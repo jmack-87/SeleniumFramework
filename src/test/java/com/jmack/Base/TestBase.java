@@ -39,7 +39,10 @@ public class TestBase {
 	private String id;
 	private String testName;
 	
-		
+	/**
+	 * Initialize RemoteWebDriver, gather test data (from JSON) 	
+	 * @param testMethod testNG supplied test object
+	 */
 	@BeforeMethod(description="Extract test data from JSON, create thread-safe WebDriver.")
 	@Step("Initialize test.")
 	protected void setUp(Method testMethod) {
@@ -108,7 +111,9 @@ public class TestBase {
 
 	}
 	
-	
+	/** 
+	 *  Quit RemoteWebDiver (dismiss/close browser). Destroy thread-safe driver.
+	 */
 	@AfterMethod(description="Quit and destroy thread-safe driver.")
 	@Step("Quit browser.")
 	protected void tearDown() {
@@ -124,5 +129,6 @@ public class TestBase {
 		return driver.get();
 		
 	}
+	
 	
 }
