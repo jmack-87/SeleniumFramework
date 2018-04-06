@@ -7,17 +7,20 @@ import java.util.function.Function;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import org.testng.Assert;
+import org.testng.asserts.Assertion;
+import org.testng.asserts.IAssert;
 
 import com.jmack.Base.PageObjects.HomePage;
 
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 
-public class Generic {
+public class Generic extends Assertion {
 
 	private RemoteWebDriver driver;
 	private FluentWait<RemoteWebDriver> wait;
@@ -52,6 +55,7 @@ public class Generic {
 		
 	}
 	
+	
 	/**
 	 * Acquires locator and type from locatorElementAndMethod(). Asserts locator has type (is locator vs string).
 	 * FluentWait for element, by locator+type.
@@ -68,7 +72,7 @@ public class Generic {
 		//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", this.id, this.testName, command.length);
 		
 		errorCondition = String.format("[DEBUG]: <[%s:%s] no such element: %s>%n", this.id, this.testName, command[0]);
-		Assert.assertTrue(command.length == 2, errorCondition);
+		assertTrue(command.length == 2, errorCondition);
 		
 		locator = command[0];
 		type = command[1];
@@ -97,7 +101,9 @@ public class Generic {
 		});
 		
 		return we;
+		
 	}
+	
 	
 	/**
 	 * Acquires locator and type from locatorElementAndMethod(). Asserts locator has type (is locator vs string).
@@ -105,7 +111,7 @@ public class Generic {
 	 * @param propertyKey properties file key defining element locator
 	 * @return WebElement or null
 	 */
-	@Step("Wait for element.")
+	//@Step("Wait for element.")
 	public WebElement waitForElement(String propertyKey, String replacement) {
 
 		String locator;
@@ -115,7 +121,7 @@ public class Generic {
 		//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", this.id, this.testName, command.length);
 		
 		errorCondition = String.format("[DEBUG]: <[%s:%s] no such element: %s>%n", this.id, this.testName, command[0]);
-		Assert.assertTrue(command.length == 2, errorCondition);
+		assertTrue(command.length == 2, errorCondition);
 
 		locator = buildDynamicLocator(command[0], replacement);
 		type = command[1];
@@ -144,7 +150,9 @@ public class Generic {
 		});
 		
 		return we;
+		
 	}
+	
 	
 	/**
 	 * Asserts page title equals target value
@@ -152,8 +160,11 @@ public class Generic {
 	 */
 	@Step("Confirm page title.")
 	public void confirmTitle(String propertyKey) {
-		Assert.assertTrue(driver.getTitle().toLowerCase().equals(getPropertyValue(propertyKey)));
+		
+		assertTrue(driver.getTitle().toLowerCase().equals(getPropertyValue(propertyKey)));
+		
 	}
+	
 	
 	/**
 	 * Navigates browser to target URL
@@ -161,15 +172,19 @@ public class Generic {
 	 */
 	@Step("Navigate to URL.")
 	public void getUrl(String propertyKey) {
+		
 		driver.get(getPropertyValue(propertyKey));
+		
 	}
 
+	
 	/**
 	 * Retrieves locator definition and type from WebElement property definition
 	 * @param propertyKey properties file key defining element locator
 	 * @return String[] containing locator definition and locator type
 	 */
 	private String[] locatorElementAndMethod(String propertyKey) {
+		
 		//System.out.format("[DEBUG]: <[%s:%s] key: %s>%n", this.id, this.testName, propertyKey);
 		command = null;
 		String propertyValue = null;
@@ -183,7 +198,9 @@ public class Generic {
 		}
 		
 		return command;
+		
 	}
+	
 	
 	/**
 	 * Return String value of non-WebElement property definition
@@ -191,6 +208,7 @@ public class Generic {
 	 * @return String value of property
 	 */
 	private String getPropertyValue(String propertyKey) {
+		
 		//System.out.format("[DEBUG]: <[%s:%s] key: %s>%n", this.id, this.testName, key);
 		command = null;
 		String propertyValue = null;
@@ -204,6 +222,7 @@ public class Generic {
 		return propertyValue;
 	}
 
+	
 	/**
 	 * Inserts string into target element
 	 * @param propertyKey properties file key defining element locator
@@ -211,34 +230,41 @@ public class Generic {
 	 */
 	@Step("Input text.")
 	public void sendText(String propertyKey, String input) {
+		
 		we = confirmElementExistence(propertyKey);
 		we.clear();
 		we.sendKeys(input);
+		takeScreenShot("After input");
 		
 	}
 
+	
 	/**
 	 * After confirming element existence, clicks element. 
 	 * @param propertyKey properties file key defining element locator
 	 */
 	@Step("Click element.")
 	public void clickElement(String propertyKey) {
+		
 		we = confirmElementExistence(propertyKey);
 		we.click();
 		
 	}
 
+	
 	/**
 	 * Performs a FluentWait for element described by property propertyKey. Asserts wait returns element.
 	 * @param propertyKey properties file key defining element locator
 	 */
 	@Step("Confirm element exists.")
 	public WebElement confirmElementExistence(String propertyKey) {
-		Assert.assertTrue((we = waitForElement(propertyKey)) != null);
+		
+		assertTrue((we = waitForElement(propertyKey)) != null);
 		return we;
 		
 	}
 
+	
 	/**
 	 * Performs a FluentWait for element described by dynamic property propertyKey+replacement. Asserts wait returns element.
 	 * @param propertyKey properties file key defining element locator
@@ -247,10 +273,12 @@ public class Generic {
 	 */
 	@Step("Confirm dynamic element exists.")
 	public WebElement confirmElementExistence(String propertyKey, String replacement) {
-		Assert.assertTrue((we = waitForElement(propertyKey, replacement)) != null);
+		
+		assertTrue((we = waitForElement(propertyKey, replacement)) != null);
 		return we;
 		
 	}
+	
 	
 	/**
 	 * Given a generic locator (includes placeholder string), replace placeholder string with desired string
@@ -258,11 +286,13 @@ public class Generic {
 	 * @param replacement String to replace placeholder
 	 * @return String locator as rebuilt
 	 */
-	@Step("Build dynamic locator.")
+	//@Step("Build dynamic locator.")
 	private String buildDynamicLocator(String locator, String replacement) {
+		
 		return locator.replace(gc.compoundLocatorPlacehold, replacement);
 		
 	}
+	
 	
 	/**
 	 * Waits up to timeOutInSeconds for the browser javascript engine to report standby.
@@ -270,6 +300,7 @@ public class Generic {
 	 */
 	@Step("Wait for page to completely load.")
 	public void waitForPageLoaded() {
+		
 		wait.until(new Function<RemoteWebDriver, Boolean>(){
 			public Boolean apply(RemoteWebDriver drv) {
 				return ((JavascriptExecutor) drv).executeScript("return document.readyState").equals("complete");
@@ -278,12 +309,14 @@ public class Generic {
         
 	}
 	
+	
 	/**
-	 * Waits up to timeOutInSeconds for the browser javascript engine to report standby.
+	 * Waits up to timeOutInSeconds for the browser JavaScript engine to report standby.
 	 * @param timeOutInSeconds maximum seconds to wait
 	 */
 	@Step("Wait for page to completely load.")
 	public void waitForPageLoaded(int timeOut) {
+		
 		FluentWait<RemoteWebDriver> wait = new FluentWait<RemoteWebDriver>(driver)
 				.ignoring(NoSuchElementException.class)
 				.withTimeout(Duration.ofSeconds(timeOut));
@@ -297,16 +330,45 @@ public class Generic {
         
 	}
 
+	
 	public HomePage HomePage() {
+		
 		return this.HomePage;
+		
 	}
+	
 	
 	/**
 	 *  Force fail a test
 	 */
 	@Step("Force a FAIL.")
 	public void failTest() {
-		Assert.assertTrue(false, "This assertion intended to FAIL.");
+		
+		assertTrue(false, "This assertion intended to FAIL.");
+		
+	}
+	
+	
+	/**
+	 * Take a screenshot
+	 * @param description String description of screenshot supplied to Allure framework
+	 * @return
+	 */
+	@Attachment(value="{description}", type="image/png")
+	public byte[] takeScreenShot(String description) {
+		System.out.format("[LOG]: <[%s:%s] taking screenshot: \"%s\">%n", this.id, this.testName, description);
+		return this.driver.getScreenshotAs(OutputType.BYTES);
+		
+	}
+	
+	/**
+	 *  Always take a screenshot if Assert fails
+	 */
+	@Override
+	public void onAssertFailure(IAssert<?> assertCommand) {
+		
+		takeScreenShot("FAIL: "+assertCommand.getMessage());
+		
 	}
 		
 		
