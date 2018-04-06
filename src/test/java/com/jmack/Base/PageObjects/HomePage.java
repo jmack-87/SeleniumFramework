@@ -16,7 +16,7 @@ public class HomePage {
 	 *  Do something with HomePage
 	 */
 	@Step("Doing something with HomePage")
-	public void stuff() {
-		System.out.format("[LOG]: <[%s:%s] doing something with HomePage>%n", this.id, this.testName);
+	public void stuff(String somethingToPass) {
+		System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on HomePage>%n", this.id, this.testName, somethingToPass);
 	}
 }

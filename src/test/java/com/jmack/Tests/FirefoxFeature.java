@@ -38,7 +38,7 @@ public class FirefoxFeature extends TestBase {
 		
 		generic.confirmElementExistence("SearchResults.Locator.Text.santanderSearchConfirmation");
 		
-		generic.HomePage().stuff();
+		generic.HomePage().stuff("something passed");
 		
 	}
 	
