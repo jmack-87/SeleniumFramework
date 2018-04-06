@@ -1,0 +1,29 @@
+{
+	"Tests": [
+		{
+			"ChromeTest": {
+				"browser": "chrome",
+				"headless": true,
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM"
+			},
+			"FirefoxTest": {
+				"browser": "firefox",
+				"headless": true,
+				"searchString": "Santander Bank",
+				"searchConfirmationString": "Santander Bank"
+			},
+			"EdgeTest": {
+				"browser": "edge"
+			},
+			"IeTest": {
+				"browser": "ie"
+			}
+		}
+	],
+	"System Options": [
+		{
+			"Opt1": "system option"
+		}
+	]
+}

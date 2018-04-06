@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Super Suite" parallel="true" thread-count="2">
+
+	<parameter name="param" value="val" />
+	
+	<suite-files>
+		<suite-file path="cfg/testng.xml" />
+		<suite-file path="cfg/testng2.xml" />
+	</suite-files>
+	
+</suite>

@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Parallel Suite 1">
+	
+	<parameter name="suiteParam2" value="suiteValue2" />
+
+	<test name="parallel browsers 1">
+	
+		<parameter name="testParam1" value="testValue1" />
+		
+		<classes>
+			<class name="com.jmack.Tests.ChromeFeature" />
+			<class name="com.jmack.Tests.FirefoxFeature" />
+			<class name="com.jmack.Tests.EdgeFeature" />
+			<class name="com.jmack.Tests.IeFeature" />
+		</classes>
+		
+	</test>
+	
+</suite>
