@@ -7,20 +7,15 @@ import java.util.function.Function;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import org.testng.asserts.Assertion;
-import org.testng.asserts.IAssert;
-
 import com.jmack.Base.PageObjects.HomePage;
 
-import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 
-public class Generic extends Assertion {
+public class Generic {
 
 	private RemoteWebDriver driver;
 	private FluentWait<RemoteWebDriver> wait;
@@ -33,7 +28,8 @@ public class Generic extends Assertion {
 	private String testName = null;
 	private String id = null;
 	
-	private HomePage HomePage;
+	public HomePage HomePage;
+	private ScreenShot ss;
 
 	
 	/**
@@ -42,7 +38,7 @@ public class Generic extends Assertion {
 	 * @param gc GlobalConstants instance
 	 * @param props properties file instance
 	 */
-	public Generic(RemoteWebDriver driver, GlobalConstants gc, Properties props, String testName, String id) {
+	public Generic(RemoteWebDriver driver, GlobalConstants gc, Properties props, ScreenShot ss, String testName, String id) {
 		this.id = id;
 		this.testName = testName;
 		this.driver = driver;
@@ -51,11 +47,23 @@ public class Generic extends Assertion {
 		this.wait = new FluentWait<RemoteWebDriver>(this.driver)
 				.ignoring(NoSuchElementException.class)
 				.withTimeout(Duration.ofSeconds(30));
-		this.HomePage = new HomePage(this.id, this.testName);
+		
+		this.ss = ss;
+		
+		intitializePageObjects();
 		
 	}
 	
-	
+	/** 
+	 *  One obvious place to add page objects
+	 */
+	@Step("Initialize Page Objects.")
+	private void intitializePageObjects() {
+		this.HomePage = new HomePage(this.ss, this.id, this.testName);
+		
+	}
+
+
 	/**
 	 * Acquires locator and type from locatorElementAndMethod(). Asserts locator has type (is locator vs string).
 	 * FluentWait for element, by locator+type.
@@ -72,7 +80,7 @@ public class Generic extends Assertion {
 		//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", this.id, this.testName, command.length);
 		
 		errorCondition = String.format("[DEBUG]: <[%s:%s] no such element: %s>%n", this.id, this.testName, command[0]);
-		assertTrue(command.length == 2, errorCondition);
+		ss.assertTrue(command.length == 2, errorCondition);
 		
 		locator = command[0];
 		type = command[1];
@@ -121,7 +129,7 @@ public class Generic extends Assertion {
 		//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", this.id, this.testName, command.length);
 		
 		errorCondition = String.format("[DEBUG]: <[%s:%s] no such element: %s>%n", this.id, this.testName, command[0]);
-		assertTrue(command.length == 2, errorCondition);
+		ss.assertTrue(command.length == 2, errorCondition);
 
 		locator = buildDynamicLocator(command[0], replacement);
 		type = command[1];
@@ -161,7 +169,7 @@ public class Generic extends Assertion {
 	@Step("Confirm page title.")
 	public void confirmTitle(String propertyKey) {
 		
-		assertTrue(driver.getTitle().toLowerCase().equals(getPropertyValue(propertyKey)));
+		ss.assertTrue(driver.getTitle().toLowerCase().equals(getPropertyValue(propertyKey)));
 		
 	}
 	
@@ -234,7 +242,7 @@ public class Generic extends Assertion {
 		we = confirmElementExistence(propertyKey);
 		we.clear();
 		we.sendKeys(input);
-		takeScreenShot("After input");
+		ss.takeScreenShot("After input");
 		
 	}
 
@@ -259,7 +267,7 @@ public class Generic extends Assertion {
 	@Step("Confirm element exists.")
 	public WebElement confirmElementExistence(String propertyKey) {
 		
-		assertTrue((we = waitForElement(propertyKey)) != null);
+		ss.assertTrue((we = waitForElement(propertyKey)) != null);
 		return we;
 		
 	}
@@ -274,7 +282,7 @@ public class Generic extends Assertion {
 	@Step("Confirm dynamic element exists.")
 	public WebElement confirmElementExistence(String propertyKey, String replacement) {
 		
-		assertTrue((we = waitForElement(propertyKey, replacement)) != null);
+		ss.assertTrue((we = waitForElement(propertyKey, replacement)) != null);
 		return we;
 		
 	}
@@ -329,14 +337,6 @@ public class Generic extends Assertion {
 		wait = null;
         
 	}
-
-	
-	public HomePage HomePage() {
-		
-		return this.HomePage;
-		
-	}
-	
 	
 	/**
 	 *  Force fail a test
@@ -344,30 +344,7 @@ public class Generic extends Assertion {
 	@Step("Force a FAIL.")
 	public void failTest() {
 		
-		assertTrue(false, "This assertion intended to FAIL.");
-		
-	}
-	
-	
-	/**
-	 * Take a screenshot
-	 * @param description String description of screenshot supplied to Allure framework
-	 * @return
-	 */
-	@Attachment(value="{description}", type="image/png")
-	public byte[] takeScreenShot(String description) {
-		System.out.format("[LOG]: <[%s:%s] taking screenshot: \"%s\">%n", this.id, this.testName, description);
-		return this.driver.getScreenshotAs(OutputType.BYTES);
-		
-	}
-	
-	/**
-	 *  Always take a screenshot if Assert fails
-	 */
-	@Override
-	public void onAssertFailure(IAssert<?> assertCommand) {
-		
-		takeScreenShot("FAIL: "+assertCommand.getMessage());
+		ss.assertTrue(false, "This assertion intended to FAIL.");
 		
 	}
 		

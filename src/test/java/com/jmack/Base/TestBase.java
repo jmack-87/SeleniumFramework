@@ -33,6 +33,7 @@ public class TestBase {
 	private Capabilities options = null;
 	private Properties testReference = new Properties();
 	private InputStream testReferenceFile = null;
+	private ScreenShot ss = null;
 	
 	private Date date = new Date();
 	private Long ts = date.getTime();
@@ -104,7 +105,9 @@ public class TestBase {
 		try {
 			driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
 			getDriver().manage().window().maximize();
-			generic = new Generic(getDriver(), gc, testReference, testMethod.getName(), id);
+			ss = new ScreenShot(getDriver(), this.id, this.testName);
+			generic = new Generic(getDriver(), gc, testReference, ss, this.testName, this.id);
+			
 		} catch (MalformedURLException m) {
 			m.printStackTrace();
 		}

@@ -38,7 +38,7 @@ public class ChromeFeature extends TestBase {
 		
 		generic.confirmElementExistence("SearchResults.Locator.Text.ibmSearchConfirmation");
 		
-		generic.HomePage().stuff("something passed");
+		generic.HomePage.stuff("something passed");
 		
 		generic.failTest();
 		
