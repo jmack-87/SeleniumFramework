@@ -1,8 +1,11 @@
 package com.jmack.Tests;
 
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
+import com.jmack.Enumerations.*;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -15,28 +18,33 @@ import io.qameta.allure.Story;
 @Feature("Firefox")
 public class FirefoxFeature extends TestBase {
 
-	
+	/**
+	 * Perform a google search. Confirm and click first result. Confirm navigation.
+	 * @param testParam optional TestNG value from suite
+	 * @throws InterruptedException
+	 */
 	@Test(testName="Firefox Test", description="Run Firefox browser in parallel.")
 	@Severity(SeverityLevel.CRITICAL)
 	@Description("Test Description: Run Firefox browser in parallel.")
 	@Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
-	public void FirefoxTest() throws InterruptedException {
-			
+	@Parameters({"testParam"})
+	public void FirefoxTest(@Optional String testParam) throws InterruptedException {
+				
+		generic.getUrl(Generic.Text_googleURL.toString());
 		
-		generic.getUrl("googleURL");
+		generic.confirmElementExistence(SearchPage.Locator_Tag_head.toString());
+		generic.confirmTitle(SearchPage.Text_pageTitle.toString());
 		
-		generic.confirmElementExistence("SearchPage.Locator.Tag.head");
-		generic.confirmTitle("SearchPage.Text.pageTitle");
+		generic.sendText(SearchPage.Locator_TextField_searchInput.toString(), runtimeData.searchString);
+		generic.clickElement(SearchPage.Locator_Button_searchSubmit.toString());
 		
-		generic.sendText("SearchPage.Locator.TextField.searchInput", runtimeData.searchString);
-		generic.clickElement("SearchPage.Locator.Button.searchSubmit");
-		
-		generic.confirmElementExistence("SearchResults.Locator.FirstResult");
-		generic.confirmElementExistence("SearchResults.CompoundLocator.FirstResult", runtimeData.searchConfirmationString);
-		generic.clickElement("SearchResults.Locator.FirstResult");
+		generic.confirmElementExistence(SearchResults.Locator_firstResult.toString());
+		generic.confirmElementExistence(SearchResults.CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
+		generic.clickElement(SearchResults.Locator_firstResult.toString());
+
 		generic.waitForPageLoaded(30);
 		
-		generic.confirmElementExistence("SearchResults.Locator.Text.santanderSearchConfirmation");
+		generic.confirmElementExistence(SearchResults.Locator_Text_santanderSearchConfirmation.toString());
 		
 		homePage.stuff("something passed");
 		
