@@ -20,40 +20,59 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+
+import com.jmack.Base.PageObjects.HomePage;
 
 import io.qameta.allure.Step;
 
+/**
+ * 
+ * @author Jerimiah Mack
+ *
+ */
 public class TestBase {
 	
-	protected static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
+	private static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
+	protected Properties props = new Properties();
+
+	private Capabilities options = null;
+	private InputStream testReferenceFile = null;
+	private Date date = new Date();
+	private Long ts = date.getTime();
+	private String browserOverride = "";
+	
+	private String id;
+	private String testName;
+	
+	// Helpers
 	protected Generic generic;
+	protected ScreenShot ss = null;
 	protected DataExtractor runtimeData = new DataExtractor();
 	protected static GlobalConstants gc = new GlobalConstants();
 	
-	private Capabilities options = null;
-	private Properties testReference = new Properties();
-	private InputStream testReferenceFile = null;
-	private ScreenShot ss = null;
+	// Page Objects
+	protected HomePage homePage;
 	
-	private Date date = new Date();
-	private Long ts = date.getTime();
-	private String id;
-	private String testName;
 	
 	/**
 	 * Initialize RemoteWebDriver, gather test data (from JSON) 	
 	 * @param testMethod testNG supplied test object
+	 * @param browserOverride optional TestNG input from test suite
 	 */
 	@BeforeMethod(description="Extract test data from JSON, create thread-safe WebDriver.")
 	@Step("Initialize test.")
-	protected void setUp(Method testMethod) {
-		this.testName = testMethod.getName();
+	@Parameters({"browserOverride"})
+	protected void setUp(Method testMethod, @Optional String browserOverride) {
+		this.browserOverride = browserOverride;
+		testName = testMethod.getName();
 		
-		this.id = ts.toString();
-		this.id = this.id.substring(id.length()-3 );
+		id = ts.toString();
+		id = id.substring(id.length()-3 );
 		
 		try {
-			runtimeData.initialize(gc, this.testName, this.id);
+			runtimeData.initialize(gc, testName, id);
 		} catch (FileNotFoundException f) {
 			f.printStackTrace();
 		}
@@ -62,6 +81,12 @@ public class TestBase {
 			Random r = new Random();
 			String[] browsers = {"chrome","firefox","edge","ie"};
 			runtimeData.browser = browsers[r.nextInt(browsers.length)];
+		}
+		
+		if (!browserOverride.equals("") && !runtimeData.browser.toLowerCase().equals(this.browserOverride.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding browser \"%s\" with \"%s\">%n", id, testName, runtimeData.browser, browserOverride);
+			runtimeData.browser = browserOverride;
+			
 		}
 		
 		switch (runtimeData.browser.toLowerCase()) {
@@ -89,7 +114,7 @@ public class TestBase {
 		
 		try {
 			testReferenceFile = new FileInputStream(gc.testReferenceFilePath);
-			testReference.load(testReferenceFile);
+			props.load(testReferenceFile);
 		} catch (IOException io) {
 			io.printStackTrace();
 		} finally {
@@ -105,14 +130,29 @@ public class TestBase {
 		try {
 			driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
 			getDriver().manage().window().maximize();
-			ss = new ScreenShot(getDriver(), this.id, this.testName);
-			generic = new Generic(getDriver(), gc, testReference, ss, this.testName, this.id);
+			ss = new ScreenShot(getDriver(), id, testName);
+			generic = new Generic(getDriver(), ss, props, id, testName);
 			
 		} catch (MalformedURLException m) {
 			m.printStackTrace();
 		}
+		
+		initializePageObjects();
+		System.out.format("[LOG]: <[%s:%s] =====Start test=====>%n", id, testName);
 
 	}
+	
+	
+	/** 
+	 *  Add page objects here
+	 */
+	@Step("Initialize Page Objects.")
+	private void initializePageObjects() {
+		
+		homePage = new HomePage(generic, ss, id, testName);
+		
+	}
+	
 	
 	/** 
 	 *  Quit RemoteWebDiver (dismiss/close browser). Destroy thread-safe driver.
@@ -123,10 +163,14 @@ public class TestBase {
 		
 		getDriver().quit();
 		driver.remove();
+		System.out.format("[LOG]: <[%s:%s] =====end test=====>%n", id, testName);
 		
 	}
 	
-	
+	/**
+	 * Returns a thread-safe RemoteWebDriver
+	 * @return thread-safe RemoteWebDriver
+	 */
 	private RemoteWebDriver getDriver() {
 		
 		return driver.get();
