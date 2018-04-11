@@ -11,11 +11,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import com.jmack.Base.PageObjects.HomePage;
-
 import io.qameta.allure.Step;
 
-public class Generic {
+/**
+ * 
+ * @author Jerimiah Mack
+ *
+ */
+public class Generic extends TestBase {
 
 	private RemoteWebDriver driver;
 	private FluentWait<RemoteWebDriver> wait;
@@ -24,42 +27,47 @@ public class Generic {
 	private String[] command;
 	private String errorCondition = "";
 	private WebElement we = null;
-	private GlobalConstants gc;
-	private String testName = null;
-	private String id = null;
 	
-	public HomePage HomePage;
+	protected String id = "unknown";
+	protected String testName = "unknown";
+	
 	private ScreenShot ss;
+	//private GlobalConstants gc;
 
 	
 	/**
-	 * Class container for generic step-operations and confirmation.
+	 * Minimum constructor for generic step-operations and confirmation.
 	 * @param driver thread-safe WebDriver
 	 * @param gc GlobalConstants instance
 	 * @param props properties file instance
 	 */
-	public Generic(RemoteWebDriver driver, GlobalConstants gc, Properties props, ScreenShot ss, String testName, String id) {
-		this.id = id;
-		this.testName = testName;
+	public Generic(RemoteWebDriver driver, ScreenShot ss, Properties props) {
+		
+		this.ss = ss;
 		this.driver = driver;
 		this.props = props;
-		this.gc = gc;
 		this.wait = new FluentWait<RemoteWebDriver>(this.driver)
 				.ignoring(NoSuchElementException.class)
 				.withTimeout(Duration.ofSeconds(30));
 		
-		this.ss = ss;
-		
-		intitializePageObjects();
-		
 	}
 	
-	/** 
-	 *  One obvious place to add page objects
+	/**
+	 * Constructor for generic step-operations and confirmation, provisioned for instance logging
+	 * @param driver thread-safe WebDriver
+	 * @param gc GlobalConstants instance
+	 * @param props properties file instance
 	 */
-	@Step("Initialize Page Objects.")
-	private void intitializePageObjects() {
-		this.HomePage = new HomePage(this.ss, this.id, this.testName);
+	public Generic(RemoteWebDriver driver, ScreenShot ss, Properties props, String id, String testName) {
+		
+		this.ss = ss;
+		this.id = id;
+		this.testName = testName;
+		this.driver = driver;
+		this.props = props;
+		this.wait = new FluentWait<RemoteWebDriver>(this.driver)
+				.ignoring(NoSuchElementException.class)
+				.withTimeout(Duration.ofSeconds(30));
 		
 	}
 
@@ -77,15 +85,15 @@ public class Generic {
 		String type;
 		
 		command = locatorElementAndMethod(propertyKey);
-		//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", this.id, this.testName, command.length);
+		//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", id, testName, command.length);
 		
-		errorCondition = String.format("[DEBUG]: <[%s:%s] no such element: %s>%n", this.id, this.testName, command[0]);
+		errorCondition = String.format("[DEBUG]: <[%s:%s] no such element: %s>%n", id, testName, command[0]);
 		ss.assertTrue(command.length == 2, errorCondition);
 		
 		locator = command[0];
 		type = command[1];
 		
-		System.out.format("[LOG]: <[%s:%s] waiting for locator: %s; type: %s;>%n", this.id, this.testName, locator, type);
+		System.out.format("[LOG]: <[%s:%s] waiting for locator: %s; type: %s;>%n", id, testName, locator, type);
 		
 		switch (type) {
 			case "xpath":
@@ -126,15 +134,15 @@ public class Generic {
 		String type;
 		
 		command = locatorElementAndMethod(propertyKey);
-		//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", this.id, this.testName, command.length);
+		//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", id, testName, command.length);
 		
-		errorCondition = String.format("[DEBUG]: <[%s:%s] no such element: %s>%n", this.id, this.testName, command[0]);
+		errorCondition = String.format("[DEBUG]: <[%s:%s] no such element: %s>%n", id, testName, command[0]);
 		ss.assertTrue(command.length == 2, errorCondition);
 
 		locator = buildDynamicLocator(command[0], replacement);
 		type = command[1];
 		
-		System.out.format("[LOG]: <[%s:%s] waiting for locator: %s; type: %s;>%n", this.id, this.testName, locator, type);
+		System.out.format("[LOG]: <[%s:%s] waiting for locator: %s; type: %s;>%n", id, testName, locator, type);
 		
 		switch (type) {
 			case "xpath":
@@ -193,16 +201,16 @@ public class Generic {
 	 */
 	private String[] locatorElementAndMethod(String propertyKey) {
 		
-		//System.out.format("[DEBUG]: <[%s:%s] key: %s>%n", this.id, this.testName, propertyKey);
+		//System.out.format("[DEBUG]: <[%s:%s] key: %s>%n", id, testName, propertyKey);
 		command = null;
 		String propertyValue = null;
 		
-		//System.out.format("[DEBUG]: <[%s:%s] key found?: %b>%n", this.id, this.testName, props.containsKey(propertyKey));
+		//System.out.format("[DEBUG]: <[%s:%s] key found?: %b>%n", id, testName, props.containsKey(propertyKey));
 		if (props.containsKey(propertyKey)) {
 			propertyValue = props.getProperty(propertyKey);
-			//System.out.format("[DEBUG]: <[%s:%s] key value: %s>%n", this.id, this.testName, propertyValue);
+			//System.out.format("[DEBUG]: <[%s:%s] key value: %s>%n", id, testName, propertyValue);
 			command = propertyValue.split(gc.locatorSeparator);
-			//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", this.id, this.testName, command.length);
+			//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", id, testName, command.length);
 		}
 		
 		return command;
@@ -217,17 +225,18 @@ public class Generic {
 	 */
 	private String getPropertyValue(String propertyKey) {
 		
-		//System.out.format("[DEBUG]: <[%s:%s] key: %s>%n", this.id, this.testName, key);
+		//System.out.format("[DEBUG]: <[%s:%s] key: %s>%n", id, testName, propertyKey);
 		command = null;
 		String propertyValue = null;
 		
-		//System.out.format("[DEBUG]: <[%s:%s] key found?: %b>%n", this.id, this.testName, props.containsKey(key));
+		//System.out.format("[DEBUG]: <[%s:%s] key found?: %b>%n", id, testName, props.containsKey(propertyKey));
 		if (props.containsKey(propertyKey)) {
 			propertyValue = props.getProperty(propertyKey);
-			//System.out.format("[DEBUG]: <[%s:%s] key value: %s>%n", this.id, this.testName, propertyValue);
+			//System.out.format("[DEBUG]: <[%s:%s] key value: %s>%n", id, testName, propertyValue);
 		}
 		
 		return propertyValue;
+		
 	}
 
 	
@@ -303,13 +312,13 @@ public class Generic {
 	
 	
 	/**
-	 * Waits up to timeOutInSeconds for the browser javascript engine to report standby.
-	 * @param timeOutInSeconds maximum seconds to wait
+	 * Waits up to 30s for the browser JavaScript engine to report standby.
+	 * 
 	 */
 	@Step("Wait for page to completely load.")
 	public void waitForPageLoaded() {
 		
-		wait.until(new Function<RemoteWebDriver, Boolean>(){
+		this.wait.until(new Function<RemoteWebDriver, Boolean>(){
 			public Boolean apply(RemoteWebDriver drv) {
 				return ((JavascriptExecutor) drv).executeScript("return document.readyState").equals("complete");
 			}
@@ -337,6 +346,7 @@ public class Generic {
 		wait = null;
         
 	}
+	
 	
 	/**
 	 *  Force fail a test
