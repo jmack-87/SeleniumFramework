@@ -7,21 +7,40 @@ import org.testng.asserts.IAssert;
 
 import io.qameta.allure.Attachment;
 
+/**
+ * 
+ * @author Jerimiah Mack
+ *
+ */
 public class ScreenShot extends Assertion {
 	
+	private RemoteWebDriver driver;
 	private String id = "unknown";
 	private String testName = "unknown";
-	private RemoteWebDriver driver;
-
 	
-	public ScreenShot(RemoteWebDriver driver, String testName, String id) {
+	
+	/**
+	 * Constructor with provisions for instance logging
+	 * @param driver RemoteWebDriver
+	 * @param id test instance id (timestamp truncated to last three digits)
+	 * @param testName
+	 */
+	public ScreenShot(RemoteWebDriver driver, String id, String testName) {
+		
 		this.id = id;
 		this.testName = testName;
 		this.driver = driver;
 	}
 	
+	
+	/**
+	 * Minimum constructor
+	 * @param driver RemoteWebDriver
+	 */
 	public ScreenShot(RemoteWebDriver driver) {
+		
 		this.driver = driver;
+		
 	}
 	
 	
@@ -32,10 +51,12 @@ public class ScreenShot extends Assertion {
 	 */
 	@Attachment(value="{description}", type="image/png")
 	public byte[] takeScreenShot(String description) {
-		System.out.format("[LOG]: <[%s:%s] taking screenshot: \"%s\">%n", this.id, this.testName, description);
-		return this.driver.getScreenshotAs(OutputType.BYTES);
+		
+		System.out.format("[LOG]: <[%s:%s] taking screenshot: \"%s\">%n", id, testName, description);
+		return driver.getScreenshotAs(OutputType.BYTES);
 		
 	}
+	
 	
 	/**
 	 *  Always take a screenshot if Assert fails
@@ -46,5 +67,6 @@ public class ScreenShot extends Assertion {
 		takeScreenShot("FAIL: "+assertCommand.getMessage());
 		
 	}
+	
 	
 }
