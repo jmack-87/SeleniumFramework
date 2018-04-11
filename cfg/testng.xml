@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Parallel Suite 1">
 	
-	<parameter name="suiteParam2" value="suiteValue2" />
+	<parameter name="browserOverride" value="" /><!-- can override script-defined values from TestParametersJSON (entire suite) -->
 
 	<test name="parallel browsers 1">
 	
-		<parameter name="testParam1" value="testValue1" />
+		<parameter name="testParam" value="testValue1" />
 		
 		<classes>
 			<class name="com.jmack.Tests.ChromeFeature" />

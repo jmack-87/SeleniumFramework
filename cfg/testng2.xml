@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Parallel Suite 2">
 	
-	<parameter name="suiteParam2" value="suiteValue2" />
+	<parameter name="browserOverride" value="" />
 
 	<test name="parallel browsers 2">
 	
-		<parameter name="testParam2" value="testValue2" />
+		<parameter name="testParam" value="testValue2" />
 		
 		<classes>
 			<class name="com.jmack.Tests.ChromeFeature" />
