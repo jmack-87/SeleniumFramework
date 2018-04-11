@@ -37,7 +37,7 @@ public class EdgeFeature extends TestBase {
 		
 		generic.confirmElementExistence("SearchResults.Locator.Text.ibmSearchConfirmation");
 		
-		generic.HomePage.stuff("something passed");
+		homePage.stuff("something passed");
 		
 	}
 	
