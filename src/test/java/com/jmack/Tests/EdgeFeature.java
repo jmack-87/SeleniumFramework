@@ -30,7 +30,7 @@ public class EdgeFeature extends TestBase {
 	@Parameters({"testParam"})
 	public void EdgeTest(@Optional String testParam) throws InterruptedException {
 			
-generic.getUrl(Generic.Text_googleURL.toString());
+		generic.getUrl(Generic.Text_googleURL.toString());
 		
 		generic.confirmElementExistence(SearchPage.Locator_Tag_head.toString());
 		generic.confirmTitle(SearchPage.Text_pageTitle.toString());
