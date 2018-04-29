@@ -5,15 +5,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jmack</groupId>
-	<artifactId>5_Jenkins_Maven_TestNG_Parallel_Framework</artifactId>
+	<artifactId>SeleniumFramework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>5_Jenkins_Maven_TestNG_Parallel_Framework</name>
+	<name>SeleniumFramework</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
 		<aspectj.version>1.9.0</aspectj.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<baseDir>C:\Dev\Eclipse_workspaces\New\5_Jenkins_Maven_TestNG_Parallel_Framework</baseDir>
+		<baseDir>C:\Dev\eclipse_workspaces\SeleniumFramework</baseDir>
 		<parallelStyle>instances</parallelStyle>
 		<t.count>4</t.count>
 	</properties>
