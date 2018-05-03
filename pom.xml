@@ -1,4 +1,4 @@
-<!-- <?xml version="1.0"?> -->
+<?xml version="1.0"?>
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0"
@@ -13,11 +13,7 @@
 	<properties>
 		<aspectj.version>1.9.0</aspectj.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-<<<<<<< HEAD
-		<baseDir>C:\Dev\Eclipse_workspaces\New\SeleniumFramework</baseDir>
-=======
 		<baseDir>C:\Dev\eclipse_workspaces\SeleniumFramework</baseDir>
->>>>>>> branch 'master' of https://github.com/jmack-87/SeleniumFramework.git
 		<parallelStyle>instances</parallelStyle>
 		<t.count>4</t.count>
 	</properties>
