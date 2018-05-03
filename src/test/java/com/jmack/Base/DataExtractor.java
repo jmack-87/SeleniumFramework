@@ -18,6 +18,10 @@ public class DataExtractor {
 	protected String sysOpt;
 	protected String browser;
 	protected Boolean headless;
+	protected String aut;
+	protected String activity;
+	protected String platformVersion;
+	protected String gridType;
 	
 	/*	Data available to scripts
 	 */
@@ -68,11 +72,15 @@ public class DataExtractor {
 	@Step("Set Test data.")
 	private void setTestData(JsonObject testData) {
 		System.out.format("[LOG]: <[%s:%s] RuntimeData: %s>%n", this.id, this.testName, testData);
+		
 		browser = testData.get("browser") == null ? "random" : testData.get("browser").getAsString();
 		headless = testData.get("headless") == null ? false : testData.get("headless").getAsBoolean();
 		searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
 		searchConfirmationString = testData.get("searchConfirmationString") == null ? "IBM" : testData.get("searchConfirmationString").getAsString();
-	
+		aut = testData.get("applicationUnderTest") == null ? null : testData.get("applicationUnderTest").getAsString();
+		activity = testData.get("activity") == null ? null : testData.get("activity").getAsString();
+		platformVersion = testData.get("platformVersion") == null ? null : testData.get("platformVersion").getAsString();
+		gridType = testData.get("gridType") == null ? null : testData.get("gridType").getAsString();
 	}
 	
 	/**
@@ -83,7 +91,6 @@ public class DataExtractor {
 	private void setSystemOptions(JsonObject sysOpts) {
 		System.out.format("[LOG]: <[%s:%s] SystemData: %s>%n", this.id, this.testName, sysOpts);
 		sysOpt = sysOpts.get("Opt1") == null ? null : sysOpts.get("Opt1").getAsString(); //example of syntax
-		
 	}
 	
 	/**

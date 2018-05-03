@@ -2,22 +2,50 @@
 	"Tests": [
 		{
 			"ChromeTest": {
+				"gridType": "local",
 				"browser": "chrome",
 				"headless": true,
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"
 			},
 			"FirefoxTest": {
+				"gridType": "local",
 				"browser": "firefox",
 				"headless": true,
 				"searchString": "Santander Bank",
 				"searchConfirmationString": "Santander Bank"
 			},
 			"EdgeTest": {
+				"gridType": "local",
 				"browser": "edge"
 			},
 			"IeTest": {
+				"gridType": "local",
 				"browser": "ie"
+			},
+			"AndroidChromeTest": {
+				"gridType": "local",
+				"browser": "androidChrome",
+				"platformVersion": "8",
+				"applicationUnderTest": "com.android.chrome",
+				"activity": "com.google.android.apps.chrome.Main",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM"
+			},
+			"AndroidNativeTest": {
+				"gridType": "local",
+				"browser": "androidNative",
+				"platformVersion": "8"
+			},
+			"IosSafariTest": {
+				"gridType": "perfecto",
+				"browser": "iosSafari",
+				"platformVersion": "11"
+			},
+			"IosNativeTest": {
+				"gridType": "perfecto",
+				"browser": "iosNative",
+				"platformVersion": "11"
 			}
 		}
 	],

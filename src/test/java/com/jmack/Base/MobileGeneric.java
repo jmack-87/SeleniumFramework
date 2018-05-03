@@ -14,6 +14,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
 
 /**
@@ -21,56 +22,36 @@ import io.qameta.allure.Step;
  * @author Jerimiah Mack
  *
  */
-public class Generic extends TestBase {
+public class MobileGeneric extends TestBase {
 
-	private RemoteWebDriver driver;
-	private FluentWait<RemoteWebDriver> wait;
+	private AppiumDriver<?> driver;
+	private FluentWait<AppiumDriver<?>> wait;
 	private Properties props;
 	private By byType = null;
 	private String[] command;
 	private String errorCondition = "";
-	private WebElement we = null;
+	private MobileElement me = null;
 	
 	protected String id = "unknown";
 	protected String testName = "unknown";
 	
-	private ScreenShot ss;
-	//private GlobalConstants gc;
+	private MobileScreenShot ss;
 
-	
+
 	/**
 	 * Minimum constructor for generic step-operations and confirmation.
 	 * @param driver thread-safe WebDriver
 	 * @param gc GlobalConstants instance
 	 * @param props properties file instance
 	 */
-	public Generic(RemoteWebDriver driver, ScreenShot ss, Properties props) {
+	public MobileGeneric(AppiumDriver<?> driver, MobileScreenShot ss, Properties props) {
 		
 		this.ss = ss;
 		this.driver = driver;
 		this.props = props;
-		this.wait = new FluentWait<RemoteWebDriver>(this.driver)
+		this.wait = new FluentWait<AppiumDriver<?>>(this.driver)
 				.ignoring(NoSuchElementException.class)
 				.withTimeout(Duration.ofSeconds(30));
-		
-	}
-	
-	/**
-	 * Minimum constructor for generic step-operations and confirmation.
-	 * @param driver thread-safe WebDriver
-	 * @param gc GlobalConstants instance
-	 * @param props properties file instance
-	 */
-	public Generic(AppiumDriver<?> driver, ScreenShot ss, Properties props) {
-		
-		this.ss = ss;
-		this.driver = driver;
-		this.props = props;
-		this.wait = new FluentWait<RemoteWebDriver>(this.driver)
-				.ignoring(NoSuchElementException.class)
-				.withTimeout(Duration.ofSeconds(30));
-		
-		((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 		
 	}
 	
@@ -80,14 +61,14 @@ public class Generic extends TestBase {
 	 * @param gc GlobalConstants instance
 	 * @param props properties file instance
 	 */
-	public Generic(RemoteWebDriver driver, ScreenShot ss, Properties props, String id, String testName) {
+	public MobileGeneric(AppiumDriver<?> driver, MobileScreenShot ss, Properties props, String id, String testName) {
 		
 		this.ss = ss;
 		this.id = id;
 		this.testName = testName;
 		this.driver = driver;
 		this.props = props;
-		this.wait = new FluentWait<RemoteWebDriver>(this.driver)
+		this.wait = new FluentWait<AppiumDriver<?>>(this.driver)
 				.ignoring(NoSuchElementException.class)
 				.withTimeout(Duration.ofSeconds(30));
 		
@@ -101,7 +82,7 @@ public class Generic extends TestBase {
 	 * @return WebElement or null
 	 */
 	//@Step("Wait for element.")
-	public WebElement waitForElement(String propertyKey) {
+	public MobileElement waitForElement(String propertyKey) {
 
 		String locator;
 		String type;
@@ -132,13 +113,14 @@ public class Generic extends TestBase {
 				break;
 		}
 		
-		we = this.wait.until(new Function<RemoteWebDriver, WebElement>(){
-				public WebElement apply(RemoteWebDriver drv) {
-					return drv.findElement(byType);
+		me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
+				public MobileElement apply(AppiumDriver<?> drv) {
+					return (MobileElement) drv.findElement(byType);
 				}
 		});
 		
-		return we;
+		//System.out.format("[DEBUG]: <[%s:%s] found %s>%n", id, testName, me);
+		return me;
 		
 	}
 	
@@ -150,7 +132,7 @@ public class Generic extends TestBase {
 	 * @return WebElement or null
 	 */
 	//@Step("Wait for element.")
-	public WebElement waitForElement(String propertyKey, String replacement) {
+	public MobileElement waitForElement(String propertyKey, String replacement) {
 
 		String locator;
 		String type;
@@ -181,13 +163,13 @@ public class Generic extends TestBase {
 				break;
 		}
 		
-		we = this.wait.until(new Function<RemoteWebDriver, WebElement>(){
-				public WebElement apply(RemoteWebDriver drv) {
-					return drv.findElement(byType);
-				}
+		me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
+			public MobileElement apply(AppiumDriver<?> drv) {
+				return (MobileElement) drv.findElement(byType);
+			}
 		});
 		
-		return we;
+		return me;
 		
 	}
 	
@@ -200,7 +182,6 @@ public class Generic extends TestBase {
 	public void confirmTitle(String propertyKey) {
 		
 		ss.assertTrue(driver.getTitle().toLowerCase().equals(getPropertyValue(propertyKey)));
-		
 	}
 	
 	
@@ -212,7 +193,6 @@ public class Generic extends TestBase {
 	public void getUrl(String propertyKey) {
 		
 		driver.get(getPropertyValue(propertyKey));
-		
 	}
 
 	
@@ -236,7 +216,6 @@ public class Generic extends TestBase {
 		}
 		
 		return command;
-		
 	}
 	
 	
@@ -258,7 +237,6 @@ public class Generic extends TestBase {
 		}
 		
 		return propertyValue;
-		
 	}
 
 	
@@ -270,11 +248,10 @@ public class Generic extends TestBase {
 	@Step("Input text.")
 	public void sendText(String propertyKey, String input) {
 		
-		we = confirmElementExistence(propertyKey);
-		we.clear();
-		we.sendKeys(input);
+		me = confirmElementExistence(propertyKey);
+		me.clear();
+		me.sendKeys(input);
 		ss.takeScreenShot("After input");
-		
 	}
 
 	
@@ -285,9 +262,8 @@ public class Generic extends TestBase {
 	@Step("Click element.")
 	public void clickElement(String propertyKey) {
 		
-		we = confirmElementExistence(propertyKey);
-		we.click();
-		
+		me = confirmElementExistence(propertyKey);
+		me.click();
 	}
 
 	
@@ -296,11 +272,10 @@ public class Generic extends TestBase {
 	 * @param propertyKey properties file key defining element locator
 	 */
 	@Step("Confirm element exists.")
-	public WebElement confirmElementExistence(String propertyKey) {
+	public MobileElement confirmElementExistence(String propertyKey) {
 		
-		ss.assertTrue((we = waitForElement(propertyKey)) != null);
-		return we;
-		
+		ss.assertTrue((me = waitForElement(propertyKey)) != null);
+		return me;
 	}
 
 	
@@ -311,11 +286,10 @@ public class Generic extends TestBase {
 	 * @return WebElement
 	 */
 	@Step("Confirm dynamic element exists.")
-	public WebElement confirmElementExistence(String propertyKey, String replacement) {
+	public MobileElement confirmElementExistence(String propertyKey, String replacement) {
 		
-		ss.assertTrue((we = waitForElement(propertyKey, replacement)) != null);
-		return we;
-		
+		ss.assertTrue((me = waitForElement(propertyKey, replacement)) != null);
+		return me;
 	}
 	
 	
@@ -329,7 +303,6 @@ public class Generic extends TestBase {
 	private String buildDynamicLocator(String locator, String replacement) {
 		
 		return locator.replace(gc.compoundLocatorPlacehold, replacement);
-		
 	}
 	
 	
@@ -345,7 +318,6 @@ public class Generic extends TestBase {
 				return ((JavascriptExecutor) drv).executeScript("return document.readyState").equals("complete");
 			}
 		});
-        
 	}
 	
 	
@@ -366,7 +338,6 @@ public class Generic extends TestBase {
 			}
 		});
 		wait = null;
-        
 	}
 	
 	
@@ -377,7 +348,6 @@ public class Generic extends TestBase {
 	public void failTest() {
 		
 		ss.assertTrue(false, "This assertion intended to FAIL.");
-		
 	}
 		
 		

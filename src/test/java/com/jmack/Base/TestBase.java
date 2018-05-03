@@ -11,13 +11,14 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
-
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
@@ -25,6 +26,9 @@ import org.testng.annotations.Parameters;
 
 import com.jmack.Base.PageObjects.HomePage;
 
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.remote.MobileCapabilityType;
 import io.qameta.allure.Step;
 
 /**
@@ -35,9 +39,11 @@ import io.qameta.allure.Step;
 public class TestBase {
 	
 	private static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
+	private static ThreadLocal<AppiumDriver<?>> mDriver = new ThreadLocal<>();
 	protected Properties props = new Properties();
 
 	private Capabilities options = null;
+	private DesiredCapabilities caps = null;
 	private InputStream testReferenceFile = null;
 	private Date date = new Date();
 	private Long ts = date.getTime();
@@ -48,7 +54,9 @@ public class TestBase {
 	
 	// Helpers
 	protected Generic generic;
+	protected MobileGeneric mGeneric;
 	protected ScreenShot ss = null;
+	protected MobileScreenShot mss = null;
 	protected DataExtractor runtimeData = new DataExtractor();
 	protected static GlobalConstants gc = new GlobalConstants();
 	
@@ -68,6 +76,7 @@ public class TestBase {
 		this.browserOverride = browserOverride;
 		testName = testMethod.getName();
 		
+		// tag the test with the last three digits of timestamp
 		id = ts.toString();
 		id = id.substring(id.length()-3 );
 		
@@ -77,12 +86,21 @@ public class TestBase {
 			f.printStackTrace();
 		}
 		
-		if (runtimeData.browser.toLowerCase().equals("random")) {
+		// 
+		if (runtimeData.browser.toLowerCase().equals("randomDesktop")) {
 			Random r = new Random();
 			String[] browsers = {"chrome","firefox","edge","ie"};
 			runtimeData.browser = browsers[r.nextInt(browsers.length)];
 		}
 		
+		//  
+		if (runtimeData.browser.toLowerCase().equals("randomMobile")) {
+			Random r = new Random();
+			String[] browsers = {"androidNative","androidChrome","iosNative","iosSafari"};
+			runtimeData.browser = browsers[r.nextInt(browsers.length)];
+		}
+		
+		// if there is an override passed via TestNG suite file, and the override differs from preestablished browser, override browser
 		if (!browserOverride.equals("") && !runtimeData.browser.toLowerCase().equals(this.browserOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding browser \"%s\" with \"%s\">%n", id, testName, runtimeData.browser, browserOverride);
 			runtimeData.browser = browserOverride;
@@ -90,6 +108,7 @@ public class TestBase {
 		}
 		
 		switch (runtimeData.browser.toLowerCase()) {
+		//Desktop
 		case "chrome":
 			options = new ChromeOptions();
 			if (runtimeData.headless) {
@@ -104,9 +123,39 @@ public class TestBase {
 			break;
 		case "edge":
 			options = new EdgeOptions();
+			((EdgeOptions) options).setCapability("", "");
 			break;
 		case "ie":
 			options = new InternetExplorerOptions();
+			break;
+		//Mobile
+		case "androidnative":
+			caps = DesiredCapabilities.android();
+			caps.setCapability("automationName", "UIAutomator2");
+			caps.setCapability("platformVersion", runtimeData.platformVersion);
+			caps.setCapability("appPackage", runtimeData.aut);
+			caps.setCapability("takesScreenshot", "true");
+			break;
+		case "androidchrome":
+			caps = DesiredCapabilities.android();
+			caps.setCapability("automationName", "UIAutomator2");
+			caps.setCapability("platformVersion", runtimeData.platformVersion);
+			caps.setCapability("skipUnlock", true);
+			caps.setCapability("deviceName", "ignored");
+			caps.setCapability("takesScreenshot", "true");
+			caps.setBrowserName("Chrome");
+			break;
+		case "iosnative":
+			caps = DesiredCapabilities.iphone();
+			caps.setCapability("automationName", "XCUITest");
+			caps.setCapability("platformVersion", runtimeData.platformVersion);
+			caps.setCapability("bundleId", runtimeData.aut);
+			break;
+		case "iossafari":
+			caps = DesiredCapabilities.iphone();
+			caps.setCapability("automationName", "XCUITest");
+			caps.setCapability("platformVersion", runtimeData.platformVersion);
+			caps.setBrowserName("Safari");
 			break;
 		}
 		
@@ -127,19 +176,55 @@ public class TestBase {
 			}
 		}
 		
-		try {
-			driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
-			getDriver().manage().window().maximize();
-			ss = new ScreenShot(getDriver(), id, testName);
-			generic = new Generic(getDriver(), ss, props, id, testName);
+		if (null != options) {
 			
-		} catch (MalformedURLException m) {
-			m.printStackTrace();
+			if (runtimeData.gridType.equals("local")) {
+				try {
+					driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
+					getDriver().manage().window().maximize();
+					ss = new ScreenShot(getDriver(), id, testName);
+					generic = new Generic(getDriver(), ss, props, id, testName);
+					
+					initializePageObjects();
+					
+				} catch (MalformedURLException m) {
+					m.printStackTrace();
+				}
+			} else if (runtimeData.gridType.equals("perfecto")) {
+				((DesiredCapabilities) options).setCapability("securityToken", gc.perfectoSecurityToken);
+				try {
+					driver.set(new RemoteWebDriver(new URL(gc.perfectoHost), options));
+					getDriver().manage().window().maximize();
+					ss = new ScreenShot(getDriver(), id, testName);
+					generic = new Generic(getDriver(), ss, props, id, testName);
+					
+					initializePageObjects();
+					
+				} catch (MalformedURLException m) {
+					m.printStackTrace();
+				}
+			} else {
+				// error, no grid identified
+			}
+			
+		} else if (null != caps) {
+			try {
+				//System.out.format("[DEBUG]: <setting up appium driver for %s>%n", runtimeData.browser);
+				mDriver.set(new AppiumDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), caps));
+				mss = new MobileScreenShot(getMobileDriver(), id, testName);
+				mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
+				
+				initializeMobilePageObjects();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		else {
+			// throw config error?
 		}
 		
-		initializePageObjects();
 		System.out.format("[LOG]: <[%s:%s] =====Start test=====>%n", id, testName);
-
 	}
 	
 	
@@ -150,7 +235,16 @@ public class TestBase {
 	private void initializePageObjects() {
 		
 		homePage = new HomePage(generic, ss, id, testName);
+	}
+	
+	
+	/** 
+	 *  Add mobile page objects here
+	 */
+	@Step("Initialize Mobile Page Objects.")
+	private void initializeMobilePageObjects() {
 		
+		//homePage = new HomePage(mGeneric, ss, id, testName);
 	}
 	
 	
@@ -161,11 +255,16 @@ public class TestBase {
 	@Step("Quit browser.")
 	protected void tearDown() {
 		
-		getDriver().quit();
+		if (getDriver() instanceof RemoteWebDriver) {
+			getDriver().quit();
+		}
+		else if (getMobileDriver() instanceof AppiumDriver<?>) {
+			getMobileDriver().quit();
+		}
 		driver.remove();
 		System.out.format("[LOG]: <[%s:%s] =====end test=====>%n", id, testName);
-		
 	}
+	
 	
 	/**
 	 * Returns a thread-safe RemoteWebDriver
@@ -174,7 +273,16 @@ public class TestBase {
 	private RemoteWebDriver getDriver() {
 		
 		return driver.get();
+	}
+	
+	
+	/**
+	 * Returns a thread-safe AppiumDriver
+	 * @return thread-safe AppiumDriver
+	 */
+	private AppiumDriver<?> getMobileDriver() {
 		
+		return mDriver.get();
 	}
 	
 	
