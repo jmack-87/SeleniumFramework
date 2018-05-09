@@ -4,7 +4,9 @@ package com.jmack.Enumerations;
 		
 		// DESKTOP
 		Locator_firstResult("SearchResults.Locator.firstResult"),
+		Locator_secondResult("SearchResults.Locator.secondResult"),
 		CompoundLocator_firstResult("SearchResults.CompoundLocator.firstResult"),
+		CompoundLocator_secondResult("SearchResults.CompoundLocator.secondResult"),
 		Locator_Text_ibmSearchConfirmation("SearchResults.Locator.Text.ibmSearchConfirmation"),
 		Locator_Text_santanderSearchConfirmation("SearchResults.Locator.Text.santanderSearchConfirmation"),
 		
