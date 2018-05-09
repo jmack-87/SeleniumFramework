@@ -16,12 +16,21 @@ public class DataExtractor {
 	/*	Data available to Generic
 	 */
 	protected String sysOpt;
-	protected String browser;
-	protected Boolean headless;
-	protected String aut;
-	protected String activity;
-	protected String platformVersion;
 	protected String gridType;
+	public String platformName; //
+	protected String platformVersion; //
+	protected String browserName;
+	protected String browserVersion; //perfecto
+	protected String resolution; //perfecto
+	protected String location; //perfecto
+	
+	protected Boolean headless;
+	
+	protected String deviceName;
+	protected String model;
+	protected String appPackage;
+	protected String appActivity;
+	protected String bundleId;
 	
 	/*	Data available to scripts
 	 */
@@ -30,6 +39,7 @@ public class DataExtractor {
 	
 	private String id;
 	private String testName;
+	
 
 
 	/**
@@ -73,14 +83,26 @@ public class DataExtractor {
 	private void setTestData(JsonObject testData) {
 		System.out.format("[LOG]: <[%s:%s] RuntimeData: %s>%n", this.id, this.testName, testData);
 		
-		browser = testData.get("browser") == null ? "random" : testData.get("browser").getAsString();
-		headless = testData.get("headless") == null ? false : testData.get("headless").getAsBoolean();
-		searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
-		searchConfirmationString = testData.get("searchConfirmationString") == null ? "IBM" : testData.get("searchConfirmationString").getAsString();
-		aut = testData.get("applicationUnderTest") == null ? null : testData.get("applicationUnderTest").getAsString();
-		activity = testData.get("activity") == null ? null : testData.get("activity").getAsString();
-		platformVersion = testData.get("platformVersion") == null ? null : testData.get("platformVersion").getAsString();
-		gridType = testData.get("gridType") == null ? null : testData.get("gridType").getAsString();
+		this.gridType = testData.get("gridType") == null ? "" : testData.get("gridType").getAsString();
+		
+		this.platformName = testData.get("platformName") == null ? "" : testData.get("platformName").getAsString(); // perfecto
+		this.platformVersion = testData.get("platformVersion") == null ? "" : testData.get("platformVersion").getAsString(); // perfecto
+		this.browserName = testData.get("browserName") == null ? "" : testData.get("browserName").getAsString();
+		this.browserVersion = testData.get("browserVersion") == null ? "" : testData.get("browserVersion").getAsString(); // perfecto
+		this.resolution = testData.get("resolution") == null ? "" : testData.get("resolution").getAsString(); // perfecto
+		this.location = testData.get("location") == null ? "" : testData.get("location").getAsString(); // perfecto
+		
+		this.headless = testData.get("headless") == null ? false : testData.get("headless").getAsBoolean(); // local
+
+		// mobile native
+		this.deviceName = testData.get("deviceName") == null ? "" : testData.get("deviceName").getAsString();
+		this.model = testData.get("model") == null ? "" : testData.get("model").getAsString();
+		this.appPackage = testData.get("appPackage") == null ? "" : testData.get("appPackage").getAsString();
+		this.appActivity = testData.get("appActivity") == null ? "" : testData.get("appActivity").getAsString();
+		this.bundleId = testData.get("bundleId") == null ? "" : testData.get("bundleId").getAsString();
+		
+		this.searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
+		this.searchConfirmationString = testData.get("searchConfirmationString") == null ? "IBM" : testData.get("searchConfirmationString").getAsString();
 	}
 	
 	/**
