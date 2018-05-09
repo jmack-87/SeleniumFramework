@@ -10,6 +10,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -100,7 +101,7 @@ public class Generic extends TestBase {
 	 * @param propertyKey properties file key defining element locator
 	 * @return WebElement or null
 	 */
-	//@Step("Wait for element.")
+	@Step("Wait for element.")
 	public WebElement waitForElement(String propertyKey) {
 
 		String locator;
@@ -127,17 +128,25 @@ public class Generic extends TestBase {
 			case "id":
 				byType = By.id(locator);
 				break;
+			case "tagname":
+				byType = By.tagName(locator);
+				break;
 			default:
 				byType = By.tagName(locator);
 				break;
 		}
 		
-		we = this.wait.until(new Function<RemoteWebDriver, WebElement>(){
-				public WebElement apply(RemoteWebDriver drv) {
-					return drv.findElement(byType);
-				}
-		});
+		try {
+			we = this.wait.until(new Function<RemoteWebDriver, WebElement>(){
+					public WebElement apply(RemoteWebDriver drv) {
+						return drv.findElement(byType);
+					}
+			});
+		} catch (TimeoutException to) {
+			return null;
+		}
 		
+		//System.out.format("[DEBUG]: <[%s:%s] found %s>%n", id, testName, me);
 		return we;
 		
 	}
@@ -176,17 +185,25 @@ public class Generic extends TestBase {
 			case "id":
 				byType = By.id(locator);
 				break;
+			case "tagname":
+				byType = By.tagName(locator);
+				break;
 			default:
 				byType = By.tagName(locator);
 				break;
 		}
 		
-		we = this.wait.until(new Function<RemoteWebDriver, WebElement>(){
-				public WebElement apply(RemoteWebDriver drv) {
-					return drv.findElement(byType);
-				}
-		});
+		try {
+			we = this.wait.until(new Function<RemoteWebDriver, WebElement>(){
+					public WebElement apply(RemoteWebDriver drv) {
+						return drv.findElement(byType);
+					}
+			});
+		} catch (TimeoutException to) {
+			return null;
+		}
 		
+		//System.out.format("[DEBUG]: <[%s:%s] found %s>%n", id, testName, me);
 		return we;
 		
 	}
@@ -212,7 +229,6 @@ public class Generic extends TestBase {
 	public void getUrl(String propertyKey) {
 		
 		driver.get(getPropertyValue(propertyKey));
-		
 	}
 
 	
@@ -277,6 +293,17 @@ public class Generic extends TestBase {
 		
 	}
 
+	
+	/**
+	 * Manually trigger a screenshot
+	 * @param description String describing screenshot to be taken
+	 */
+	@Step("Take Screenshot: {0}")
+	public void takeScreenShot(String description) {
+		
+		ss.takeScreenShot(description);
+	}
+	
 	
 	/**
 	 * After confirming element existence, clicks element. 
