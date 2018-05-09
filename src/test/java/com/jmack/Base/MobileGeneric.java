@@ -2,7 +2,6 @@ package com.jmack.Base;
 
 import java.time.Duration;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import org.openqa.selenium.By;
@@ -72,10 +71,7 @@ public class MobileGeneric extends TestBase {
 		this.wait = new FluentWait<AppiumDriver<?>>(this.driver)
 				.ignoring(NoSuchElementException.class)
 				.withTimeout(Duration.ofSeconds(30))
-				.pollingEvery(Duration.ofMillis(1000));
-		
-		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
+				.pollingEvery(Duration.ofMillis(1000));	
 	}
 
 
@@ -85,7 +81,7 @@ public class MobileGeneric extends TestBase {
 	 * @param propertyKey properties file key defining element locator
 	 * @return WebElement or null
 	 */
-	//@Step("Wait for element")
+	//@Step("Wait for element.")
 	public MobileElement waitForElement(String propertyKey) {
 
 		String locator;
