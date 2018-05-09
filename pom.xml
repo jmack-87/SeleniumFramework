@@ -13,9 +13,10 @@
 	<properties>
 		<aspectj.version>1.9.0</aspectj.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<baseDir>C:\Dev\eclipse_workspaces\SeleniumFramework</baseDir>
+		<baseDir>C:\Dev\Eclipse_workspaces\New\SeleniumFramework</baseDir>
 		<parallelStyle>instances</parallelStyle>
-		<t.count>4</t.count>
+		<t.count>2</t.count> <!-- parallel test(instance) max count per suite -->
+		<suitePool>2</suitePool> <!-- parallel suite max count -->
 	</properties>
 
 	<dependencies>
@@ -68,7 +69,7 @@
 		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
-			<version>5.0.4</version>
+			<version>6.0.0-BETA5</version>
 		</dependency>
 	</dependencies>
 
@@ -81,7 +82,13 @@
 			<name>Central Repository</name>
 			<url>https://repo.maven.apache.org/maven2</url>
 		</repository>
+		<repository>
+	    	<id>perfectomobile</id>
+	    	<name>Perfecto mobile</name>
+	    	<url>http://repository-perfectomobile.forge.cloudbees.com/public</url>
+		</repository>
 	</repositories>
+	
 
 	<pluginRepositories>
 		<pluginRepository>
@@ -210,6 +217,7 @@
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
+						<!-- <compilerArgument>-Xlint:deprecation</compilerArgument> -->
 					</configuration>
 					<executions>
 						<execution>
@@ -237,15 +245,19 @@
 						<suiteXmlFiles>
 <!-- 							<suiteXmlFile>cfg/master.xml</suiteXmlFile> -->
 <!-- 							<suiteXmlFile>cfg/testng.xml</suiteXmlFile> -->
-<!-- 							<suiteXmlFile>cfg/testng2.xml</suiteXmlFile> -->
 							<suiteXmlFile>cfg/appium.xml</suiteXmlFile>
+<!-- 							<suiteXmlFile>cfg/testng2.xml</suiteXmlFile> -->
 						</suiteXmlFiles>
 						<threadCount>${t.count}</threadCount>
 						<parallel>${parallelStyle}</parallel>
 						<properties>
 							<property>
 								<name>suitethreadpoolsize</name>
-								<value>2</value>
+								<value>${suitePool}</value>
+							</property>
+							<property>
+								<name>listener</name>
+								<value>com.jmack.Base.CustomAnnotations.TestRetryTransform</value>
 							</property>
 						</properties>
 						<argLine>

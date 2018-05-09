@@ -1,17 +1,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Parallel Suite 1">
 	
-	<parameter name="browserOverride" value="" /><!-- can override script-defined values from TestParametersJSON (entire suite) -->
-
+	<parameter name="browserOverride" value="" />
+	<parameter name="gridTypeOverride" value="" />	
+	
 	<test name="parallel browsers 1">
 	
 		<parameter name="testParam" value="testValue1" />
 		
 		<classes>
-			<class name="com.jmack.Tests.ChromeFeature" />
-			<class name="com.jmack.Tests.FirefoxFeature" />
-			<class name="com.jmack.Tests.EdgeFeature" />
-			<class name="com.jmack.Tests.IeFeature" />
+<!-- 			<class name="com.jmack.Tests.Desktop.ChromeFeature" /> -->
+<!-- 			<class name="com.jmack.Tests.Desktop.SafariFeature" /> -->
+			<class name="com.jmack.Tests.Desktop.FirefoxFeature" />
+			<class name="com.jmack.Tests.Desktop.EdgeFeature" />
+<!-- 			<class name="com.jmack.Tests.Desktop.IeFeature" /> -->
 		</classes>
 		
 	</test>
