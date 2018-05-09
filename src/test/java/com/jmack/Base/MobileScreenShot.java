@@ -16,7 +16,7 @@ import io.qameta.allure.Attachment;
  */
 public class MobileScreenShot extends Assertion {
 	
-	private RemoteWebDriver driver;
+	private AppiumDriver<?> driver;
 	private String id = "unknown";
 	private String testName = "unknown";
 	
@@ -62,9 +62,9 @@ public class MobileScreenShot extends Assertion {
 	 *  Always take a screenshot if Assert fails
 	 */
 	@Override
-	public void onAssertFailure(IAssert<?> assertCommand) {
+	public void onAssertFailure(IAssert<?> assertCommand, AssertionError er) {
 		
-		takeScreenShot("FAIL: "+assertCommand.getMessage());
+		takeScreenShot("FAIL: "+er.getLocalizedMessage());
 	}
 	
 	

@@ -40,7 +40,6 @@ public class ScreenShot extends Assertion {
 	public ScreenShot(RemoteWebDriver driver) {
 		
 		this.driver = driver;
-		
 	}
 	
 	
@@ -54,7 +53,6 @@ public class ScreenShot extends Assertion {
 		
 		System.out.format("[LOG]: <[%s:%s] taking screenshot: \"%s\">%n", id, testName, description);
 		return driver.getScreenshotAs(OutputType.BYTES);
-		
 	}
 	
 	
@@ -62,10 +60,9 @@ public class ScreenShot extends Assertion {
 	 *  Always take a screenshot if Assert fails
 	 */
 	@Override
-	public void onAssertFailure(IAssert<?> assertCommand) {
+	public void onAssertFailure(IAssert<?> assertCommand, AssertionError er) {
 		
-		takeScreenShot("FAIL: "+assertCommand.getMessage());
-		
+		takeScreenShot("FAIL: "+er.getLocalizedMessage());
 	}
 	
 	
