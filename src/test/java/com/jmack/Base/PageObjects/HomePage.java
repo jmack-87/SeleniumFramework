@@ -59,7 +59,7 @@ public class HomePage extends TestBase {
 		
 		System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on HomePage>%n", id, testName, somethingToPass);
 		
-		ss.assertTrue(true,"Some message if fail."); // example of an assertion with screenshot on fail
+		ss.assertTrue(true, "Some message if fail."); // example of an assertion with screenshot on fail
 		//ss.takeScreenShot("Some description"); // example of taking screenshot, on demand
 		//generic.clickElement("Some.Property.Key"); // example of using generic methods
 		
