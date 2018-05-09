@@ -1,13 +1,13 @@
 {
 	"Tests": [
 		{
-			"example": {
-				"gridType": "perfecto|local",
-				"platformName": "Mac|Windows|Android|iOS",
+			"FOR REFERENCE": {
+				"gridType": "REQUIRED: perfecto|local",
+				"platformName": "REQUIRED: Mac|Windows|Android|iOS",
 				"platformVersion": "integer number or 'macOS High Sierra'",
-				"browserName": "desktopChrome",
-				"browserVersion": "62",
-				"location": "NA-US-BOS",
+				"browserName": "desktop{Chrome|Ie|Edge|Firefox}|{android|ios}{Chrome|Native|Safari}",
+				"browserVersion": "integer|latest|beta",
+				"location": "REQUIRED(Mac): perfecto location",
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"
 			},
