@@ -1,11 +1,13 @@
-package com.jmack.Tests;
+package com.jmack.Tests.Desktop;
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
-import com.jmack.Enumerations.*;
+import com.jmack.Enumerations.Generic;
+import com.jmack.Enumerations.SearchPage;
+import com.jmack.Enumerations.SearchResults;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -30,7 +32,6 @@ public class ChromeFeature extends TestBase {
 	@Parameters({"testParam"})
 	public void ChromeTest(@Optional String testParam) throws InterruptedException {
 		
-	
 		generic.getUrl(Generic.Text_googleURL.toString());
 		
 		generic.confirmElementExistence(SearchPage.Locator_Tag_head.toString());

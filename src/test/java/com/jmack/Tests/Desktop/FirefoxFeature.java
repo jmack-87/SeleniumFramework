@@ -1,11 +1,14 @@
-package com.jmack.Tests;
+package com.jmack.Tests.Desktop;
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
-import com.jmack.Enumerations.*;
+import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
+import com.jmack.Enumerations.Generic;
+import com.jmack.Enumerations.SearchPage;
+import com.jmack.Enumerations.SearchResults;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -15,22 +18,23 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 
 @Epic("Parallelism")
-@Feature("InternetExplorer")
-public class IeFeature extends TestBase {
+@Feature("Firefox")
+public class FirefoxFeature extends TestBase {
 
 	/**
 	 * Perform a google search. Confirm and click first result. Confirm navigation.
 	 * @param testParam optional TestNG value from suite
 	 * @throws InterruptedException
 	 */
-	@Test(testName="InternetExplorer Test", description="Run InternetExplorer browser in parallel.")
-	@Severity(SeverityLevel.MINOR)
-	@Description("Test Description: Run InternetExplorer browser in parallel.")
+	@Test(testName="Firefox Test", description="Run Firefox browser in parallel.")
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Test Description: Run Firefox browser in parallel.")
 	@Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
 	@Parameters({"testParam"})
-	public void IeTest(@Optional String testParam) throws InterruptedException {
-			
-generic.getUrl(Generic.Text_googleURL.toString());
+	@RetryOnFailCount(0)
+	public void FirefoxTest(@Optional String testParam) throws InterruptedException {
+				
+		generic.getUrl(Generic.Text_googleURL.toString());
 		
 		generic.confirmElementExistence(SearchPage.Locator_Tag_head.toString());
 		generic.confirmTitle(SearchPage.Text_pageTitle.toString());
@@ -44,7 +48,11 @@ generic.getUrl(Generic.Text_googleURL.toString());
 
 		generic.waitForPageLoaded(30);
 		
-		generic.confirmElementExistence(SearchResults.Locator_Text_ibmSearchConfirmation.toString());
+		if (runtimeData.searchString.toLowerCase().contains("ibm")) {
+			generic.confirmElementExistence(SearchResults.Locator_Text_ibmSearchConfirmation.toString());
+		} else if (runtimeData.searchString.toLowerCase().contains("santander")){
+			generic.confirmElementExistence(SearchResults.Locator_Text_santanderSearchConfirmation.toString());
+		}
 		
 		homePage.stuff("something passed");
 		

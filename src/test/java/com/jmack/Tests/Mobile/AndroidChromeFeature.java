@@ -1,11 +1,14 @@
-package com.jmack.Tests;
+package com.jmack.Tests.Mobile;
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
-import com.jmack.Enumerations.*;
+import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
+import com.jmack.Enumerations.Generic;
+import com.jmack.Enumerations.SearchPage;
+import com.jmack.Enumerations.SearchResults;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -28,6 +31,7 @@ public class AndroidChromeFeature extends TestBase {
 	@Description("Test Description: Run Android Chrome browser.")
 	@Story("Run Android Chrome.")
 	@Parameters({"testParam"})
+	@RetryOnFailCount(0)
 	public void AndroidChromeTest(@Optional String testParam) throws InterruptedException {
 		
 		mGeneric.getUrl(Generic.Text_googleURL.toString());
