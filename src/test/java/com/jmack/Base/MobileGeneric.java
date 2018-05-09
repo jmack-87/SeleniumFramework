@@ -2,15 +2,18 @@ package com.jmack.Base;
 
 import java.time.Duration;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
 
@@ -48,7 +51,8 @@ public class MobileGeneric extends TestBase {
 		this.props = props;
 		this.wait = new FluentWait<AppiumDriver<?>>(this.driver)
 				.ignoring(NoSuchElementException.class)
-				.withTimeout(Duration.ofSeconds(30));
+				.withTimeout(Duration.ofSeconds(30))
+				.pollingEvery(Duration.ofMillis(1000));
 		
 	}
 	
@@ -67,7 +71,10 @@ public class MobileGeneric extends TestBase {
 		this.props = props;
 		this.wait = new FluentWait<AppiumDriver<?>>(this.driver)
 				.ignoring(NoSuchElementException.class)
-				.withTimeout(Duration.ofSeconds(30));
+				.withTimeout(Duration.ofSeconds(30))
+				.pollingEvery(Duration.ofMillis(1000));
+		
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 	}
 
@@ -78,7 +85,7 @@ public class MobileGeneric extends TestBase {
 	 * @param propertyKey properties file key defining element locator
 	 * @return WebElement or null
 	 */
-	//@Step("Wait for element.")
+	//@Step("Wait for element")
 	public MobileElement waitForElement(String propertyKey) {
 
 		String locator;
@@ -97,24 +104,34 @@ public class MobileGeneric extends TestBase {
 		
 		switch (type) {
 			case "xpath":
-				byType = By.xpath(locator);
+				byType = MobileBy.xpath(locator);
 				break;
 			case "css":
-				byType = By.cssSelector(locator);
+				byType = MobileBy.cssSelector(locator);
 				break;
 			case "id":
-				byType = By.id(locator);
+				byType = MobileBy.id(locator);
+				break;
+			case "accessibilityId":
+				byType = MobileBy.AccessibilityId(locator);
+				break;
+			case "tagname":
+				byType = MobileBy.tagName(locator);
 				break;
 			default:
-				byType = By.tagName(locator);
+				byType = MobileBy.tagName(locator);
 				break;
 		}
 		
-		me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
+		try {
+			me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
 				public MobileElement apply(AppiumDriver<?> drv) {
 					return (MobileElement) drv.findElement(byType);
 				}
-		});
+			});
+		} catch (TimeoutException to) {
+			return null;
+		}
 		
 		//System.out.format("[DEBUG]: <[%s:%s] found %s>%n", id, testName, me);
 		return me;
@@ -147,25 +164,36 @@ public class MobileGeneric extends TestBase {
 		
 		switch (type) {
 			case "xpath":
-				byType = By.xpath(locator);
+				byType = MobileBy.xpath(locator);
 				break;
 			case "css":
-				byType = By.cssSelector(locator);
+				byType = MobileBy.cssSelector(locator);
 				break;
 			case "id":
-				byType = By.id(locator);
+				byType = MobileBy.id(locator);
+				break;
+			case "accessibilityId":
+				byType = MobileBy.AccessibilityId(locator);
+				break;
+			case "tagname":
+				byType = MobileBy.tagName(locator);
 				break;
 			default:
-				byType = By.tagName(locator);
+				byType = MobileBy.tagName(locator);
 				break;
 		}
 		
-		me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
-			public MobileElement apply(AppiumDriver<?> drv) {
-				return (MobileElement) drv.findElement(byType);
-			}
-		});
+		try {
+			me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
+				public MobileElement apply(AppiumDriver<?> drv) {
+					return (MobileElement) drv.findElement(byType);
+				}
+			});
+		} catch (TimeoutException to) {
+			return null;
+		}
 		
+		//System.out.format("[DEBUG]: <[%s:%s] found %s>%n", id, testName, me);
 		return me;
 		
 	}
@@ -251,6 +279,22 @@ public class MobileGeneric extends TestBase {
 		ss.takeScreenShot("After input");
 	}
 
+	
+	/**
+	 * Manually trigger a screenshot
+	 * @param description String describing screenshot to be taken
+	 */
+	@Step("Take Screenshot: {0}")
+	public void takeScreenShot(String description) {
+		
+		ss.takeScreenShot(description);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	/**
 	 * After confirming element existence, clicks element. 
