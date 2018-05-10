@@ -1,8 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Parallel Suite 2">
 	
-	<parameter name="browserOverride" value="" />
-	<parameter name="gridTypeOverride" value="local" />
+	<parameter name="gridTypeOverride" value="" />
+	<parameter name="platformNameOverride" value="" />
+	<parameter name="platformVersionOverride" value="" />
+	<parameter name="browserNameOverride" value="" />
+	<parameter name="browserVersionOverride" value="" />
+	<parameter name="resolutionOverride" value="" />
+	<parameter name="locationOverride" value="" />
 
 	<test name="parallel browsers 2">
 	

@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<baseDir>C:\Dev\Eclipse_workspaces\New\SeleniumFramework</baseDir>
 		<parallelStyle>instances</parallelStyle>
-		<t.count>2</t.count> <!-- parallel test(instance) max count per suite -->
+		<t.count>4</t.count> <!-- parallel test(instance) max count per suite -->
 		<suitePool>2</suitePool> <!-- parallel suite max count -->
 	</properties>
 
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-support</artifactId>
-			<version>3.11.0</version>
+			<version>3.12.0</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -244,8 +244,8 @@
 						<testFailureIgnore>true</testFailureIgnore>
 						<suiteXmlFiles>
 <!-- 							<suiteXmlFile>cfg/master.xml</suiteXmlFile> -->
-<!-- 							<suiteXmlFile>cfg/testng.xml</suiteXmlFile> -->
-							<suiteXmlFile>cfg/appium.xml</suiteXmlFile>
+							<suiteXmlFile>cfg/testng.xml</suiteXmlFile>
+<!-- 							<suiteXmlFile>cfg/appium.xml</suiteXmlFile> -->
 <!-- 							<suiteXmlFile>cfg/testng2.xml</suiteXmlFile> -->
 						</suiteXmlFiles>
 						<threadCount>${t.count}</threadCount>

@@ -48,11 +48,7 @@ public class FirefoxFeature extends TestBase {
 
 		generic.waitForPageLoaded(30);
 		
-		if (runtimeData.searchString.toLowerCase().contains("ibm")) {
-			generic.confirmElementExistence(SearchResults.Locator_Text_ibmSearchConfirmation.toString());
-		} else if (runtimeData.searchString.toLowerCase().contains("santander")){
-			generic.confirmElementExistence(SearchResults.Locator_Text_santanderSearchConfirmation.toString());
-		}
+		generic.confirmElementExistence(SearchResults.Locator_Text_santanderSearchConfirmation.toString());
 		
 		homePage.stuff("something passed");
 		
