@@ -52,7 +52,7 @@ public class HomePage extends TestBase {
 	
 	/** 
 	 *  Do something with HomePage
-	 *  @param somthingToPass String (used only to change Allure pass/fail iconography from circle to arrow)
+	 *  @param somethingToPass String (used only to change Allure pass/fail iconography from circle to arrow)
 	 */
 	@Step("Doing something with HomePage")
 	public void stuff(String somethingToPass) {

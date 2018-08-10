@@ -276,7 +276,6 @@ public class Generic extends TestBase {
 		return propertyValue;
 		
 	}
-
 	
 	/**
 	 * Inserts string into target element
@@ -378,7 +377,7 @@ public class Generic extends TestBase {
 	
 	/**
 	 * Waits up to timeOutInSeconds for the browser JavaScript engine to report standby.
-	 * @param timeOutInSeconds maximum seconds to wait
+	 * @param timeOut maximum seconds to wait
 	 */
 	@Step("Wait for page to completely load.")
 	public void waitForPageLoaded(int timeOut) {

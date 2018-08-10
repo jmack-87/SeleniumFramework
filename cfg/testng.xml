@@ -9,11 +9,11 @@
 		<parameter name="testParam" value="testValue1" />
 		
 		<classes>
-<!-- 			<class name="com.jmack.Tests.Desktop.ChromeFeature" /> -->
-<!-- 			<class name="com.jmack.Tests.Desktop.SafariFeature" /> -->
+ 			<class name="com.jmack.Tests.Desktop.ChromeFeature" />
+ 			<!--<class name="com.jmack.Tests.Desktop.SafariFeature" />-->
 			<class name="com.jmack.Tests.Desktop.FirefoxFeature" />
 			<class name="com.jmack.Tests.Desktop.EdgeFeature" />
-<!-- 			<class name="com.jmack.Tests.Desktop.IeFeature" /> -->
+ 			<class name="com.jmack.Tests.Desktop.IeFeature" />
 		</classes>
 		
 	</test>
