@@ -7,26 +7,19 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
 import org.testng.annotations.AfterMethod;
@@ -90,7 +83,7 @@ public class TestBase {
 	/**
 	 * Initialize RemoteWebDriver, gather test data (from JSON) 	
 	 * @param testMethod testNG supplied test object
-	 * @param browserOverride optional TestNG input from test suite
+	 * @param browserNameOverride optional TestNG input from test suite
 	 */
 	@BeforeMethod(description="Extract test data from JSON, create thread-safe WebDriver.")
 	@Step("Initialize test.")
@@ -422,45 +415,7 @@ public class TestBase {
 		if (null != options) {
 			if (runtimeData.gridType.equals("local")) {
 				try {
-					// BEGIN NON-GRID IMPLEMENTATION
-					//driver.set(new RemoteWebDriver(new URL(gc.gridHost), options));
-					if (options instanceof FirefoxOptions) {
-
-						System.setProperty("webdriver.gecko.driver", gc.geckoDriver);
-						System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, gc.firefoxBrowserLogFile);
-
-						Path path = Paths.get(gc.firefoxBinary);
-						((FirefoxOptions) options).setBinary(path);
-
-						FirefoxProfile ffProf = new FirefoxProfile();
-						ffProf.setPreference("network.proxy.type", 4);
-						ffProf.setAcceptUntrustedCertificates(true);
-						ffProf.setAssumeUntrustedCertificateIssuer(false);
-						((FirefoxOptions) options).setProfile(ffProf);
-
-						/*
-						JsonObject proxyJson = new JsonObject();
-						proxyJson.addProperty("proxyType", "manual");
-						proxyJson.addProperty("httpProxy", gc.proxy);
-						proxyJson.addProperty("sslProxy", gc.proxy);
-						((FirefoxOptions) options).setCapability("proxy", proxyJson);
-						*/
-
-						driver.set(new FirefoxDriver((FirefoxOptions) options));
-
-					} else if (options instanceof ChromeOptions) {
-						System.setProperty("webdriver.chrome.driver", gc.chromeDriver);
-						driver.set(new ChromeDriver((ChromeOptions) options));
-
-					} else if (options instanceof InternetExplorerOptions) {
-						System.setProperty("webdriver.ie.driver", gc.ieDriver);
-						driver.set(new InternetExplorerDriver((InternetExplorerOptions) options));
-
-					} else if (options instanceof SafariOptions) {
-						driver.set(new SafariDriver((SafariOptions) options));
-					}
-					// END NON-GRID IMPLEMENTATION
-
+				    driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
 					if (!(options instanceof SafariOptions)) {
 						getDriver().manage().window().maximize();
 					}
@@ -469,7 +424,7 @@ public class TestBase {
 
 					initializePageObjects();
 
-				} catch (Exception m) { // GRID: MalformedURLException
+				} catch (MalformedURLException m) { // GRID: MalformedURLException
 					m.printStackTrace();
 				}
 			} else if (runtimeData.gridType.equals("perfecto")) {
