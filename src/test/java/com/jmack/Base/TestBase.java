@@ -7,20 +7,28 @@ import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
@@ -409,51 +417,93 @@ public class TestBase {
 				}
 			}
 		}
-		
+
 		// Desktop
 		if (null != options) {
 			if (runtimeData.gridType.equals("local")) {
 				try {
-					driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
+					// BEGIN NON-GRID IMPLEMENTATION
+					//driver.set(new RemoteWebDriver(new URL(gc.gridHost), options));
+					if (options instanceof FirefoxOptions) {
+
+						System.setProperty("webdriver.gecko.driver", gc.geckoDriver);
+						System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, gc.firefoxBrowserLogFile);
+
+						Path path = Paths.get(gc.firefoxBinary);
+						((FirefoxOptions) options).setBinary(path);
+
+						FirefoxProfile ffProf = new FirefoxProfile();
+						ffProf.setPreference("network.proxy.type", 4);
+						ffProf.setAcceptUntrustedCertificates(true);
+						ffProf.setAssumeUntrustedCertificateIssuer(false);
+						((FirefoxOptions) options).setProfile(ffProf);
+
+						/*
+						JsonObject proxyJson = new JsonObject();
+						proxyJson.addProperty("proxyType", "manual");
+						proxyJson.addProperty("httpProxy", gc.proxy);
+						proxyJson.addProperty("sslProxy", gc.proxy);
+						((FirefoxOptions) options).setCapability("proxy", proxyJson);
+						*/
+
+						driver.set(new FirefoxDriver((FirefoxOptions) options));
+
+					} else if (options instanceof ChromeOptions) {
+						System.setProperty("webdriver.chrome.driver", gc.chromeDriver);
+						driver.set(new ChromeDriver((ChromeOptions) options));
+
+					} else if (options instanceof InternetExplorerOptions) {
+						System.setProperty("webdriver.ie.driver", gc.ieDriver);
+						driver.set(new InternetExplorerDriver((InternetExplorerOptions) options));
+
+					} else if (options instanceof SafariOptions) {
+						driver.set(new SafariDriver((SafariOptions) options));
+					}
+					// END NON-GRID IMPLEMENTATION
+
 					if (!(options instanceof SafariOptions)) {
 						getDriver().manage().window().maximize();
 					}
 					ss = new ScreenShot(getDriver(), id, testName);
 					generic = new Generic(getDriver(), ss, props, id, testName);
-					
+
 					initializePageObjects();
-					
-				} catch (MalformedURLException m) {
+
+				} catch (Exception m) { // GRID: MalformedURLException
 					m.printStackTrace();
 				}
 			} else if (runtimeData.gridType.equals("perfecto")) {
 				((MutableCapabilities) options).setCapability("securityToken", gc.perfectoSecurityToken);
 				try {
+
 					driver.set(new RemoteWebDriver(new URL(gc.perfectoHost), options));
+
 					if (!(options instanceof SafariOptions)) {
 						getDriver().manage().window().maximize();
 					}
 					ss = new ScreenShot(getDriver(), id, testName);
 					generic = new Generic(getDriver(), ss, props, id, testName);
-					
+
 					initializePageObjects();
-					
+
 				} catch (MalformedURLException m) {
 					m.printStackTrace();
 				}
+
 			} else {
 				// error, no grid identified
 			}
-		
-		// Mobile
+
+			// Mobile
 		} else if (null != caps) {
 			if (runtimeData.gridType.equals("local")) {
 				try {
-					mDriver.set(new AppiumDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), caps));
+					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.appiumHost), caps));
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
-					
+
 					initializeMobilePageObjects();
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -463,31 +513,33 @@ public class TestBase {
 					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.perfectoHost), caps));
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
-					
-					initializePageObjects();
-					
+
+					initializeMobilePageObjects();
+
 				} catch (MalformedURLException m) {
 					m.printStackTrace();
 				}
 			} else {
 				// error, no grid identified
 			}
-			
+
 		}
 		else {
 			// throw config error?
 		}
-		
+
 		System.out.format("[LOG]: <[%s:%s] =====Start test=====>%n", id, testName);
+
 	}
-	
-	
-	/** 
+
+
+	/**
 	 *  Add page objects here
 	 */
 	@Step("Initialize Page Objects.")
 	private void initializePageObjects() {
-		
+
+
 		homePage = new HomePage(generic, ss, id, testName);
 	}
 	
