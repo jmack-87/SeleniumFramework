@@ -21,6 +21,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
@@ -82,7 +83,7 @@ public class TestBase {
 	/**
 	 * Initialize RemoteWebDriver, gather test data (from JSON) 	
 	 * @param testMethod testNG supplied test object
-	 * @param browserOverride optional TestNG input from test suite
+	 * @param browserNameOverride optional TestNG input from test suite
 	 */
 	@BeforeMethod(description="Extract test data from JSON, create thread-safe WebDriver.")
 	@Step("Initialize test.")
@@ -409,51 +410,55 @@ public class TestBase {
 				}
 			}
 		}
-		
+
 		// Desktop
 		if (null != options) {
 			if (runtimeData.gridType.equals("local")) {
 				try {
-					driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
+				    driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
 					if (!(options instanceof SafariOptions)) {
 						getDriver().manage().window().maximize();
 					}
 					ss = new ScreenShot(getDriver(), id, testName);
 					generic = new Generic(getDriver(), ss, props, id, testName);
-					
+
 					initializePageObjects();
-					
-				} catch (MalformedURLException m) {
+
+				} catch (MalformedURLException m) { // GRID: MalformedURLException
 					m.printStackTrace();
 				}
 			} else if (runtimeData.gridType.equals("perfecto")) {
 				((MutableCapabilities) options).setCapability("securityToken", gc.perfectoSecurityToken);
 				try {
+
 					driver.set(new RemoteWebDriver(new URL(gc.perfectoHost), options));
+
 					if (!(options instanceof SafariOptions)) {
 						getDriver().manage().window().maximize();
 					}
 					ss = new ScreenShot(getDriver(), id, testName);
 					generic = new Generic(getDriver(), ss, props, id, testName);
-					
+
 					initializePageObjects();
-					
+
 				} catch (MalformedURLException m) {
 					m.printStackTrace();
 				}
+
 			} else {
 				// error, no grid identified
 			}
-		
-		// Mobile
+
+			// Mobile
 		} else if (null != caps) {
 			if (runtimeData.gridType.equals("local")) {
 				try {
-					mDriver.set(new AppiumDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), caps));
+					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.appiumHost), caps));
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
-					
+
 					initializeMobilePageObjects();
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -463,31 +468,33 @@ public class TestBase {
 					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.perfectoHost), caps));
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
-					
-					initializePageObjects();
-					
+
+					initializeMobilePageObjects();
+
 				} catch (MalformedURLException m) {
 					m.printStackTrace();
 				}
 			} else {
 				// error, no grid identified
 			}
-			
+
 		}
 		else {
 			// throw config error?
 		}
-		
+
 		System.out.format("[LOG]: <[%s:%s] =====Start test=====>%n", id, testName);
+
 	}
-	
-	
-	/** 
+
+
+	/**
 	 *  Add page objects here
 	 */
 	@Step("Initialize Page Objects.")
 	private void initializePageObjects() {
-		
+
+
 		homePage = new HomePage(generic, ss, id, testName);
 	}
 	

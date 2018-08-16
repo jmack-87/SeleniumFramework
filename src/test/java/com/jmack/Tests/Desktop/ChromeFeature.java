@@ -50,8 +50,6 @@ public class ChromeFeature extends TestBase {
 		
 		homePage.stuff("something passed");
 		
-		generic.failTest();
-		
 	}
 	
 }

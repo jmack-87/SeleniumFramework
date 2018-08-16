@@ -34,6 +34,7 @@ public class DataExtractor {
 	
 	/*	Data available to scripts
 	 */
+	public String environment;
 	public String searchString;
 	public String searchConfirmationString;
 	
@@ -112,7 +113,7 @@ public class DataExtractor {
 	@Step("Set System data.")
 	private void setSystemOptions(JsonObject sysOpts) {
 		System.out.format("[LOG]: <[%s:%s] SystemData: %s>%n", this.id, this.testName, sysOpts);
-		sysOpt = sysOpts.get("Opt1") == null ? null : sysOpts.get("Opt1").getAsString(); //example of syntax
+		this.environment = sysOpts.get("Environment") == null ? "PRE" : sysOpts.get("Environment").getAsString();
 	}
 	
 	/**

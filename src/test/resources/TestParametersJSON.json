@@ -13,18 +13,39 @@
 			},
 			"ChromeTest": {
 				"gridType": "local",
+<<<<<<< HEAD
 				"browserName": "desktopChrome",
+=======
+				"platformName": "Windows",
+				"platformVersion": "10",
+				"browserName": "desktopChrome",
+				"browserVersion": "latest",
+				"location": "NA-US-BOS",
+>>>>>>> mattsBranch_Master
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"
 			},
 			"SafariTest": {
 				"gridType": "local",
+<<<<<<< HEAD
 				"browserName": "desktopSafari",
+=======
+				"platformName": "Windows",
+				"platformVersion": "10",
+				"browserName": "desktopSafari",
+				"browserVersion": "latest",
+				"location": "NA-US-BOS",
+>>>>>>> mattsBranch_Master
 				"searchString": "Santander Bank",
 				"searchConfirmationString": "Santander Bank"
 			},
 			"FirefoxTest": {
 				"gridType": "local",
+<<<<<<< HEAD
+=======
+				"platformName": "Windows",
+				"platformVersion": "10",
+>>>>>>> mattsBranch_Master
 				"browserName": "desktopFirefox",
 				"searchString": "Santander Bank",
 				"searchConfirmationString": "Santander Bank"
@@ -32,6 +53,7 @@
 			"EdgeTest": {
 				"gridType": "local",
 				"browserName": "desktopEdge",
+<<<<<<< HEAD
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"
 			},
@@ -40,6 +62,20 @@
 				"browserName": "desktopIe",
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"
+=======
+				"browserVersion": "latest",
+				"resolution": "1440x900",
+				"location": "US East"
+			},
+			"IeTest": {
+				"gridType": "local",
+				"platformName": "Windows",
+				"platformVersion": "10",
+				"browserName": "desktopIe",
+				"browserVersion": "latest",
+				"resolution": "1440x900",
+				"location": "US East"
+>>>>>>> mattsBranch_Master
 			},
 			"AndroidChromeTest": {
 				"gridType": "local",
