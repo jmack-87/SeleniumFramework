@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e97ba7a-7041-4a1f-af81-23e71c3d65d7" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cfg/testng.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cfg/testng.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/jmack/Base/GlobalConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/jmack/Base/GlobalConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/jmack/Tests/Desktop/ChromeFeature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/jmack/Tests/Desktop/ChromeFeature.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -108,8 +105,8 @@
       <file leaf-file-name="GlobalConstants.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/jmack/Base/GlobalConstants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+            <state relative-caret-position="697">
+              <caret line="41" column="41" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -843,8 +840,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/jmack/Base/GlobalConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+        <state relative-caret-position="697">
+          <caret line="41" column="41" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
         </state>
       </provider>
     </entry>
