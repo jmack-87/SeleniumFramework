@@ -2,7 +2,7 @@
 <suite name="Parallel Suite 1">
 	
 	<parameter name="browserOverride" value="" />
-	<parameter name="gridTypeOverride" value="" />	
+	<parameter name="gridTypeOverride" value="local" />
 	
 	<test name="parallel browsers 1">
 	

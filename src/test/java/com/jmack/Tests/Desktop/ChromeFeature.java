@@ -6,8 +6,9 @@ import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
 import com.jmack.Enumerations.Generic;
-import com.jmack.Enumerations.SearchPage;
-import com.jmack.Enumerations.SearchResults;
+import com.jmack.Enumerations.ChangeLager_LoginPage;
+//import com.jmack.Enumerations.SearchPage;
+//import com.jmack.Enumerations.SearchResults;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -31,24 +32,31 @@ public class ChromeFeature extends TestBase {
 	@Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
 	@Parameters({"testParam"})
 	public void ChromeTest(@Optional String testParam) throws InterruptedException {
-		
-		generic.getUrl(Generic.Text_googleURL.toString());
-		
-		generic.confirmElementExistence(SearchPage.Locator_Tag_head.toString());
-		generic.confirmTitle(SearchPage.Text_pageTitle.toString());
-		
-		generic.sendText(SearchPage.Locator_TextField_searchInput.toString(), runtimeData.searchString);
-		generic.clickElement(SearchPage.Locator_Button_searchSubmit.toString());
-		
-		generic.confirmElementExistence(SearchResults.Locator_firstResult.toString());
-		generic.confirmElementExistence(SearchResults.CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
-		generic.clickElement(SearchResults.Locator_firstResult.toString());
 
-		generic.waitForPageLoaded(30);
-		
-		generic.confirmElementExistence(SearchResults.Locator_Text_ibmSearchConfirmation.toString());
-		
-		homePage.stuff("something passed");
+	    generic.getUrl(Generic.Text_changeLagerLoginURL.toString());
+
+	    generic.confirmElementExistence(ChangeLager_LoginPage.Locator_Tag_head.toString());
+	    generic.confirmTitle(ChangeLager_LoginPage.Text_pageTitle.toString());
+
+	    generic.clickElement(ChangeLager_LoginPage.Locator_Button_Register.toString());
+
+//		generic.getUrl(Generic.Text_googleURL.toString());
+//
+//      generic.confirmElementExistence(SearchPage.Locator_Tag_head.toString());
+//		generic.confirmTitle(SearchPage.Text_pageTitle.toString());
+//
+//		generic.sendText(SearchPage.Locator_TextField_searchInput.toString(), runtimeData.searchString);
+//		generic.clickElement(SearchPage.Locator_Button_searchSubmit.toString());
+//
+//		generic.confirmElementExistence(SearchResults.Locator_firstResult.toString());
+//		generic.confirmElementExistence(SearchResults.CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
+//		generic.clickElement(SearchResults.Locator_firstResult.toString());
+//
+//		generic.waitForPageLoaded(30);
+//
+//		generic.confirmElementExistence(SearchResults.Locator_Text_ibmSearchConfirmation.toString());
+//
+//		homePage.stuff("something passed");
 		
 	}
 	
