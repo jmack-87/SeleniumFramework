@@ -1,5 +1,6 @@
 package com.jmack.Tests.Desktop;
 
+import com.jmack.Enumerations.ChangeLager_RegistrationPage;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -39,6 +40,14 @@ public class ChromeFeature extends TestBase {
 	    generic.confirmTitle(ChangeLager_LoginPage.Text_pageTitle.toString());
 
 	    generic.clickElement(ChangeLager_LoginPage.Locator_Button_Register.toString());
+
+	    generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_DevPlanSelected.toString());
+	    generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_FreePlanSelect.toString());
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_Button_FreePlanSelect.toString());
+
+	    generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_DevPlanSelect.toString());
+	    generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_FreePlanSelected.toString());
 
 //		generic.getUrl(Generic.Text_googleURL.toString());
 //
