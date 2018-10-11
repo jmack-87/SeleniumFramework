@@ -1,6 +1,6 @@
 package com.jmack.Tests.Desktop;
 
-import com.jmack.Enumerations.ChangeLager_RegistrationPage;
+
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import com.jmack.Base.TestBase;
 import com.jmack.Enumerations.Generic;
 import com.jmack.Enumerations.ChangeLager_LoginPage;
+import com.jmack.Enumerations.ChangeLager_RegistrationPage;
 //import com.jmack.Enumerations.SearchPage;
 //import com.jmack.Enumerations.SearchResults;
 
@@ -41,13 +42,27 @@ public class ChromeFeature extends TestBase {
 
 	    generic.clickElement(ChangeLager_LoginPage.Locator_Button_Register.toString());
 
+		generic.clickElement(ChangeLager_RegistrationPage.Locator_Button_FreePlan.toString());
+
+		generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_DevPlanSelect.toString());
+		generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_FreePlanSelected.toString());
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_Button_DevPlan.toString());
+
 	    generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_DevPlanSelected.toString());
 	    generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_FreePlanSelect.toString());
 
-	    generic.clickElement(ChangeLager_RegistrationPage.Locator_Button_FreePlanSelect.toString());
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Name.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Name.toString(), "Daddy Austin");
 
-	    generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_DevPlanSelect.toString());
-	    generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_FreePlanSelected.toString());
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Email.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Email.toString(),"Daddy.Austin@fuckmeharder.com");
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Password.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Password.toString(), runtimeData.password);
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString(), runtimeData.password);
 
 //		generic.getUrl(Generic.Text_googleURL.toString());
 //

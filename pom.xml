@@ -14,7 +14,7 @@
 		<aspectj.version>1.9.0</aspectj.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<baseDir>C:\Users\MatthewDevellis\IdeaProjects\SeleniumFramework</baseDir>
-		<parallelStyle>instances</parallelStyle>
+		<parallelStyle>tests</parallelStyle>
 		<t.count>2</t.count> <!-- parallel test(instance) max count per suite -->
 		<suitePool>2</suitePool> <!-- parallel suite max count -->
 	</properties>
@@ -243,8 +243,8 @@
 					<configuration>
 						<testFailureIgnore>true</testFailureIgnore>
 						<suiteXmlFiles>
- 							<suiteXmlFile>cfg/master.xml</suiteXmlFile>
- 							<!--<suiteXmlFile>cfg/testng.xml</suiteXmlFile>-->
+ 							<!--<suiteXmlFile>cfg/master.xml</suiteXmlFile>-->
+ 							<suiteXmlFile>cfg/testng.xml</suiteXmlFile>
 							<!--<suiteXmlFile>cfg/appium.xml</suiteXmlFile>-->
  							<!--<suiteXmlFile>cfg/testng2.xml</suiteXmlFile>-->
 						</suiteXmlFiles>

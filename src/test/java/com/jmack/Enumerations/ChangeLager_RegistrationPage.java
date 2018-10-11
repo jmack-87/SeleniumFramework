@@ -6,8 +6,10 @@ public enum ChangeLager_RegistrationPage {
     Locator_Tag_head("ChangeLagerRegistration.Locator.Tag.head"),
 
     // DESKTOP
+    Locator_Button_DevPlan("ChangeLagerRegistration.Locator.Button.DevPlan"),
     Locator_Button_DevPlanSelect("ChangeLagerRegistration.Locator.Button.DevPlanSelect"),
     Locator_Button_DevPlanSelected("ChangeLagerRegistration.Locator.Button.DevPlanSelected"),
+    Locator_Button_FreePlan("ChangeLagerRegistration.Locator.Button.FreePlan"),
     Locator_Button_FreePlanSelect("ChangeLagerRegistration.Locator.Button.FreePlanSelect"),
     Locator_Button_FreePlanSelected("ChangeLagerRegistration.Locator.Button.FreePlanSelected"),
     Locator_textField_Name("ChangeLagerRegistration.Locator.textField.Name"),
