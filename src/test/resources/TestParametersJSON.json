@@ -13,59 +13,47 @@
 			},
 			"ChromeTest": {
 				"gridType": "local",
-<<<<<<< HEAD
-				"browserName": "desktopChrome",
-=======
 				"platformName": "Windows",
 				"platformVersion": "10",
 				"browserName": "desktopChrome",
 				"browserVersion": "latest",
 				"location": "NA-US-BOS",
->>>>>>> mattsBranch_Master
 				"searchString": "IBM Perfecto",
-				"searchConfirmationString": "IBM"
+				"searchConfirmationString": "IBM",
+				"headless": "false",
+				"password": ""
 			},
 			"SafariTest": {
 				"gridType": "local",
-<<<<<<< HEAD
-				"browserName": "desktopSafari",
-=======
 				"platformName": "Windows",
 				"platformVersion": "10",
 				"browserName": "desktopSafari",
 				"browserVersion": "latest",
 				"location": "NA-US-BOS",
->>>>>>> mattsBranch_Master
 				"searchString": "Santander Bank",
-				"searchConfirmationString": "Santander Bank"
+				"searchConfirmationString": "Santander Bank",
+				"headless": "false"
 			},
 			"FirefoxTest": {
 				"gridType": "local",
-<<<<<<< HEAD
-=======
 				"platformName": "Windows",
 				"platformVersion": "10",
->>>>>>> mattsBranch_Master
 				"browserName": "desktopFirefox",
-				"searchString": "Santander Bank",
-				"searchConfirmationString": "Santander Bank"
+				"browserVersion": "latest",
+				"location": "NA-US-BOS",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM",
+				"headless": "false"
 			},
 			"EdgeTest": {
 				"gridType": "local",
+				"platformName": "Windows",
+				"platformVersion": "10",
 				"browserName": "desktopEdge",
-<<<<<<< HEAD
-				"searchString": "IBM Perfecto",
-				"searchConfirmationString": "IBM"
-			},
-			"IeTest": {
-				"gridType": "local",
-				"browserName": "desktopIe",
-				"searchString": "IBM Perfecto",
-				"searchConfirmationString": "IBM"
-=======
 				"browserVersion": "latest",
 				"resolution": "1440x900",
-				"location": "US East"
+				"location": "US East",
+				"headless": "false"
 			},
 			"IeTest": {
 				"gridType": "local",
@@ -74,8 +62,8 @@
 				"browserName": "desktopIe",
 				"browserVersion": "latest",
 				"resolution": "1440x900",
-				"location": "US East"
->>>>>>> mattsBranch_Master
+				"location": "US East",
+				"headless": "false"
 			},
 			"AndroidChromeTest": {
 				"gridType": "local",

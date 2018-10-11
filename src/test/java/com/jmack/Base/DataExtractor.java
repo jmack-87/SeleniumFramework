@@ -37,6 +37,8 @@ public class DataExtractor {
 	public String environment;
 	public String searchString;
 	public String searchConfirmationString;
+	public String username;
+	public String password;
 	
 	private String id;
 	private String testName;
@@ -104,6 +106,8 @@ public class DataExtractor {
 		
 		this.searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
 		this.searchConfirmationString = testData.get("searchConfirmationString") == null ? "IBM" : testData.get("searchConfirmationString").getAsString();
+
+		this.password = testData.get("password") == null ? "" : testData.get("password").getAsString();
 	}
 	
 	/**
