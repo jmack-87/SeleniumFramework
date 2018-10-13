@@ -117,8 +117,13 @@ hubConfig.json:
 ```
 
 [Selenium Server](https://www.seleniumhq.org/download/)
+
 [Geckodriver](https://github.com/mozilla/geckodriver)
+
 [Chromedriver](http://chromedriver.chromium.org/)
+
 [IEDriverServer](https://github.com/SeleniumHQ/selenium/wiki/InternetExplorerDriver)
+
 [MicrosoftWebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/)
+
 [Information on Safari driver](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)
