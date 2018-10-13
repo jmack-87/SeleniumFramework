@@ -1,5 +1,6 @@
 package com.jmack.Tests.Desktop;
 
+
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -7,8 +8,10 @@ import org.testng.annotations.Test;
 import com.jmack.Base.TestBase;
 import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
 import com.jmack.Enumerations.Generic;
-import com.jmack.Enumerations.SearchPage;
-import com.jmack.Enumerations.SearchResults;
+import com.jmack.Enumerations.ChangeLager_LoginPage;
+import com.jmack.Enumerations.ChangeLager_RegistrationPage;
+//import com.jmack.Enumerations.SearchPage;
+//import com.jmack.Enumerations.SearchResults;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -33,26 +36,53 @@ public class ChromeFeature extends TestBase {
 	@Parameters({"testParam"})
 	@RetryOnFailCount(2)
 	public void ChromeTest(@Optional String testParam) throws InterruptedException {
-		
-		generic.getUrl(Generic.Text_googleURL.toString());
-		
-		generic.confirmElementExistence(SearchPage.Locator_Tag_head.toString());
-		generic.confirmTitle(SearchPage.Text_pageTitle.toString());
-		
-		generic.sendText(SearchPage.Locator_TextField_searchInput.toString(), runtimeData.searchString);
-		generic.clickElement(SearchPage.Locator_Button_searchSubmit.toString());
-		
-		generic.confirmElementExistence(SearchResults.Locator_firstResult.toString());
-		generic.confirmElementExistence(SearchResults.CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
-		generic.clickElement(SearchResults.Locator_firstResult.toString());
 
-		generic.waitForPageLoaded(30);
-		
-		generic.confirmElementExistence(SearchResults.Locator_Text_ibmSearchConfirmation.toString());
-		
-		homePage.stuff("something passed");
-		
-		generic.failTest();
+	    generic.getUrl(Generic.Text_changeLagerLoginURL.toString());
+
+	    generic.confirmElementExistence(ChangeLager_LoginPage.Locator_Tag_head.toString());
+	    generic.confirmTitle(ChangeLager_LoginPage.Text_pageTitle.toString());
+
+	    generic.clickElement(ChangeLager_LoginPage.Locator_Button_Register.toString());
+
+		generic.clickElement(ChangeLager_RegistrationPage.Locator_Button_FreePlan.toString());
+
+		generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_DevPlanSelect.toString());
+		generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_FreePlanSelected.toString());
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_Button_DevPlan.toString());
+
+	    generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_DevPlanSelected.toString());
+	    generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_FreePlanSelect.toString());
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Name.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Name.toString(), "Daddy Austin");
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Email.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Email.toString(),"Daddy.Austin@fuckmeharder.com");
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Password.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Password.toString(), runtimeData.password);
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString(), runtimeData.password);
+
+//		generic.getUrl(Generic.Text_googleURL.toString());
+//
+//      generic.confirmElementExistence(SearchPage.Locator_Tag_head.toString());
+//		generic.confirmTitle(SearchPage.Text_pageTitle.toString());
+//
+//		generic.sendText(SearchPage.Locator_TextField_searchInput.toString(), runtimeData.searchString);
+//		generic.clickElement(SearchPage.Locator_Button_searchSubmit.toString());
+//
+//		generic.confirmElementExistence(SearchResults.Locator_firstResult.toString());
+//		generic.confirmElementExistence(SearchResults.CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
+//		generic.clickElement(SearchResults.Locator_firstResult.toString());
+//
+//		generic.waitForPageLoaded(30);
+//
+//		generic.confirmElementExistence(SearchResults.Locator_Text_ibmSearchConfirmation.toString());
+//
+//		homePage.stuff("something passed");
 		
 	}
 	

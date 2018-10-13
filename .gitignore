@@ -1,13 +1,9 @@
+/.idea/
 /target/
-<<<<<<< HEAD
 /.project
 /.classpath
 /.allure/
 /test-output/
 /perfectoToken.txt
-
-=======
-/.classpath
-/.project
 /.settings/
->>>>>>> branch 'master' of https://github.com/jmack-87/SeleniumFramework.git
+/*.iml
