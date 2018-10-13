@@ -5,6 +5,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
+import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
 import com.jmack.Enumerations.Generic;
 import com.jmack.Enumerations.SearchPage;
 import com.jmack.Enumerations.SearchResults;
@@ -30,6 +31,7 @@ public class ChromeFeature extends TestBase {
 	@Description("Test Description: Run Chrome browser in parallel.")
 	@Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
 	@Parameters({"testParam"})
+	@RetryOnFailCount(2)
 	public void ChromeTest(@Optional String testParam) throws InterruptedException {
 		
 		generic.getUrl(Generic.Text_googleURL.toString());
