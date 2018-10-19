@@ -55,10 +55,10 @@ public class ChromeFeature extends TestBase {
 	    generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_FreePlanSelect.toString());
 
 	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Name.toString());
-	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Name.toString(), "Daddy Austin");
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Name.toString(), "@U$T1N D3V G0D");
 
 	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Email.toString());
-	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Email.toString(),"Daddy.Austin@fuckmeharder.com");
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Email.toString(),"l33th4x0r@nyancat.com");
 
 	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Password.toString());
 	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Password.toString(), runtimeData.password);
