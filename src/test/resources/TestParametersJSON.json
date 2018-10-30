@@ -21,7 +21,7 @@
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM",
 				"headless": "false",
-				"password": ""
+				"password": "password"
 			},
 			"SafariTest": {
 				"gridType": "local",

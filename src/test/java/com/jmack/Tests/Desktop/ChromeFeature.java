@@ -66,6 +66,8 @@ public class ChromeFeature extends TestBase {
 	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString());
 	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString(), runtimeData.password);
 
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_checkBox_TermsAndService.toString());
+
 //		generic.getUrl(Generic.Text_googleURL.toString());
 //
 //      generic.confirmElementExistence(SearchPage.Locator_Tag_head.toString());

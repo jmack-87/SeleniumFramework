@@ -106,7 +106,7 @@ public class DataExtractor {
 		this.searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
 		this.searchConfirmationString = testData.get("searchConfirmationString") == null ? "IBM" : testData.get("searchConfirmationString").getAsString();
 
-		this.password = testData.get("password") == null ? "" : testData.get("password").getAsString();
+		this.password = testData.get("password") == null ? "password" : testData.get("password").getAsString();
 
 	}
 

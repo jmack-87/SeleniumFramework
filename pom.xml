@@ -13,10 +13,10 @@
 	<properties>
 		<aspectj.version>1.9.1</aspectj.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<baseDir>C:\dev\eclipse_workspaces\SeleniumFramework</baseDir>
-		<parallelStyle>instances</parallelStyle>
-		<t.count>4</t.count> <!-- parallel test(instance) max count per suite -->
-		<suitePool>2</suitePool> <!-- parallel suite max count -->
+		<basedir>${project.basedir}</basedir>
+		<parallelStyle>tests</parallelStyle>
+		<t.count>3</t.count> <!-- parallel test(instance) max count per suite -->
+		<suitePool>1</suitePool> <!-- parallel suite max count -->
 	</properties>
 
 	<dependencies>
@@ -109,25 +109,25 @@
 	</pluginRepositories>
 
 	<build>
-		<!--<sourceDirectory>${baseDir}\src\main\java</sourceDirectory>-->
-		<!--<scriptSourceDirectory>${baseDir}\src\main\scripts</scriptSourceDirectory>-->
-		<!--<testSourceDirectory>${baseDir}\src\test\java</testSourceDirectory>-->
-		<outputDirectory>${baseDir}\target\classes</outputDirectory>
-		<testOutputDirectory>${baseDir}\target\test-classes</testOutputDirectory>
+		<!--<sourceDirectory>${project.basedir}\src\main\java</sourceDirectory>-->
+		<!--<scriptSourceDirectory>${project.basedir}\src\main\scripts</scriptSourceDirectory>-->
+		<!--<testSourceDirectory>${project.basedir}\src\test\java</testSourceDirectory>-->
+		<outputDirectory>${project.basedir}\target\classes</outputDirectory>
+		<testOutputDirectory>${project.basedir}\target\test-classes</testOutputDirectory>
 
 		<resources>
 			<resource>
-				<directory>${baseDir}\src\main\resources</directory>
+				<directory>${project.basedir}\src\main\resources</directory>
 			</resource>
 		</resources>
 
 		<testResources>
 			<testResource>
-				<directory>${baseDir}\src\test\resources</directory>
+				<directory>${project.basedir}\src\test\resources</directory>
 			</testResource>
 		</testResources>
 
-		<directory>${baseDir}\target</directory>
+		<directory>${project.basedir}\target</directory>
 		<finalName>SeleniumFramework</finalName>
 
 		<pluginManagement>
@@ -316,7 +316,7 @@
 								<goal>site</goal>
 							</goals>
 							<configuration>
-								<outputDirectory>${baseDir}\target\site</outputDirectory>
+								<outputDirectory>${project.basedir}\target\site</outputDirectory>
 							</configuration>
 						</execution>
 						<execution>
@@ -326,12 +326,12 @@
 								<goal>deploy</goal>
 							</goals>
 							<configuration>
-								<outputDirectory>${baseDir}\target\site</outputDirectory>
+								<outputDirectory>${project.basedir}\target\site</outputDirectory>
 							</configuration>
 						</execution>
 					</executions>
 					<configuration>
-						<outputDirectory>${baseDir}\target\site</outputDirectory>
+						<outputDirectory>${project.basedir}\target\site</outputDirectory>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -340,7 +340,7 @@
 					<version>2.9</version>
 					<configuration>
 						<reportVersion>2.6.0</reportVersion>
-						<propertiesFilePath>${baseDir}\src\test\resources\allure.properties</propertiesFilePath>
+						<propertiesFilePath>${project.basedir}\src\test\resources\allure.properties</propertiesFilePath>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -348,7 +348,7 @@
 	</build>
 
 	<reporting>
-		<outputDirectory>${baseDir}\target\site</outputDirectory>
+		<outputDirectory>${project.basedir}\target\site</outputDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
