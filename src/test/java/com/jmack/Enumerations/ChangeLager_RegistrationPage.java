@@ -16,6 +16,11 @@ public enum ChangeLager_RegistrationPage {
     Locator_textField_Email("ChangeLagerRegistration.Locator.textField.Email"),
     Locator_textField_Password("ChangeLagerRegistration.Locator.textField.Password"),
     Locator_textField_ConfirmPassword("ChangeLagerRegistration.Locator.textField.ConfirmPassword"),
+    Locator_textField_CardholdersName("ChangeLagerRegistration.Locator.textField.CardholdersName"),
+    Locator_textField_CardNumber("ChangeLagerRegistration.Locator.textField.CardNumber"),
+    Locator_textField_CardExpire("ChangeLagerRegistration.Locator.textField.CardExpire"),
+    Locator_textField_CardCVC("ChangeLagerRegistration.Locator.textField.CardCVC"),
+    Locator_textField_ZIPPostalCode("ChangeLagerRegistration.Locator.textField.ZIPPostalCode"),
     Locator_checkBox_TermsAndService("ChangeLagerRegistration.Locator.checkBox.TermsAndService"),
     Locator_Button_Register("ChangeLagerRegistration.Locator.Button.Registration");
 

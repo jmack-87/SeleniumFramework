@@ -1,6 +1,7 @@
 package com.jmack.Tests.Desktop;
 
 
+import javafx.scene.control.TextFormatter;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -44,6 +45,8 @@ public class ChromeFeature extends TestBase {
 
 	    generic.clickElement(ChangeLager_LoginPage.Locator_Button_Register.toString());
 
+		generic.waitForPageCompletelyLoaded(10);
+
 		generic.clickElement(ChangeLager_RegistrationPage.Locator_Button_FreePlan.toString());
 
 		generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Button_DevPlanSelect.toString());
@@ -65,6 +68,23 @@ public class ChromeFeature extends TestBase {
 
 	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString());
 	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString(), runtimeData.password);
+
+	    generic.scrollDown();
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_CardholdersName.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardholdersName.toString(), "Stinky Stankerton");
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_CardNumber.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardNumber.toString(), runtimeData.creditCardNumber);
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_CardExpire.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardExpire.toString(), runtimeData.creditCardExpiration);
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_CardCVC.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardCVC.toString(), runtimeData.creditCardCVC);
+
+	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_ZIPPostalCode.toString());
+	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ZIPPostalCode.toString(), "11111");
 
 	    generic.clickElement(ChangeLager_RegistrationPage.Locator_checkBox_TermsAndService.toString());
 

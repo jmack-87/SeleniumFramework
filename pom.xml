@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<basedir>${project.basedir}</basedir>
 		<parallelStyle>tests</parallelStyle>
-		<t.count>3</t.count> <!-- parallel test(instance) max count per suite -->
+		<t.count>1</t.count> <!-- parallel test(instance) max count per suite -->
 		<suitePool>1</suitePool> <!-- parallel suite max count -->
 	</properties>
 

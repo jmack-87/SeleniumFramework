@@ -21,7 +21,11 @@
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM",
 				"headless": "false",
-				"password": "password"
+				"username": "",
+				"password": "password",
+				"creditCardNumber": "1111111111111111",
+				"creditCardExpiration": "0122",
+				"creditCardCVC": "000"
 			},
 			"SafariTest": {
 				"gridType": "local",
