@@ -3164,7 +3164,33 @@ public class Generic extends TestBase {
 
 	}
 
+	/**
+	 * Switch to an iFrame from a default context
+	 *
+	 * @param iFrameName (String) iFrame WebElement
+	 */
+	@Step("Switch to an iFrame in the current webpage.")
+	public void switchToIframe(String iFrameName) {
+		WebElement we = confirmElementExistence(iFrameName);
+		this.driver.switchTo().frame(we);
+	}
 
+	/**
+	 * Switch to the parent of the current iFrame
+	 */
+	@Step("Switch to the parent of the iFrame.")
+	public void switchToParentIframe() {
+		this.driver.switchTo().parentFrame();
+	}
+
+	/**
+	 * Switch to the main webpage from any level within a set of iFrames
+	 */
+
+	@Step("Switch back to the main webpage.")
+	public void switchToDefault() {
+		this.driver.switchTo().defaultContent();
+	}
 }
 
 

@@ -21,7 +21,7 @@
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM",
 				"headless": "false",
-				"username": "",
+				"username": "username",
 				"password": "password",
 				"creditCardNumber": "1111111111111111",
 				"creditCardExpiration": "0122",

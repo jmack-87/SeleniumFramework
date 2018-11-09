@@ -17,6 +17,7 @@ public enum ChangeLager_RegistrationPage {
     Locator_textField_Password("ChangeLagerRegistration.Locator.textField.Password"),
     Locator_textField_ConfirmPassword("ChangeLagerRegistration.Locator.textField.ConfirmPassword"),
     Locator_textField_CardholdersName("ChangeLagerRegistration.Locator.textField.CardholdersName"),
+    Locator_iFrame_CreditCardInformation("ChangeLagerRegistration.Locator.iFrame.CreditCardInformation"),
     Locator_textField_CardNumber("ChangeLagerRegistration.Locator.textField.CardNumber"),
     Locator_textField_CardExpire("ChangeLagerRegistration.Locator.textField.CardExpire"),
     Locator_textField_CardCVC("ChangeLagerRegistration.Locator.textField.CardCVC"),

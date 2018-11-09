@@ -531,7 +531,7 @@ public class TestBase {
 	 * Returns a thread-safe RemoteWebDriver
 	 * @return thread-safe RemoteWebDriver
 	 */
-	private RemoteWebDriver getDriver() {
+	protected RemoteWebDriver getDriver() {
 		
 		return driver.get();
 	}
