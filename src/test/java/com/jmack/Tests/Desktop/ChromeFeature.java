@@ -1,7 +1,5 @@
 package com.jmack.Tests.Desktop;
 
-
-import javafx.scene.control.TextFormatter;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -86,7 +84,7 @@ public class ChromeFeature extends TestBase {
 		generic.scrollDown();
 
 	    //Switch to the iFrame containing the textboxes for credit card information
-		generic.switchToIframe(ChangeLager_RegistrationPage.Locator_iFrame_CreditCardInformation.toString());
+		iFrame.switchToIframe(ChangeLager_RegistrationPage.Locator_iFrame_CreditCardInformation.toString());
 
 		//Click the "Credit or debit card number" textbox, and send it input
 	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_CardNumber.toString());
@@ -101,7 +99,7 @@ public class ChromeFeature extends TestBase {
 	    generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardCVC.toString(), runtimeData.creditCardCVC);
 
 	    //Step out of the iframe, and back into the default context of the webpage
-		generic.switchToDefault();
+		iFrame.switchToDefault();
 
 	    //Click the "ZIP / Postal Code" textbox, and send it input
 	    generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_ZIPPostalCode.toString());
@@ -109,6 +107,8 @@ public class ChromeFeature extends TestBase {
 
 	    //Click the "Terms and Service" checkbox
 	    generic.clickElement(ChangeLager_RegistrationPage.Locator_checkBox_TermsAndService.toString());
+
+		//
 
 //		generic.getUrl(Generic.Text_googleURL.toString());
 //

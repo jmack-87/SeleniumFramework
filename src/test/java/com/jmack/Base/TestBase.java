@@ -28,6 +28,9 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import com.jmack.Base.PageObjects.HomePage;
+import com.jmack.Base.PageObjects.IFrame;
+import com.jmack.Base.PageObjects.LogInPage;
+import com.jmack.Base.PageObjects.RegistrationPage;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -78,6 +81,9 @@ public class TestBase {
 	
 	// Page Objects
 	protected HomePage homePage;
+	protected IFrame iFrame;
+	protected LogInPage logInPage;
+	protected RegistrationPage registrationPage;
 	
 	
 	/**
@@ -496,6 +502,9 @@ public class TestBase {
 
 
 		homePage = new HomePage(generic, ss, id, testName);
+		iFrame = new IFrame(generic, ss, id, testName);
+		logInPage = new LogInPage(generic, ss, id, testName);
+		registrationPage = new RegistrationPage(generic, ss, id, testName);
 	}
 	
 	
