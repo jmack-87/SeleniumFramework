@@ -1,12 +1,11 @@
-package com.jmack.Enumerations;
+package com.jmack.Enumerations.ChangeLagerApp;
 
 public enum ChangeLager_LoginPage {
 
-    // GENERIC
+    // DESKTOP
+    Text_changeLagerLoginURL("ChangeLagerLogin.text.changeLagerLoginURL"),
     Text_pageTitle("ChangeLagerLogin.text.pageTitle"),
     Locator_Tag_head("ChangeLagerLogin.Locator.Tag.head"),
-
-    // DESKTOP
     Locator_Button_SignUp("ChangeLagerLogin.Locator.Button.SignUp"),
     Locator_Button_Login("ChangeLagerLogin.Locator.Button.Login"),
     Locator_Button_Register("ChangeLagerLogin.Locator.Button.Register");

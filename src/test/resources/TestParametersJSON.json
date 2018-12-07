@@ -11,7 +11,7 @@
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"
 			},
-			"ChromeTest": {
+			"ChangeLager_E2E": {
 				"gridType": "local",
 				"platformName": "Windows",
 				"platformVersion": "10",
@@ -26,6 +26,17 @@
 				"creditCardNumber": "1111111111111111",
 				"creditCardExpiration": "0122",
 				"creditCardCVC": "000"
+			},
+			"ChromeTest": {
+				"gridType": "local",
+				"platformName": "Windows",
+				"platformVersion": "10",
+				"browserName": "desktopChrome",
+				"browserVersion": "latest",
+				"location": "NA-US-BOS",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM",
+				"headless": "false"
 			},
 			"SafariTest": {
 				"gridType": "local",

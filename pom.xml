@@ -248,9 +248,10 @@
 						<testFailureIgnore>true</testFailureIgnore>
 						<suiteXmlFiles>
 <!-- 							<suiteXmlFile>cfg/master.xml</suiteXmlFile> -->
-							<suiteXmlFile>cfg/testng.xml</suiteXmlFile>
+<!--							<suiteXmlFile>cfg/testng.xml</suiteXmlFile> -->
 <!-- 							<suiteXmlFile>cfg/appium.xml</suiteXmlFile> -->
 <!-- 							<suiteXmlFile>cfg/testng2.xml</suiteXmlFile> -->
+							<suiteXmlFile>cfg/changeLager.xml</suiteXmlFile>
 						</suiteXmlFiles>
 						<threadCount>${t.count}</threadCount>
 						<parallel>${parallelStyle}</parallel>

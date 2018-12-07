@@ -1,4 +1,4 @@
-package com.jmack.Enumerations;
+package com.jmack.Enumerations.ChangeLagerApp;
 
 public enum ChangeLager_RegistrationPage {
     // GENERIC
