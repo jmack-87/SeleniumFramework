@@ -4,6 +4,8 @@ import com.jmack.Base.Generic;
 import com.jmack.Base.ScreenShot;
 import com.jmack.Base.TestBase;
 
+import com.jmack.Enumerations.ChangeLagerApp.ChangeLager_HomePage;
+import com.jmack.Enumerations.ChangeLagerApp.ChangeLager_RegistrationPage;
 import io.qameta.allure.Step;
 
 
@@ -46,12 +48,72 @@ public class HomePage extends TestBase {
 		this.id = id;
 		this.testName = testName;
 
+		
 	}
 
 
 	/**
+	 * Navigate to ChangeLager Home Page and Confirm
+	 */
+	@Step("Validate ChangeLager HomePage URL")
+	public void navigateAndValidate(){
+
+//        System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on LogInPage>%n", id, testName);
+
+		//Open a new browser instance, and navigate to the ChangeLager URL
+		generic.getUrl(ChangeLager_HomePage.Text_changeLagerHomeURL.toString());
+
+		//Confirm the Head section of the HTML for the page, as well as the title of the page
+		generic.confirmElementExistence(ChangeLager_HomePage.Locator_Tag_head.toString());
+		generic.confirmTitle(ChangeLager_HomePage.Text_pageTitle.toString());
+	}
+
+	/**
+	 * From the ChangeLager Home Page, navigate to the Registration Page via the "Register"
+	 * Button, and confirm
+	 */
+	@Step("Navigate to ChangeLager Registration Page from Home Page using the 'Register' button")
+	public void navigateToRegistrationViaRegisterButton(){
+
+//        System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on LogInPage>%n", id, testName);
+
+		//Click the "Register" button on the login page
+		generic.clickElement(ChangeLager_HomePage.Locator_Button_Register.toString());
+
+		//Confirm the Head section of the HTML for the page, as well as the title of the page
+		generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Tag_head.toString());
+		generic.confirmTitle(ChangeLager_RegistrationPage.Text_pageTitle.toString());
+	}
+
+	/**
+	 * From the ChangeLager Home Page, navigate to the Registration Page via the "Sign up for Free"
+	 * Button, and confirm
+	 */
+	@Step("Navigate to ChangeLager Registration Page from Log-In Page using the 'Sign up for free' button")
+	public void navigateToRegistrationViaSignUpButton(){
+
+		//Click the "Sign up for free" button on the login page
+		generic.clickElement(ChangeLager_HomePage.Locator_Button_SignUp.toString());
+
+		//Confirm the Head section of the HTML for the page, as well as the title of the page
+		generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Tag_head.toString());
+		generic.confirmElementExistence(ChangeLager_RegistrationPage.Text_pageTitle.toString());
+	}
+
+	/**
+	 * On the ChangeLager Home Page, validate all buttons exist
+	 */
+	@Step("Validate all Buttons on the ChangeLager Home Page exist")
+	public void validateAllButtonsExist(){
+
+		generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Login.toString());
+		generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Register.toString());
+		generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_SignUp.toString());
+	}
+
+	/**
 	 *  Do something with HomePage
-	 *  @param somthingToPass String (used only to change Allure pass/fail iconography from circle to arrow)
+	 *  @param somethingToPass String (used only to change Allure pass/fail iconography from circle to arrow)
 	 */
 	@Step("Doing something with HomePage")
 	public void stuff(String somethingToPass) {

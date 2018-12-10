@@ -37,7 +37,12 @@ public class DataExtractor {
 	 */
 	public String searchString;
 	public String searchConfirmationString;
-	
+	public String username;
+	public String password;
+	public String creditCardNumber;
+	public String creditCardExpiration;
+	public String creditCardCVC;
+
 	private String id;
 	private String testName;
 	
@@ -105,6 +110,12 @@ public class DataExtractor {
 		
 		this.searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
 		this.searchConfirmationString = testData.get("searchConfirmationString") == null ? "IBM" : testData.get("searchConfirmationString").getAsString();
+
+		this.username = testData.get("username") == null ? "" : testData.get("password").getAsString();
+		this.password = testData.get("password") == null ? "" : testData.get("password").getAsString();
+		this.creditCardNumber = testData.get("creditCardNumber") == null ? "" : testData.get("creditCardNumber").getAsString();
+		this.creditCardExpiration = testData.get("creditCardExpiration") == null ? "" : testData.get("creditCardExpiration").getAsString();
+		this.creditCardCVC = testData.get("creditCardCVC") == null ? "" : testData.get("creditCardCVC").getAsString();
 	}
 	
 	/**
@@ -113,7 +124,7 @@ public class DataExtractor {
 	 */
 	@Step("Set System data.")
 	private void setSystemOptions(JsonObject sysOpts) {
-		System.out.format("[LOG]: <[%s:%s] SystemData: %s>%n", this.id, this.testName, sysOpts);
+		//System.out.format("[LOG]: <[%s:%s] SystemData: %s>%n", this.id, this.testName, sysOpts);
 		sysOpt = sysOpts.get("Opt1") == null ? null : sysOpts.get("Opt1").getAsString(); //example of syntax
 	}
 	

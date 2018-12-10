@@ -5,7 +5,6 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
-import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
 import com.jmack.Enumerations.Generic;
 import com.jmack.Enumerations.SearchPage;
 import com.jmack.Enumerations.SearchResults;
@@ -31,7 +30,6 @@ public class EdgeFeature extends TestBase {
 	@Description("Test Description: Run Edge browser in parallel.")
 	@Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
 	@Parameters({"testParam"})
-	@RetryOnFailCount(0)
 	public void EdgeTest(@Optional String testParam) throws InterruptedException {
 			
 		generic.getUrl(Generic.Text_googleURL.toString());

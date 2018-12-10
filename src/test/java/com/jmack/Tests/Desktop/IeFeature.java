@@ -31,7 +31,7 @@ public class IeFeature extends TestBase {
 	@Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
 	@Parameters({"testParam"})
 	public void IeTest(@Optional String testParam) throws InterruptedException {
-			
+
 		generic.getUrl(Generic.Text_googleURL.toString());
 		
 		generic.confirmElementExistence(SearchPage.Locator_Tag_head.toString());

@@ -28,22 +28,22 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>3.14.0</version>
+			<version>3.141.59</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
-			<version>3.14.0</version>
+			<version>3.141.59</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>
-			<version>3.14.0</version>
+			<version>3.141.59</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-support</artifactId>
-			<version>3.14.0</version>
+			<version>3.141.59</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
@@ -65,6 +65,11 @@
 			<artifactId>java-client</artifactId>
 			<version>6.1.0</version>
 		</dependency>
+<!--		<dependency>	-->
+<!--			<groupId>com.sikulix</groupId>	-->
+<!--			<artifactId>sikulixapi</artifactId>	-->
+<!--			<version>1.1.2</version>	-->
+<!--		</dependency>	-->
 	</dependencies>
 
 	<repositories>
@@ -80,6 +85,13 @@
 	    	<id>perfectomobile</id>
 	    	<name>Perfecto mobile</name>
 	    	<url>http://repository-perfectomobile.forge.cloudbees.com/public</url>
+		</repository>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>sonatype-ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 		</repository>
 	</repositories>
 
@@ -99,25 +111,25 @@
 	</pluginRepositories>
 
 	<build>
-		<sourceDirectory>${baseDir}\src\main\java</sourceDirectory>
-		<scriptSourceDirectory>${baseDir}\src\main\scripts</scriptSourceDirectory>
-		<testSourceDirectory>${baseDir}\src\test\java</testSourceDirectory>
-		<outputDirectory>${baseDir}\target\classes</outputDirectory>
-		<testOutputDirectory>${baseDir}\target\test-classes</testOutputDirectory>
+		<sourceDirectory>${project.basedir}\src\main\java</sourceDirectory>
+		<scriptSourceDirectory>${project.basedir}\src\main\scripts</scriptSourceDirectory>
+		<testSourceDirectory>${project.basedir}\src\test\java</testSourceDirectory>
+		<outputDirectory>${project.basedir}\target\classes</outputDirectory>
+		<testOutputDirectory>${project.basedir}\target\test-classes</testOutputDirectory>
 
 		<resources>
 			<resource>
-				<directory>${baseDir}\src\main\resources</directory>
+				<directory>${project.basedir}\src\main\resources</directory>
 			</resource>
 		</resources>
 
 		<testResources>
 			<testResource>
-				<directory>${baseDir}\src\test\resources</directory>
+				<directory>${project.basedir}\src\test\resources</directory>
 			</testResource>
 		</testResources>
 
-		<directory>${baseDir}\target</directory>
+		<directory>${project.basedir}\target</directory>
 		<finalName>SeleniumFramework</finalName>
 
 		<pluginManagement>
@@ -207,7 +219,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.7.0</version>
+					<version>3.8.0</version>
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
@@ -233,14 +245,15 @@
 
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.21.0</version>
+					<version>2.22.1</version>
 					<configuration>
 						<testFailureIgnore>true</testFailureIgnore>
 						<suiteXmlFiles>
 <!-- 							<suiteXmlFile>cfg/master.xml</suiteXmlFile> -->
 <!-- 							<suiteXmlFile>cfg/testng.xml</suiteXmlFile> -->
-							<suiteXmlFile>cfg/appium.xml</suiteXmlFile>
+<!--							<suiteXmlFile>cfg/appium.xml</suiteXmlFile> -->
 <!-- 							<suiteXmlFile>cfg/testng2.xml</suiteXmlFile> -->
+							<suiteXmlFile>cfg/changeLager.xml</suiteXmlFile>
 						</suiteXmlFiles>
 						<threadCount>${t.count}</threadCount>
 						<parallel>${parallelStyle}</parallel>
@@ -306,7 +319,7 @@
 								<goal>site</goal>
 							</goals>
 							<configuration>
-								<outputDirectory>${baseDir}\target\site</outputDirectory>
+								<outputDirectory>${project.basedir}\target\site</outputDirectory>
 							</configuration>
 						</execution>
 						<execution>
@@ -316,12 +329,12 @@
 								<goal>deploy</goal>
 							</goals>
 							<configuration>
-								<outputDirectory>${baseDir}\target\site</outputDirectory>
+								<outputDirectory>${project.basedir}\target\site</outputDirectory>
 							</configuration>
 						</execution>
 					</executions>
 					<configuration>
-						<outputDirectory>${baseDir}\target\site</outputDirectory>
+						<outputDirectory>${project.basedir}\target\site</outputDirectory>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -330,7 +343,7 @@
 					<version>2.9</version>
 					<configuration>
 						<reportVersion>2.6.0</reportVersion>
-						<propertiesFilePath>${baseDir}\src\test\resources\allure.properties</propertiesFilePath>
+						<propertiesFilePath>${project.basedir}\src\test\resources\allure.properties</propertiesFilePath>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -338,7 +351,7 @@
 	</build>
 
 	<reporting>
-		<outputDirectory>${baseDir}\target\site</outputDirectory>
+		<outputDirectory>${project.basedir}\target\site</outputDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -8,7 +8,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -41,7 +40,7 @@ public class MobileGeneric extends TestBase {
 	/**
 	 * Minimum constructor for generic step-operations and confirmation.
 	 * @param driver thread-safe WebDriver
-	 * @param gc GlobalConstants instance
+	 * @param ss MobileScreenShot instance
 	 * @param props properties file instance
 	 */
 	public MobileGeneric(AppiumDriver<?> driver, MobileScreenShot ss, Properties props) {
@@ -51,15 +50,15 @@ public class MobileGeneric extends TestBase {
 		this.props = props;
 		this.wait = new FluentWait<AppiumDriver<?>>(this.driver)
 				.ignoring(NoSuchElementException.class)
-				.withTimeout(Duration.ofSeconds(30))
-				.pollingEvery(Duration.ofMillis(1000));
-		
+				.withTimeout(Duration.ofSeconds(gc.defaultTimeOut))
+				.pollingEvery(Duration.ofMillis(gc.defaultPollingRate));
+
 	}
 	
 	/**
 	 * Constructor for generic step-operations and confirmation, provisioned for instance logging
 	 * @param driver thread-safe WebDriver
-	 * @param gc GlobalConstants instance
+	 * @param ss MobileScreenShot instance
 	 * @param props properties file instance
 	 */
 	public MobileGeneric(AppiumDriver<?> driver, MobileScreenShot ss, Properties props, String id, String testName) {
@@ -71,8 +70,8 @@ public class MobileGeneric extends TestBase {
 		this.props = props;
 		this.wait = new FluentWait<AppiumDriver<?>>(this.driver)
 				.ignoring(NoSuchElementException.class)
-				.withTimeout(Duration.ofSeconds(30L))
-				.pollingEvery(Duration.ofMillis(1000L));	
+				.withTimeout(Duration.ofSeconds(gc.defaultTimeOut))
+				.pollingEvery(Duration.ofMillis(gc.defaultPollingRate));
 	}
 
 
@@ -121,16 +120,9 @@ public class MobileGeneric extends TestBase {
 		}
 		
 		try {
-			me = this.wait
-					.withTimeout(Duration.ofSeconds(20L))
-					.until(new Function<AppiumDriver<?>, MobileElement>(){
+			me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
 				public MobileElement apply(AppiumDriver<?> drv) {
-					WebElement we = drv.findElement(byType);
-					if (null == we) {
-						return null;
-					} else {
-						return (MobileElement) we;
-					}
+					return (MobileElement) drv.findElement(byType);
 				}
 			});
 		} catch (TimeoutException to) {
@@ -189,16 +181,9 @@ public class MobileGeneric extends TestBase {
 		}
 		
 		try {
-			me = this.wait
-					.withTimeout(Duration.ofSeconds(30L))
-					.until(new Function<AppiumDriver<?>, MobileElement>(){
+			me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
 				public MobileElement apply(AppiumDriver<?> drv) {
-					WebElement we = drv.findElement(byType);
-					if (null == we) {
-						return null;
-					} else {
-						return (MobileElement) we;
-					}
+					return (MobileElement) drv.findElement(byType);
 				}
 			});
 		} catch (TimeoutException to) {
@@ -356,7 +341,7 @@ public class MobileGeneric extends TestBase {
 	//@Step("Build dynamic locator.")
 	private String buildDynamicLocator(String locator, String replacement) {
 		
-		return locator.replace(gc.compoundLocatorPlacehold, replacement);
+		return locator.replace(gc.compoundLocatorPlaceholder, replacement);
 	}
 	
 	
@@ -377,14 +362,15 @@ public class MobileGeneric extends TestBase {
 	
 	/**
 	 * Waits up to timeOutInSeconds for the browser JavaScript engine to report standby.
-	 * @param timeOutInSeconds maximum seconds to wait
+	 * @param timeOut maximum seconds to wait
 	 */
 	@Step("Wait for page to completely load.")
 	public void waitForPageLoaded(int timeOut) {
 		
 		FluentWait<RemoteWebDriver> wait = new FluentWait<RemoteWebDriver>(driver)
 				.ignoring(NoSuchElementException.class)
-				.withTimeout(Duration.ofSeconds(timeOut));
+				.withTimeout(Duration.ofSeconds(timeOut))
+				.pollingEvery(Duration.ofMillis(gc.defaultPollingRate));
 		
 		wait.until(new Function<RemoteWebDriver, Boolean>(){
 			public Boolean apply(RemoteWebDriver drv) {

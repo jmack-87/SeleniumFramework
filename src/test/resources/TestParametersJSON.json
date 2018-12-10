@@ -11,16 +11,34 @@
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"
 			},
+			"ChangeLager_E2E": {
+				"gridType": "local",
+				"platformName": "Windows",
+				"platformVersion": "10",
+				"browserName": "desktopChrome",
+				"browserVersion": "latest",
+				"location": "NA-US-BOS",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM",
+				"headless": "false",
+				"username": "username",
+				"password": "password",
+				"creditCardNumber": "1111111111111111",
+				"creditCardExpiration": "0122",
+				"creditCardCVC": "000"
+			},
 			"ChromeTest": {
-				"gridType": "perfecto",
+				"gridType": "local",
 				"browserName": "desktopChrome",
 				"platformName": "Windows",
 				"platform": "windows 10",
 				"platformVersion": "10",
 				"browserVersion": "latest",
 				"resolution": "1024x768",
+				"location": "NA-US-BOS",
 				"searchString": "IBM Perfecto",
-				"searchConfirmationString": "IBM"
+				"searchConfirmationString": "IBM",
+				"headless": "false"
 			},
 			"SafariTest": {
 				"gridType": "local",
@@ -47,9 +65,9 @@
 				"searchConfirmationString": "IBM"
 			},
 			"AndroidChromeTest": {
-				"gridType": "perfecto",
-				"platformName": "android",
-				"platformVersion": "6.0",
+				"gridType": "local",
+				"platformName": "Android",
+				"platformVersion": "8",
 				"browserName": "androidChrome",
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"
@@ -64,8 +82,8 @@
 			},
 			"IosSafariTest": {
 				"gridType": "perfecto",
-				"platformName": "ios",
-				"platformVersion": "11.2.1",
+				"platformName": "iOS",
+				"platformVersion": "11.*",
 				"browserName": "iosSafari",
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"

@@ -27,6 +27,9 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import com.jmack.Base.PageObjects.HomePage;
+import com.jmack.Base.PageObjects.IFrame;
+import com.jmack.Base.PageObjects.LogInPage;
+import com.jmack.Base.PageObjects.RegistrationPage;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -77,12 +80,15 @@ public class TestBase {
 	
 	// Page Objects
 	protected HomePage homePage;
+	protected IFrame iFrame;
+	protected LogInPage logInPage;
+	protected RegistrationPage registrationPage;
 	
 	
 	/**
 	 * Initialize RemoteWebDriver, gather test data (from JSON) 	
 	 * @param testMethod testNG supplied test object
-	 * @param browserOverride optional TestNG input from test suite
+	 * @param browserNameOverride optional TestNG input from test suite
 	 */
 	@BeforeMethod(description="Extract test data from JSON, create thread-safe WebDriver.")
 	@Step("Initialize test.")
@@ -467,7 +473,7 @@ public class TestBase {
 		} else if (null != caps) {
 			if (runtimeData.gridType.equals("local")) {
 				try {
-					mDriver.set(new AppiumDriver<MobileElement>(new URL("http://localhost:4723/wd/hub"), caps));
+					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.appiumHost), caps));
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
 					
@@ -489,10 +495,10 @@ public class TestBase {
 				try {
 					
 					//Perfecto
-					//mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.perfectoHost), caps));
+					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.perfectoHost), caps));
 					
 					//SRF
-					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.srfHost), caps));
+					//mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.srfHost), caps));
 					
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
@@ -522,6 +528,9 @@ public class TestBase {
 	private void initializePageObjects() {
 		
 		homePage = new HomePage(generic, ss, id, testName);
+		iFrame = new IFrame(generic, ss, id, testName);
+		logInPage = new LogInPage(generic, ss, id, testName);
+		registrationPage = new RegistrationPage(generic, ss, id, testName);
 	}
 	
 	
@@ -558,7 +567,7 @@ public class TestBase {
 	 * Returns a thread-safe RemoteWebDriver
 	 * @return thread-safe RemoteWebDriver
 	 */
-	private RemoteWebDriver getDriver() {
+	protected RemoteWebDriver getDriver() {
 		
 		return driver.get();
 	}
