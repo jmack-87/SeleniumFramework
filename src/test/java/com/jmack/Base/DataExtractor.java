@@ -23,6 +23,7 @@ public class DataExtractor {
 	protected String browserVersion; //perfecto
 	protected String resolution; //perfecto
 	protected String location; //perfecto
+	public String platform; //
 	
 	protected Boolean headless;
 	
@@ -91,6 +92,7 @@ public class DataExtractor {
 		this.browserVersion = testData.get("browserVersion") == null ? "" : testData.get("browserVersion").getAsString(); // perfecto
 		this.resolution = testData.get("resolution") == null ? "" : testData.get("resolution").getAsString(); // perfecto
 		this.location = testData.get("location") == null ? "" : testData.get("location").getAsString(); // perfecto
+		this.platform = testData.get("platform") == null ? "" : testData.get("platform").getAsString(); // perfecto
 		
 		this.headless = testData.get("headless") == null ? false : testData.get("headless").getAsBoolean(); // local
 

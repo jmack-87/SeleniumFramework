@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 
@@ -70,8 +71,8 @@ public class MobileGeneric extends TestBase {
 		this.props = props;
 		this.wait = new FluentWait<AppiumDriver<?>>(this.driver)
 				.ignoring(NoSuchElementException.class)
-				.withTimeout(Duration.ofSeconds(30))
-				.pollingEvery(Duration.ofMillis(1000));	
+				.withTimeout(Duration.ofSeconds(30L))
+				.pollingEvery(Duration.ofMillis(1000L));	
 	}
 
 
@@ -120,12 +121,20 @@ public class MobileGeneric extends TestBase {
 		}
 		
 		try {
-			me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
+			me = this.wait
+					.withTimeout(Duration.ofSeconds(20L))
+					.until(new Function<AppiumDriver<?>, MobileElement>(){
 				public MobileElement apply(AppiumDriver<?> drv) {
-					return (MobileElement) drv.findElement(byType);
+					WebElement we = drv.findElement(byType);
+					if (null == we) {
+						return null;
+					} else {
+						return (MobileElement) we;
+					}
 				}
 			});
 		} catch (TimeoutException to) {
+			System.out.format("[DEBUG]: <[%s:%s] element notfound>%n", id, testName);
 			return null;
 		}
 		
@@ -180,12 +189,20 @@ public class MobileGeneric extends TestBase {
 		}
 		
 		try {
-			me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
+			me = this.wait
+					.withTimeout(Duration.ofSeconds(30L))
+					.until(new Function<AppiumDriver<?>, MobileElement>(){
 				public MobileElement apply(AppiumDriver<?> drv) {
-					return (MobileElement) drv.findElement(byType);
+					WebElement we = drv.findElement(byType);
+					if (null == we) {
+						return null;
+					} else {
+						return (MobileElement) we;
+					}
 				}
 			});
 		} catch (TimeoutException to) {
+			System.out.format("[DEBUG]: <[%s:%s] element notfound>%n", id, testName);
 			return null;
 		}
 		
@@ -311,7 +328,7 @@ public class MobileGeneric extends TestBase {
 	@Step("Confirm element exists.")
 	public MobileElement confirmElementExistence(String propertyKey) {
 		
-		ss.assertTrue((me = waitForElement(propertyKey)) != null);
+		ss.assertTrue((me = waitForElement(propertyKey)) instanceof MobileElement, "Could not locate element.");
 		return me;
 	}
 
@@ -325,7 +342,7 @@ public class MobileGeneric extends TestBase {
 	@Step("Confirm dynamic element exists.")
 	public MobileElement confirmElementExistence(String propertyKey, String replacement) {
 		
-		ss.assertTrue((me = waitForElement(propertyKey, replacement)) != null);
+		ss.assertTrue((me = waitForElement(propertyKey, replacement)) instanceof MobileElement, "Could not locate element.");
 		return me;
 	}
 	

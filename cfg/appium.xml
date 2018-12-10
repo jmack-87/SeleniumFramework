@@ -15,13 +15,13 @@
 
 	<test name="Local Android Chrome and Perfecto iOS Native App">
 	
-		<parameter name="testParam" value="testValue1" />
+<!-- 		<parameter name="testParam" value="testValue1" /> -->
 		
 		<classes>
 <!-- 			<class name="com.jmack.Tests.Mobile.AndroidChromeFeature" /> -->
 <!-- 			<class name="com.jmack.Tests.Mobile.AndroidNativeFeature" /> -->
-<!-- 			<class name="com.jmack.Tests.Mobile.IosSafariFeature" /> -->
-			<class name="com.jmack.Tests.Mobile.IosNativeFeature" />
+			<class name="com.jmack.Tests.Mobile.IosSafariFeature" />
+<!-- 			<class name="com.jmack.Tests.Mobile.IosNativeFeature" /> -->
 		</classes>
 		
 	</test>

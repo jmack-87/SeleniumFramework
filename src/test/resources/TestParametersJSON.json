@@ -12,8 +12,13 @@
 				"searchConfirmationString": "IBM"
 			},
 			"ChromeTest": {
-				"gridType": "local",
+				"gridType": "perfecto",
 				"browserName": "desktopChrome",
+				"platformName": "Windows",
+				"platform": "windows 10",
+				"platformVersion": "10",
+				"browserVersion": "latest",
+				"resolution": "1024x768",
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"
 			},
@@ -42,9 +47,9 @@
 				"searchConfirmationString": "IBM"
 			},
 			"AndroidChromeTest": {
-				"gridType": "local",
-				"platformName": "Android",
-				"platformVersion": "8",
+				"gridType": "perfecto",
+				"platformName": "android",
+				"platformVersion": "6.0",
 				"browserName": "androidChrome",
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"
@@ -59,8 +64,8 @@
 			},
 			"IosSafariTest": {
 				"gridType": "perfecto",
-				"platformName": "iOS",
-				"platformVersion": "11.*",
+				"platformName": "ios",
+				"platformVersion": "11.2.1",
 				"browserName": "iosSafari",
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"

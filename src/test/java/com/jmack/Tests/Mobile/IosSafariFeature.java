@@ -31,7 +31,7 @@ public class IosSafariFeature extends TestBase {
 	@Description("Test Description: Run Ios Safari browser.")
 	@Story("Run Ios Safari.")
 	@Parameters({"testParam"})
-	@RetryOnFailCount(2)
+	@RetryOnFailCount(0)
 	public void IosSafariTest(@Optional String testParam) throws InterruptedException {
 		
 		mGeneric.getUrl(Generic.Text_googleURL.toString());
@@ -46,7 +46,7 @@ public class IosSafariFeature extends TestBase {
 		mGeneric.confirmElementExistence(SearchResults.Mobile_CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
 		mGeneric.clickElement(SearchResults.Mobile_Locator_firstResult.toString());
 
-		mGeneric.waitForPageLoaded(30);
+		//mGeneric.waitForPageLoaded(30);
 		
 		mGeneric.confirmElementExistence(SearchResults.Locator_Text_ibmSearchConfirmation.toString());
 		

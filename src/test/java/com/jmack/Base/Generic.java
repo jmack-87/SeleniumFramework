@@ -325,7 +325,7 @@ public class Generic extends TestBase {
 	@Step("Confirm element exists.")
 	public WebElement confirmElementExistence(String propertyKey) {
 		
-		ss.assertTrue((we = waitForElement(propertyKey)) != null);
+		ss.assertTrue((we = waitForElement(propertyKey)) instanceof WebElement, "Could not find element.");
 		return we;
 		
 	}
@@ -340,7 +340,7 @@ public class Generic extends TestBase {
 	@Step("Confirm dynamic element exists.")
 	public WebElement confirmElementExistence(String propertyKey, String replacement) {
 		
-		ss.assertTrue((we = waitForElement(propertyKey, replacement)) != null);
+		ss.assertTrue((we = waitForElement(propertyKey, replacement)) instanceof WebElement, "Could not locate element");
 		return we;
 		
 	}

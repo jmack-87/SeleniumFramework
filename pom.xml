@@ -11,9 +11,9 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<aspectj.version>1.9.0</aspectj.version>
+		<aspectj.version>1.9.1</aspectj.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<baseDir>C:\Dev\Eclipse_workspaces\New\SeleniumFramework</baseDir>
+		<baseDir>C:\Dev\EclipseWorkspace\New\SeleniumFramework</baseDir>
 		<parallelStyle>instances</parallelStyle>
 		<t.count>4</t.count> <!-- parallel test(instance) max count per suite -->
 		<suitePool>2</suitePool> <!-- parallel suite max count -->
@@ -28,38 +28,32 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>3.11.0</version>
-			<scope>compile</scope>
+			<version>3.14.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
-			<version>3.11.0</version>
-			<scope>compile</scope>
+			<version>3.14.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>
-			<version>3.11.0</version>
-			<scope>compile</scope>
+			<version>3.14.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-support</artifactId>
-			<version>3.12.0</version>
-			<scope>compile</scope>
+			<version>3.14.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>6.14.2</version>
-			<scope>compile</scope>
+			<version>6.14.3</version>
 		</dependency>
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-testng</artifactId>
-			<version>2.6.0</version>
-			<scope>test</scope>
+			<version>2.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -69,7 +63,7 @@
 		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
-			<version>6.0.0-BETA5</version>
+			<version>6.1.0</version>
 		</dependency>
 	</dependencies>
 
@@ -88,7 +82,7 @@
 	    	<url>http://repository-perfectomobile.forge.cloudbees.com/public</url>
 		</repository>
 	</repositories>
-	
+
 
 	<pluginRepositories>
 		<pluginRepository>
@@ -138,7 +132,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-dependency-plugin</artifactId>
-					<version>3.0.2</version>
+					<version>3.1.1</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-release-plugin</artifactId>
@@ -146,7 +140,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.0.0</version>
+					<version>3.1.0</version>
 					<executions>
 						<execution>
 							<id>default-clean</id>
@@ -160,7 +154,7 @@
 
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.0.2</version>
+					<version>3.1.0</version>
 					<executions>
 						<execution>
 							<id>copy-resources</id>
@@ -200,7 +194,7 @@
 
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
+					<version>3.1.0</version>
 					<executions>
 						<execution>
 							<id>default-jar</id>
@@ -244,8 +238,8 @@
 						<testFailureIgnore>true</testFailureIgnore>
 						<suiteXmlFiles>
 <!-- 							<suiteXmlFile>cfg/master.xml</suiteXmlFile> -->
-							<suiteXmlFile>cfg/testng.xml</suiteXmlFile>
-<!-- 							<suiteXmlFile>cfg/appium.xml</suiteXmlFile> -->
+<!-- 							<suiteXmlFile>cfg/testng.xml</suiteXmlFile> -->
+							<suiteXmlFile>cfg/appium.xml</suiteXmlFile>
 <!-- 							<suiteXmlFile>cfg/testng2.xml</suiteXmlFile> -->
 						</suiteXmlFiles>
 						<threadCount>${t.count}</threadCount>
@@ -303,7 +297,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.7</version>
+					<version>3.7.1</version>
 					<executions>
 						<execution>
 							<id>default-site</id>

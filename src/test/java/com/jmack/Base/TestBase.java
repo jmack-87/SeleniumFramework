@@ -299,12 +299,15 @@ public class TestBase {
 			//Desktop
 			case "desktopchrome":
 				options = new ChromeOptions();
-				((ChromeOptions) options).setCapability(CapabilityType.BROWSER_NAME, "Chrome");
-				((ChromeOptions) options).setCapability("platformName", runtimeData.platformName);
-				((ChromeOptions) options).setCapability("platformVersion", runtimeData.platformVersion);
-				((ChromeOptions) options).setCapability(CapabilityType.BROWSER_VERSION, runtimeData.browserVersion);
-				((ChromeOptions) options).setCapability("resolution", runtimeData.resolution);
-				((ChromeOptions) options).setCapability("location", runtimeData.location);
+				((ChromeOptions) options).setCapability(CapabilityType.BROWSER_NAME, "chrome");
+				//((ChromeOptions) options).setCapability("platformName", runtimeData.platformName);
+				((ChromeOptions) options).setCapability("platform", runtimeData.platform);
+				((ChromeOptions) options).setCapability("testName", this.testName);
+				((ChromeOptions) options).setCapability("version", runtimeData.browserVersion);
+				//((ChromeOptions) options).setCapability("platformVersion", runtimeData.platformVersion);
+				//((ChromeOptions) options).setCapability(CapabilityType.BROWSER_VERSION, runtimeData.browserVersion);
+				//((ChromeOptions) options).setCapability("resolution", runtimeData.resolution);
+				//((ChromeOptions) options).setCapability("location", runtimeData.location);
 				break;
 			case "desktopfirefox":
 				options = new FirefoxOptions();
@@ -427,9 +430,24 @@ public class TestBase {
 					m.printStackTrace();
 				}
 			} else if (runtimeData.gridType.equals("perfecto")) {
+				
+				//Perfecto
+				System.out.println("set remote session caps");
 				((MutableCapabilities) options).setCapability("securityToken", gc.perfectoSecurityToken);
+				
+				//SRF
+				((MutableCapabilities) options).setCapability("SRF_CLIENT_ID", gc.srfId);
+				((MutableCapabilities) options).setCapability("SRF_CLIENT_SECRET", gc.srfPass);
+				
 				try {
+					//Perfecto
+					System.out.println("start remote session");
 					driver.set(new RemoteWebDriver(new URL(gc.perfectoHost), options));
+					
+					//SRF
+					//driver.set(new RemoteWebDriver(new URL(gc.srfHost), options));
+					System.out.println("finished remote session");
+					
 					if (!(options instanceof SafariOptions)) {
 						getDriver().manage().window().maximize();
 					}
@@ -457,14 +475,29 @@ public class TestBase {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
 			} else if (runtimeData.gridType.equals("perfecto")) {
+				
+				//Perfecto
 				((DesiredCapabilities) caps).setCapability("securityToken", gc.perfectoSecurityToken);
+				
+				//SRF
+				((DesiredCapabilities) caps).setCapability("SRF_CLIENT_ID", gc.srfId);
+				((DesiredCapabilities) caps).setCapability("SRF_CLIENT_SECRET", gc.srfPass);
+				
+				
 				try {
-					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.perfectoHost), caps));
+					
+					//Perfecto
+					//mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.perfectoHost), caps));
+					
+					//SRF
+					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.srfHost), caps));
+					
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
 					
-					initializePageObjects();
+					initializeMobilePageObjects();
 					
 				} catch (MalformedURLException m) {
 					m.printStackTrace();
@@ -511,11 +544,12 @@ public class TestBase {
 		
 		if (getDriver() instanceof RemoteWebDriver) {
 			getDriver().quit();
+			driver.remove();
 		}
 		else if (getMobileDriver() instanceof AppiumDriver<?>) {
 			getMobileDriver().quit();
+			mDriver.remove();
 		}
-		driver.remove();
 		System.out.format("[LOG]: <[%s:%s] =====end test=====>%n", id, testName);
 	}
 	
