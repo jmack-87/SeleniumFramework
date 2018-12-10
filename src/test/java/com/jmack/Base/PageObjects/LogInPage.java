@@ -3,8 +3,6 @@ package com.jmack.Base.PageObjects;
 import com.jmack.Base.Generic;
 import com.jmack.Base.ScreenShot;
 import com.jmack.Base.TestBase;
-import com.jmack.Enumerations.ChangeLagerApp.ChangeLager_HomePage;
-import com.jmack.Enumerations.ChangeLagerApp.ChangeLager_RegistrationPage;
 import io.qameta.allure.Step;
 
 public class LogInPage extends TestBase{
