@@ -11,7 +11,7 @@
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM"
 			},
-			"ChangeLager_E2E": {
+			"ChangeLager_E2ETest": {
 				"gridType": "local",
 				"platformName": "Windows",
 				"platformVersion": "10",
