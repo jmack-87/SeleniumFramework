@@ -62,6 +62,7 @@ public class TestBase {
 	private String browserVersionOverride;
 	private String resolutionOverride;
 	private String locationOverride;
+
 	// Mobile
 	private String deviceNameOverride;
 	private String modelOverride;
@@ -102,7 +103,7 @@ public class TestBase {
 		"deviceNameOverride", "modelOverride",
 		"appPackageOverride", "appActivityOverride",
 		"bundleIdOverride"})
-	private void setUp(Method testMethod,
+	protected void setUp(Method testMethod,
 			// TestNG Suite Parameters
 			@Optional String gridTypeOverride,
 			@Optional String platformNameOverride, @Optional String platformVersionOverride,
@@ -567,7 +568,7 @@ public class TestBase {
 	 */
 	@AfterMethod(description="Quit and destroy thread-safe driver.")
 	@Step("Quit browser.")
-	private void tearDown() {
+	protected void tearDown() {
 
 		if (getDriver() instanceof RemoteWebDriver) {
 			getDriver().quit();
