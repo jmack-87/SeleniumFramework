@@ -51,8 +51,6 @@ public class RegistrationPagePO extends TestBase {
 		this.iFrame = iFrame;
 		this.id = id;
 		this.testName = testName;
-
-
 	}
 
 
@@ -102,20 +100,16 @@ public class RegistrationPagePO extends TestBase {
 	public void fillOutProfileSection() {
 
 		// Click the "Name" textbox, and send it input
-		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Name.toString());
 		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Name.toString(), "@U$T1N D3V G0D");
 
 		// Click the "Email" textbox, and send it input
-		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Email.toString());
 		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Email.toString(), "l33th4x0r@nyancat.com");
 
 		// Click the "Password" textbox, and send it input
-		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_Password.toString());
 		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Password.toString(), this.runtimeData.password);
 
 		// Click the "Confirm Password" textbox, and send it input
-		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString());
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString(),	this.runtimeData.password);
+		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString(), this.runtimeData.password);
 
 	}
 
@@ -154,8 +148,11 @@ public class RegistrationPagePO extends TestBase {
 
 		// Click the "Terms and Service" checkbox
 		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_checkBox_TermsAndService.toString());
-
 	}
+
+	/**
+	 * Navigate
+	 */
 
 
 	/**
