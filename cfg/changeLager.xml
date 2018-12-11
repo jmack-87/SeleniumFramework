@@ -8,7 +8,7 @@
     <parameter name="browserVersionOverride" value="" />
     <parameter name="resolutionOverride" value="" />
     <parameter name="locationOverride" value="" />
-    <parameter name="browserOverride" value="" />
+    <parameter name="browserNameOverride" value="desktopChrome" />
     <parameter name="gridTypeOverride" value="local" />
 
     <test name="parallel browsers 1">
