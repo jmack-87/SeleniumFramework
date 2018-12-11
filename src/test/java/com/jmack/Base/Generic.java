@@ -12,15 +12,12 @@ import java.util.function.Function;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 
-import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
 
 /**
@@ -46,7 +43,6 @@ public class Generic extends TestBase {
 	protected JavascriptExecutor jse;
 
 	private ScreenShot ss;
-	// private GlobalConstants gc;
 
 
 	/**
@@ -65,27 +61,6 @@ public class Generic extends TestBase {
 				.ignoring(NoSuchElementException.class)
 				.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut));
 		this.jse = (JavascriptExecutor) this.driver;
-
-	}
-
-
-	/**
-	 * Minimum constructor for generic step-operations and confirmation.
-	 *
-	 * @param driver (WebDriver) thread-safe WebDriver
-	 * @param ss (ScreenShot) Screenshot instance
-	 * @param props (Properties) properties file instance
-	 */
-	public Generic(AppiumDriver<?> driver, ScreenShot ss, Properties props) {
-
-		this.ss = ss;
-		this.driver = driver;
-		this.props = props;
-		this.wait = new FluentWait<RemoteWebDriver>(this.driver)
-				.ignoring(NoSuchElementException.class)
-				.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut));
-		this.jse = (JavascriptExecutor) this.driver;
-		((TakesScreenshot) this.driver).getScreenshotAs(OutputType.BYTES);
 
 	}
 
