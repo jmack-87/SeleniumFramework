@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
 import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
-import com.jmack.Enumerations.ChangeLagerApp.ChangeLager_RegistrationPage;
+
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -14,6 +14,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
+
 
 @Epic("Parallelism")
 @Feature("Chrome")
