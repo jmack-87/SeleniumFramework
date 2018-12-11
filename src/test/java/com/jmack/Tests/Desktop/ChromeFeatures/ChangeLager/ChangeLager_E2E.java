@@ -33,7 +33,7 @@ public class ChangeLager_E2E extends TestBase {
     public void ChangeLager_E2ETest(@Optional String testParam) {
 
         //Navigate to the ChangeLager website, and confirm
-        homePage.navigateAndValidate();
+        homePage.navigateAndValidate_CL();
 
         //Validate all buttons exist
         homePage.validateAllButtonsExist();
