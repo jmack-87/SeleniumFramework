@@ -29,7 +29,7 @@ public class ChangeLager_E2E extends TestBase {
     @Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
     @Parameters({"testParam"})
     @RetryOnFailCount(0)
-    public void ChangeLager_E2E(@Optional String testParam) {
+    public void ChangeLager_E2ETest(@Optional String testParam) {
 
         //Navigate to the ChangeLager website, and confirm
         homePage.navigateAndValidate();
