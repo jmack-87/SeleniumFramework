@@ -5,7 +5,7 @@ import com.jmack.Base.ScreenShot;
 import com.jmack.Base.TestBase;
 import io.qameta.allure.Step;
 
-public class LogInPage extends TestBase{
+public class LogInPagePO extends TestBase{
 
     private Generic generic;
     private ScreenShot ss;
@@ -17,7 +17,7 @@ public class LogInPage extends TestBase{
      * @param generic
      * @param ss
      */
-    public LogInPage(Generic generic, ScreenShot ss) {
+    public LogInPagePO(Generic generic, ScreenShot ss) {
 
         this.generic = generic;
         this.ss = ss;
@@ -31,7 +31,7 @@ public class LogInPage extends TestBase{
      * @param id
      * @param testName
      */
-    public LogInPage(Generic generic, ScreenShot ss, String id, String testName) {
+    public LogInPagePO(Generic generic, ScreenShot ss, String id, String testName) {
 
         this.generic = generic;
         this.ss = ss;

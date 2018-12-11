@@ -6,7 +6,7 @@ import com.jmack.Base.TestBase;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 
-public class IFrame extends TestBase {
+public class IFramePO extends TestBase {
 
     private Generic generic;
     private ScreenShot ss;
@@ -18,7 +18,7 @@ public class IFrame extends TestBase {
      * @param generic
      * @param ss
      */
-    public IFrame (Generic generic, ScreenShot ss) {
+    public IFramePO (Generic generic, ScreenShot ss) {
 
         this.generic = generic;
         this.ss = ss;
@@ -32,7 +32,7 @@ public class IFrame extends TestBase {
      * @param id
      * @param testName
      */
-    public IFrame (Generic generic, ScreenShot ss, String id, String testName) {
+    public IFramePO (Generic generic, ScreenShot ss, String id, String testName) {
 
         this.generic = generic;
         this.ss = ss;

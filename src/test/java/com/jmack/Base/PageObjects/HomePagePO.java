@@ -14,7 +14,7 @@ import io.qameta.allure.Step;
  * @author Jerimiah Mack
  *
  */
-public class HomePage extends TestBase {
+public class HomePagePO extends TestBase {
 
 	private ScreenShot ss;
 	private String id = "unknown";
@@ -26,7 +26,7 @@ public class HomePage extends TestBase {
 	 * @param generic
 	 * @param ss
 	 */
-	public HomePage (Generic generic, ScreenShot ss) {
+	public HomePagePO(Generic generic, ScreenShot ss) {
 
 		this.generic = super.generic;
 		this.ss = ss;
@@ -36,19 +36,20 @@ public class HomePage extends TestBase {
 
 	/**
 	 * Constructor provisioned for instance logging
+	 *
 	 * @param generic
 	 * @param ss
 	 * @param id
 	 * @param testName
 	 */
-	public HomePage (Generic generic, ScreenShot ss, String id, String testName) {
+	public HomePagePO(Generic generic, ScreenShot ss, String id, String testName) {
 
-		this.generic = super.generic;
+		this.generic = generic;
 		this.ss = ss;
 		this.id = id;
 		this.testName = testName;
 
-		
+
 	}
 
 
@@ -61,11 +62,12 @@ public class HomePage extends TestBase {
 //        System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on LogInPage>%n", id, testName);
 
 		//Open a new browser instance, and navigate to the ChangeLager URL
-		generic.getUrl(ChangeLager_HomePage.Text_changeLagerHomeURL.toString());
+		this.generic.getUrl(ChangeLager_HomePage.Text_changeLagerHomeURL.toString());
 
 		//Confirm the Head section of the HTML for the page, as well as the title of the page
-		generic.confirmElementExistence(ChangeLager_HomePage.Locator_Tag_head.toString());
-		generic.confirmTitle(ChangeLager_HomePage.Text_pageTitle.toString());
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Tag_head.toString());
+		this.generic.confirmTitle(ChangeLager_HomePage.Text_pageTitle.toString());
+
 	}
 
 	/**
@@ -78,11 +80,11 @@ public class HomePage extends TestBase {
 //        System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on LogInPage>%n", id, testName);
 
 		//Click the "Register" button on the login page
-		generic.clickElement(ChangeLager_HomePage.Locator_Button_Register.toString());
+		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_Register.toString());
 
 		//Confirm the Head section of the HTML for the page, as well as the title of the page
-		generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Tag_head.toString());
-		generic.confirmTitle(ChangeLager_RegistrationPage.Text_pageTitle.toString());
+		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Tag_head.toString());
+		this.generic.confirmTitle(ChangeLager_RegistrationPage.Text_pageTitle.toString());
 	}
 
 	/**
@@ -93,11 +95,11 @@ public class HomePage extends TestBase {
 	public void navigateToRegistrationViaSignUpButton(){
 
 		//Click the "Sign up for free" button on the login page
-		generic.clickElement(ChangeLager_HomePage.Locator_Button_SignUp.toString());
+		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_SignUp.toString());
 
 		//Confirm the Head section of the HTML for the page, as well as the title of the page
-		generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Tag_head.toString());
-		generic.confirmElementExistence(ChangeLager_RegistrationPage.Text_pageTitle.toString());
+		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Tag_head.toString());
+		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Text_pageTitle.toString());
 	}
 
 	/**
@@ -106,9 +108,9 @@ public class HomePage extends TestBase {
 	@Step("Validate all Buttons on the ChangeLager Home Page exist")
 	public void validateAllButtonsExist(){
 
-		generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Login.toString());
-		generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Register.toString());
-		generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_SignUp.toString());
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Login.toString());
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Register.toString());
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_SignUp.toString());
 	}
 
 	/**
@@ -118,9 +120,9 @@ public class HomePage extends TestBase {
 	@Step("Doing something with HomePage")
 	public void stuff(String somethingToPass) {
 
-		System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on HomePage>%n", id, testName, somethingToPass);
+		System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on HomePage>%n", this.id, this.testName, somethingToPass);
 
-		ss.assertTrue(true, "Some message if fail."); // example of an assertion with screenshot on fail
+		this.ss.assertTrue(true, "Some message if fail."); // example of an assertion with screenshot on fail
 		//ss.takeScreenShot("Some description"); // example of taking screenshot, on demand
 		//generic.clickElement("Some.Property.Key"); // example of using generic methods
 
