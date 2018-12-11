@@ -438,10 +438,10 @@ public class TestBase {
 						getDriver().manage().window().maximize();
 					}
 
-					System.out.format("[LOG]: <[%s:%s] plaunching screenshot helper>%n", id, testName);
+					System.out.format("[LOG]: <[%s:%s] launching screenshot helper>%n", id, testName);
 					ss = new ScreenShot(getDriver(), id, testName);
 
-					System.out.format("[LOG]: <[%s:%s] plaunching generic helper>%n", id, testName);
+					System.out.format("[LOG]: <[%s:%s] launching generic helper>%n", id, testName);
 					generic = new Generic(getDriver(), ss, props, id, testName);
 
 					System.out.format("[LOG]: <[%s:%s] initializing page objects>%n", id, testName);
