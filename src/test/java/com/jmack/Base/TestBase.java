@@ -36,12 +36,12 @@ import io.appium.java_client.MobileElement;
 import io.qameta.allure.Step;
 
 /**
- * 
+ *
  * @author Jerimiah Mack
  *
  */
 public class TestBase {
-	
+
 	private static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
 	private static ThreadLocal<AppiumDriver<?>> mDriver = new ThreadLocal<>();
 	protected Properties props = new Properties();
@@ -51,7 +51,7 @@ public class TestBase {
 	private InputStream testReferenceFile = null;
 	private Date date = new Date();
 	private Long ts = date.getTime();
-	
+
 	// TestNG Suite parameters
 	private String gridTypeOverride;
 	private String platformNameOverride;
@@ -66,10 +66,10 @@ public class TestBase {
 	private String appPackageOverride;
 	private String appActivityOverride;
 	private String bundleIdOverride;
-	
+
 	private String id;
 	private String testName;
-	
+
 	// Helpers
 	protected Generic generic;
 	protected MobileGeneric mGeneric;
@@ -77,16 +77,16 @@ public class TestBase {
 	protected MobileScreenShot mss = null;
 	protected DataExtractor runtimeData = new DataExtractor();
 	protected static GlobalConstants gc = new GlobalConstants();
-	
+
 	// Page Objects
 	protected HomePage homePage;
 	protected IFrame iFrame;
 	protected LogInPage logInPage;
 	protected RegistrationPage registrationPage;
-	
-	
+
+
 	/**
-	 * Initialize RemoteWebDriver, gather test data (from JSON) 	
+	 * Initialize RemoteWebDriver, gather test data (from JSON)
 	 * @param testMethod testNG supplied test object
 	 * @param browserNameOverride optional TestNG input from test suite
 	 */
@@ -109,7 +109,7 @@ public class TestBase {
 			@Optional String deviceNameOverride, @Optional String modelOverride,
 			@Optional String appPackageOverride, @Optional String appActivityOverride,
 			@Optional String bundleIdOverride) {
-		
+
 		this.gridTypeOverride = gridTypeOverride == null ? "" : gridTypeOverride;
 		this.platformNameOverride = platformNameOverride == null ? "" : platformNameOverride;
 		this.platformVersionOverride = platformVersionOverride == null ? "" : platformVersionOverride;
@@ -117,90 +117,91 @@ public class TestBase {
 		this.browserVersionOverride = browserVersionOverride == null ? "" : browserVersionOverride;
 		this.resolutionOverride = resolutionOverride == null ? "" : resolutionOverride;
 		this.locationOverride = locationOverride == null ? "" : locationOverride;
-		
+
 		this.deviceNameOverride = deviceNameOverride == null ? "" : deviceNameOverride;
 		this.modelOverride = modelOverride == null ? "" : modelOverride;
 		this.appPackageOverride = appPackageOverride == null ? "" : appPackageOverride;
 		this.appActivityOverride = appActivityOverride == null ? "" : appActivityOverride;
 		this.bundleIdOverride = bundleIdOverride == null ? "" : bundleIdOverride;
-		
+
 		testName = testMethod.getName();
-		
+
 		// tag the test with the last three digits of timestamp
 		id = ts.toString();
 		id = id.substring(id.length()-3 );
-		
+
 		// initialize/retrieve test data (from JSON)
 		try {
 			runtimeData.initialize(gc, testName, id);
 		} catch (FileNotFoundException f) {
 			f.printStackTrace();
 		}
-		
+
 		// randomize desktop client
 		if (runtimeData.browserName.toLowerCase().equals("randomDesktop")) {
 			Random r = new Random();
 			String[] browsers = {"chrome","firefox","edge","ie"};
 			runtimeData.browserName = browsers[r.nextInt(browsers.length)];
 		}
-		
+
 		//  randomize mobile client
 		if (runtimeData.browserName.toLowerCase().equals("randomMobile")) {
 			Random r = new Random();
 			String[] browsers = {"androidNative","androidChrome","iosNative","iosSafari"};
 			runtimeData.browserName = browsers[r.nextInt(browsers.length)];
 		}
-		
-		
+
+		System.out.format("[LOG]: <[%s:%s] overriding data.>%n", id, testName);
+
 		// OVERRIDES
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established gridType, override gridType
 		if (!("").equals(this.gridTypeOverride) && !runtimeData.gridType.toLowerCase().equals(this.gridTypeOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding gridType \"%s\" with \"%s\">%n", id, testName, runtimeData.gridType, gridTypeOverride);
 			runtimeData.gridType = this.gridTypeOverride;
 		}
-		
+
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established platformName, override platformName
 		if (!("").equals(this.platformNameOverride) && !runtimeData.platformName.toLowerCase().equals(this.platformNameOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding platformName \"%s\" with \"%s\">%n", id, testName, runtimeData.platformName, platformNameOverride);
 			runtimeData.platformName = this.platformNameOverride;
 		}
-		
+
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established platformVersion, override platformVersion
 		if (!("").equals(this.platformVersionOverride) && !runtimeData.platformVersion.toLowerCase().equals(this.platformVersionOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding platformVersion \"%s\" with \"%s\">%n", id, testName, runtimeData.platformVersion, platformVersionOverride);
 			runtimeData.platformVersion = this.platformVersionOverride;
 		}
-				
+
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established browser, override browser
 		if (!("").equals(this.browserNameOverride) && !runtimeData.browserName.toLowerCase().equals(this.browserNameOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding browserName \"%s\" with \"%s\">%n", id, testName, runtimeData.browserName, browserNameOverride);
 			runtimeData.browserName = browserNameOverride;
 		}
-		
+
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established browserVersion, override browserVersion
 		if (!("").equals(this.browserVersionOverride) && !runtimeData.browserVersion.toLowerCase().equals(this.browserVersionOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding browserVersion \"%s\" with \"%s\">%n", id, testName, runtimeData.browserVersion, browserVersionOverride);
 			runtimeData.browserVersion = browserVersionOverride;
 		}
-		
+
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established resolution, override resolution
 		if (!("").equals(this.resolutionOverride) && !runtimeData.resolution.toLowerCase().equals(this.resolutionOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding resolution \"%s\" with \"%s\">%n", id, testName, runtimeData.resolution, resolutionOverride);
 			runtimeData.resolution = resolutionOverride;
 		}
-		
+
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established location, override location
 		if (!("").equals(this.locationOverride) && !runtimeData.location.toLowerCase().equals(this.locationOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding location \"%s\" with \"%s\">%n", id, testName, runtimeData.location, locationOverride);
 			runtimeData.location = locationOverride;
 		}
-		
+
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established deviceName, override deviceName
 		if (!("").equals(this.deviceNameOverride) && !runtimeData.deviceName.toLowerCase().equals(this.deviceNameOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding deviceName \"%s\" with \"%s\">%n", id, testName, runtimeData.deviceName, deviceNameOverride);
 			runtimeData.deviceName = this.deviceNameOverride;
 		}
-		
+
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established model, override model
 		if (!("").equals(this.modelOverride) && !runtimeData.model.toLowerCase().equals(this.modelOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding model \"%s\" with \"%s\">%n", id, testName, runtimeData.model, modelOverride);
@@ -218,16 +219,19 @@ public class TestBase {
 			System.out.format("[LOG]: <[%s:%s] overriding appActivity \"%s\" with \"%s\">%n", id, testName, runtimeData.appActivity, appActivityOverride);
 			runtimeData.appActivity = this.appActivityOverride;
 		}
-		
+
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established bundleId, override bundleId
 		if (!("").equals(this.bundleIdOverride) && !runtimeData.bundleId.toLowerCase().equals(this.bundleIdOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding bundleId \"%s\" with \"%s\">%n", id, testName, runtimeData.bundleId, bundleIdOverride);
 			runtimeData.bundleId = this.bundleIdOverride;
 		}
 		// END OVERRIDES
-		
-		
+
+
 		if (runtimeData.gridType.toLowerCase().equals("local")) {
+
+			System.out.format("[LOG]: <[%s:%s] local grid detected>%n", id, testName);
+
 			switch (runtimeData.browserName.toLowerCase()) {
 			//Desktop
 			case "desktopchrome":
@@ -299,7 +303,7 @@ public class TestBase {
 				break;
 			}
 		}
-		
+
 		if (runtimeData.gridType.toLowerCase().equals("perfecto")) {
 			switch (runtimeData.browserName.toLowerCase()) {
 			//Desktop
@@ -400,9 +404,9 @@ public class TestBase {
 				break;
 			}
 		}
-		
+
 		//System.out.format("[LOG]: <[%s:%s] using %s; headless: %s;>\n", this.id, this.testName, runtimeData.browserName, runtimeData.headless);
-		
+
 		// load properties file (locators definitions)
 		try {
 			testReferenceFile = new FileInputStream(gc.testReferenceFilePath);
@@ -413,144 +417,156 @@ public class TestBase {
 			if (testReferenceFile != null) {
 				try {
 					testReferenceFile.close();
+					System.out.format("[LOG]: <[%s:%s] properties loaded.>%n", id, testName);
 				} catch (IOException io) {
 					io.printStackTrace();
 				}
 			}
 		}
-		
+
 		// Desktop
 		if (null != options) {
-			if (runtimeData.gridType.equals("local")) {
+
+			System.out.format("[LOG]: <[%s:%s] %s browser detected on %s grid>%n", id, testName, runtimeData.browserName, runtimeData.gridType);
+
+			if (runtimeData.gridType.toLowerCase().equals("local")) {
 				try {
 					driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
 					if (!(options instanceof SafariOptions)) {
 						getDriver().manage().window().maximize();
 					}
+
+					System.out.format("[LOG]: <[%s:%s] plaunching screenshot helper>%n", id, testName);
 					ss = new ScreenShot(getDriver(), id, testName);
+
+					System.out.format("[LOG]: <[%s:%s] plaunching generic helper>%n", id, testName);
 					generic = new Generic(getDriver(), ss, props, id, testName);
-					
+
+					System.out.format("[LOG]: <[%s:%s] initializing page objects>%n", id, testName);
 					initializePageObjects();
-					
+
 				} catch (MalformedURLException m) {
 					m.printStackTrace();
 				}
-			} else if (runtimeData.gridType.equals("perfecto")) {
-				
+			} else if (runtimeData.gridType.toLowerCase().equals("perfecto")) {
+
 				//Perfecto
 				System.out.println("set remote session caps");
 				((MutableCapabilities) options).setCapability("securityToken", gc.perfectoSecurityToken);
-				
+
 				//SRF
 				((MutableCapabilities) options).setCapability("SRF_CLIENT_ID", gc.srfId);
 				((MutableCapabilities) options).setCapability("SRF_CLIENT_SECRET", gc.srfPass);
-				
+
 				try {
 					//Perfecto
 					System.out.println("start remote session");
 					driver.set(new RemoteWebDriver(new URL(gc.perfectoHost), options));
-					
+
 					//SRF
 					//driver.set(new RemoteWebDriver(new URL(gc.srfHost), options));
 					System.out.println("finished remote session");
-					
+
 					if (!(options instanceof SafariOptions)) {
 						getDriver().manage().window().maximize();
 					}
 					ss = new ScreenShot(getDriver(), id, testName);
 					generic = new Generic(getDriver(), ss, props, id, testName);
-					
+
 					initializePageObjects();
-					
+
 				} catch (MalformedURLException m) {
 					m.printStackTrace();
 				}
 			} else {
 				// error, no grid identified
 			}
-		
+
 		// Mobile
 		} else if (null != caps) {
-			if (runtimeData.gridType.equals("local")) {
+			if (runtimeData.gridType.toLowerCase().equals("local")) {
 				try {
 					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.appiumHost), caps));
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
-					
+
 					initializeMobilePageObjects();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
-			} else if (runtimeData.gridType.equals("perfecto")) {
-				
+
+			} else if (runtimeData.gridType.toLowerCase().equals("perfecto")) {
+
 				//Perfecto
 				((DesiredCapabilities) caps).setCapability("securityToken", gc.perfectoSecurityToken);
-				
+
 				//SRF
 				((DesiredCapabilities) caps).setCapability("SRF_CLIENT_ID", gc.srfId);
 				((DesiredCapabilities) caps).setCapability("SRF_CLIENT_SECRET", gc.srfPass);
-				
-				
+
+
 				try {
-					
+
 					//Perfecto
 					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.perfectoHost), caps));
-					
+
 					//SRF
 					//mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.srfHost), caps));
-					
+
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
-					
+
 					initializeMobilePageObjects();
-					
+
 				} catch (MalformedURLException m) {
 					m.printStackTrace();
 				}
 			} else {
 				// error, no grid identified
 			}
-			
+
 		}
 		else {
 			// throw config error?
 		}
-		
+
 		System.out.format("[LOG]: <[%s:%s] =====Start test=====>%n", id, testName);
 	}
-	
-	
-	/** 
+
+
+	/**
 	 *  Add page objects here
 	 */
 	@Step("Initialize Page Objects.")
 	private void initializePageObjects() {
-		
+
 		homePage = new HomePage(generic, ss, id, testName);
 		iFrame = new IFrame(generic, ss, id, testName);
 		logInPage = new LogInPage(generic, ss, id, testName);
 		registrationPage = new RegistrationPage(generic, ss, id, testName);
+
+		System.out.format("[LOG]: <[%s:%s] page objects loaded>%n", id, testName);
+
 	}
-	
-	
-	/** 
+
+
+	/**
 	 *  Add mobile page objects here
 	 */
 	@Step("Initialize Mobile Page Objects.")
 	private void initializeMobilePageObjects() {
-		
+
 		//homePage = new HomePage(mGeneric, ss, id, testName);
 	}
-	
-	
-	/** 
+
+
+	/**
 	 *  Quit RemoteWebDiver (dismiss/close browser). Destroy thread-safe driver.
 	 */
 	@AfterMethod(description="Quit and destroy thread-safe driver.")
 	@Step("Quit browser.")
 	protected void tearDown() {
-		
+
 		if (getDriver() instanceof RemoteWebDriver) {
 			getDriver().quit();
 			driver.remove();
@@ -561,26 +577,26 @@ public class TestBase {
 		}
 		System.out.format("[LOG]: <[%s:%s] =====end test=====>%n", id, testName);
 	}
-	
-	
+
+
 	/**
 	 * Returns a thread-safe RemoteWebDriver
 	 * @return thread-safe RemoteWebDriver
 	 */
 	protected RemoteWebDriver getDriver() {
-		
+
 		return driver.get();
 	}
-	
-	
+
+
 	/**
 	 * Returns a thread-safe AppiumDriver
 	 * @return thread-safe AppiumDriver
 	 */
 	private AppiumDriver<?> getMobileDriver() {
-		
+
 		return mDriver.get();
 	}
-	
-	
+
+
 }
