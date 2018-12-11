@@ -11,12 +11,17 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<aspectj.version>1.9.1</aspectj.version>
+		<projectName>SeleniumFramework</projectName>
+		<aspectj.version>1.9.2</aspectj.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<baseDir>C:\Dev\EclipseWorkspace\New\SeleniumFramework</baseDir>
+
 		<parallelStyle>instances</parallelStyle>
-		<t.count>4</t.count> <!-- parallel test(instance) max count per suite -->
-		<suitePool>2</suitePool> <!-- parallel suite max count -->
+		<t.count>1</t.count> <!-- parallel test(instance) max count per suite -->
+		<suitePool>1</suitePool> <!-- parallel suite max count -->
+
+		<suiteXMLPath></suiteXMLPath>
+		<suiteXML></suiteXML>
+		<suiteXMLFile>${suiteXMLPath}${suiteXML}</suiteXMLFile>
 	</properties>
 
 	<dependencies>
@@ -29,31 +34,37 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>3.141.59</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
 			<version>3.141.59</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>
 			<version>3.141.59</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-support</artifactId>
 			<version>3.141.59</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.14.3</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-testng</artifactId>
-			<version>2.7.0</version>
+			<version>2.8.1</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -111,8 +122,8 @@
 	</pluginRepositories>
 
 	<build>
-		<sourceDirectory>${project.basedir}\src\main\java</sourceDirectory>
-		<scriptSourceDirectory>${project.basedir}\src\main\scripts</scriptSourceDirectory>
+<!-- 		<sourceDirectory>${project.basedir}\src\main\java</sourceDirectory> -->
+<!-- 		<scriptSourceDirectory>${project.basedir}\src\main\scripts</scriptSourceDirectory> -->
 		<testSourceDirectory>${project.basedir}\src\test\java</testSourceDirectory>
 		<outputDirectory>${project.basedir}\target\classes</outputDirectory>
 		<testOutputDirectory>${project.basedir}\target\test-classes</testOutputDirectory>
@@ -130,7 +141,7 @@
 		</testResources>
 
 		<directory>${project.basedir}\target</directory>
-		<finalName>SeleniumFramework</finalName>
+		<finalName>${projectName}</finalName>
 
 		<pluginManagement>
 			<plugins>
@@ -249,15 +260,20 @@
 					<configuration>
 						<testFailureIgnore>true</testFailureIgnore>
 						<suiteXmlFiles>
+						<suiteXMLFile>${suiteXMLFile}</suiteXMLFile>
 <!-- 							<suiteXmlFile>cfg/master.xml</suiteXmlFile> -->
 <!-- 							<suiteXmlFile>cfg/testng.xml</suiteXmlFile> -->
 <!--							<suiteXmlFile>cfg/appium.xml</suiteXmlFile> -->
 <!-- 							<suiteXmlFile>cfg/testng2.xml</suiteXmlFile> -->
-							<suiteXmlFile>cfg/changeLager.xml</suiteXmlFile>
+<!-- 							<suiteXmlFile>cfg/changeLager.xml</suiteXmlFile> -->
 						</suiteXmlFiles>
 						<threadCount>${t.count}</threadCount>
 						<parallel>${parallelStyle}</parallel>
 						<properties>
+							<property>
+								<name>usedefaultlisteners</name>
+								<value>true</value>
+							</property>
 							<property>
 								<name>suitethreadpoolsize</name>
 								<value>${suitePool}</value>
@@ -342,7 +358,8 @@
 					<artifactId>allure-maven</artifactId>
 					<version>2.9</version>
 					<configuration>
-						<reportVersion>2.6.0</reportVersion>
+						<reportVersion>2.8.1</reportVersion>
+						<allureDownloadUrl>https://dl.bintray.com/qameta/maven/io/qameta/allure/allure-commandline/2.8.1/allure-commandline-2.8.1.zip</allureDownloadUrl>
 						<propertiesFilePath>${project.basedir}\src\test\resources\allure.properties</propertiesFilePath>
 					</configuration>
 				</plugin>
