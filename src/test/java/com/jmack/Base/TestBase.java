@@ -21,18 +21,20 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-import com.jmack.Base.PageObjects.HomePage;
-import com.jmack.Base.PageObjects.IFrame;
-import com.jmack.Base.PageObjects.LogInPage;
-import com.jmack.Base.PageObjects.RegistrationPage;
+import com.jmack.Base.PageObjects.HomePagePO;
+import com.jmack.Base.PageObjects.IFramePO;
+import com.jmack.Base.PageObjects.LogInPagePO;
+import com.jmack.Base.PageObjects.RegistrationPagePO;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+
 import io.qameta.allure.Step;
 
 /**
@@ -44,7 +46,7 @@ public class TestBase {
 
 	private static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
 	private static ThreadLocal<AppiumDriver<?>> mDriver = new ThreadLocal<>();
-	protected Properties props = new Properties();
+	private Properties props = new Properties();
 
 	private Capabilities options = null;
 	private DesiredCapabilities caps = null;
@@ -73,16 +75,16 @@ public class TestBase {
 	// Helpers
 	protected Generic generic;
 	protected MobileGeneric mGeneric;
-	protected ScreenShot ss = null;
-	protected MobileScreenShot mss = null;
+	private ScreenShot ss = null;
+	private MobileScreenShot mss = null;
 	protected DataExtractor runtimeData = new DataExtractor();
 	protected static GlobalConstants gc = new GlobalConstants();
 
 	// Page Objects
-	protected HomePage homePage;
-	protected IFrame iFrame;
-	protected LogInPage logInPage;
-	protected RegistrationPage registrationPage;
+	protected HomePagePO homePage;
+	protected IFramePO iFrame;
+	protected LogInPagePO logInPage;
+	protected RegistrationPagePO registrationPage;
 
 
 	/**
@@ -100,7 +102,7 @@ public class TestBase {
 		"deviceNameOverride", "modelOverride",
 		"appPackageOverride", "appActivityOverride",
 		"bundleIdOverride"})
-	protected void setUp(Method testMethod,
+	private void setUp(Method testMethod,
 			// TestNG Suite Parameters
 			@Optional String gridTypeOverride,
 			@Optional String platformNameOverride, @Optional String platformVersionOverride,
@@ -540,10 +542,10 @@ public class TestBase {
 	@Step("Initialize Page Objects.")
 	private void initializePageObjects() {
 
-		homePage = new HomePage(generic, ss, id, testName);
-		iFrame = new IFrame(generic, ss, id, testName);
-		logInPage = new LogInPage(generic, ss, id, testName);
-		registrationPage = new RegistrationPage(generic, ss, id, testName);
+		homePage = 			new HomePagePO				(generic, ss, id, testName);
+		iFrame = 			new IFramePO				(generic, ss, id, testName);
+		logInPage = 		new LogInPagePO				(generic, ss, id, testName);
+		registrationPage = 	new RegistrationPagePO		(generic, ss, runtimeData, id, testName, iFrame); // must be after IFramePO
 
 		System.out.format("[LOG]: <[%s:%s] page objects loaded>%n", id, testName);
 
@@ -565,7 +567,7 @@ public class TestBase {
 	 */
 	@AfterMethod(description="Quit and destroy thread-safe driver.")
 	@Step("Quit browser.")
-	protected void tearDown() {
+	private void tearDown() {
 
 		if (getDriver() instanceof RemoteWebDriver) {
 			getDriver().quit();
