@@ -70,6 +70,10 @@ public class TestBase {
 	private String appActivityOverride;
 	private String bundleIdOverride;
 
+	//Excel-based data
+	private String applicationUnderTest = null;
+	private String excelDataFile = null;
+
 	private String id;
 	private String testName;
 
@@ -80,6 +84,7 @@ public class TestBase {
 	private MobileScreenShot mss = null;
 	protected DataExtractor runtimeData = new DataExtractor();
 	protected static GlobalConstants gc = new GlobalConstants();
+	protected ExcelDataExtractor excelDataExtractor;
 
 	// Page Objects
 	protected HomePagePO homePage;
@@ -102,7 +107,8 @@ public class TestBase {
 		"resolutionOverride", "locationOverride",
 		"deviceNameOverride", "modelOverride",
 		"appPackageOverride", "appActivityOverride",
-		"bundleIdOverride"})
+		"bundleIdOverride", "applicationUnderTest",
+		"excelDataFile"})
 	protected void setUp(Method testMethod,
 			// TestNG Suite Parameters
 			@Optional String gridTypeOverride,
@@ -111,7 +117,8 @@ public class TestBase {
 			@Optional String resolutionOverride, @Optional String locationOverride,
 			@Optional String deviceNameOverride, @Optional String modelOverride,
 			@Optional String appPackageOverride, @Optional String appActivityOverride,
-			@Optional String bundleIdOverride) {
+			@Optional String bundleIdOverride, @Optional String applicationUnderTest,
+			@Optional String excelDataFile) {
 
 		this.gridTypeOverride = gridTypeOverride == null ? "" : gridTypeOverride;
 		this.platformNameOverride = platformNameOverride == null ? "" : platformNameOverride;
@@ -127,6 +134,9 @@ public class TestBase {
 		this.appActivityOverride = appActivityOverride == null ? "" : appActivityOverride;
 		this.bundleIdOverride = bundleIdOverride == null ? "" : bundleIdOverride;
 
+		this.applicationUnderTest = applicationUnderTest == null ? null : applicationUnderTest;
+		this.excelDataFile = excelDataFile == null ? null : excelDataFile;
+
 		testName = testMethod.getName();
 
 		// tag the test with the last three digits of timestamp
@@ -139,29 +149,6 @@ public class TestBase {
 		} catch (FileNotFoundException f) {
 			f.printStackTrace();
 		}
-
-
-		/*
-
-
-         _,-._
-        ; ___ :           ,------------------------------.
-    ,--' (. .) '--.__    |  This be were the fillo data   |
-  _;      |||        \   |   extraction is to go!         |
- '._,-----''';=.____,"   |       YARR!!!!!                |
-   /// < o>   |##|       |                                |
-   (o        \`--'       //`-----------------------------'
-  ///\ >>>>  _\ <<<<    //
- --._>>>>>>>><<<<<<<<  /
- ___() >>>[||||]<<<<
- `--'>>>>>>>><<<<<<<
-      >>>>>>><<<<<<
-        >>>>><<<<<
-         >>ctr<<
-
-
-		 */
-
 
 		// randomize desktop client
 		if (runtimeData.browserName.toLowerCase().equals("randomDesktop")) {
@@ -177,9 +164,42 @@ public class TestBase {
 			runtimeData.browserName = browsers[r.nextInt(browsers.length)];
 		}
 
-		System.out.format("[LOG]: <[%s:%s] overriding data.>%n", id, testName);
 
-		// OVERRIDES
+		// START EXCEL OVERRIDES
+		System.out.format("[LOG]: <[%s:%s] overriding JSON data by excel.>%n", id, testName);
+
+		/*
+
+
+        _,-._
+       ; ___ :           ,------------------------------.
+   ,--' (. .) '--.__    |  This be were the fillo data   |
+ _;      |||        \   |   extraction is to go!         |
+'._,-----''';=.____,"   |       YARR!!!!!                |
+  /// < o>   |##|       |                                |
+  (o        \`--'       //`-----------------------------'
+ ///\ >>>>  _\ <<<<    //
+--._>>>>>>>><<<<<<<<  /
+___() >>>[||||]<<<<
+`--'>>>>>>>><<<<<<<
+     >>>>>>><<<<<<
+       >>>>><<<<<
+        >>VvV<<
+
+
+		 */
+
+		if (!(null == this.excelDataFile || null == this.applicationUnderTest)) {
+			excelDataExtractor = new ExcelDataExtractor(this.applicationUnderTest, this.excelDataFile, this.testName, this.runtimeData);
+		}
+
+		System.out.format("[LOG]: <[%s:%s] JSON data overridden by excel.>%n", id, testName);
+		// END EXCEL OVERRIDES
+
+
+		// PARAMETER OVERRIDES
+		System.out.format("[LOG]: <[%s:%s] overriding JSON/Excel data by parameter.>%n", id, testName);
+
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established gridType, override gridType
 		if (!("").equals(this.gridTypeOverride) && !runtimeData.gridType.toLowerCase().equals(this.gridTypeOverride.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding gridType \"%s\" with \"%s\">%n", id, testName, runtimeData.gridType, gridTypeOverride);
@@ -251,8 +271,9 @@ public class TestBase {
 			System.out.format("[LOG]: <[%s:%s] overriding bundleId \"%s\" with \"%s\">%n", id, testName, runtimeData.bundleId, bundleIdOverride);
 			runtimeData.bundleId = this.bundleIdOverride;
 		}
-		// END OVERRIDES
 
+		System.out.format("[LOG]: <[%s:%s] JSON/Excel data overridden by parameter.>%n", id, testName);
+		// END PARAMETER OVERRIDES
 
 		if (runtimeData.gridType.toLowerCase().equals("local")) {
 
