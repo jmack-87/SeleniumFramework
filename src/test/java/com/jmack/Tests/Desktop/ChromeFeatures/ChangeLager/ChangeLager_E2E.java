@@ -50,6 +50,8 @@ public class ChangeLager_E2E extends TestBase {
 
         //Fill out the 'Credit Card' section of the Registration Form
         registrationPage.fillOutCreditCardSection();
+
     }
+
 
 }
