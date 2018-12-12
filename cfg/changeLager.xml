@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Parallel Suite 1">
+<suite name="ChangeLager Suite">
 
     <parameter name="gridTypeOverride" value="" />
     <parameter name="platformNameOverride" value="" />
@@ -8,12 +8,13 @@
     <parameter name="browserVersionOverride" value="" />
     <parameter name="resolutionOverride" value="" />
     <parameter name="locationOverride" value="" />
-    <parameter name="browserNameOverride" value="desktopChrome" />
-    <parameter name="gridTypeOverride" value="local" />
+    <parameter name="browserNameOverride" value="" />
+    <parameter name="gridTypeOverride" value="" />
 
-    <test name="parallel browsers 1">
+    <test name="Build Acceptance">
 
-        <parameter name="testParam" value="testValue1" />
+    	<parameter name="applicationUnderTest" value="changeLager" />
+		<parameter name="excelDataFile" value="Example.xlsx" />
 
         <classes>
             <class name="com.jmack.Tests.Desktop.ChromeFeatures.ChangeLager.ChangeLager_E2E" />
