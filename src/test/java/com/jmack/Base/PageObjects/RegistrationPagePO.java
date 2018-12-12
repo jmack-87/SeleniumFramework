@@ -51,6 +51,7 @@ public class RegistrationPagePO extends TestBase {
 		this.iFrame = iFrame;
 		this.id = id;
 		this.testName = testName;
+
 	}
 
 	/**
@@ -104,10 +105,10 @@ public class RegistrationPagePO extends TestBase {
 	public void fillOutProfileSection() {
 
 		// Click the "Name" textbox, and send it input
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Name.toString(), "@U$T1N D3V G0D");
+		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Name.toString(), this.runtimeData.username);
 
 		// Click the "Email" textbox, and send it input
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Email.toString(), "l33th4x0r@nyancat.com");
+		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Email.toString(), this.runtimeData.userEmail);
 
 		// Click the "Password" textbox, and send it input
 		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Password.toString(), this.runtimeData.password);
