@@ -53,6 +53,10 @@ public class RegistrationPagePO extends TestBase {
 		this.testName = testName;
 	}
 
+	/**
+	 * Validate
+	 */
+
 
 	/**
 	 * Toggle from 'Dev' to 'Free' subscription type, and validate

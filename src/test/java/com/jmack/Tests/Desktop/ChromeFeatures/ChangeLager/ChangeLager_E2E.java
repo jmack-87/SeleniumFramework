@@ -36,10 +36,10 @@ public class ChangeLager_E2E extends TestBase {
         homePage.navigateAndValidate_CL();
 
         //Validate all buttons exist
-        homePage.validateAllButtonsExist();
+        homePage.validateAllButtonsExist_CL();
 
         //Click the "Register" button, and confirm page change
-        homePage.navigateToRegistrationViaRegisterButton();
+        homePage.clickRegisterButton_CL();
 
         //Toggle between the different plans to ensure they function appropriately
         registrationPage.toggleDevToFree();

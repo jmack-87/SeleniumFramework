@@ -1,11 +1,11 @@
 package com.jmack.Enumerations.ChangeLagerApp;
 
 public enum ChangeLager_RegistrationPage {
-    // GENERIC
-    Text_pageTitle("ChangeLagerRegistration.text.pageTitle"),
-    Locator_Tag_head("ChangeLagerRegistration.Locator.Tag.head"),
 
     // DESKTOP
+    Text_changeLagerRegistrationURL(""),
+    Text_pageTitle("ChangeLagerRegistration.text.pageTitle"),
+    Locator_Tag_head("ChangeLagerRegistration.Locator.Tag.head"),
     Locator_Button_DevPlan("ChangeLagerRegistration.Locator.Button.DevPlan"),
     Locator_Button_DevPlanSelect("ChangeLagerRegistration.Locator.Button.DevPlanSelect"),
     Locator_Button_DevPlanSelected("ChangeLagerRegistration.Locator.Button.DevPlanSelected"),

@@ -25,7 +25,8 @@
 				"password": "password",
 				"creditCardNumber": "1111111111111111",
 				"creditCardExpiration": "0122",
-				"creditCardCVC": "000"
+				"creditCardCVC": "000",
+				"userEmail": "testemail@example.com"
 			},
 			"ChromeTest": {
 				"gridType": "local",

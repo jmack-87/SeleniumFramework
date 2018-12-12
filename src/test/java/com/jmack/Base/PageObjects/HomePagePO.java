@@ -99,14 +99,44 @@ public class HomePagePO extends TestBase {
 	}
 
 	/**
+	 * Validate the 'Login' button on the ChangeLager Home Page
+	 */
+	@Step("Validate 'Login' button on the ChangeLager Home page")
+	public void validateLoginButton_CL(){
+
+		//Validate the button exists
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Login.toString());
+	}
+
+	/**
+	 * Validate the 'Register' button on the ChangeLager Home Page
+	 */
+	@Step("Validate 'Register' button on the ChangeLager Home page")
+	public void validateRegisterButton_CL(){
+
+		//Validate the button exists
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Register.toString());
+	}
+
+	/**
+	 * Validate the 'Sign up for free' button on the ChangeLager Home Page
+	 */
+	@Step("Validate 'Sign up for free' button on the ChangeLager Home page")
+	public void validateSignUpButton_CL(){
+
+		//Validate the button exists
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_SignUp.toString());
+	}
+
+	/**
 	 * On the ChangeLager Home Page, validate all buttons exist
 	 */
 	@Step("Validate all Buttons on the ChangeLager Home Page exist")
 	public void validateAllButtonsExist_CL(){
 
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Login.toString());
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Register.toString());
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_SignUp.toString());
+		validateLoginButton_CL();
+		validateRegisterButton_CL();
+		validateSignUpButton_CL();
 	}
 
 	/**

@@ -42,6 +42,7 @@ public class DataExtractor {
 	public String creditCardNumber;
 	public String creditCardExpiration;
 	public String creditCardCVC;
+	public String userEmail;
 
 	private String id;
 	private String testName;
@@ -120,6 +121,7 @@ public class DataExtractor {
 		this.creditCardNumber = testData.get("creditCardNumber") == null ? "" : testData.get("creditCardNumber").getAsString();
 		this.creditCardExpiration = testData.get("creditCardExpiration") == null ? "" : testData.get("creditCardExpiration").getAsString();
 		this.creditCardCVC = testData.get("creditCardCVC") == null ? "" : testData.get("creditCardCVC").getAsString();
+		this.userEmail = testData.get("userEmail") == null ? "" : testData.get("userEmail").getAsString();
 
 		System.out.format("[LOG]: <[%s:%s] Test data loaded.>%n", this.id, this.testName, testData);
 
