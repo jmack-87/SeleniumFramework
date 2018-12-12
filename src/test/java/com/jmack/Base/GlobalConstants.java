@@ -6,8 +6,8 @@ public class GlobalConstants {
 	protected final String testDataFileName = "TestParametersJSON.json";
 	protected final String testReferenceFileName = "testReference.properties";
 
-	protected final String testDataFilePath = System.getProperty("user.dir")+"\\src\\test\\resources\\" + testDataFileName;
-	protected final String testReferenceFilePath = System.getProperty("user.dir")+"\\src\\test\\resources\\" + testReferenceFileName;
+	protected final String testDataFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\" + testDataFileName;
+	protected final String testReferenceFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\" + testReferenceFileName;
 
 	protected final String locatorSeparator = "@@@";
 	protected final String compoundLocatorPlaceholder = "~~~";
