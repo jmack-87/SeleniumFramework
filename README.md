@@ -1,4 +1,4 @@
-"# SeleniumFramework" 
+"# SeleniumFramework"
 
 a selenium grid is required
 
@@ -127,3 +127,13 @@ hubConfig.json:
 [MicrosoftWebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/)
 
 [Information on Safari driver](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)
+
+**Note on Edge:**
+It's a disappointing surprise, but Microsoft has plans to drop Edge support sometime in the future. In the meanwhile, they've also decided to make working with the MicrosoftWebDriver more difficult. Current Windows 10 users (builds > 17134) will need to run:
+```DISM.exe /Online /Add-Capability /CapabilityName:Microsoft.WebDriver~~~~0.0.1.0``` from an elevated command prompt.
+This will normally install the required binary *MicrosoftWebDriver.exe* to C:\Windows\System32\.
+
+If not, running **where** should point the way.
+```C:\WINDOWS\system32>where MicrosoftWebDriver.exe
+C:\Windows\System32\MicrosoftWebDriver.exe```
+
