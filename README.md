@@ -130,10 +130,13 @@ hubConfig.json:
 
 **Note on Edge:**
 It's a disappointing surprise, but Microsoft has plans to drop Edge support sometime in the future. In the meanwhile, they've also decided to make working with the MicrosoftWebDriver more difficult. Current Windows 10 users (builds > 17134) will need to run:
-```DISM.exe /Online /Add-Capability /CapabilityName:Microsoft.WebDriver~~~~0.0.1.0``` from an elevated command prompt.
-This will normally install the required binary *MicrosoftWebDriver.exe* to C:\Windows\System32\.
+```DISM.exe /Online /Add-Capability /CapabilityName:Microsoft.WebDriver~~~~0.0.1.0``` from an elevated command prompt to install a version appropriate binary.
+The binary *MicrosoftWebDriver.exe* normally installs to the C:\Windows\System32\ directory. User of Selenium Grid may wish to copy the binary to a more manageable location like the *drivers* folder mentioned above.
 
-If not, running **where** should point the way.
-```C:\WINDOWS\system32>where MicrosoftWebDriver.exe
-C:\Windows\System32\MicrosoftWebDriver.exe```
+If the binary is not found under C:\Windows\System32, running **where** should point the way.
+Example:
+```
+C:\WINDOWS\system32>where MicrosoftWebDriver.exe
+C:\Windows\System32\MicrosoftWebDriver.exe
+```
 
