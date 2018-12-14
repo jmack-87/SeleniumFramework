@@ -12,7 +12,7 @@ public class GlobalConstants {
 	protected final String locatorSeparator = "@@@";
 	protected final String compoundLocatorPlaceholder = "~~~";
 
-	protected final String jsonTestsDataArray = "Test";
+	protected final String jsonTestsDataArray = "Tests";
 	protected final String jsonSystemOptionsDataArray = "System Options";
 
 	protected final String perfectoSecurityToken = "";
