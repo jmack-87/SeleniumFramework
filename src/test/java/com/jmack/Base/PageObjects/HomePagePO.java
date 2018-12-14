@@ -57,10 +57,11 @@ public class HomePagePO extends TestBase {
 	 * Navigate to ChangeLager Home Page
 	 */
 	@Step("Open ChangeLager Webpage")
-	public void navigateToCL() {
+	public void navigateTo_CL() {
 
 		// Open a new browser instance and navigate to the ChangeLager URL
 		this.generic.getUrl(ChangeLager_HomePage.Text_changeLagerHomeURL.toString());
+
 	}
 
 
@@ -77,31 +78,19 @@ public class HomePagePO extends TestBase {
 
 
 	/**
-	 * Confirm Page Title of ChangeLager Home Page
-	 */
-	@Step("Validate CL Home Page Title")
-	public void confirmTitle_CL() {
-
-		// Confirm the Title tag of the page
-		this.generic.confirmTitle(ChangeLager_HomePage.Text_pageTitle.toString());
-
-	}
-
-
-	/**
 	 * Navigate to ChangeLager Home Page and Confirm
 	 */
 	@Step("Validate ChangeLager HomePage URL")
 	public void navigateAndValidate_CL() {
 
 		// Open a new browser instance, and navigate to the ChangeLager URL
-		this.navigateToCL();
+		this.navigateTo_CL();
 
 		// Confirm the Head section of the HTML for the page
 		this.confirmHeadTag_CL();
 
 		// Confirm the Title of the page
-		this.confirmTitle_CL();
+		this.generic.confirmTitle(ChangeLager_HomePage.Text_pageTitle.toString());
 
 	}
 
@@ -124,6 +113,7 @@ public class HomePagePO extends TestBase {
 
 		//Validate the button exists
 		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Register.toString());
+
 	}
 
 	/**
@@ -147,6 +137,7 @@ public class HomePagePO extends TestBase {
 		validateLoginButton_CL();
 		validateRegisterButton_CL();
 		validateSignUpButton_CL();
+
 	}
 
 	/**

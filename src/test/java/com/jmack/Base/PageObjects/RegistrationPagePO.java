@@ -55,9 +55,30 @@ public class RegistrationPagePO extends TestBase {
 	}
 
 	/**
-	 * Validate
+	 * Navigate to ChangeLager Registration Page
 	 */
+	@Step("Open ChangeLager Registration Page")
+	public void navigateToCL_CL(){
 
+		//Open a browser instance and navigate to the ChangeLager URL
+		this.generic.getUrl(ChangeLager_RegistrationPage.Text_changeLagerRegistrationURL.toString());
+
+	}
+
+	/**
+	 * Confirm Head Tag of ChangeLager Registration Page
+	 */
+	@Step("Validate CL Registration Page Head Tag")
+	public void confirmHeadTag_CL(){
+
+		//Confirm the Head section of the HTML for the page
+		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_Tag_head.toString());
+
+	}
+
+	/**
+	 * Navigate to Change Lager 
+	 */
 
 	/**
 	 * Toggle from 'Dev' to 'Free' subscription type, and validate
