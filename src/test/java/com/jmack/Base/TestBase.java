@@ -151,13 +151,9 @@ public class TestBase {
 		}
 
 		// START EXCEL OVERRIDES
-		System.out.format("[LOG]: <[%s:%s] overriding JSON data by excel.>%n", id, testName);
-
 		if (!(null == this.excelDataFile || null == this.applicationUnderTest)) {
 			excelDataExtractor = new ExcelDataExtractor(this.applicationUnderTest, this.excelDataFile, this.runtimeData, this.id, this.testName);
 		}
-
-		System.out.format("[LOG]: <[%s:%s] JSON data overridden by excel.>%n", id, testName);
 		// END EXCEL OVERRIDES
 
 
