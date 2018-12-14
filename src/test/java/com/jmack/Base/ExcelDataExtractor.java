@@ -1,7 +1,6 @@
 package com.jmack.Base;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.testng.Assert;
 
@@ -25,6 +24,8 @@ public class ExcelDataExtractor {
 
 	private String id;
 	private String testName;
+
+	private String key;
 
 
 	public ExcelDataExtractor(String applicationUnderTest, String excelFileName, JsonDataExtractor runtimeData, String id, String testName) {
@@ -87,120 +88,194 @@ public class ExcelDataExtractor {
 		records.forEach((k,v) -> System.out.format("\"%s\":\"%s\";", k, v));
 		System.out.format("}>%n");
 
-
-		if (records.containsKey("gridType") && records.get("gridType") != "") {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding gridType: %s -> %s>%n", this.id, this.testName, runtimeData.gridType, records.get("gridType"));
-			runtimeData.gridType = records.get("gridType") == "" ? runtimeData.gridType : records.get("gridType");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "gridType";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.gridType.toLowerCase().equals(records.get(key).toLowerCase())) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.gridType, records.get(key));
+				runtimeData.gridType = records.get(key);
+			}
 		}
 
-		if (records.containsKey("appActivity") && records.get("appactivity") != "") {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.appActivity, records.get("appActivity"));
-			runtimeData.appActivity = records.get("appActivity") == "" ? runtimeData.appActivity : records.get("appActivity");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "appActivity";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.appActivity.toLowerCase().equals(records.get(key).toLowerCase())) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.appActivity, records.get(key));
+				runtimeData.appActivity = records.get(key);
+			}
 		}
 
-		if (records.containsKey("appPackage")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.appPackage, records.get("appPackage"));
-			runtimeData.appPackage = records.get("appPackage") == "" ? runtimeData.appPackage : records.get("appPackage");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "appPackage";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.appPackage.toLowerCase().equals(records.get(key).toLowerCase())) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.appPackage, records.get(key));
+				runtimeData.appPackage = records.get(key);
+			}
 		}
 
-		if (records.containsKey("browserName")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.browserName, records.get("browserName"));
-			runtimeData.browserName = records.get("browserName") == "" ? runtimeData.browserName : records.get("browserName");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "browserName";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.browserName.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.browserName, records.get(key));
+				runtimeData.browserName = records.get(key);
+			}
 		}
 
-		if (records.containsKey("bundleId")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.bundleId, records.get("bundleId"));
-			runtimeData.bundleId = records.get("bundleId") == "" ? runtimeData.bundleId : records.get("bundleId");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "bundleId";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.bundleId.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.bundleId, records.get(key));
+				runtimeData.bundleId = records.get(key);
+			}
 		}
 
-		if (records.containsKey("creditCardCVC")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.creditCardCVC, records.get("creditCardCVC"));
-			runtimeData.creditCardCVC = records.get("creditCardCVC") == "" ? runtimeData.creditCardCVC : records.get("creditCardCVC");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "creditCardCVC";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.creditCardCVC.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.creditCardCVC, records.get(key));
+				runtimeData.creditCardCVC = records.get(key);
+			}
 		}
 
-		if (records.containsKey("creditCardExpiration")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.creditCardExpiration, records.get("creditCardExpiration"));
-			runtimeData.creditCardExpiration = records.get("creditCardExpiration") == "" ? runtimeData.creditCardExpiration : records.get("creditCardExpiration");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "creditCardExpiration";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.creditCardExpiration.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.creditCardExpiration, records.get(key));
+				runtimeData.creditCardExpiration = records.get(key);
+			}
 		}
 
-		if (records.containsKey("creditCardNumber")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.creditCardNumber, records.get("creditCardNumber"));
-			runtimeData.creditCardNumber = records.get("creditCardNumber") == "" ? runtimeData.creditCardNumber : records.get("creditCardNumber");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "creditCardNumber";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.creditCardNumber.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.creditCardNumber, records.get(key));
+				runtimeData.creditCardNumber = records.get(key);
+			}
 		}
 
-		if (records.containsKey("deviceName")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.deviceName, records.get("deviceName"));
-			runtimeData.deviceName = records.get("deviceName") == "" ? runtimeData.deviceName : records.get("deviceName");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "deviceName";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.deviceName.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.deviceName, records.get(key));
+				runtimeData.deviceName = records.get(key);
+			}
 		}
 
-		if (records.containsKey("appheadlessActivity")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.gridType, records.get("gridType"));
-			runtimeData.gridType = records.get("gridType") == "" ? runtimeData.gridType : records.get("gridType");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "headless";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.headless.toString().equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.headless, records.get(key));
+				runtimeData.headless = Boolean.parseBoolean(records.get(key));
+			}
 		}
 
-		if (records.containsKey("headless")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.headless, records.get("headless"));
-			runtimeData.headless = records.get("headless") == "" ? runtimeData.headless : Boolean.parseBoolean(records.get("headless"));
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "model";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.model.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.model, records.get(key));
+				runtimeData.model = records.get(key);
+			}
 		}
 
-		if (records.containsKey("model")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.location, records.get("location"));
-			runtimeData.location = records.get("location") == "" ? runtimeData.location : records.get("location");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "password";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.password.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.password, records.get(key));
+				runtimeData.password = records.get(key);
+			}
 		}
 
-		if (records.containsKey("model")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.model, records.get("model"));
-			runtimeData.model = records.get("model") == "" ? runtimeData.model : records.get("model");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "platform";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.platform.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.platform, records.get(key));
+				runtimeData.platform = records.get(key);
+			}
 		}
 
-		if (records.containsKey("password")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.password, records.get("password"));
-			runtimeData.password = records.get("password") == "" ? runtimeData.password : records.get("password");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "platformName";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.platformName.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.gridType, records.get(key));
+				runtimeData.platformName = records.get(key);
+			}
 		}
 
-		if (records.containsKey("platform")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.platform, records.get("platform"));
-			runtimeData.platform = records.get("platform") == "" ? runtimeData.platform : records.get("platform");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "platformVersion";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.platformVersion.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.platformVersion, records.get(key));
+				runtimeData.platformVersion = records.get(key);
+			}
 		}
 
-		if (records.containsKey("platformName")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.platformName, records.get("platformName"));
-			runtimeData.platformName = records.get("platformName") == "" ? runtimeData.platformName : records.get("platformName");
+
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "resolution";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.resolution.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.resolution, records.get(key));
+				runtimeData.resolution = records.get(key);
+			}
 		}
 
-		if (records.containsKey("platformVersion")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.platformVersion, records.get("platformVersion"));
-			runtimeData.platformVersion = records.get("platformVersion") == "" ? runtimeData.platformVersion : records.get("platformVersion");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "searchConfirmationString";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.searchConfirmationString.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.searchConfirmationString, records.get(key));
+				runtimeData.searchConfirmationString = records.get(key);
+			}
 		}
 
-		if (records.containsKey("resolution")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.resolution, records.get("resolution"));
-			runtimeData.resolution = records.get("resolution") == "" ? runtimeData.resolution : records.get("resolution");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "searchString";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.searchString.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.searchString, records.get(key));
+				runtimeData.searchString = records.get(key);
+			}
 		}
 
-		if (records.containsKey("searchConfirmationString")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.searchConfirmationString, records.get("searchConfirmationString"));
-			runtimeData.searchConfirmationString = records.get("searchConfirmationString") == ""? runtimeData.searchConfirmationString : records.get("searchConfirmationString");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "userEmail";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.userEmail.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.userEmail, records.get(key));
+				runtimeData.userEmail = records.get(key);
+			}
 		}
 
-		if (records.containsKey("searchString")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.searchString, records.get("searchString"));
-			runtimeData.searchString = records.get("searchString") == "" ? runtimeData.searchString : records.get("searchString");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "username";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.username.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.username, records.get(key));
+				runtimeData.username = records.get(key);
+			}
 		}
 
-		if (records.containsKey("userEmail")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.userEmail, records.get("userEmail"));
-			runtimeData.userEmail = records.get("userEmail") == "" ? runtimeData.userEmail : records.get("userEmail");
-		}
-
-		if (records.containsKey("username")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding %s -> %s>%n", this.id, this.testName, runtimeData.username, records.get("username"));
-			runtimeData.username = records.get("username") == "" ? runtimeData.username : records.get("username");
-		}
-
-		if (records.containsKey("sysOpt")) {
-			System.out.format("[DEBUG]: <[%s:%s] Overriding sysOpt: %s -> %s>%n", this.id, this.testName, runtimeData.sysOpt, records.get("sysOpt"));
-			runtimeData.sysOpt = records.get("sysOpt") == "" ? runtimeData.sysOpt : records.get("sysOpt");
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "sysOpt";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.sysOpt.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.sysOpt, records.get(key));
+				runtimeData.sysOpt = records.get(key);
+			}
 		}
 
 	}
