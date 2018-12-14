@@ -109,7 +109,7 @@ public class JsonDataExtractor {
 	@Step("Set Test data.")
 	private void setTestData(JsonObject testData) {
 
-		System.out.format("[LOG]: <[%s:%s] RuntimeData: %s>%n", this.id, this.testName, testData);
+		System.out.format("[LOG]: <[%s:%s] JsonData: %s>%n", this.id, this.testName, testData);
 
 		this.gridType = testData.get("gridType") == null ? "local" : testData.get("gridType").getAsString();
 
