@@ -12,6 +12,9 @@ public class GlobalConstants {
 	protected final String locatorSeparator = "@@@";
 	protected final String compoundLocatorPlaceholder = "~~~";
 
+	protected final String jsonTestsDataArray = "Test";
+	protected final String jsonSystemOptionsDataArray = "System Options";
+
 	protected final String perfectoSecurityToken = "";
 	protected final String perfectoHost = "https://ibmgbs.perfectomobile.com/nexperience/perfectomobile/wd/hub";
 

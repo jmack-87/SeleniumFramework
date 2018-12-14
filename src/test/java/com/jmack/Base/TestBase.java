@@ -82,7 +82,7 @@ public class TestBase {
 	protected MobileGeneric mGeneric;
 	private ScreenShot ss = null;
 	private MobileScreenShot mss = null;
-	protected DataExtractor runtimeData = new DataExtractor();
+	protected JsonDataExtractor runtimeData = new JsonDataExtractor();
 	protected static GlobalConstants gc = new GlobalConstants();
 	protected ExcelDataExtractor excelDataExtractor;
 
@@ -117,8 +117,8 @@ public class TestBase {
 			@Optional String resolutionOverride, @Optional String locationOverride,
 			@Optional String deviceNameOverride, @Optional String modelOverride,
 			@Optional String appPackageOverride, @Optional String appActivityOverride,
-			@Optional String bundleIdOverride, @Optional String applicationUnderTest,
-			@Optional String excelDataFile) {
+			@Optional String bundleIdOverride, @Optional("changeLager") String applicationUnderTest,
+			@Optional("Example.xlsx") String excelDataFile) {
 
 		this.gridTypeOverride = gridTypeOverride == null ? "" : gridTypeOverride;
 		this.platformNameOverride = platformNameOverride == null ? "" : platformNameOverride;
@@ -150,47 +150,11 @@ public class TestBase {
 			f.printStackTrace();
 		}
 
-		// randomize desktop client
-		if (runtimeData.browserName.toLowerCase().equals("randomDesktop")) {
-			Random r = new Random();
-			String[] browsers = {"chrome","firefox","edge","ie"};
-			runtimeData.browserName = browsers[r.nextInt(browsers.length)];
-		}
-
-		//  randomize mobile client
-		if (runtimeData.browserName.toLowerCase().equals("randomMobile")) {
-			Random r = new Random();
-			String[] browsers = {"androidNative","androidChrome","iosNative","iosSafari"};
-			runtimeData.browserName = browsers[r.nextInt(browsers.length)];
-		}
-
-
 		// START EXCEL OVERRIDES
 		System.out.format("[LOG]: <[%s:%s] overriding JSON data by excel.>%n", id, testName);
 
-		/*
-
-
-        _,-._
-       ; ___ :           ,------------------------------.
-   ,--' (. .) '--.__    |  This be were the fillo data   |
- _;      |||        \   |   extraction is to go!         |
-'._,-----''';=.____,"   |       YARR!!!!!                |
-  /// < o>   |##|       |                                |
-  (o        \`--'       //`-----------------------------'
- ///\ >>>>  _\ <<<<    //
---._>>>>>>>><<<<<<<<  /
-___() >>>[||||]<<<<
-`--'>>>>>>>><<<<<<<
-     >>>>>>><<<<<<
-       >>>>><<<<<
-        >>VvV<<
-
-
-		 */
-
 		if (!(null == this.excelDataFile || null == this.applicationUnderTest)) {
-			excelDataExtractor = new ExcelDataExtractor(this.applicationUnderTest, this.excelDataFile, this.testName, this.runtimeData);
+			excelDataExtractor = new ExcelDataExtractor(this.applicationUnderTest, this.excelDataFile, this.runtimeData, this.id, this.testName);
 		}
 
 		System.out.format("[LOG]: <[%s:%s] JSON data overridden by excel.>%n", id, testName);
@@ -274,6 +238,23 @@ ___() >>>[||||]<<<<
 
 		System.out.format("[LOG]: <[%s:%s] JSON/Excel data overridden by parameter.>%n", id, testName);
 		// END PARAMETER OVERRIDES
+
+
+		// randomize desktop client
+		if (runtimeData.browserName.toLowerCase().equals("randomDesktop")) {
+			Random r = new Random();
+			String[] browsers = {"chrome","firefox","edge","ie"};
+			runtimeData.browserName = browsers[r.nextInt(browsers.length)];
+		}
+
+		//  randomize mobile client
+		if (runtimeData.browserName.toLowerCase().equals("randomMobile")) {
+			Random r = new Random();
+			String[] browsers = {"androidNative","androidChrome","iosNative","iosSafari"};
+			runtimeData.browserName = browsers[r.nextInt(browsers.length)];
+		}
+
+
 
 		if (runtimeData.gridType.toLowerCase().equals("local")) {
 
@@ -478,7 +459,7 @@ ___() >>>[||||]<<<<
 
 			if (runtimeData.gridType.toLowerCase().equals("local")) {
 				try {
-					driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options));
+					driver.set(new RemoteWebDriver(new URL(gc.gridHost), options));
 					if (!(options instanceof SafariOptions)) {
 						getDriver().manage().window().maximize();
 					}
@@ -495,6 +476,7 @@ ___() >>>[||||]<<<<
 				} catch (MalformedURLException m) {
 					m.printStackTrace();
 				}
+
 			} else if (runtimeData.gridType.toLowerCase().equals("perfecto")) {
 
 				//Perfecto

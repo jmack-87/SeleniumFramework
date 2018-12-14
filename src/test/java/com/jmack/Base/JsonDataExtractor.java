@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Iterator;
 
+import org.testng.Assert;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -11,41 +13,43 @@ import com.google.gson.JsonParser;
 
 import io.qameta.allure.Step;
 
-public class DataExtractor {
+public class JsonDataExtractor {
 
 	/*	Data available to Generic
 	 */
-	protected String sysOpt;
-	protected String gridType;
-	public String platformName; //
-	protected String platformVersion; //
-	protected String browserName;
-	protected String browserVersion; //perfecto
-	protected String resolution; //perfecto
-	protected String location; //perfecto
-	public String platform; //
+	protected String sysOpt = "";
+	protected String gridType = "";
+	public String platformName = ""; //
+	protected String platformVersion = ""; //
+	protected String browserName = "";
+	protected String browserVersion = ""; //perfecto
+	protected String resolution = ""; //perfecto
+	protected String location = ""; //perfecto
+	public String platform = ""; //
 
-	protected Boolean headless;
+	protected Boolean headless = false;
 
-	protected String deviceName;
-	protected String model;
-	protected String appPackage;
-	protected String appActivity;
-	protected String bundleId;
+	protected String deviceName = "";
+	protected String model = "";
+	protected String appPackage = "";
+	protected String appActivity = "";
+	protected String bundleId = "";
 
 	/*	Data available to scripts
 	 */
-	public String searchString;
-	public String searchConfirmationString;
-	public String username;
-	public String password;
-	public String creditCardNumber;
-	public String creditCardExpiration;
-	public String creditCardCVC;
-	public String userEmail;
+	public String searchString = "";
+	public String searchConfirmationString = "";
+	public String username = "";
+	public String password = "";
+	public String creditCardNumber = "";
+	public String creditCardExpiration = "";
+	public String creditCardCVC = "";
+	public String userEmail = "";
 
 	private String id;
 	private String testName;
+
+	private GlobalConstants gc;
 
 
 
@@ -59,29 +63,41 @@ public class DataExtractor {
 	 */
 	@Step("Extract dynamic test data from JSON.")
 	protected void initialize(GlobalConstants gc, String testName, String id) throws FileNotFoundException {
+
+		this.gc = gc;
 		this.testName = testName;
 		this.id = id;
 
 		Object[] data = getTestData(gc.testDataFilePath);
-		JsonArray testDataArray = (JsonArray) data[0]; // All test definitions, wrapped in Array
-		JsonArray systemDataArray = (JsonArray) data [1]; // All System Options definitions, wrapped in Array
 
-		//System.out.format("[DEBUG]: <[%s:%s] TestsCount: %d>%n", this.id, this.testName, testDataArray.size());
-		//System.out.format("[DEBUG]: <[%s:%s] SystemDataCount: %d>%n", this.id, this.testName, systemDataArray.size());
+		if (null != data[0]) {
 
-		Iterator<JsonElement> sda = systemDataArray.iterator();
-		while (sda.hasNext()) { // there should only be one (1) array element, containing all key:value pairs
-			JsonObject sob = (JsonObject) sda.next();
-			//System.out.format("[DEBUG]: <[%s:%s] SystemData: %s>%n", this.id, this.testName, sob);
-			setSystemOptions(sob);
+			JsonArray testDataArray = (JsonArray) data[0]; // All test definitions, wrapped in Array
+
+			Iterator<JsonElement> tda = testDataArray.iterator();
+			while (tda.hasNext()) { // there should only be one (1) array element, containing all test-arrays
+				JsonObject tob = (JsonObject) tda.next();
+				//System.out.format("[DEBUG]: <[%s:%s] TestsData: %s>%n", this.id, this.testName, tob);
+				setTestData(tob.getAsJsonObject(testName));
+			}
+		} else {
+			System.out.format("[LOG]: <[%s:%s] Skipping JSON test data extraction. JSON test data not found.>%n", this.id, this.testName);
 		}
 
-		Iterator<JsonElement> tda = testDataArray.iterator();
-		while (tda.hasNext()) { // there should only be one (1) array element, containing all test-arrays
-			JsonObject tob = (JsonObject) tda.next();
-			//System.out.format("[DEBUG]: <[%s:%s] TestsData: %s>%n", this.id, this.testName, tob);
-			setTestData(tob.getAsJsonObject(testName));
+		if (null != data[1]) {
+
+			JsonArray systemDataArray = (JsonArray) data [1]; // All System Options definitions, wrapped in Array
+
+			Iterator<JsonElement> sda = systemDataArray.iterator();
+			while (sda.hasNext()) { // there should only be one (1) array element, containing all key:value pairs
+				JsonObject sob = (JsonObject) sda.next();
+				//System.out.format("[DEBUG]: <[%s:%s] SystemData: %s>%n", this.id, this.testName, sob);
+				setSystemOptions(sob);
+			}
+		} else {
+			System.out.format("[LOG]: <[%s:%s] Skipping JSON system data extraction. JSON system data not found.>%n", this.id, this.testName);
 		}
+
 	}
 
 
@@ -92,6 +108,7 @@ public class DataExtractor {
 	 */
 	@Step("Set Test data.")
 	private void setTestData(JsonObject testData) {
+
 		System.out.format("[LOG]: <[%s:%s] RuntimeData: %s>%n", this.id, this.testName, testData);
 
 		this.gridType = testData.get("gridType") == null ? "local" : testData.get("gridType").getAsString();
@@ -113,7 +130,9 @@ public class DataExtractor {
 		this.appActivity = testData.get("appActivity") == null ? "" : testData.get("appActivity").getAsString();
 		this.bundleId = testData.get("bundleId") == null ? "" : testData.get("bundleId").getAsString();
 
+		// for sample scripts, not required: searchString
 		this.searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
+		// for sample scripts, not required: searchConfirmationString
 		this.searchConfirmationString = testData.get("searchConfirmationString") == null ? "IBM" : testData.get("searchConfirmationString").getAsString();
 
 		this.username = testData.get("username") == null ? "" : testData.get("username").getAsString();
@@ -135,8 +154,11 @@ public class DataExtractor {
 	 */
 	@Step("Set System data.")
 	private void setSystemOptions(JsonObject sysOpts) {
+
 		System.out.format("[LOG]: <[%s:%s] SystemData: %s>%n", this.id, this.testName, sysOpts);
+
 		sysOpt = sysOpts.get("Opt1") == null ? null : sysOpts.get("Opt1").getAsString(); //example of syntax
+
 	}
 
 
@@ -149,11 +171,16 @@ public class DataExtractor {
 	 * @throws FileNotFoundException
 	 */
 	private Object[] getTestData(String jsonDataFilePath) throws FileNotFoundException {
+
 		FileReader jsonDataFileReader = new FileReader(jsonDataFilePath);
 		JsonParser jsonParser = new JsonParser();
 		JsonObject jsonData = jsonParser.parse(jsonDataFileReader).getAsJsonObject();
-		JsonArray testsArray = jsonData.getAsJsonArray("Tests");
-		JsonArray systemArray = jsonData.getAsJsonArray("System Options");
+
+		//force the fail for now
+		JsonArray testsArray = jsonData.getAsJsonArray(gc.jsonTestsDataArray);
+
+		//JsonArray testsArray = jsonData.getAsJsonArray("Tests");
+		JsonArray systemArray = jsonData.getAsJsonArray(gc.jsonSystemOptionsDataArray);
 
 		return new Object[] {testsArray, systemArray};
 
