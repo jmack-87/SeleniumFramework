@@ -28,6 +28,17 @@ public class ExcelDataExtractor {
 	private String key;
 
 
+	/**
+	 * Constructor. Used to simplify the extraction and processing of excel data. Calls internal methods
+	 * to initialize connection to excel file, override common testdata repository, and then shut down
+	 * connection to excel file.
+	 *
+	 * @param applicationUnderTest (String) name of application. Corresponds to a folder in src/test/resources/spreadsheetData/
+	 * @param excelFileName (String) name of target excel file
+	 * @param runtimeData (JsonDataExtractor) common test data repository
+	 * @param id (String) test instance id
+	 * @param testName (String) test method name [name should match some row in excel worksheet]
+	 */
 	public ExcelDataExtractor(String applicationUnderTest, String excelFileName, JsonDataExtractor runtimeData, String id, String testName) {
 
 		this.id = id;
@@ -43,9 +54,9 @@ public class ExcelDataExtractor {
 	/**
 	 * Load test data from excel, where available
 	 *
-	 * @param appUnderTest
-	 * @param excelFileName
-	 * @param testName
+	 * @param appUnderTest (String) name of application. Corresponds to a folder in src/test/resources/spreadsheetData/
+	 * @param excelFileName (String) name of target excel file
+	 * @param testName (String) test method name [name should match some row in excel worksheet]
 	 */
 	private void initialize(String appUnderTest, String excelFileName) {
 
@@ -82,6 +93,12 @@ public class ExcelDataExtractor {
 	}
 
 
+	/**
+	 * Override common test data repository values with values from excel data
+	 *
+	 * @param runtimeData (JsonDataExtractor)
+	 * @param records (RecordSet) fillo excel data extraction results
+	 */
 	private void overrideJSONdata(JsonDataExtractor runtimeData, HashMap<String, String> records) {
 
 		System.out.format("[Log]: <[%s:%s] Excel Data: {", this.id, this.testName);
@@ -281,6 +298,11 @@ public class ExcelDataExtractor {
 	}
 
 
+	/**
+	 * Change fillo recordset to hashmap
+	 *
+	 * @return (HashMap[String, String]) HashMap equivalent of fillo recordset
+	 */
 	private HashMap<String, String> getHashMapData() {
 
 		HashMap<String, String> resultsMap = new HashMap<String, String>();
@@ -299,6 +321,9 @@ public class ExcelDataExtractor {
 	}
 
 
+	/**
+	 * Close down fillo excel access
+	 */
 	public void shutDown() {
 
 		records.close();
