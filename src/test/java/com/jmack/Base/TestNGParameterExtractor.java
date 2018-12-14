@@ -1,9 +1,10 @@
 package com.jmack.Base;
 
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-public class SuiteParameterExtractor {
+public class TestNGParameterExtractor {
 
 	// TestNG Suite parameters
 	private String gridTypeOverride;
@@ -35,7 +36,8 @@ public class SuiteParameterExtractor {
 		"bundleIdOverride", "applicationUnderTest",
 		"excelDataFile"
 	})
-	public SuiteParameterExtractor(String id, String testName, RuntimeData runtimeData,
+	@BeforeSuite
+	public TestNGParameterExtractor(String id, String testName, RuntimeData runtimeData,
 			@Optional String gridTypeOverride,
 			@Optional String platformNameOverride, @Optional String platformVersionOverride,
 			@Optional String browserNameOverride, @Optional String browserVersionOverride,

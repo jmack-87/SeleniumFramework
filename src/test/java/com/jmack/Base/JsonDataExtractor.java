@@ -51,6 +51,15 @@ public class JsonDataExtractor {
 
 	private GlobalConstants gc;
 
+	public JsonDataExtractor(String id, String testName, GlobalConstants gc) {
+
+		this.id = id;
+		this.testName = testName;
+		this.gc = gc;
+		initialize();
+
+	}
+
 
 
 	/**
@@ -62,13 +71,14 @@ public class JsonDataExtractor {
 	 * @throws FileNotFoundException in case gc.testDateFilePath invalid
 	 */
 	@Step("Extract dynamic test data from JSON.")
-	protected void initialize(GlobalConstants gc, String testName, String id) throws FileNotFoundException {
+	protected void initialize() {
 
-		this.gc = gc;
-		this.testName = testName;
-		this.id = id;
-
-		Object[] data = getTestData(gc.testDataFilePath);
+		Object[] data = null;
+		try {
+			data = getTestData(this.gc.testDataFilePath);
+		} catch (FileNotFoundException fnfe) {
+			Assert.fail(fnfe.getLocalizedMessage());
+		}
 
 		if (null != data[0]) {
 
@@ -78,7 +88,7 @@ public class JsonDataExtractor {
 			while (tda.hasNext()) { // there should only be one (1) array element, containing all test-arrays
 				JsonObject tob = (JsonObject) tda.next();
 				//System.out.format("[DEBUG]: <[%s:%s] TestsData: %s>%n", this.id, this.testName, tob);
-				setTestData(tob.getAsJsonObject(testName));
+				setTestData(tob.getAsJsonObject(this.testName));
 			}
 		} else {
 			System.out.format("[LOG]: <[%s:%s] Skipping JSON test data extraction. JSON test data not found.>%n", this.id, this.testName);
@@ -177,10 +187,10 @@ public class JsonDataExtractor {
 		JsonObject jsonData = jsonParser.parse(jsonDataFileReader).getAsJsonObject();
 
 		//force the fail for now
-		JsonArray testsArray = jsonData.getAsJsonArray(gc.jsonTestsDataArray);
+		JsonArray testsArray = jsonData.getAsJsonArray(this.gc.jsonTestsDataArray);
 
 		//JsonArray testsArray = jsonData.getAsJsonArray("Tests");
-		JsonArray systemArray = jsonData.getAsJsonArray(gc.jsonSystemOptionsDataArray);
+		JsonArray systemArray = jsonData.getAsJsonArray(this.gc.jsonSystemOptionsDataArray);
 
 		return new Object[] {testsArray, systemArray};
 
