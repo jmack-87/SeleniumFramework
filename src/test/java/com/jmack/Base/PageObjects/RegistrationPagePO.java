@@ -1,7 +1,7 @@
 package com.jmack.Base.PageObjects;
 
 
-import com.jmack.Base.DataExtractor;
+import com.jmack.Base.JsonDataExtractor;
 import com.jmack.Base.Generic;
 import com.jmack.Base.ScreenShot;
 import com.jmack.Base.TestBase;
@@ -15,7 +15,7 @@ public class RegistrationPagePO extends TestBase {
 
 	private Generic generic;
 	private ScreenShot ss;
-	private DataExtractor runtimeData;
+	private JsonDataExtractor runtimeData;
 	private String id = "unknown";
 	private String testName = "unknown";
 	private IFramePO iFrame;
@@ -43,7 +43,7 @@ public class RegistrationPagePO extends TestBase {
 	 * @param id
 	 * @param testName
 	 */
-	public RegistrationPagePO(Generic generic, ScreenShot ss, DataExtractor runtimeData, String id, String testName, IFramePO iFrame) {
+	public RegistrationPagePO(Generic generic, ScreenShot ss, JsonDataExtractor runtimeData, String id, String testName, IFramePO iFrame) {
 
 		this.generic = generic;
 		this.ss = ss;
