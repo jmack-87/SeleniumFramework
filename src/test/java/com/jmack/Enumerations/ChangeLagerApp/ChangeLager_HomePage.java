@@ -2,7 +2,7 @@ package com.jmack.Enumerations.ChangeLagerApp;
 
 public enum ChangeLager_HomePage {
 
-    // DESKTOP
+       // DESKTOP
     Text_changeLagerHomeURL("ChangeLagerHome.text.changeLagerHomeURL"),
     Text_pageTitle("ChangeLagerHome.text.pageTitle"),
     Locator_Tag_head("ChangeLagerHome.Locator.Tag.head"),
