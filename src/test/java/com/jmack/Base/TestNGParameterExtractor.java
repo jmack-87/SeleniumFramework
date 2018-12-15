@@ -1,12 +1,11 @@
 package com.jmack.Base;
 
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
-
 public class TestNGParameterExtractor {
 
-	// TestNG Suite parameters
+
+	private String id;
+	private String testName;
+	private RuntimeData runtimeData;
 	private String gridTypeOverride;
 	private String platformNameOverride;
 	private String platformVersionOverride;
@@ -14,41 +13,33 @@ public class TestNGParameterExtractor {
 	private String browserVersionOverride;
 	private String resolutionOverride;
 	private String locationOverride;
-
-	// Mobile
 	private String deviceNameOverride;
 	private String modelOverride;
 	private String appPackageOverride;
 	private String appActivityOverride;
 	private String bundleIdOverride;
 
-	private String id;
-	private String testName;
 
+	public TestNGParameterExtractor(
 
-	@Parameters({
-		"gridTypeOverride",
-		"platformNameOverride",	"platformVersionOverride",
-		"browserNameOverride", "browserVersionOverride",
-		"resolutionOverride", "locationOverride",
-		"deviceNameOverride", "modelOverride",
-		"appPackageOverride", "appActivityOverride",
-		"bundleIdOverride", "applicationUnderTest",
-		"excelDataFile"
-	})
-	@BeforeSuite
-	public TestNGParameterExtractor(String id, String testName, RuntimeData runtimeData,
-			@Optional String gridTypeOverride,
-			@Optional String platformNameOverride, @Optional String platformVersionOverride,
-			@Optional String browserNameOverride, @Optional String browserVersionOverride,
-			@Optional String resolutionOverride, @Optional String locationOverride,
-			@Optional String deviceNameOverride, @Optional String modelOverride,
-			@Optional String appPackageOverride, @Optional String appActivityOverride,
-			@Optional String bundleIdOverride, @Optional String applicationUnderTest,
-			@Optional String excelDataFile) {
+			String id, String testName, RuntimeData runtimeData,
+
+			String gridTypeOverride,
+			String platformNameOverride,
+			String platformVersionOverride,
+			String browserNameOverride,
+			String browserVersionOverride,
+			String resolutionOverride,
+			String locationOverride,
+			String deviceNameOverride,
+			String modelOverride,
+			String appPackageOverride,
+			String appActivityOverride,
+			String bundleIdOverride) {
 
 		this.id = id;
 		this.testName = testName;
+		this.runtimeData = runtimeData;
 
 		this.gridTypeOverride = gridTypeOverride == null ? "" : gridTypeOverride;
 		this.platformNameOverride = platformNameOverride == null ? "" : platformNameOverride;
@@ -64,26 +55,26 @@ public class TestNGParameterExtractor {
 		this.appActivityOverride = appActivityOverride == null ? "" : appActivityOverride;
 		this.bundleIdOverride = bundleIdOverride == null ? "" : bundleIdOverride;
 
-		overrideJsonExcelData(runtimeData);
+		initialize();
 
 	}
 
 
-	private void overrideJsonExcelData(RuntimeData runtimeData) {
+	private void initialize() {
 
 		// PARAMETER OVERRIDES
-		System.out.format("[LOG]: <[%s:%s] overriding JSON/Excel data by parameter.>%n", id, testName);
+		System.out.format("[LOG]: <[%s:%s] overriding JSON/Excel data by parameter.>%n", this.id, this.testName);
 
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established gridType, override gridType
 		if (!("").equals(this.gridTypeOverride) && !runtimeData.gridType.toLowerCase().equals(this.gridTypeOverride.toLowerCase())) {
-			System.out.format("[LOG]: <[%s:%s] overriding gridType \"%s\" with \"%s\">%n", id, testName, runtimeData.gridType, gridTypeOverride);
-			runtimeData.gridType = this.gridTypeOverride;
+			System.out.format("[LOG]: <[%s:%s] overriding gridType \"%s\" with \"%s\">%n", this.id, this.testName, this.runtimeData.gridType, this.gridTypeOverride);
+			this.runtimeData.gridType = this.gridTypeOverride;
 		}
 
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established platformName, override platformName
 		if (!("").equals(this.platformNameOverride) && !runtimeData.platformName.toLowerCase().equals(this.platformNameOverride.toLowerCase())) {
-			System.out.format("[LOG]: <[%s:%s] overriding platformName \"%s\" with \"%s\">%n", id, testName, runtimeData.platformName, platformNameOverride);
-			runtimeData.platformName = this.platformNameOverride;
+			System.out.format("[LOG]: <[%s:%s] overriding platformName \"%s\" with \"%s\">%n", this.id, this.testName, this.runtimeData.platformName, this.platformNameOverride);
+			this.runtimeData.platformName = this.platformNameOverride;
 		}
 
 		// if there is an override passed via TestNG suite file, and the override differs from pre-established platformVersion, override platformVersion

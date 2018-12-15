@@ -1,7 +1,6 @@
 package com.jmack.Base;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
@@ -58,6 +57,22 @@ public class TestBase {
 	private String applicationUnderTest = null;
 	private String excelDataFile = null;
 
+	// TestNG Suite parameters
+	private String gridTypeOverride;
+	private String platformNameOverride;
+	private String platformVersionOverride;
+	private String browserNameOverride;
+	private String browserVersionOverride;
+	private String resolutionOverride;
+	private String locationOverride;
+
+	// Mobile
+	private String deviceNameOverride;
+	private String modelOverride;
+	private String appPackageOverride;
+	private String appActivityOverride;
+	private String bundleIdOverride;
+
 	private String id;
 	private String testName;
 
@@ -80,17 +95,64 @@ public class TestBase {
 
 
 	/**
-	 * Initialize RemoteWebDriver, gather test data (from JSON)
+	 * Initialize RemoteWebDriver, gather test data (from JSON, excel, TestNG suite Parameters)
+	 *
 	 * @param testMethod testNG supplied test object
 	 * @param browserNameOverride optional TestNG input from test suite
 	 */
 	@BeforeMethod(description="Extract test data from JSON, create thread-safe WebDriver.")
 	@Step("Initialize test.")
-	@Parameters({"applicationUnderTest", "excelDataFile"})
-	protected void setUp(Method testMethod, @Optional String applicationUnderTest, @Optional String excelDataFile) {
+	@Parameters({
+		"gridTypeOverride",
+		"platformNameOverride",
+		"platformVersionOverride",
+		"browserNameOverride",
+		"browserVersionOverride",
+		"resolutionOverride",
+		"locationOverride",
+		"deviceNameOverride",
+		"modelOverride",
+		"appPackageOverride",
+		"appActivityOverride",
+		"bundleIdOverride",
+		"applicationUnderTest",
+		"excelDataFile"})
+	protected void setUp(
+
+			Method testMethod,
+
+			@Optional String gridTypeOverride,
+			@Optional String platformNameOverride,
+			@Optional String platformVersionOverride,
+			@Optional String browserNameOverride,
+			@Optional String browserVersionOverride,
+			@Optional String resolutionOverride,
+			@Optional String locationOverride,
+			@Optional String deviceNameOverride,
+			@Optional String modelOverride,
+			@Optional String appPackageOverride,
+			@Optional String appActivityOverride,
+			@Optional String bundleIdOverride,
+			@Optional String applicationUnderTest,
+			@Optional String excelDataFile) {
+
+//		this.gridTypeOverride = gridTypeOverride == null ? "" : gridTypeOverride;
+//		this.platformNameOverride = platformNameOverride == null ? "" : platformNameOverride;
+//		this.platformVersionOverride = platformVersionOverride == null ? "" : platformVersionOverride;
+//		this.browserNameOverride = browserNameOverride == null ? "" : browserNameOverride;
+//		this.browserVersionOverride = browserVersionOverride == null ? "" : browserVersionOverride;
+//		this.resolutionOverride = resolutionOverride == null ? "" : resolutionOverride;
+//		this.locationOverride = locationOverride == null ? "" : locationOverride;
+//
+//		this.deviceNameOverride = deviceNameOverride == null ? "" : deviceNameOverride;
+//		this.modelOverride = modelOverride == null ? "" : modelOverride;
+//		this.appPackageOverride = appPackageOverride == null ? "" : appPackageOverride;
+//		this.appActivityOverride = appActivityOverride == null ? "" : appActivityOverride;
+//		this.bundleIdOverride = bundleIdOverride == null ? "" : bundleIdOverride;
 
 		this.applicationUnderTest = applicationUnderTest == null ? null : applicationUnderTest;
 		this.excelDataFile = excelDataFile == null ? null : excelDataFile;
+
 
 		testName = testMethod.getName();
 
@@ -110,7 +172,22 @@ public class TestBase {
 
 
 		// START TESTNG PARAMETER OVERRIDES
-		testNGParameterExtractor = new TestNGParameterExtractor(id, testName, runtimeData);
+		testNGParameterExtractor = new TestNGParameterExtractor(
+				id, testName, runtimeData,
+
+				this.gridTypeOverride,
+				this.platformNameOverride,
+				this.platformVersionOverride,
+				this.browserNameOverride,
+				this.browserVersionOverride,
+				this.resolutionOverride,
+				this.locationOverride,
+				this.deviceNameOverride,
+				this.modelOverride,
+				this.appPackageOverride,
+				this.appActivityOverride,
+				this.bundleIdOverride
+				);
 		// END TESTNG PARAMETER OVERRIDES
 
 
@@ -129,7 +206,7 @@ public class TestBase {
 		}
 
 
-
+		// Set up clients for use with a locally hosted selenium grid
 		if (runtimeData.gridType.toLowerCase().equals("local")) {
 
 			System.out.format("[LOG]: <[%s:%s] local grid detected>%n", id, testName);
@@ -206,6 +283,7 @@ public class TestBase {
 			}
 		}
 
+		// setup clients for use with Perfecto cloud
 		if (runtimeData.gridType.toLowerCase().equals("perfecto")) {
 			switch (runtimeData.browserName.toLowerCase()) {
 			//Desktop
@@ -326,11 +404,12 @@ public class TestBase {
 			}
 		}
 
-		// Desktop
+		// initialize desktop client WebDriver
 		if (null != options) {
 
 			System.out.format("[LOG]: <[%s:%s] %s browser detected on %s grid>%n", id, testName, runtimeData.browserName, runtimeData.gridType);
 
+			// using local grid
 			if (runtimeData.gridType.toLowerCase().equals("local")) {
 				try {
 					driver.set(new RemoteWebDriver(new URL(gc.gridHost), options));
@@ -351,6 +430,7 @@ public class TestBase {
 					m.printStackTrace();
 				}
 
+			// using Perfecto grid
 			} else if (runtimeData.gridType.toLowerCase().equals("perfecto")) {
 
 				//Perfecto
@@ -385,8 +465,10 @@ public class TestBase {
 				// error, no grid identified
 			}
 
-		// Mobile
+		// initialize mobile client WebDriver (Appium)
 		} else if (null != caps) {
+
+			// using local appium server
 			if (runtimeData.gridType.toLowerCase().equals("local")) {
 				try {
 					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.appiumHost), caps));
@@ -398,14 +480,15 @@ public class TestBase {
 					e.printStackTrace();
 				}
 
+			// using perfecto
 			} else if (runtimeData.gridType.toLowerCase().equals("perfecto")) {
 
 				//Perfecto
 				((DesiredCapabilities) caps).setCapability("securityToken", gc.perfectoSecurityToken);
 
-				//SRF
+				/* StormRunnerFunctional
 				((DesiredCapabilities) caps).setCapability("SRF_CLIENT_ID", gc.srfId);
-				((DesiredCapabilities) caps).setCapability("SRF_CLIENT_SECRET", gc.srfPass);
+				((DesiredCapabilities) caps).setCapability("SRF_CLIENT_SECRET", gc.srfPass);*/
 
 
 				try {
@@ -413,8 +496,8 @@ public class TestBase {
 					//Perfecto
 					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.perfectoHost), caps));
 
-					//SRF
-					//mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.srfHost), caps));
+					/* StormRunnerFunctional
+					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.srfHost), caps));*/
 
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);

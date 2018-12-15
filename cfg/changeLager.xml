@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="ChangeLager Suite">
 
-    <parameter name="gridTypeOverride" value="" />
+    <parameter name="gridTypeOverride" value="perfecto" />
     <parameter name="platformNameOverride" value="" />
     <parameter name="platformVersionOverride" value="" />
     <parameter name="browserNameOverride" value="" />
