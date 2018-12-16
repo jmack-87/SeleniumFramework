@@ -58,20 +58,20 @@ public class TestBase {
 	private String excelDataFile = null;
 
 	// TestNG Suite parameters
-	private String gridTypeOverride;
-	private String platformNameOverride;
-	private String platformVersionOverride;
-	private String browserNameOverride;
-	private String browserVersionOverride;
-	private String resolutionOverride;
-	private String locationOverride;
+	private String gridType;
+	private String platformName;
+	private String platformVersion;
+	private String browserName;
+	private String browserVersion;
+	private String resolution;
+	private String location;
 
 	// Mobile
-	private String deviceNameOverride;
-	private String modelOverride;
-	private String appPackageOverride;
-	private String appActivityOverride;
-	private String bundleIdOverride;
+	private String deviceName;
+	private String model;
+	private String appPackage;
+	private String appActivity;
+	private String bundleId;
 
 	private String id;
 	private String testName;
@@ -82,9 +82,8 @@ public class TestBase {
 	private ScreenShot ss = null;
 	private MobileScreenShot mss = null;
 	protected JsonDataExtractor jsonDataExtractor;
-	protected TestNGParameterExtractor testNGParameterExtractor;
-	protected static GlobalConstants gc = new GlobalConstants();
-	protected static RuntimeData runtimeData = new RuntimeData();
+	protected GlobalConstants gc = new GlobalConstants();
+	protected RuntimeData runtimeData = new RuntimeData();
 	protected ExcelDataExtractor excelDataExtractor;
 
 	// Page Objects
@@ -102,56 +101,33 @@ public class TestBase {
 	 */
 	@BeforeMethod(description="Extract test data from JSON, create thread-safe WebDriver.")
 	@Step("Initialize test.")
-	@Parameters({
-		"gridTypeOverride",
-		"platformNameOverride",
-		"platformVersionOverride",
-		"browserNameOverride",
-		"browserVersionOverride",
-		"resolutionOverride",
-		"locationOverride",
-		"deviceNameOverride",
-		"modelOverride",
-		"appPackageOverride",
-		"appActivityOverride",
-		"bundleIdOverride",
-		"applicationUnderTest",
-		"excelDataFile"})
-	protected void setUp(
-
-			Method testMethod,
-
-			@Optional String gridTypeOverride,
-			@Optional String platformNameOverride,
-			@Optional String platformVersionOverride,
-			@Optional String browserNameOverride,
-			@Optional String browserVersionOverride,
-			@Optional String resolutionOverride,
-			@Optional String locationOverride,
-			@Optional String deviceNameOverride,
-			@Optional String modelOverride,
-			@Optional String appPackageOverride,
-			@Optional String appActivityOverride,
-			@Optional String bundleIdOverride,
-			@Optional String applicationUnderTest,
-			@Optional String excelDataFile) {
-
-//		this.gridTypeOverride = gridTypeOverride == null ? "" : gridTypeOverride;
-//		this.platformNameOverride = platformNameOverride == null ? "" : platformNameOverride;
-//		this.platformVersionOverride = platformVersionOverride == null ? "" : platformVersionOverride;
-//		this.browserNameOverride = browserNameOverride == null ? "" : browserNameOverride;
-//		this.browserVersionOverride = browserVersionOverride == null ? "" : browserVersionOverride;
-//		this.resolutionOverride = resolutionOverride == null ? "" : resolutionOverride;
-//		this.locationOverride = locationOverride == null ? "" : locationOverride;
-//
-//		this.deviceNameOverride = deviceNameOverride == null ? "" : deviceNameOverride;
-//		this.modelOverride = modelOverride == null ? "" : modelOverride;
-//		this.appPackageOverride = appPackageOverride == null ? "" : appPackageOverride;
-//		this.appActivityOverride = appActivityOverride == null ? "" : appActivityOverride;
-//		this.bundleIdOverride = bundleIdOverride == null ? "" : bundleIdOverride;
+	@Parameters({"applicationUnderTest", "excelDataFile", "gridType", "platformName", "platformVersion", "browserName",
+		"browserVersion", "resolution", "location", "deviceName", "model", "appPackage", "appActivity", "bundleId"})
+	protected void setUp(Method testMethod,
+			@Optional String applicationUnderTest, @Optional String excelDataFile,
+			@Optional String gridType, @Optional String platformName,
+			@Optional String platformVersion, @Optional String browserName,
+			@Optional String browserVersion, @Optional String resolution,
+			@Optional String location, @Optional String deviceName,
+			@Optional String model, @Optional String appPackage,
+			@Optional String appActivity, @Optional String bundleId) {
 
 		this.applicationUnderTest = applicationUnderTest == null ? null : applicationUnderTest;
 		this.excelDataFile = excelDataFile == null ? null : excelDataFile;
+
+		this.gridType = gridType == null ? "" : gridType;
+		this.platformName = platformName == null ? "" : platformName;
+		this.platformVersion = platformVersion == null ? "" : platformVersion;
+		this.browserName = browserName == null ? "" : browserName;
+		this.browserVersion = browserVersion == null ? "" : browserVersion;
+		this.resolution = resolution == null ? "" : resolution;
+		this.location = location == null ? "" : location;
+
+		this.deviceName = deviceName == null ? "" : deviceName;
+		this.model = model == null ? "" : model;
+		this.appPackage = appPackage == null ? "" : appPackage;
+		this.appActivity = appActivity == null ? "" : appActivity;
+		this.bundleId = bundleId == null ? "" : bundleId;
 
 
 		testName = testMethod.getName();
@@ -161,46 +137,101 @@ public class TestBase {
 		id = id.substring(id.length() - 3);
 
 		// START JSON DATA EXTRACTION
-		jsonDataExtractor = new JsonDataExtractor(id, testName, gc);
+		jsonDataExtractor = new JsonDataExtractor(id, testName, gc, runtimeData);
 		// START JSON DATA EXTRACTION
 
 		// START EXCEL OVERRIDES
 		if (!(null == this.excelDataFile || null == this.applicationUnderTest)) {
-			excelDataExtractor = new ExcelDataExtractor(this.applicationUnderTest, this.excelDataFile, this.jsonDataExtractor, this.id, this.testName);
+			excelDataExtractor = new ExcelDataExtractor(this.applicationUnderTest, this.excelDataFile, runtimeData, this.id, this.testName);
 		}
 		// END EXCEL OVERRIDES
 
 
 		// START TESTNG PARAMETER OVERRIDES
-		testNGParameterExtractor = new TestNGParameterExtractor(
-				id, testName, runtimeData,
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established gridType,  gridType
+		if (!("").equals(this.gridType) && !runtimeData.gridType.toLowerCase().equals(this.gridType.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding gridType \"%s\" with \"%s\">%n", id, testName, runtimeData.gridType, this.gridType);
+			runtimeData.gridType = this.gridType;
+		}
 
-				this.gridTypeOverride,
-				this.platformNameOverride,
-				this.platformVersionOverride,
-				this.browserNameOverride,
-				this.browserVersionOverride,
-				this.resolutionOverride,
-				this.locationOverride,
-				this.deviceNameOverride,
-				this.modelOverride,
-				this.appPackageOverride,
-				this.appActivityOverride,
-				this.bundleIdOverride
-				);
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established platformName,  platformName
+		if (!("").equals(this.platformName) && !runtimeData.platformName.toLowerCase().equals(this.platformName.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding platformName \"%s\" with \"%s\">%n", id, testName, runtimeData.platformName, this.platformName);
+			runtimeData.platformName = this.platformName;
+		}
+
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established platformVersion,  platformVersion
+		if (!("").equals(this.platformVersion) && !runtimeData.platformVersion.toLowerCase().equals(this.platformVersion.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding platformVersion \"%s\" with \"%s\">%n", id, testName, runtimeData.platformVersion, platformVersion);
+			runtimeData.platformVersion = this.platformVersion;
+		}
+
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established browser,  browser
+		if (!("").equals(this.browserName) && !runtimeData.browserName.toLowerCase().equals(this.browserName.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding browserName \"%s\" with \"%s\">%n", id, testName, runtimeData.browserName, browserName);
+			runtimeData.browserName = browserName;
+		}
+
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established browserVersion,  browserVersion
+		if (!("").equals(this.browserVersion) && !runtimeData.browserVersion.toLowerCase().equals(this.browserVersion.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding browserVersion \"%s\" with \"%s\">%n", id, testName, runtimeData.browserVersion, browserVersion);
+			runtimeData.browserVersion = browserVersion;
+		}
+
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established resolution,  resolution
+		if (!("").equals(this.resolution) && !runtimeData.resolution.toLowerCase().equals(this.resolution.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding resolution \"%s\" with \"%s\">%n", id, testName, runtimeData.resolution, resolution);
+			runtimeData.resolution = resolution;
+		}
+
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established location,  location
+		if (!("").equals(this.location) && !runtimeData.location.toLowerCase().equals(this.location.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding location \"%s\" with \"%s\">%n", id, testName, runtimeData.location, location);
+			runtimeData.location = location;
+		}
+
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established deviceName,  deviceName
+		if (!("").equals(this.deviceName) && !runtimeData.deviceName.toLowerCase().equals(this.deviceName.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding deviceName \"%s\" with \"%s\">%n", id, testName, runtimeData.deviceName, deviceName);
+			runtimeData.deviceName = this.deviceName;
+		}
+
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established model,  model
+		if (!("").equals(this.model) && !runtimeData.model.toLowerCase().equals(this.model.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding model \"%s\" with \"%s\">%n", id, testName, runtimeData.model, model);
+			runtimeData.model = this.model;
+		}
+
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established appPackage,  appPackage
+		if (!("").equals(this.appPackage) && !runtimeData.appPackage.toLowerCase().equals(this.appPackage.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding appPackage \"%s\" with \"%s\">%n", id, testName, runtimeData.appPackage, appPackage);
+			runtimeData.appPackage = this.appPackage;
+		}
+
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established appActivity,  appActivity
+		if (!("").equals(this.appActivity) && !runtimeData.appActivity.toLowerCase().equals(this.appActivity.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding appActivity \"%s\" with \"%s\">%n", id, testName, runtimeData.appActivity, appActivity);
+			runtimeData.appActivity = this.appActivity;
+		}
+
+		// if there is an  passed via TestNG suite file, and the  differs from pre-established bundleId,  bundleId
+		if (!("").equals(this.bundleId) && !runtimeData.bundleId.toLowerCase().equals(this.bundleId.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding bundleId \"%s\" with \"%s\">%n", id, testName, runtimeData.bundleId, bundleId);
+			runtimeData.bundleId = this.bundleId;
+		}
 		// END TESTNG PARAMETER OVERRIDES
 
 
 		// randomize desktop client
 		if (runtimeData.browserName.toLowerCase().equals("randomDesktop")) {
-			Random r = new Random();
+			Random r = new Random(System.currentTimeMillis());
 			String[] browsers = {"chrome","firefox","edge","ie"};
 			runtimeData.browserName = browsers[r.nextInt(browsers.length)];
 		}
 
 		//  randomize mobile client
 		if (runtimeData.browserName.toLowerCase().equals("randomMobile")) {
-			Random r = new Random();
+			Random r = new Random(System.currentTimeMillis());
 			String[] browsers = {"androidNative","androidChrome","iosNative","iosSafari"};
 			runtimeData.browserName = browsers[r.nextInt(browsers.length)];
 		}
@@ -285,6 +316,9 @@ public class TestBase {
 
 		// setup clients for use with Perfecto cloud
 		if (runtimeData.gridType.toLowerCase().equals("perfecto")) {
+
+			System.out.format("[LOG]: <[%s:%s] perfecto grid detected>%n", id, testName);
+
 			switch (runtimeData.browserName.toLowerCase()) {
 			//Desktop
 			case "desktopchrome":
@@ -385,7 +419,6 @@ public class TestBase {
 			}
 		}
 
-		//System.out.format("[LOG]: <[%s:%s] using %s; headless: %s;>\n", this.id, this.testName, runtimeData.browserName, runtimeData.headless);
 
 		// load properties file (locators definitions)
 		try {
@@ -407,7 +440,7 @@ public class TestBase {
 		// initialize desktop client WebDriver
 		if (null != options) {
 
-			System.out.format("[LOG]: <[%s:%s] %s browser detected on %s grid>%n", id, testName, runtimeData.browserName, runtimeData.gridType);
+			System.out.format("[LOG]: <[%s:%s] %s client detected on %s grid>%n", id, testName, runtimeData.browserName, runtimeData.gridType);
 
 			// using local grid
 			if (runtimeData.gridType.toLowerCase().equals("local")) {
@@ -467,6 +500,8 @@ public class TestBase {
 
 		// initialize mobile client WebDriver (Appium)
 		} else if (null != caps) {
+
+			System.out.format("[LOG]: <[%s:%s] %s client detected on %s grid>%n", id, testName, runtimeData.browserName, runtimeData.gridType);
 
 			// using local appium server
 			if (runtimeData.gridType.toLowerCase().equals("local")) {
