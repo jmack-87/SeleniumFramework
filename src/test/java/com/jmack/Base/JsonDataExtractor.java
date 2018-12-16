@@ -13,53 +13,25 @@ import com.google.gson.JsonParser;
 
 import io.qameta.allure.Step;
 
+
 public class JsonDataExtractor {
-
-	/*	Data available to Generic
-	 */
-	protected String sysOpt = "";
-	protected String gridType = "";
-	public String platformName = ""; //
-	protected String platformVersion = ""; //
-	protected String browserName = "";
-	protected String browserVersion = ""; //perfecto
-	protected String resolution = ""; //perfecto
-	protected String location = ""; //perfecto
-	public String platform = ""; //
-
-	protected Boolean headless = false;
-
-	protected String deviceName = "";
-	protected String model = "";
-	protected String appPackage = "";
-	protected String appActivity = "";
-	protected String bundleId = "";
-
-	/*	Data available to scripts
-	 */
-	public String searchString = "";
-	public String searchConfirmationString = "";
-	public String username = "";
-	public String password = "";
-	public String creditCardNumber = "";
-	public String creditCardExpiration = "";
-	public String creditCardCVC = "";
-	public String userEmail = "";
 
 	private String id;
 	private String testName;
-
 	private GlobalConstants gc;
+	private RuntimeData runtimeData;
 
-	public JsonDataExtractor(String id, String testName, GlobalConstants gc) {
+
+	public JsonDataExtractor(String id, String testName, GlobalConstants gc, RuntimeData runtimeData) {
 
 		this.id = id;
 		this.testName = testName;
 		this.gc = gc;
+		this.runtimeData = runtimeData;
+
 		initialize();
 
 	}
-
 
 
 	/**
@@ -119,40 +91,38 @@ public class JsonDataExtractor {
 	@Step("Set Test data.")
 	private void setTestData(JsonObject testData) {
 
-		System.out.format("[LOG]: <[%s:%s] JsonData: %s>%n", this.id, this.testName, testData);
+		System.out.format("[LOG]: <[%s:%s] JsonTestData: %s>%n", this.id, this.testName, testData);
 
-		this.gridType = testData.get("gridType") == null ? "local" : testData.get("gridType").getAsString();
+		this.runtimeData.gridType = testData.get("gridType") == null ? "local" : testData.get("gridType").getAsString();
 
-		this.platformName = testData.get("platformName") == null ? "" : testData.get("platformName").getAsString(); // perfecto
-		this.platformVersion = testData.get("platformVersion") == null ? "" : testData.get("platformVersion").getAsString(); // perfecto
-		this.browserName = testData.get("browserName") == null ? "" : testData.get("browserName").getAsString();
-		this.browserVersion = testData.get("browserVersion") == null ? "" : testData.get("browserVersion").getAsString(); // perfecto
-		this.resolution = testData.get("resolution") == null ? "" : testData.get("resolution").getAsString(); // perfecto
-		this.location = testData.get("location") == null ? "" : testData.get("location").getAsString(); // perfecto
-		this.platform = testData.get("platform") == null ? "" : testData.get("platform").getAsString(); // perfecto
+		this.runtimeData.platformName = testData.get("platformName") == null ? "" : testData.get("platformName").getAsString(); // perfecto
+		this.runtimeData.platformVersion = testData.get("platformVersion") == null ? "" : testData.get("platformVersion").getAsString(); // perfecto
+		this.runtimeData.browserName = testData.get("browserName") == null ? "" : testData.get("browserName").getAsString();
+		this.runtimeData.browserVersion = testData.get("browserVersion") == null ? "" : testData.get("browserVersion").getAsString(); // perfecto
+		this.runtimeData.resolution = testData.get("resolution") == null ? "" : testData.get("resolution").getAsString(); // perfecto
+		this.runtimeData.location = testData.get("location") == null ? "" : testData.get("location").getAsString(); // perfecto
+		this.runtimeData.platform = testData.get("platform") == null ? "" : testData.get("platform").getAsString(); // perfecto
 
-		this.headless = testData.get("headless") == null ? false : testData.get("headless").getAsBoolean(); // local
+		this.runtimeData.headless = testData.get("headless") == null ? false : testData.get("headless").getAsBoolean(); // local
 
 		// mobile native
-		this.deviceName = testData.get("deviceName") == null ? "" : testData.get("deviceName").getAsString();
-		this.model = testData.get("model") == null ? "" : testData.get("model").getAsString();
-		this.appPackage = testData.get("appPackage") == null ? "" : testData.get("appPackage").getAsString();
-		this.appActivity = testData.get("appActivity") == null ? "" : testData.get("appActivity").getAsString();
-		this.bundleId = testData.get("bundleId") == null ? "" : testData.get("bundleId").getAsString();
+		this.runtimeData.deviceName = testData.get("deviceName") == null ? "" : testData.get("deviceName").getAsString();
+		this.runtimeData.model = testData.get("model") == null ? "" : testData.get("model").getAsString();
+		this.runtimeData.appPackage = testData.get("appPackage") == null ? "" : testData.get("appPackage").getAsString();
+		this.runtimeData.appActivity = testData.get("appActivity") == null ? "" : testData.get("appActivity").getAsString();
+		this.runtimeData.bundleId = testData.get("bundleId") == null ? "" : testData.get("bundleId").getAsString();
 
 		// for sample scripts, not required: searchString
-		this.searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
+		this.runtimeData.searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
 		// for sample scripts, not required: searchConfirmationString
-		this.searchConfirmationString = testData.get("searchConfirmationString") == null ? "IBM" : testData.get("searchConfirmationString").getAsString();
+		this.runtimeData.searchConfirmationString = testData.get("searchConfirmationString") == null ? "IBM" : testData.get("searchConfirmationString").getAsString();
 
-		this.username = testData.get("username") == null ? "" : testData.get("username").getAsString();
-		this.password = testData.get("password") == null ? "" : testData.get("password").getAsString();
-		this.creditCardNumber = testData.get("creditCardNumber") == null ? "" : testData.get("creditCardNumber").getAsString();
-		this.creditCardExpiration = testData.get("creditCardExpiration") == null ? "" : testData.get("creditCardExpiration").getAsString();
-		this.creditCardCVC = testData.get("creditCardCVC") == null ? "" : testData.get("creditCardCVC").getAsString();
-		this.userEmail = testData.get("userEmail") == null ? "" : testData.get("userEmail").getAsString();
-
-		System.out.format("[LOG]: <[%s:%s] Test data loaded.>%n", this.id, this.testName, testData);
+		this.runtimeData.username = testData.get("username") == null ? "" : testData.get("username").getAsString();
+		this.runtimeData.password = testData.get("password") == null ? "" : testData.get("password").getAsString();
+		this.runtimeData.creditCardNumber = testData.get("creditCardNumber") == null ? "" : testData.get("creditCardNumber").getAsString();
+		this.runtimeData.creditCardExpiration = testData.get("creditCardExpiration") == null ? "" : testData.get("creditCardExpiration").getAsString();
+		this.runtimeData.creditCardCVC = testData.get("creditCardCVC") == null ? "" : testData.get("creditCardCVC").getAsString();
+		this.runtimeData.userEmail = testData.get("userEmail") == null ? "" : testData.get("userEmail").getAsString();
 
 	}
 
@@ -163,11 +133,11 @@ public class JsonDataExtractor {
 	 * @param sysOpts json array containing system level json elements
 	 */
 	@Step("Set System data.")
-	private void setSystemOptions(JsonObject sysOpts) {
+	private void setSystemOptions(JsonObject sysData) {
 
-		System.out.format("[LOG]: <[%s:%s] SystemData: %s>%n", this.id, this.testName, sysOpts);
+		System.out.format("[LOG]: <[%s:%s] JsonSystemData: %s>%n", this.id, this.testName, sysData);
 
-		sysOpt = sysOpts.get("Opt1") == null ? null : sysOpts.get("Opt1").getAsString(); //example of syntax
+		this.runtimeData.sysOpt = sysData.get("Opt1") == null ? null : sysData.get("Opt1").getAsString(); //example of syntax
 
 	}
 
