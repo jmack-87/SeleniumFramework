@@ -1,15 +1,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="ChangeLager Suite">
 
-    <parameter name="gridTypeOverride" value="perfecto" />
-    <parameter name="platformNameOverride" value="" />
-    <parameter name="platformVersionOverride" value="" />
-    <parameter name="browserNameOverride" value="" />
-    <parameter name="browserVersionOverride" value="" />
-    <parameter name="resolutionOverride" value="" />
-    <parameter name="locationOverride" value="" />
-    <parameter name="browserNameOverride" value="" />
-    <parameter name="gridTypeOverride" value="" />
+    <parameter name="gridType" value="local" />
+    <parameter name="platformName" value="" />
+    <parameter name="platformVersion" value="" />
+    <parameter name="browserName" value="" />
+    <parameter name="browserVersion" value="" />
+    <parameter name="resolution" value="" />
+    <parameter name="location" value="" />
+    <parameter name="browserName" value="" />
+    <parameter name="gridType" value="" />
 
     <test name="Build Acceptance">
 
