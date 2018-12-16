@@ -2,28 +2,24 @@ package com.jmack.Base;
 
 public class RuntimeData {
 
-	/*	Data available to Generic
-	 */
+	// Data available to TestBase/Generic/PageObjects
 	protected String sysOpt = "";
 	protected String gridType = "";
-	public String platformName = ""; //
-	protected String platformVersion = ""; //
+	protected String platformName = "";
+	protected String platformVersion = "";
 	protected String browserName = "";
-	protected String browserVersion = ""; //perfecto
-	protected String resolution = ""; //perfecto
-	protected String location = ""; //perfecto
-	public String platform = ""; //
-
+	protected String browserVersion = "";
+	protected String resolution = "";
+	protected String location = "";
+	protected String platform = "";
 	protected Boolean headless = false;
-
 	protected String deviceName = "";
 	protected String model = "";
 	protected String appPackage = "";
 	protected String appActivity = "";
 	protected String bundleId = "";
 
-	/*	Data available to scripts
-	 */
+	// Data available to scripts
 	public String searchString = "";
 	public String searchConfirmationString = "";
 	public String username = "";
