@@ -15,11 +15,11 @@ import com.codoid.products.fillo.Recordset;
  */
 public class ExcelDataExtractor {
 
-	private String appUnderTest;
+	private GlobalConstants gc;
+	private String applicationUnderTest;
 	private String excelFileName;
 	private String filePath;
-	private Recordset testRecords;
-	private Recordset systemRecords;
+	private Recordset records;
 	private Connection conn;
 	private String query;
 
@@ -34,22 +34,26 @@ public class ExcelDataExtractor {
 	 * to initialize connection to excel file, override common testdata repository, and then shut down
 	 * connection to excel file.
 	 *
-	 * @param applicationUnderTest (String) name of application. Corresponds to a folder in src/test/resources/spreadsheetData/
+	 * @param gc (GlobalConstants) project structural data reference
+	 * @param applicationUnderTest (String) name of application. Corresponds to a folder in src/test/resources/excelData/
 	 * @param excelFileName (String) name of target excel file
 	 * @param runtimeData (JsonDataExtractor) common test data repository
 	 * @param id (String) test instance id
 	 * @param testName (String) test method name [name should match some row in excel worksheet]
 	 */
-	public ExcelDataExtractor(String applicationUnderTest, String excelFileName, RuntimeData runtimeData, String id, String testName) {
+	public ExcelDataExtractor(GlobalConstants gc, String applicationUnderTest, String excelFileName, RuntimeData runtimeData, String id, String testName) {
 
+		this.gc = gc;
 		this.id = id;
 		this.testName = testName;
+		this.applicationUnderTest = applicationUnderTest;
+		this.excelFileName = excelFileName;
 
-		this.getTestData(applicationUnderTest, excelFileName);
-		this.overrideTestData(runtimeData, this.getHashMapData(testRecords));
+		this.getData("test");
+		this.overrideTestData(runtimeData, getHashMapData());
 
-		this.getSystemData(applicationUnderTest, excelFileName);
-		this.overrideSystemData(runtimeData, this.getHashMapData(systemRecords));
+		this.getData("system");
+		this.overrideSystemData(runtimeData, getHashMapData());
 
 		this.shutDown();
 
@@ -59,64 +63,24 @@ public class ExcelDataExtractor {
 	/**
 	 * Load test data from excel, where available
 	 *
-	 * @param appUnderTest (String) name of application. Corresponds to a folder in src/test/resources/spreadsheetData/
-	 * @param excelFileName (String) name of target excel file
-	 * @param testName (String) test method name [name should match some row in excel worksheet]
+	 * @param dataLevel (String) worksheet containing data
 	 */
-	private void getTestData(String appUnderTest, String excelFileName) {
+	private void getData(String dataLevel) {
 
 		System.setProperty("ROW", "2"); // trim descriptive row
 		System.setProperty("COLUMN", "1");
 
-		query = "SELECT * FROM test";
+		query = "SELECT * FROM " + dataLevel;
 
-		this.appUnderTest = appUnderTest;
-		this.excelFileName = excelFileName;
-
-		filePath = System.getProperty("user.dir") + "\\src\\test\\resources\\spreadsheetData\\" + this.appUnderTest + "\\" + this.excelFileName;
+		filePath = this.gc.excelFilesPath + this.applicationUnderTest + "\\" + this.excelFileName;
 
 		Fillo fillo = new Fillo();
 
 		try {
 			conn = fillo.getConnection(filePath);
-			testRecords = conn.executeQuery(query).where("TestMethodName='" + this.testName + "'");
-			Assert.assertTrue(testRecords.getCount() != 0, String.format("No records found. Please ensure TestMethodName '%s' exists in '%s'.", this.testName, excelFileName));
-			Assert.assertTrue(testRecords.getCount() == 1, String.format("Multiple records found. Please ensure TestMethodName '%s' is unique.", this.testName));
-
-		} catch (FilloException fe) {
-			Assert.fail(fe.getLocalizedMessage());
-		}
-
-
-	}
-
-
-	/**
-	 * Load test data from excel, where available
-	 *
-	 * @param appUnderTest (String) name of application. Corresponds to a folder in src/test/resources/spreadsheetData/
-	 * @param excelFileName (String) name of target excel file
-	 * @param testName (String) test method name [name should match some row in excel worksheet]
-	 */
-	private void getSystemData(String appUnderTest, String excelFileName) {
-
-		System.setProperty("ROW", "2"); // trim descriptive row
-		System.setProperty("COLUMN", "1");
-
-		query = "SELECT * FROM system";
-
-		this.appUnderTest = appUnderTest;
-		this.excelFileName = excelFileName;
-
-		filePath = System.getProperty("user.dir") + "\\src\\test\\resources\\spreadsheetData\\" + this.appUnderTest + "\\" + this.excelFileName;
-
-		Fillo fillo = new Fillo();
-
-		try {
-			conn = fillo.getConnection(filePath);
-			systemRecords = conn.executeQuery(query).where("TestMethodName='" + this.testName + "'");
-			Assert.assertTrue(systemRecords.getCount() != 0, String.format("No records found. Please ensure TestMethodName '%s' exists in '%s'.", this.testName, excelFileName));
-			Assert.assertTrue(systemRecords.getCount() == 1, String.format("Multiple records found. Please ensure TestMethodName '%s' is unique.", this.testName));
+			records = conn.executeQuery(query).where("TestMethodName='" + this.testName + "'");
+			Assert.assertTrue(records.getCount() != 0, String.format("No records found. Please ensure TestMethodName '%s' exists in '%s'.", this.testName, excelFileName));
+			Assert.assertTrue(records.getCount() == 1, String.format("Multiple records found. Please ensure TestMethodName '%s' is unique.", this.testName));
 
 		} catch (FilloException fe) {
 			Assert.fail(fe.getLocalizedMessage());
@@ -347,7 +311,7 @@ public class ExcelDataExtractor {
 	 *
 	 * @return (HashMap[String, String]) HashMap equivalent of fillo recordset
 	 */
-	private HashMap<String, String> getHashMapData(Recordset records) {
+	private HashMap<String, String> getHashMapData() {
 
 		HashMap<String, String> resultsMap = new HashMap<String, String>();
 
@@ -370,8 +334,7 @@ public class ExcelDataExtractor {
 	 */
 	public void shutDown() {
 
-		testRecords.close();
-		systemRecords.close();
+		records.close();
 		conn.close();
 
 	}
