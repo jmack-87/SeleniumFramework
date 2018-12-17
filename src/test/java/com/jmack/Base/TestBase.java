@@ -528,6 +528,7 @@ public class TestBase {
 					ss = new ScreenShot(getDriver(), id, testName);
 					generic = new Generic(getDriver(), ss, props, id, testName);
 
+					System.out.format("[LOG]: <[%s:%s] initializing page objects>%n", id, testName);
 					initializePageObjects();
 
 				} catch (MalformedURLException m) {
@@ -549,7 +550,9 @@ public class TestBase {
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
 
+					System.out.format("[LOG]: <[%s:%s] initializing mobile page objects>%n", id, testName);
 					initializeMobilePageObjects();
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -564,7 +567,6 @@ public class TestBase {
 				((DesiredCapabilities) caps).setCapability("SRF_CLIENT_ID", gc.srfId);
 				((DesiredCapabilities) caps).setCapability("SRF_CLIENT_SECRET", gc.srfPass);*/
 
-
 				try {
 
 					//Perfecto
@@ -576,6 +578,7 @@ public class TestBase {
 					mss = new MobileScreenShot(getMobileDriver(), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
 
+					System.out.format("[LOG]: <[%s:%s] initializing mobile page objects>%n", id, testName);
 					initializeMobilePageObjects();
 
 				} catch (MalformedURLException m) {
