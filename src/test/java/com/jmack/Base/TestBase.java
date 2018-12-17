@@ -20,7 +20,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
-
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
@@ -56,6 +56,8 @@ public class TestBase {
 	//Excel-based data
 	private String applicationUnderTest = null;
 	private String excelDataFile = null;
+	private String jsonDataFile = null;
+	private String propertiesFile = null;
 
 	// TestNG Suite parameters
 	private String gridType;
@@ -101,10 +103,18 @@ public class TestBase {
 	 */
 	@BeforeMethod(description="Extract test data from JSON, create thread-safe WebDriver.")
 	@Step("Initialize test.")
-	@Parameters({"applicationUnderTest", "excelDataFile", "gridType", "platformName", "platformVersion", "browserName",
-		"browserVersion", "resolution", "location", "deviceName", "model", "appPackage", "appActivity", "bundleId"})
+	@Parameters({
+		"applicationUnderTest", "excelDataFile",
+		"jsonDataFile", "propertiesFile",
+		"gridType", "platformName",
+		"platformVersion", "browserName",
+		"browserVersion", "resolution",
+		"location", "deviceName",
+		"model", "appPackage",
+		"appActivity", "bundleId"})
 	protected void setUp(Method testMethod,
 			@Optional String applicationUnderTest, @Optional String excelDataFile,
+			@Optional String jsonDataFile, @Optional String propertiesFile,
 			@Optional String gridType, @Optional String platformName,
 			@Optional String platformVersion, @Optional String browserName,
 			@Optional String browserVersion, @Optional String resolution,
@@ -114,6 +124,8 @@ public class TestBase {
 
 		this.applicationUnderTest = applicationUnderTest == null ? null : applicationUnderTest;
 		this.excelDataFile = excelDataFile == null ? null : excelDataFile;
+		this.jsonDataFile = jsonDataFile == null ? null : jsonDataFile;
+		this.propertiesFile = propertiesFile == null ? null : propertiesFile;
 
 		this.gridType = gridType == null ? "" : gridType;
 		this.platformName = platformName == null ? "" : platformName;
@@ -137,15 +149,35 @@ public class TestBase {
 		id = id.substring(id.length() - 3);
 
 		// START JSON DATA EXTRACTION
-		jsonDataExtractor = new JsonDataExtractor(id, testName, gc, runtimeData);
+		if (!(null == this.jsonDataFile || null == this.applicationUnderTest)) {
+			jsonDataExtractor = new JsonDataExtractor(this.gc, this.runtimeData, this.applicationUnderTest, this.jsonDataFile, this.id, this.testName);
+		}
 		// START JSON DATA EXTRACTION
 
 		// START EXCEL OVERRIDES
 		if (!(null == this.excelDataFile || null == this.applicationUnderTest)) {
-			excelDataExtractor = new ExcelDataExtractor(this.applicationUnderTest, this.excelDataFile, runtimeData, this.id, this.testName);
+			excelDataExtractor = new ExcelDataExtractor(this.gc, this.runtimeData, this.applicationUnderTest, this.excelDataFile, this.id, this.testName);
 		}
 		// END EXCEL OVERRIDES
 
+		/* DEBUG Parameters
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'applicationUnderTest': '%s'%n", id, testName, applicationUnderTest);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'excelDataFile': '%s'%n", id, testName, excelDataFile);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'jsonDataFile': '%s'%n", id, testName, jsonDataFile);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'propertiesFile': '%s'%n", id, testName, propertiesFile);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'gridType': '%s'%n", id, testName, gridType);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'platformName': '%s'%n", id, testName, platformName);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'platformVersion': '%s'%n", id, testName, platformVersion);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'browserName': '%s'%n", id, testName, browserName);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'browserVersion': '%s'%n", id, testName, browserVersion);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'resolution': '%s'%n", id, testName, resolution);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'location': '%s'%n", id, testName, location);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'deviceName': '%s'%n", id, testName, deviceName);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'model': '%s'%n", id, testName, model);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'appPackage': '%s'%n", id, testName, appPackage);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'appActivity': '%s'%n", id, testName, appActivity);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'bundleId': '%s'%n", id, testName, bundleId);
+		*/
 
 		// START TESTNG PARAMETER OVERRIDES
 		// if there is an  passed via TestNG suite file, and the  differs from pre-established gridType,  gridType
@@ -235,6 +267,10 @@ public class TestBase {
 			String[] browsers = {"androidNative","androidChrome","iosNative","iosSafari"};
 			runtimeData.browserName = browsers[r.nextInt(browsers.length)];
 		}
+
+
+		// make sure minimum data requirements have been met
+		Assert.assertTrue(runtimeData.minimumDataCheck(this.id, this.testName), "Minimum data requirements were not met. Check JSON/Excel/Parameter for minimum data.");
 
 
 		// Set up clients for use with a locally hosted selenium grid
@@ -422,7 +458,10 @@ public class TestBase {
 
 		// load properties file (locators definitions)
 		try {
-			testReferenceFile = new FileInputStream(gc.testReferenceFilePath);
+
+			String path = gc.propertiesFilesPath + this.applicationUnderTest + "\\" + this.propertiesFile;
+
+			testReferenceFile = new FileInputStream(path);
 			props.load(testReferenceFile);
 		} catch (IOException io) {
 			io.printStackTrace();
@@ -430,7 +469,7 @@ public class TestBase {
 			if (testReferenceFile != null) {
 				try {
 					testReferenceFile.close();
-					System.out.format("[LOG]: <[%s:%s] properties loaded.>%n", id, testName);
+					System.out.format("[LOG]: <[%s:%s] properties loaded>%n", id, testName);
 				} catch (IOException io) {
 					io.printStackTrace();
 				}
