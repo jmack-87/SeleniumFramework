@@ -21,7 +21,7 @@
 
 		<suiteXMLPath></suiteXMLPath>
 		<suiteXML></suiteXML>
-		<suiteXMLFile>cfg\${suiteXMLPath}\${suiteXML}</suiteXMLFile>
+		<suiteXMLFile>suites\${suiteXMLPath}\${suiteXML}</suiteXMLFile>
 	</properties>
 
 	<dependencies>
