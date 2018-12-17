@@ -1,11 +1,10 @@
-package com.jmack.Tests.Desktop;
+package com.jmack.Tests.Example.Desktop;
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
-import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
 import com.jmack.Enumerations.Generic;
 import com.jmack.Enumerations.SearchPage;
 import com.jmack.Enumerations.SearchResults;
@@ -18,21 +17,20 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 
 @Epic("Parallelism")
-@Feature("Firefox")
-public class FirefoxFeature extends TestBase {
+@Feature("Safari")
+public class SafariFeature extends TestBase {
 
 	/**
 	 * Perform a google search. Confirm and click first result. Confirm navigation.
 	 * @param testParam optional TestNG value from suite
 	 * @throws InterruptedException
 	 */
-	@Test(testName="Firefox Test", description="Run Firefox browser in parallel.")
+	@Test(testName="Safari Test", description="Run Safari browser in parallel.")
 	@Severity(SeverityLevel.CRITICAL)
-	@Description("Test Description: Run Firefox browser in parallel.")
-	@Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
+	@Description("Test Description: Run Safari browser in parallel.")
+	@Story("Run Chrome, Firefox, Edge, InternetExplorer, Safari in parallel.")
 	@Parameters({"testParam"})
-	@RetryOnFailCount(0)
-	public void FirefoxTest(@Optional String testParam) throws InterruptedException {
+	public void SafariTest(@Optional String testParam) throws InterruptedException {
 				
 		generic.getUrl(Generic.Text_googleURL.toString());
 		

@@ -1,4 +1,4 @@
-package com.jmack.Tests.Mobile;
+package com.jmack.Tests.Example.Mobile;
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -19,20 +19,20 @@ import io.qameta.allure.Story;
 
 @Epic("Parallelism")
 @Feature("Android Chrome")
-public class IosSafariFeature extends TestBase {
+public class AndroidChromeFeature extends TestBase {
 	
 	/**
 	 * Perform a google search. Confirm and click first result. Confirm navigation.
 	 * @param testParam optional TestNG value from suite
 	 * @throws InterruptedException
 	 */
-	@Test(testName="Ios Safari Test", description="Run Ios Safari browser in parallel.")
+	@Test(testName="Android Chrome Test", description="Run Android Chrome browser in parallel.")
 	@Severity(SeverityLevel.BLOCKER)
-	@Description("Test Description: Run Ios Safari browser.")
-	@Story("Run Ios Safari.")
+	@Description("Test Description: Run Android Chrome browser.")
+	@Story("Run Android Chrome.")
 	@Parameters({"testParam"})
 	@RetryOnFailCount(0)
-	public void IosSafariTest(@Optional String testParam) throws InterruptedException {
+	public void AndroidChromeTest(@Optional String testParam) throws InterruptedException {
 		
 		mGeneric.getUrl(Generic.Text_googleURL.toString());
 		
@@ -46,7 +46,7 @@ public class IosSafariFeature extends TestBase {
 		mGeneric.confirmElementExistence(SearchResults.Mobile_CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
 		mGeneric.clickElement(SearchResults.Mobile_Locator_firstResult.toString());
 
-		//mGeneric.waitForPageLoaded(30);
+		mGeneric.waitForPageLoaded(30);
 		
 		mGeneric.confirmElementExistence(SearchResults.Locator_Text_ibmSearchConfirmation.toString());
 		
