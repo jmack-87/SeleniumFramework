@@ -21,17 +21,17 @@ public class JsonDataExtractor {
 	private GlobalConstants gc;
 	private RuntimeData runtimeData;
 	private String applicationUnderTest;
-	private String jsonDataFile;
+	private String jsonFileName;
 
 
-	public JsonDataExtractor(String id, String testName, GlobalConstants gc, RuntimeData runtimeData, String applicationUnderTest, String jsonDataFile) {
+	public JsonDataExtractor(GlobalConstants gc, RuntimeData runtimeData, String applicationUnderTest, String jsonFileName, String id, String testName) {
 
 		this.id = id;
 		this.testName = testName;
 		this.gc = gc;
 		this.runtimeData = runtimeData;
 		this.applicationUnderTest = applicationUnderTest;
-		this.jsonDataFile = jsonDataFile;
+		this.jsonFileName = jsonFileName;
 
 		initialize();
 
@@ -44,7 +44,7 @@ public class JsonDataExtractor {
 	@Step("Extract dynamic test data from JSON.")
 	protected void initialize() {
 
-		String path = this.gc.jsonFilesPath + this.applicationUnderTest + "\\" + this.jsonDataFile;
+		String path = this.gc.jsonFilesPath + this.applicationUnderTest + "\\" + this.jsonFileName;
 
 		Object[] data = null;
 		try {
