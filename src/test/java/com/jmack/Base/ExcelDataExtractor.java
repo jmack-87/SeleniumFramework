@@ -41,7 +41,7 @@ public class ExcelDataExtractor {
 	 * @param id (String) test instance id
 	 * @param testName (String) test method name [name should match some row in excel worksheet]
 	 */
-	public ExcelDataExtractor(GlobalConstants gc, String applicationUnderTest, String excelFileName, RuntimeData runtimeData, String id, String testName) {
+	public ExcelDataExtractor(GlobalConstants gc, RuntimeData runtimeData, String applicationUnderTest, String excelFileName, String id, String testName) {
 
 		this.gc = gc;
 		this.id = id;
