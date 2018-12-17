@@ -24,7 +24,7 @@
 <!-- 		<parameter name="systemDataArray" value="System Options" /> -->
 
         <classes>
-            <class name="com.jmack.Tests.Desktop.ChromeFeatures.ChangeLager.ChangeLager_E2E" />
+            <class name="com.jmack.Tests.ChangeLager.Desktop.ChangeLager_E2E" />
         </classes>
 
     </test>
