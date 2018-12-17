@@ -1,12 +1,10 @@
 package com.jmack.Tests.ChangeLager.Desktop;
 
-import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
 import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
-
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -28,9 +26,9 @@ public class ChangeLager_E2E extends TestBase {
     @Severity(SeverityLevel.BLOCKER)
     @Description("Test Description: Perform general E2E test, in parallel, across multiple threads")
     @Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
-    @Parameters({"testParam"})
+    @Parameters({})
     @RetryOnFailCount(0)
-    public void ChangeLager_E2ETest(@Optional String testParam) {
+    public void ChangeLager_E2ETest() {
 
         //Navigate to the ChangeLager website, and confirm
         homePage.navigateAndValidate_CL();
