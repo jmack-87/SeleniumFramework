@@ -20,14 +20,18 @@ public class JsonDataExtractor {
 	private String testName;
 	private GlobalConstants gc;
 	private RuntimeData runtimeData;
+	private String applicationUnderTest;
+	private String jsonDataFile;
 
 
-	public JsonDataExtractor(String id, String testName, GlobalConstants gc, RuntimeData runtimeData) {
+	public JsonDataExtractor(String id, String testName, GlobalConstants gc, RuntimeData runtimeData, String applicationUnderTest, String jsonDataFile) {
 
 		this.id = id;
 		this.testName = testName;
 		this.gc = gc;
 		this.runtimeData = runtimeData;
+		this.applicationUnderTest = applicationUnderTest;
+		this.jsonDataFile = jsonDataFile;
 
 		initialize();
 
@@ -36,18 +40,16 @@ public class JsonDataExtractor {
 
 	/**
 	 * Extract and set test and system level data from reference JSON
-	 *
-	 * @param gc GlobalConstants instance
-	 * @param testName test class name String
-	 *
-	 * @throws FileNotFoundException in case gc.testDateFilePath invalid
 	 */
 	@Step("Extract dynamic test data from JSON.")
 	protected void initialize() {
 
+		String path = this.gc.jsonFilesPath + this.applicationUnderTest + "\\" + this.jsonDataFile;
+
 		Object[] data = null;
 		try {
-			data = getTestData(this.gc.testDataFilePath);
+			//data = getTestData(this.gc.testDataFilePath);
+			data = getTestData(path);
 		} catch (FileNotFoundException fnfe) {
 			Assert.fail(fnfe.getLocalizedMessage());
 		}
@@ -86,7 +88,7 @@ public class JsonDataExtractor {
 	/**
 	 * Set test-level data
 	 *
-	 * @param testData json array containing test level json elements
+	 * @param testData (JsonObject) json array containing test level json elements
 	 */
 	@Step("Set Test data.")
 	private void setTestData(JsonObject testData) {
@@ -95,15 +97,15 @@ public class JsonDataExtractor {
 
 		this.runtimeData.gridType = testData.get("gridType") == null ? "local" : testData.get("gridType").getAsString();
 
-		this.runtimeData.platformName = testData.get("platformName") == null ? "" : testData.get("platformName").getAsString(); // perfecto
-		this.runtimeData.platformVersion = testData.get("platformVersion") == null ? "" : testData.get("platformVersion").getAsString(); // perfecto
+		this.runtimeData.platformName = testData.get("platformName") == null ? "" : testData.get("platformName").getAsString();
+		this.runtimeData.platformVersion = testData.get("platformVersion") == null ? "" : testData.get("platformVersion").getAsString();
 		this.runtimeData.browserName = testData.get("browserName") == null ? "" : testData.get("browserName").getAsString();
-		this.runtimeData.browserVersion = testData.get("browserVersion") == null ? "" : testData.get("browserVersion").getAsString(); // perfecto
-		this.runtimeData.resolution = testData.get("resolution") == null ? "" : testData.get("resolution").getAsString(); // perfecto
-		this.runtimeData.location = testData.get("location") == null ? "" : testData.get("location").getAsString(); // perfecto
-		this.runtimeData.platform = testData.get("platform") == null ? "" : testData.get("platform").getAsString(); // perfecto
+		this.runtimeData.browserVersion = testData.get("browserVersion") == null ? "" : testData.get("browserVersion").getAsString();
+		this.runtimeData.resolution = testData.get("resolution") == null ? "" : testData.get("resolution").getAsString();
+		this.runtimeData.location = testData.get("location") == null ? "" : testData.get("location").getAsString();
+		this.runtimeData.platform = testData.get("platform") == null ? "" : testData.get("platform").getAsString();
 
-		this.runtimeData.headless = testData.get("headless") == null ? false : testData.get("headless").getAsBoolean(); // local
+		this.runtimeData.headless = testData.get("headless") == null ? false : testData.get("headless").getAsBoolean();
 
 		// mobile native
 		this.runtimeData.deviceName = testData.get("deviceName") == null ? "" : testData.get("deviceName").getAsString();
@@ -130,7 +132,7 @@ public class JsonDataExtractor {
 	/**
 	 * Set system-level options
 	 *
-	 * @param sysOpts json array containing system level json elements
+	 * @param sysOpts (JsonObject) json array containing system level json elements
 	 */
 	@Step("Set System data.")
 	private void setSystemOptions(JsonObject sysData) {
@@ -145,7 +147,8 @@ public class JsonDataExtractor {
 	/**
 	 * Given a file path, retrieve test data json array and system options json array
 	 *
-	 * @param jsonDataFilePath
+	 * @param jsonDataFilePath (String) path to target data containing file
+	 *
 	 * @return Object[] containing two JSON arrays {testData, systemData}
 	 *
 	 * @throws FileNotFoundException
