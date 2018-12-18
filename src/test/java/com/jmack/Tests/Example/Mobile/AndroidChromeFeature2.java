@@ -1,4 +1,4 @@
-package com.jmack.Tests.Mobile;
+package com.jmack.Tests.Example.Mobile;
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -19,7 +19,7 @@ import io.qameta.allure.Story;
 
 @Epic("Parallelism")
 @Feature("Android Chrome")
-public class AndroidChromeFeature extends TestBase {
+public class AndroidChromeFeature2 extends TestBase {
 	
 	/**
 	 * Perform a google search. Confirm and click first result. Confirm navigation.

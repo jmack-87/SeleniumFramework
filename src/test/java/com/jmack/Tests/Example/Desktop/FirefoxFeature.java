@@ -1,10 +1,11 @@
-package com.jmack.Tests.Desktop;
+package com.jmack.Tests.Example.Desktop;
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
+import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
 import com.jmack.Enumerations.Generic;
 import com.jmack.Enumerations.SearchPage;
 import com.jmack.Enumerations.SearchResults;
@@ -17,21 +18,22 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 
 @Epic("Parallelism")
-@Feature("Edge")
-public class EdgeFeature extends TestBase {
+@Feature("Firefox")
+public class FirefoxFeature extends TestBase {
 
 	/**
 	 * Perform a google search. Confirm and click first result. Confirm navigation.
 	 * @param testParam optional TestNG value from suite
 	 * @throws InterruptedException
 	 */
-	@Test(testName="Edge Test",description="Run Edge browser in parallel.")
-	@Severity(SeverityLevel.NORMAL)
-	@Description("Test Description: Run Edge browser in parallel.")
+	@Test(testName="Firefox Test", description="Run Firefox browser in parallel.")
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Test Description: Run Firefox browser in parallel.")
 	@Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
 	@Parameters({"testParam"})
-	public void EdgeTest(@Optional String testParam) throws InterruptedException {
-			
+	@RetryOnFailCount(0)
+	public void FirefoxTest(@Optional String testParam) throws InterruptedException {
+				
 		generic.getUrl(Generic.Text_googleURL.toString());
 		
 		generic.confirmElementExistence(SearchPage.Locator_Tag_head.toString());
@@ -46,7 +48,7 @@ public class EdgeFeature extends TestBase {
 
 		generic.waitForPageLoaded(30);
 		
-		generic.confirmElementExistence(SearchResults.Locator_Text_ibmSearchConfirmation.toString());
+		generic.confirmElementExistence(SearchResults.Locator_Text_santanderSearchConfirmation.toString());
 		
 		homePage.stuff("something passed");
 		

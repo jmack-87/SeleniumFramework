@@ -15,7 +15,7 @@
 				"gridType": "local",
 				"platformName": "Windows",
 				"platformVersion": "10",
-				"browserName": "desktopChrome",
+				"browserName": "desktopFirefox",
 				"browserVersion": "latest",
 				"location": "NA-US-BOS",
 				"searchString": "IBM Perfecto",
@@ -30,7 +30,7 @@
 			},
 			"ChromeTest": {
 				"gridType": "local",
-				"browserName": "desktopChrome",
+				"browserName": "desktopFirefox",
 				"platformName": "Windows",
 				"platform": "windows 10",
 				"platformVersion": "10",

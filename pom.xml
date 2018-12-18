@@ -21,7 +21,7 @@
 
 		<suiteXMLPath></suiteXMLPath>
 		<suiteXML></suiteXML>
-		<suiteXMLFile>${suiteXMLPath}${suiteXML}</suiteXMLFile>
+		<suiteXMLFile>suites\${suiteXMLPath}\${suiteXML}</suiteXMLFile>
 	</properties>
 
 	<dependencies>
@@ -195,7 +195,7 @@
 								<outputDirectory>target/allure-results</outputDirectory>
 								<resources>
 									<resource>
-										<directory>src/test/resources</directory>
+										<directory>src/test/resources/allure</directory>
 										<includes>
 											<include>environment.properties</include>
 										</includes>
@@ -265,12 +265,7 @@
 					<configuration>
 						<testFailureIgnore>true</testFailureIgnore>
 						<suiteXmlFiles>
-						<suiteXMLFile>${suiteXMLFile}</suiteXMLFile>
-<!-- 							<suiteXmlFile>cfg/master.xml</suiteXmlFile> -->
-<!-- 							<suiteXmlFile>cfg/testng.xml</suiteXmlFile> -->
-<!--							<suiteXmlFile>cfg/appium.xml</suiteXmlFile> -->
-<!-- 							<suiteXmlFile>cfg/testng2.xml</suiteXmlFile> -->
-<!-- 							<suiteXmlFile>cfg/changeLager.xml</suiteXmlFile> -->
+							<suiteXMLFile>${suiteXMLFile}</suiteXMLFile>
 						</suiteXmlFiles>
 						<threadCount>${t.count}</threadCount>
 						<parallel>${parallelStyle}</parallel>
@@ -365,7 +360,6 @@
 					<configuration>
 						<reportVersion>2.8.1</reportVersion>
 						<allureDownloadUrl>https://dl.bintray.com/qameta/maven/io/qameta/allure/allure-commandline/2.8.1/allure-commandline-2.8.1.zip</allureDownloadUrl>
-						<propertiesFilePath>${project.basedir}\src\test\resources\allure.properties</propertiesFilePath>
 					</configuration>
 				</plugin>
 			</plugins>

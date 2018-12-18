@@ -13,62 +13,46 @@ import com.google.gson.JsonParser;
 
 import io.qameta.allure.Step;
 
+
 public class JsonDataExtractor {
-
-	/*	Data available to Generic
-	 */
-	protected String sysOpt = "";
-	protected String gridType = "";
-	public String platformName = ""; //
-	protected String platformVersion = ""; //
-	protected String browserName = "";
-	protected String browserVersion = ""; //perfecto
-	protected String resolution = ""; //perfecto
-	protected String location = ""; //perfecto
-	public String platform = ""; //
-
-	protected Boolean headless = false;
-
-	protected String deviceName = "";
-	protected String model = "";
-	protected String appPackage = "";
-	protected String appActivity = "";
-	protected String bundleId = "";
-
-	/*	Data available to scripts
-	 */
-	public String searchString = "";
-	public String searchConfirmationString = "";
-	public String username = "";
-	public String password = "";
-	public String creditCardNumber = "";
-	public String creditCardExpiration = "";
-	public String creditCardCVC = "";
-	public String userEmail = "";
 
 	private String id;
 	private String testName;
-
 	private GlobalConstants gc;
+	private RuntimeData runtimeData;
+	private String applicationUnderTest;
+	private String jsonFileName;
 
+
+	public JsonDataExtractor(GlobalConstants gc, RuntimeData runtimeData, String applicationUnderTest, String jsonFileName, String id, String testName) {
+
+		this.id = id;
+		this.testName = testName;
+		this.gc = gc;
+		this.runtimeData = runtimeData;
+		this.applicationUnderTest = applicationUnderTest;
+		this.jsonFileName = jsonFileName;
+
+		initialize();
+
+	}
 
 
 	/**
 	 * Extract and set test and system level data from reference JSON
-	 *
-	 * @param gc GlobalConstants instance
-	 * @param testName test class name String
-	 *
-	 * @throws FileNotFoundException in case gc.testDateFilePath invalid
 	 */
 	@Step("Extract dynamic test data from JSON.")
-	protected void initialize(GlobalConstants gc, String testName, String id) throws FileNotFoundException {
+	protected void initialize() {
 
-		this.gc = gc;
-		this.testName = testName;
-		this.id = id;
+		String path = this.gc.jsonFilesPath + this.applicationUnderTest + "\\" + this.jsonFileName;
 
-		Object[] data = getTestData(gc.testDataFilePath);
+		Object[] data = null;
+		try {
+			//data = getTestData(this.gc.testDataFilePath);
+			data = getTestData(path);
+		} catch (FileNotFoundException fnfe) {
+			Assert.fail(fnfe.getLocalizedMessage());
+		}
 
 		if (null != data[0]) {
 
@@ -78,7 +62,7 @@ public class JsonDataExtractor {
 			while (tda.hasNext()) { // there should only be one (1) array element, containing all test-arrays
 				JsonObject tob = (JsonObject) tda.next();
 				//System.out.format("[DEBUG]: <[%s:%s] TestsData: %s>%n", this.id, this.testName, tob);
-				setTestData(tob.getAsJsonObject(testName));
+				setTestData(tob.getAsJsonObject(this.testName));
 			}
 		} else {
 			System.out.format("[LOG]: <[%s:%s] Skipping JSON test data extraction. JSON test data not found.>%n", this.id, this.testName);
@@ -104,45 +88,43 @@ public class JsonDataExtractor {
 	/**
 	 * Set test-level data
 	 *
-	 * @param testData json array containing test level json elements
+	 * @param testData (JsonObject) json array containing test level json elements
 	 */
 	@Step("Set Test data.")
 	private void setTestData(JsonObject testData) {
 
-		System.out.format("[LOG]: <[%s:%s] RuntimeData: %s>%n", this.id, this.testName, testData);
+		System.out.format("[LOG]: <[%s:%s] JsonTestData: %s>%n", this.id, this.testName, testData);
 
-		this.gridType = testData.get("gridType") == null ? "local" : testData.get("gridType").getAsString();
+		this.runtimeData.gridType = testData.get("gridType") == null ? "local" : testData.get("gridType").getAsString();
 
-		this.platformName = testData.get("platformName") == null ? "" : testData.get("platformName").getAsString(); // perfecto
-		this.platformVersion = testData.get("platformVersion") == null ? "" : testData.get("platformVersion").getAsString(); // perfecto
-		this.browserName = testData.get("browserName") == null ? "" : testData.get("browserName").getAsString();
-		this.browserVersion = testData.get("browserVersion") == null ? "" : testData.get("browserVersion").getAsString(); // perfecto
-		this.resolution = testData.get("resolution") == null ? "" : testData.get("resolution").getAsString(); // perfecto
-		this.location = testData.get("location") == null ? "" : testData.get("location").getAsString(); // perfecto
-		this.platform = testData.get("platform") == null ? "" : testData.get("platform").getAsString(); // perfecto
+		this.runtimeData.platformName = testData.get("platformName") == null ? "" : testData.get("platformName").getAsString();
+		this.runtimeData.platformVersion = testData.get("platformVersion") == null ? "" : testData.get("platformVersion").getAsString();
+		this.runtimeData.browserName = testData.get("browserName") == null ? "" : testData.get("browserName").getAsString();
+		this.runtimeData.browserVersion = testData.get("browserVersion") == null ? "" : testData.get("browserVersion").getAsString();
+		this.runtimeData.resolution = testData.get("resolution") == null ? "" : testData.get("resolution").getAsString();
+		this.runtimeData.location = testData.get("location") == null ? "" : testData.get("location").getAsString();
+		this.runtimeData.platform = testData.get("platform") == null ? "" : testData.get("platform").getAsString();
 
-		this.headless = testData.get("headless") == null ? false : testData.get("headless").getAsBoolean(); // local
+		this.runtimeData.headless = testData.get("headless") == null ? false : testData.get("headless").getAsBoolean();
 
 		// mobile native
-		this.deviceName = testData.get("deviceName") == null ? "" : testData.get("deviceName").getAsString();
-		this.model = testData.get("model") == null ? "" : testData.get("model").getAsString();
-		this.appPackage = testData.get("appPackage") == null ? "" : testData.get("appPackage").getAsString();
-		this.appActivity = testData.get("appActivity") == null ? "" : testData.get("appActivity").getAsString();
-		this.bundleId = testData.get("bundleId") == null ? "" : testData.get("bundleId").getAsString();
+		this.runtimeData.deviceName = testData.get("deviceName") == null ? "" : testData.get("deviceName").getAsString();
+		this.runtimeData.model = testData.get("model") == null ? "" : testData.get("model").getAsString();
+		this.runtimeData.appPackage = testData.get("appPackage") == null ? "" : testData.get("appPackage").getAsString();
+		this.runtimeData.appActivity = testData.get("appActivity") == null ? "" : testData.get("appActivity").getAsString();
+		this.runtimeData.bundleId = testData.get("bundleId") == null ? "" : testData.get("bundleId").getAsString();
 
 		// for sample scripts, not required: searchString
-		this.searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
+		this.runtimeData.searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
 		// for sample scripts, not required: searchConfirmationString
-		this.searchConfirmationString = testData.get("searchConfirmationString") == null ? "IBM" : testData.get("searchConfirmationString").getAsString();
+		this.runtimeData.searchConfirmationString = testData.get("searchConfirmationString") == null ? "IBM" : testData.get("searchConfirmationString").getAsString();
 
-		this.username = testData.get("username") == null ? "" : testData.get("username").getAsString();
-		this.password = testData.get("password") == null ? "" : testData.get("password").getAsString();
-		this.creditCardNumber = testData.get("creditCardNumber") == null ? "" : testData.get("creditCardNumber").getAsString();
-		this.creditCardExpiration = testData.get("creditCardExpiration") == null ? "" : testData.get("creditCardExpiration").getAsString();
-		this.creditCardCVC = testData.get("creditCardCVC") == null ? "" : testData.get("creditCardCVC").getAsString();
-		this.userEmail = testData.get("userEmail") == null ? "" : testData.get("userEmail").getAsString();
-
-		System.out.format("[LOG]: <[%s:%s] Test data loaded.>%n", this.id, this.testName, testData);
+		this.runtimeData.username = testData.get("username") == null ? "" : testData.get("username").getAsString();
+		this.runtimeData.password = testData.get("password") == null ? "" : testData.get("password").getAsString();
+		this.runtimeData.creditCardNumber = testData.get("creditCardNumber") == null ? "" : testData.get("creditCardNumber").getAsString();
+		this.runtimeData.creditCardExpiration = testData.get("creditCardExpiration") == null ? "" : testData.get("creditCardExpiration").getAsString();
+		this.runtimeData.creditCardCVC = testData.get("creditCardCVC") == null ? "" : testData.get("creditCardCVC").getAsString();
+		this.runtimeData.userEmail = testData.get("userEmail") == null ? "" : testData.get("userEmail").getAsString();
 
 	}
 
@@ -150,14 +132,14 @@ public class JsonDataExtractor {
 	/**
 	 * Set system-level options
 	 *
-	 * @param sysOpts json array containing system level json elements
+	 * @param sysOpts (JsonObject) json array containing system level json elements
 	 */
 	@Step("Set System data.")
-	private void setSystemOptions(JsonObject sysOpts) {
+	private void setSystemOptions(JsonObject sysData) {
 
-		System.out.format("[LOG]: <[%s:%s] SystemData: %s>%n", this.id, this.testName, sysOpts);
+		System.out.format("[LOG]: <[%s:%s] JsonSystemData: %s>%n", this.id, this.testName, sysData);
 
-		sysOpt = sysOpts.get("Opt1") == null ? null : sysOpts.get("Opt1").getAsString(); //example of syntax
+		this.runtimeData.sysOpt = sysData.get("Opt1") == null ? null : sysData.get("Opt1").getAsString(); //example of syntax
 
 	}
 
@@ -165,7 +147,8 @@ public class JsonDataExtractor {
 	/**
 	 * Given a file path, retrieve test data json array and system options json array
 	 *
-	 * @param jsonDataFilePath
+	 * @param jsonDataFilePath (String) path to target data containing file
+	 *
 	 * @return Object[] containing two JSON arrays {testData, systemData}
 	 *
 	 * @throws FileNotFoundException
@@ -177,10 +160,10 @@ public class JsonDataExtractor {
 		JsonObject jsonData = jsonParser.parse(jsonDataFileReader).getAsJsonObject();
 
 		//force the fail for now
-		JsonArray testsArray = jsonData.getAsJsonArray(gc.jsonTestsDataArray);
+		JsonArray testsArray = jsonData.getAsJsonArray(this.gc.jsonTestsDataArray);
 
 		//JsonArray testsArray = jsonData.getAsJsonArray("Tests");
-		JsonArray systemArray = jsonData.getAsJsonArray(gc.jsonSystemOptionsDataArray);
+		JsonArray systemArray = jsonData.getAsJsonArray(this.gc.jsonSystemOptionsDataArray);
 
 		return new Object[] {testsArray, systemArray};
 

@@ -1,4 +1,4 @@
-package com.jmack.Tests.Mobile;
+package com.jmack.Tests.Example.Mobile;
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
