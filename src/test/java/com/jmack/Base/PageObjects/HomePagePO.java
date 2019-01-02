@@ -141,6 +141,16 @@ public class HomePagePO extends TestBase {
 	}
 
 	/**
+	 * On the ChangeLager Home Page, validate the existence of the "Accept All Cookies" button
+	 */
+	@Step("Validate the 'Accept All Cookies' button on the ChangeLager Home Page exists")
+	public void validateAcceptAllCookies_CL(){
+
+		//validate the button exists
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_AcceptAllCookies.toString());
+	}
+
+	/**
 	 * Click the 'Register' button
 	 */
 	@Step("Click the 'Register' button")
@@ -173,6 +183,16 @@ public class HomePagePO extends TestBase {
 		// Click the "Login" button on the home page
 		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_Login.toString());
 
+	}
+
+	/**
+	 * Click the 'Accept All Cookies' button
+	 */
+	@Step("Click the 'Accept All Cookies' button")
+	public void clickAcceptAllCookies_CL(){
+
+		//Click the "Accept All Cookies" button on the home page
+		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_AcceptAllCookies.toString());
 	}
 
 

@@ -36,6 +36,12 @@ public class ChangeLager_E2E extends TestBase {
         //Validate all buttons exist
         homePage.validateAllButtonsExist_CL();
 
+        //Validate the "Accept All Cookies" button exists
+        homePage.validateAcceptAllCookies_CL();
+
+        //Click the "Accept All Cookies" button
+        homePage.clickAcceptAllCookies_CL();
+
         //Click the "Register" button, and confirm page change
         homePage.clickRegisterButton_CL();
 

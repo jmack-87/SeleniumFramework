@@ -8,7 +8,8 @@ public enum ChangeLager_HomePage {
     Locator_Tag_head("ChangeLagerHome.Locator.Tag.head"),
     Locator_Button_SignUp("ChangeLagerHome.Locator.Button.SignUp"),
     Locator_Button_Login("ChangeLagerHome.Locator.Button.Login"),
-    Locator_Button_Register("ChangeLagerHome.Locator.Button.Register");
+    Locator_Button_Register("ChangeLagerHome.Locator.Button.Register"),
+    Locator_Button_AcceptAllCookies("ChangeLagerHome.Locator.Button.AcceptAllCookies");
 
     // MOBILE
 
