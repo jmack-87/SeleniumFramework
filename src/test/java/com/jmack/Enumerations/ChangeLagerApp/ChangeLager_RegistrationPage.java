@@ -3,7 +3,7 @@ package com.jmack.Enumerations.ChangeLagerApp;
 public enum ChangeLager_RegistrationPage {
 
     // DESKTOP
-    Text_changeLagerRegistrationURL(""),
+    Text_changeLagerRegistrationURL("ChangeLagerRegistration.text.changeLagerRegistrationURL"),
     Text_pageTitle("ChangeLagerRegistration.text.pageTitle"),
     Locator_Tag_head("ChangeLagerRegistration.Locator.Tag.head"),
     Locator_Button_DevPlan("ChangeLagerRegistration.Locator.Button.DevPlan"),
