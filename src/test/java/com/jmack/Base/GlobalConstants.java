@@ -23,7 +23,7 @@ public class GlobalConstants {
 
 	/* for running against host machine browsers (non-grid).
 	 * NOTE: 	NOT supported out-of-the-box.
-	 * 			Requires re-write of TestBase "local" configuration to replace grid configurations
+	 * 			Requires re-write/supplement of TestBase "local" configuration to replace grid configurations
 	 */
 	protected final String geckoDriver = "";
 	protected final String firefoxBinary = "";
