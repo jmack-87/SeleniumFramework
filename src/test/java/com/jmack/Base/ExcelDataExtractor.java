@@ -50,10 +50,15 @@ public class ExcelDataExtractor {
 		this.excelFileName = excelFileName;
 
 		this.getData("test");
-		this.overrideTestData(runtimeData, getHashMapData());
+		if (null != records) {
+			this.overrideTestData(runtimeData, getHashMapData());
+		}
 
 		this.getData("system");
-		this.overrideSystemData(runtimeData, getHashMapData());
+
+		if (null != records) {
+			this.overrideSystemData(runtimeData, getHashMapData());
+		}
 
 		this.shutDown();
 
@@ -83,7 +88,9 @@ public class ExcelDataExtractor {
 			Assert.assertTrue(records.getCount() == 1, String.format("Multiple records found. Please ensure TestMethodName '%s' is unique.", this.testName));
 
 		} catch (FilloException fe) {
-			Assert.fail(fe.getLocalizedMessage());
+			System.out.format("[LOG]: <[%s:%s] Skipping, EXCEL %s data array not found.>%n", this.id, this.testName, dataLevel);
+			return;
+			//Assert.fail(fe.getLocalizedMessage());
 		}
 
 
@@ -316,7 +323,7 @@ public class ExcelDataExtractor {
 		HashMap<String, String> resultsMap = new HashMap<String, String>();
 
 		try {
-			if (records.next()) {
+			if (null != records && records.next()) {
 				for (String key : records.getFieldNames()) {
 					resultsMap.put(key, records.getField(key));
 				}
@@ -334,7 +341,9 @@ public class ExcelDataExtractor {
 	 */
 	public void shutDown() {
 
-		records.close();
+		if (null != records) {
+			records.close();
+		}
 		conn.close();
 
 	}
