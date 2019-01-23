@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 import com.jmack.Base.TestBase;
 import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
 import com.jmack.Enumerations.Generic;
-import com.jmack.Enumerations.SearchPage;
-import com.jmack.Enumerations.SearchResults;
+import com.jmack.Enumerations.Example.SearchPage;
+import com.jmack.Enumerations.Example.SearchResults;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;

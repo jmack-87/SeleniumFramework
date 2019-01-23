@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 import com.jmack.Base.TestBase;
 import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
-import com.jmack.Enumerations.PhoneApp;
+import com.jmack.Enumerations.Example.PhoneApp;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
