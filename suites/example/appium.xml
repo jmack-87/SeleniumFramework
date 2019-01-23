@@ -1,29 +1,39 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Mobile Suite">
-	
-	<parameter name="gridTypeOverride" value="" />
-	<parameter name="platformNameOverride" value="" />
-	<parameter name="platformVersionOverride" value="" />
+
+	<parameter name="appActivityOverride" value="" />
+	<parameter name="appPackageOverride" value="" />
 	<parameter name="browserNameOverride" value="" />
 	<parameter name="browserVersionOverride" value="" />
-	<parameter name="resolutionOverride" value="" />
-	<parameter name="locationOverride" value="" />
-	
-	<parameter name="appPackageOverride" value="" />
-	<parameter name="appActivityOverride" value="" />
 	<parameter name="bundleIdOverride" value="" />
+	<parameter name="gridTypeOverride" value="" />
+	<parameter name="locationOverride" value="" />
+	<parameter name="platformNameOverride" value="" />
+	<parameter name="platformVersionOverride" value="" />
+	<parameter name="resolutionOverride" value="" />
 
 	<test name="Local Android Chrome and Perfecto iOS Native App">
-	
-<!-- 		<parameter name="testParam" value="testValue1" /> -->
-		
+
+		<!-- Required -->
+    	<parameter name="applicationUnderTest" value="Example" />
+    	<parameter name="jsonDataFile" value="example.json" />
+		<parameter name="excelDataFile" value="example.xlsx" />
+		<parameter name="propertiesFile" value="example.properties" />
+
+<!--		not used right now, debating parameterization of source file contents as opposed to forced naming -->
+<!-- 		<parameter name="testDataSheet" value="test" /> -->
+<!-- 		<parameter name="systemDataSheet" value="system" /> -->
+<!-- 		<parameter name="testDataArray" value="Tests" /> -->
+<!-- 		<parameter name="systemDataArray" value="System Options" /> -->
+
 		<classes>
-<!-- 			<class name="com.jmack.Tests.Mobile.AndroidChromeFeature" /> -->
-<!-- 			<class name="com.jmack.Tests.Mobile.AndroidNativeFeature" /> -->
-			<class name="com.jmack.Tests.Mobile.IosSafariFeature" />
-<!-- 			<class name="com.jmack.Tests.Mobile.IosNativeFeature" /> -->
+			<class name="com.jmack.Tests.Example.Mobile.AndroidNative_AholdDelhaize" />
+			<class name="com.jmack.Tests.Example.Mobile.AndroidChromeFeature" />
+<!-- 			<class name="com.jmack.Tests.Example.Mobile.AndroidNativeFeature" /> -->
+			<class name="com.jmack.Tests.Example.Mobile.IosSafariFeature" />
+<!-- 			<class name="com.jmack.Tests.Example.Mobile.IosNativeFeature" /> -->
 		</classes>
-		
+
 	</test>
-	
+
 </suite>
