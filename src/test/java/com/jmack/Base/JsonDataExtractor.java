@@ -62,10 +62,17 @@ public class JsonDataExtractor {
 			while (tda.hasNext()) { // there should only be one (1) array element, containing all test-arrays
 				JsonObject tob = (JsonObject) tda.next();
 				//System.out.format("[DEBUG]: <[%s:%s] TestsData: %s>%n", this.id, this.testName, tob);
-				setTestData(tob.getAsJsonObject(this.testName));
+
+				if (tob.has(this.testName)) {
+					setTestData(tob.getAsJsonObject(this.testName));
+				} else {
+					System.out.format("[LOG]: <[%s:%s] Skipping, JSON test data not found.>%n", this.id, this.testName);
+					//return;
+				}
+
 			}
 		} else {
-			System.out.format("[LOG]: <[%s:%s] Skipping JSON test data extraction. JSON test data not found.>%n", this.id, this.testName);
+			System.out.format("[LOG]: <[%s:%s] Skipping, JSON test data array not found.>%n", this.id, this.testName);
 		}
 
 		if (null != data[1]) {
@@ -79,7 +86,7 @@ public class JsonDataExtractor {
 				setSystemOptions(sob);
 			}
 		} else {
-			System.out.format("[LOG]: <[%s:%s] Skipping JSON system data extraction. JSON system data not found.>%n", this.id, this.testName);
+			System.out.format("[LOG]: <[%s:%s] Skipping, JSON system data array not found.>%n", this.id, this.testName);
 		}
 
 	}
