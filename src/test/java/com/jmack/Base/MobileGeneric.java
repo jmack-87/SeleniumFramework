@@ -9,6 +9,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.function.Function;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -32,7 +33,7 @@ public class MobileGeneric extends TestBase {
 	private AppiumDriver<?> driver;
 	private FluentWait<AppiumDriver<?>> wait;
 	private Properties props;
-	private MobileBy byType = null;
+	private By byType = null;
 	private String[] command;
 	private String errorCondition = "";
 	private String value;
@@ -90,413 +91,6 @@ public class MobileGeneric extends TestBase {
 
 	}
 
-
-//	/**
-//	 * Acquires locator and type from locatorElementAndMethod(). Asserts locator has type (is locator vs string).
-//	 * FluentWait for element, by locator+type.
-//	 * @param propertyKey properties file key defining element locator
-//	 * @return WebElement or null
-//	 */
-//	//@Step("Wait for element.")
-//	public MobileElement waitForElement(String propertyKey) {
-//
-//		String locator;
-//		String type;
-//
-//		command = locatorElementAndMethod(propertyKey);
-//		//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", id, testName, command.length);
-//
-//		errorCondition = String.format("[DEBUG]: <[%s:%s] no such element: %s>%n", id, testName, command[0]);
-//		ss.assertTrue(command.length == 2, errorCondition);
-//
-//		locator = command[0];
-//		type = command[1];
-//
-//		System.out.format("[LOG]: <[%s:%s] waiting for locator: %s; type: %s;>%n", id, testName, locator, type);
-//
-//		switch (type) {
-//			case "xpath":
-//				byType = MobileMobileBy.xpath(locator);
-//				break;
-//			case "css":
-//				byType = MobileMobileBy.cssSelector(locator);
-//				break;
-//			case "id":
-//				byType = MobileMobileBy.id(locator);
-//				break;
-//			case "accessibilityId":
-//				byType = MobileMobileBy.AccessibilityId(locator);
-//				break;
-//			case "tagname":
-//				byType = MobileMobileBy.tagName(locator);
-//				break;
-//			default:
-//				byType = MobileMobileBy.tagName(locator);
-//				break;
-//		}
-//
-//		try {
-//			me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
-//				public MobileElement apply(AppiumDriver<?> drv) {
-//					return (MobileElement) drv.findElement(byType);
-//				}
-//			});
-//		} catch (TimeoutException to) {
-//			System.out.format("[DEBUG]: <[%s:%s] element notfound>%n", id, testName);
-//			return null;
-//		}
-//
-//		//System.out.format("[DEBUG]: <[%s:%s] found %s>%n", id, testName, me);
-//		return me;
-//
-//	}
-//
-//
-//	/**
-//	 * Acquires locator and type from locatorElementAndMethod(). Asserts locator has type (is locator vs string).
-//	 * Builds dynamic locator. FluentWait for element, by locator+type.
-//	 * @param propertyKey properties file key defining element locator
-//	 * @return WebElement or null
-//	 */
-//	//@Step("Wait for element.")
-//	public MobileElement waitForElement(String propertyKey, String replacement) {
-//
-//		String locator;
-//		String type;
-//
-//		command = locatorElementAndMethod(propertyKey);
-//		//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", id, testName, command.length);
-//
-//		errorCondition = String.format("[DEBUG]: <[%s:%s] no such element: %s>%n", id, testName, command[0]);
-//		ss.assertTrue(command.length == 2, errorCondition);
-//
-//		locator = buildDynamicLocator(command[0], replacement);
-//		type = command[1];
-//
-//		System.out.format("[LOG]: <[%s:%s] waiting for locator: %s; type: %s;>%n", id, testName, locator, type);
-//
-//		switch (type) {
-//			case "xpath":
-//				byType = MobileMobileBy.xpath(locator);
-//				break;
-//			case "css":
-//				byType = MobileMobileBy.cssSelector(locator);
-//				break;
-//			case "id":
-//				byType = MobileMobileBy.id(locator);
-//				break;
-//			case "accessibilityId":
-//				byType = MobileMobileBy.AccessibilityId(locator);
-//				break;
-//			case "tagname":
-//				byType = MobileMobileBy.tagName(locator);
-//				break;
-//			default:
-//				byType = MobileMobileBy.tagName(locator);
-//				break;
-//		}
-//
-//		try {
-//			me = this.wait.until(new Function<AppiumDriver<?>, MobileElement>(){
-//				public MobileElement apply(AppiumDriver<?> drv) {
-//					return (MobileElement) drv.findElement(byType);
-//				}
-//			});
-//		} catch (TimeoutException to) {
-//			System.out.format("[DEBUG]: <[%s:%s] element notfound>%n", id, testName);
-//			return null;
-//		}
-//
-//		//System.out.format("[DEBUG]: <[%s:%s] found %s>%n", id, testName, me);
-//		return me;
-//
-//	}
-//
-//
-//	/**
-//	 * Asserts page title equals target value
-//	 * @param propertyKey properties file key defining string
-//	 */
-//	@Step("Confirm page title.")
-//	public void confirmTitle(String propertyKey) {
-//
-//		ss.assertTrue(driver.getTitle().toLowerCase().equals(getPropertyValue(propertyKey)));
-//	}
-//
-//
-//	/**
-//	 * Navigates browser to target URL
-//	 * @param propertyKey properties file key defining string
-//	 */
-//	@Step("Navigate to URL.")
-//	public void getUrl(String propertyKey) {
-//
-//		driver.get(getPropertyValue(propertyKey));
-//	}
-//
-//
-//	/**
-//	 * Retrieves locator definition and type from WebElement property definition
-//	 * @param propertyKey properties file key defining element locator
-//	 * @return String[] containing locator definition and locator type
-//	 */
-//	private String[] locatorElementAndMethod(String propertyKey) {
-//
-//		//System.out.format("[DEBUG]: <[%s:%s] key: %s>%n", id, testName, propertyKey);
-//		command = null;
-//		String propertyValue = null;
-//
-//		//System.out.format("[DEBUG]: <[%s:%s] key found?: %b>%n", id, testName, props.containsKey(propertyKey));
-//		if (props.containsKey(propertyKey)) {
-//			propertyValue = props.getProperty(propertyKey);
-//			//System.out.format("[DEBUG]: <[%s:%s] key value: %s>%n", id, testName, propertyValue);
-//			command = propertyValue.split(gc.locatorSeparator);
-//			//System.out.format("[DEBUG]: <[%s:%s] command length: %d>%n", id, testName, command.length);
-//		}
-//
-//		return command;
-//	}
-//
-//
-//	/**
-//	 * Return String value of non-WebElement property definition
-//	 * @param propertyKey properties file key defining string
-//	 * @return String value of property
-//	 */
-//	private String getPropertyValue(String propertyKey) {
-//
-//		//System.out.format("[DEBUG]: <[%s:%s] key: %s>%n", id, testName, propertyKey);
-//		command = null;
-//		String propertyValue = null;
-//
-//		//System.out.format("[DEBUG]: <[%s:%s] key found?: %b>%n", id, testName, props.containsKey(propertyKey));
-//		if (props.containsKey(propertyKey)) {
-//			propertyValue = props.getProperty(propertyKey);
-//			//System.out.format("[DEBUG]: <[%s:%s] key value: %s>%n", id, testName, propertyValue);
-//		}
-//
-//		return propertyValue;
-//	}
-//
-//
-//	/**
-//	 * Inserts string into target element
-//	 * @param propertyKey properties file key defining element locator
-//	 * @param input text to enter into target element
-//	 */
-//	@Step("Input text.")
-//	public void sendText(String propertyKey, String input) {
-//
-//		me = confirmElementExistence(propertyKey);
-//		me.clear();
-//		me.sendKeys(input);
-//		ss.takeScreenShot("After input");
-//	}
-//
-//
-//	/**
-//	 * Manually trigger a screenshot
-//	 * @param description String describing screenshot to be taken
-//	 */
-//	@Step("Take Screenshot: {0}")
-//	public void takeScreenShot(String description) {
-//
-//		ss.takeScreenShot(description);
-//		try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//
-//
-//	/**
-//	 * After confirming element existence, clicks element.
-//	 * @param propertyKey properties file key defining element locator
-//	 */
-//	@Step("Click element.")
-//	public void clickElement(String propertyKey) {
-//
-//		me = confirmElementExistence(propertyKey);
-//		me.click();
-//	}
-//
-//
-//	/**
-//	 * Performs a FluentWait for element described by property propertyKey. Asserts wait returns element.
-//	 * @param propertyKey properties file key defining element locator
-//	 */
-//	@Step("Confirm element exists.")
-//	public MobileElement confirmElementExistence(String propertyKey) {
-//
-//		ss.assertTrue((me = waitForElement(propertyKey)) instanceof MobileElement, "Could not locate element.");
-//		return me;
-//	}
-//
-//
-//	/**
-//	 * Performs a FluentWait for element described by dynamic property propertyKey+replacement. Asserts wait returns element.
-//	 * @param propertyKey properties file key defining element locator
-//	 * @param replacement String to replace placeholder
-//	 * @return WebElement
-//	 */
-//	@Step("Confirm dynamic element exists.")
-//	public MobileElement confirmElementExistence(String propertyKey, String replacement) {
-//
-//		ss.assertTrue((me = waitForElement(propertyKey, replacement)) instanceof MobileElement, "Could not locate element.");
-//		return me;
-//	}
-//
-//
-//	/**
-//	 * Given a generic locator (includes placeholder string), replace placeholder string with desired string
-//	 * @param locator properties file key defining element locator
-//	 * @param replacement String to replace placeholder
-//	 * @return String locator as rebuilt
-//	 */
-//	//@Step("Build dynamic locator.")
-//	private String buildDynamicLocator(String locator, String replacement) {
-//
-//		return locator.replace(gc.compoundLocatorPlaceholder, replacement);
-//	}
-//
-//
-//	/**
-//	 * Waits up to 30s for the browser JavaScript engine to report standby.
-//	 *
-//	 */
-//	@Step("Wait for page to completely load.")
-//	public void waitForPageLoaded() {
-//
-//		this.wait.until(new Function<AppiumDriver<?>, Boolean>(){
-//			public Boolean apply(AppiumDriver<?> drv) {
-//				return ((JavascriptExecutor) drv).executeScript("return document.readyState").equals("complete");
-//			}
-//		});
-//	}
-//
-//
-//	/**
-//	 * Waits up to timeOutInSeconds for the browser JavaScript engine to report standby.
-//	 * @param timeOut maximum seconds to wait
-//	 */
-//	@Step("Wait for page to completely load.")
-//	public void waitForPageLoaded(int timeOut) {
-//
-//		FluentWait<RemoteWebDriver> wait = new FluentWait<RemoteWebDriver>(driver)
-//				.ignoring(NoSuchElementException.class)
-//				.withTimeout(Duration.ofSeconds(timeOut))
-//				.pollingEvery(Duration.ofMillis(gc.defaultPollingRate));
-//
-//		wait.until(new Function<AppiumDriver<?>, Boolean>(){
-//			public Boolean apply(AppiumDriver<?> drv) {
-//				return ((JavascriptExecutor) drv).executeScript("return document.readyState").equals("complete");
-//			}
-//		});
-//		wait = null;
-//	}
-//
-//
-//	/**
-//	 *  Force fail a test
-//	 */
-//	@Step("Force a FAIL.")
-//	public void failTest() {
-//
-//		ss.assertTrue(false, "This assertion intended to FAIL.");
-//	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	/**
 	 * Attempt to locate element within default time constraint
 	 *
@@ -540,8 +134,6 @@ public class MobileGeneric extends TestBase {
 	 */
 	private MobileElement waitForElement(String propertyKey, int maxWait) {
 
-
-
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, maxWait, "");
 		me = null;
@@ -576,8 +168,6 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement|null)
 	 */
 	private MobileElement waitForElement(String propertyKey, int maxWait, int polling) {
-
-
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, maxWait, "");
@@ -650,8 +240,6 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement|null)
 	 */
 	private MobileElement waitForElement(String propertyKey, String replacement, int maxWait) {
-
-
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, maxWait, "");
@@ -795,8 +383,6 @@ public class MobileGeneric extends TestBase {
 	 */
 	private List<MobileElement> waitForElements(String propertyKey, int maxWait) {
 
-
-
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, maxWait, "");
 		meArray.clear();
@@ -874,8 +460,6 @@ public class MobileGeneric extends TestBase {
 	// @Step("Wait for element.")
 	private List<MobileElement> waitForElements(String propertyKey, String replacement, int maxWait) {
 
-
-
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, maxWait, "");
 		meArray.clear();
@@ -911,9 +495,6 @@ public class MobileGeneric extends TestBase {
 	 * @return (null|WebElement)
 	 */
 	private MobileElement waitForElementNotFound(String propertyKey) {
-
-
-
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, "absence of ");
@@ -955,8 +536,6 @@ public class MobileGeneric extends TestBase {
 	 * @return (null|WebElement)
 	 */
 	private MobileElement waitForElementNotFound(String propertyKey, int maxWait) {
-
-
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, maxWait, "absence of ");
@@ -1001,8 +580,6 @@ public class MobileGeneric extends TestBase {
 	 */
 	private MobileElement waitForElementNotFound(String propertyKey, String replacement) {
 
-
-
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, "absence of ");
 		me = null;
@@ -1045,8 +622,6 @@ public class MobileGeneric extends TestBase {
 	 */
 	private MobileElement waitForElementNotFound(String propertyKey, String replacement, int maxWait) {
 
-
-
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, maxWait, "absence of ");
 		me = null;
@@ -1086,8 +661,6 @@ public class MobileGeneric extends TestBase {
 	 * @return (null|WebElement)
 	 */
 	private List<MobileElement> waitForElementsNotFound(String propertyKey) {
-
-
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, "absence of ");
@@ -1130,8 +703,6 @@ public class MobileGeneric extends TestBase {
 	 */
 	private List<MobileElement> waitForElementsNotFound(String propertyKey, int maxWait) {
 
-
-
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, maxWait, "absence of ");
 		meArray.clear();
@@ -1172,8 +743,6 @@ public class MobileGeneric extends TestBase {
 	 * @return (null|WebElement)
 	 */
 	private List<MobileElement> waitForElementsNotFound(String propertyKey, String replacement) {
-
-
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, "absence of ");
@@ -1217,8 +786,6 @@ public class MobileGeneric extends TestBase {
 	 */
 	private List<MobileElement> waitForElementsNotFound(String propertyKey, String replacement, int maxWait) {
 
-
-
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, maxWait, "absence of ");
 		meArray.clear();
@@ -1258,7 +825,7 @@ public class MobileGeneric extends TestBase {
 	 * @param propertyKey (String) properties file key defining string
 	 * @return (By)
 	 */
-	private MobileBy processLocator(String propertyKey, String posNeg) {
+	private By processLocator(String propertyKey, String posNeg) {
 
 		String locator;
 		String type;
@@ -1278,16 +845,22 @@ public class MobileGeneric extends TestBase {
 		byType = null;
 		switch (type.toLowerCase()) {
 			case "xpath":
-				byType = (MobileBy) MobileBy.xpath(locator);
+				byType = MobileBy.xpath(locator);
 				break;
 			case "css":
-				byType = (MobileBy) MobileBy.cssSelector(locator);
+				byType = MobileBy.cssSelector(locator);
 				break;
 			case "id":
-				byType = (MobileBy) MobileBy.id(locator);
+				byType = MobileBy.id(locator);
 				break;
 			case "accessibilityid":
 				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				break;
+			case "androidselector":
+				byType =  (MobileBy) MobileBy.AndroidUIAutomator(locator);
+				break;
+			case "tag":
+				byType =  MobileBy.tagName(locator);
 				break;
 			default:
 				byType = (MobileBy) MobileBy.AccessibilityId(locator);
@@ -1306,7 +879,7 @@ public class MobileGeneric extends TestBase {
 	 * @param maxWait (int) maximum time in seconds to wait for element
 	 * @return (By)
 	 */
-	private MobileBy processLocator(String propertyKey, int maxWait, String posNeg) {
+	private By processLocator(String propertyKey, int maxWait, String posNeg) {
 
 		String locator;
 		String type;
@@ -1326,16 +899,22 @@ public class MobileGeneric extends TestBase {
 		byType = null;
 		switch (type.toLowerCase()) {
 			case "xpath":
-				byType = (MobileBy) MobileBy.xpath(locator);
+				byType = MobileBy.xpath(locator);
 				break;
 			case "css":
-				byType = (MobileBy) MobileBy.cssSelector(locator);
+				byType = MobileBy.cssSelector(locator);
 				break;
 			case "id":
-				byType = (MobileBy) MobileBy.id(locator);
+				byType = MobileBy.id(locator);
 				break;
 			case "accessibilityid":
 				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				break;
+			case "androidselector":
+				byType =  (MobileBy) MobileBy.AndroidUIAutomator(locator);
+				break;
+			case "tag":
+				byType =  MobileBy.tagName(locator);
 				break;
 			default:
 				byType = (MobileBy) MobileBy.AccessibilityId(locator);
@@ -1354,7 +933,7 @@ public class MobileGeneric extends TestBase {
 	 * @param replacement (String) value to replace placeholder
 	 * @return (By)
 	 */
-	private MobileBy processLocator(String propertyKey, String replacement, String posNeg) {
+	private By processLocator(String propertyKey, String replacement, String posNeg) {
 
 		String locator;
 		String type;
@@ -1374,16 +953,22 @@ public class MobileGeneric extends TestBase {
 		byType = null;
 		switch (type.toLowerCase()) {
 			case "xpath":
-				byType = (MobileBy) MobileBy.xpath(locator);
+				byType = MobileBy.xpath(locator);
 				break;
 			case "css":
-				byType = (MobileBy) MobileBy.cssSelector(locator);
+				byType = MobileBy.cssSelector(locator);
 				break;
 			case "id":
-				byType = (MobileBy) MobileBy.id(locator);
+				byType = MobileBy.id(locator);
 				break;
 			case "accessibilityid":
 				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				break;
+			case "androidselector":
+				byType =  (MobileBy) MobileBy.AndroidUIAutomator(locator);
+				break;
+			case "tag":
+				byType =  MobileBy.tagName(locator);
 				break;
 			default:
 				byType = (MobileBy) MobileBy.AccessibilityId(locator);
@@ -1404,7 +989,7 @@ public class MobileGeneric extends TestBase {
 	 * @param maxWait (int) maximum time in seconds to wait for element
 	 * @return (By)
 	 */
-	private MobileBy processLocator(String propertyKey, String replacement, int maxWait, String posNeg) {
+	private By processLocator(String propertyKey, String replacement, int maxWait, String posNeg) {
 
 		String locator;
 		String type;
@@ -1425,16 +1010,22 @@ public class MobileGeneric extends TestBase {
 		byType = null;
 		switch (type.toLowerCase()) {
 			case "xpath":
-				byType = (MobileBy) MobileBy.xpath(locator);
+				byType = MobileBy.xpath(locator);
 				break;
 			case "css":
-				byType = (MobileBy) MobileBy.cssSelector(locator);
+				byType = MobileBy.cssSelector(locator);
 				break;
 			case "id":
-				byType = (MobileBy) MobileBy.id(locator);
+				byType = MobileBy.id(locator);
 				break;
 			case "accessibilityid":
 				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				break;
+			case "androidselector":
+				byType =  (MobileBy) MobileBy.AndroidUIAutomator(locator);
+				break;
+			case "tag":
+				byType =  MobileBy.tagName(locator);
 				break;
 			default:
 				byType = (MobileBy) MobileBy.AccessibilityId(locator);
@@ -1752,7 +1343,6 @@ public class MobileGeneric extends TestBase {
 		me = confirmElementExistence(propertyKey);
 		System.out.format("[LOG]: <[%s:%s] clicking element with property key: \"%s\">%n", this.id, this.testName, propertyKey);
 		me.click();
-		waitForPageCompletelyLoaded();
 
 	}
 
@@ -3549,6 +3139,15 @@ public class MobileGeneric extends TestBase {
 	public RemoteWebDriver returnDriver() {
 
 		return this.driver;
+
+	}
+
+
+	public void clickWithConfirmation(MobileElement me2, String propertyKey) {
+
+		me.click();
+		confirmElementExistence(propertyKey);
+		confirmElementExistence(propertyKey, "");
 
 	}
 
