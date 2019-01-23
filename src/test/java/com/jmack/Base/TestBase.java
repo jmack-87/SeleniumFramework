@@ -113,14 +113,14 @@ public class TestBase {
 		"model", "appPackage",
 		"appActivity", "bundleId"})
 	protected void setUp(Method testMethod,
-			@Optional String applicationUnderTest, @Optional String excelDataFile,
-			@Optional String jsonDataFile, @Optional String propertiesFile,
-			@Optional String gridType, @Optional String platformName,
-			@Optional String platformVersion, @Optional String browserName,
-			@Optional String browserVersion, @Optional String resolution,
-			@Optional String location, @Optional String deviceName,
-			@Optional String model, @Optional String appPackage,
-			@Optional String appActivity, @Optional String bundleId) {
+			@Optional String applicationUnderTest,	@Optional String excelDataFile,
+			@Optional String jsonDataFile,			@Optional String propertiesFile,
+			@Optional String gridType,				@Optional String platformName,
+			@Optional String platformVersion,		@Optional String browserName,
+			@Optional String browserVersion,		@Optional String resolution,
+			@Optional String location,				@Optional String deviceName,
+			@Optional String model,					@Optional String appPackage,
+			@Optional String appActivity,			@Optional String bundleId) {
 
 		this.applicationUnderTest = applicationUnderTest == null ? null : applicationUnderTest;
 		this.excelDataFile = excelDataFile == null ? null : excelDataFile;
