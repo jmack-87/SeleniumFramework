@@ -1,0 +1,99 @@
+{
+	"Tests": [
+		{
+			"FOR REFERENCE": {
+				"gridType": "REQUIRED: perfecto|local",
+				"platformName": "REQUIRED: Mac|Windows|Android|iOS",
+				"platformVersion": "integer number or 'macOS High Sierra'",
+				"browserName": "desktop{Chrome|Ie|Edge|Firefox}|{android|ios}{Chrome|Native|Safari}",
+				"browserVersion": "integer|latest|beta",
+				"location": "REQUIRED(Mac): perfecto location",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM"
+			},
+			"ChromeTest": {
+				"gridType": "local",
+				"browserName": "desktopFirefox",
+				"platformName": "Windows",
+				"platform": "windows 10",
+				"platformVersion": "10",
+				"browserVersion": "latest",
+				"resolution": "1024x768",
+				"location": "NA-US-BOS",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM",
+				"headless": "false"
+			},
+			"SafariTest": {
+				"gridType": "local",
+				"browserName": "desktopSafari",
+				"searchString": "Santander Bank",
+				"searchConfirmationString": "Santander Bank"
+			},
+			"FirefoxTest": {
+				"gridType": "local",
+				"browserName": "desktopFirefox",
+				"searchString": "Santander Bank",
+				"searchConfirmationString": "Santander Bank"
+			},
+			"EdgeTest": {
+				"gridType": "local",
+				"browserName": "desktopEdge",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM"
+			},
+			"IeTest": {
+				"gridType": "local",
+				"browserName": "desktopIe",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM"
+			},
+			"AndroidChromeTest": {
+				"gridType": "local",
+				"platformName": "Android",
+				"platformVersion": "7",
+				"browserName": "androidChrome",
+				"searchString": "Ahold Delhaize",
+				"searchConfirmationString": "Ahold"
+			},
+			"AndroidNativeTest": {
+				"gridType": "local",
+				"platformName": "Android",
+				"platformVersion": "7",
+				"browserName": "androidNative",
+				"appPackage": "com.belmondo.aholddelhaize",
+				"appActivity": "com.reactnativenavigation.controllers.NavigationActivity"
+			},
+			"IosSafariTest": {
+				"gridType": "perfecto",
+				"platformName": "iOS",
+				"platformVersion": "12.*",
+				"browserName": "iosSafari",
+				"searchString": "Ahold Delhaize",
+				"searchConfirmationString": "Ahold"
+			},
+			"IosNativeTest": {
+				"gridType": "perfecto",
+				"platformName": "iOS",
+				"platformVersion": "11.*",
+				"browserName": "iosNative",
+				"bundleId": "com.apple.Preferences"
+			},
+			"AndroidNative_AholdDelhaizeTest": {
+				"gridType": "local",
+				"platformName": "Android",
+				"platformVersion": "8",
+				"browserName": "androidNative",
+				"appPackage": "com.belmondo.aholddelhaize",
+				"appActivity": "com.belmondo.app.MainActivity",
+				"userEmail": "123@234.com",
+				"password": "password"
+			}
+		}
+	],
+	"System Options": [
+		{
+			"Opt1": "system option"
+		}
+	]
+}
