@@ -1,25 +1,40 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Parallel Suite 2">
-	
+
+	<parameter name="browserNameOverride" value="" />
+	<parameter name="browserOverride" value="" />
+	<parameter name="browserVersionOverride" value="" />
 	<parameter name="gridTypeOverride" value="" />
+	<parameter name="locationOverride" value="" />
 	<parameter name="platformNameOverride" value="" />
 	<parameter name="platformVersionOverride" value="" />
-	<parameter name="browserNameOverride" value="" />
-	<parameter name="browserVersionOverride" value="" />
 	<parameter name="resolutionOverride" value="" />
-	<parameter name="locationOverride" value="" />
 
 	<test name="parallel browsers 2">
-	
+
 		<parameter name="testParam" value="testValue2" />
-		
+
+		<!-- Required -->
+    	<parameter name="applicationUnderTest" value="Example" />
+    	<parameter name="jsonDataFile" value="example.json" />
+		<parameter name="excelDataFile" value="example.xlsx" />
+		<parameter name="propertiesFile" value="example.properties" />
+
+<!--		not used right now, debating parameterization of source file contents as opposed to forced naming -->
+<!-- 		<parameter name="testDataSheet" value="test" /> -->
+<!-- 		<parameter name="systemDataSheet" value="system" /> -->
+<!-- 		<parameter name="testDataArray" value="Tests" /> -->
+<!-- 		<parameter name="systemDataArray" value="System Options" /> -->
+
+		<parameter name="testParam" value="testValue1" />
+
 		<classes>
 			<class name="com.jmack.Tests.Desktop.ChromeFeature" />
 			<!--<class name="com.jmack.Tests.Desktop.FirefoxFeature" />-->
 			<!--<class name="com.jmack.Tests.Desktop.EdgeFeature" />-->
 			<!--<class name="com.jmack.Tests.Desktop.IeFeature" />-->
 		</classes>
-		
+
 	</test>
-	
+
 </suite>
