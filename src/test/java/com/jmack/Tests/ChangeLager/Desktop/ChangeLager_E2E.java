@@ -36,11 +36,16 @@ public class ChangeLager_E2E extends TestBase {
         //Validate all buttons exist
         homePage.validateAllButtonsExist_CL();
 
+        //DEPRECATED AS OF 02/04/2019; functionality removed from site
         //Validate the "Accept All Cookies" button exists
-        homePage.validateAcceptAllCookies_CL();
+        //homePage.validateAcceptAllCookies_CL();
 
+        //DEPRECATED AS OF 02/04/2019; functionality removed from site
         //Click the "Accept All Cookies" button
-        homePage.clickAcceptAllCookies_CL();
+        //homePage.clickAcceptAllCookies_CL();
+
+        //Click the down arrow
+        homePage.clickDownArrow_CL();
 
         //Click the "Register" button, and confirm page change
         homePage.clickRegisterButton_CL();

@@ -127,6 +127,17 @@ public class HomePagePO extends TestBase {
 
 	}
 
+	/**
+	 * Validate the down arrow button on the ChangeLager Home Page
+	 */
+	@Step("Validate the down arrow button on the ChangeLager Home Page")
+	public void validateDownArrowButton_CL(){
+
+		//Validate the button exists
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_DownArrow.toString());
+
+	}
+
 
 	/**
 	 * On the ChangeLager Home Page, validate all buttons exist
@@ -137,6 +148,7 @@ public class HomePagePO extends TestBase {
 		validateLoginButton_CL();
 		validateRegisterButton_CL();
 		validateSignUpButton_CL();
+		validateDownArrowButton_CL();
 
 	}
 
@@ -193,6 +205,17 @@ public class HomePagePO extends TestBase {
 
 		//Click the "Accept All Cookies" button on the home page
 		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_AcceptAllCookies.toString());
+	}
+
+	/**
+	 * Click the down arrow button
+	 */
+	@Step("Click the down arrow button")
+	public void clickDownArrow_CL(){
+
+		//Click the down arrow button on the home page
+		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_DownArrow.toString());
+
 	}
 
 
