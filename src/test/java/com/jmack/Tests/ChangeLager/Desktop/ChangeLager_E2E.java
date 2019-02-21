@@ -47,6 +47,18 @@ public class ChangeLager_E2E extends TestBase {
         //Click the down arrow
         homePage.clickDownArrow_CL();
 
+        //Click the 'Single' registration button
+        homePage.clickSingleRegistration_CL();
+
+        //Navigate back to the ChangeLager website, and confirm
+        homePage.navigateAndValidate_CL();
+
+        //Click the 'More Than One' registration button
+        homePage.clickMoreThanOneRegistration_CL();
+
+        //Navigate back to the ChangeLager website, and confirm
+        homePage.navigateAndValidate_CL();
+
         //Click the "Register" button, and confirm page change
         homePage.clickRegisterButton_CL();
 

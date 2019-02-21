@@ -218,6 +218,27 @@ public class HomePagePO extends TestBase {
 
 	}
 
+	/**
+	 * Click the 'Single' registration button at the bottom of the page
+	 */
+	@Step("Click the 'Single' registration button")
+	public void clickSingleRegistration_CL(){
+
+		//Click the 'Single' registration button
+		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_Single.toString());
+
+	}
+
+	/**
+	 * Click the 'More Than One' registration button at the bottom of the page
+	 */
+	@Step("Click the 'More Than One' registration button")
+	public void clickMoreThanOneRegistration_CL(){
+
+		//Click the 'More Than One' registration button
+		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_MoreThanOne.toString());
+
+	}
 
 	/**
 	 * Do something with HomePage
