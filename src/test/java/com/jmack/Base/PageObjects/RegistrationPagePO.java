@@ -118,6 +118,48 @@ public class RegistrationPagePO extends TestBase {
 
 	}
 
+	/**
+	 * Fill in the 'Name' text field of the profile section on the change lager registration page
+	 */
+	@Step("Fill in the 'Name' text field - Profile Section")
+	public void fillOutName(){
+
+		// Click the "Name" textbox, and send it input
+		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Name.toString(), this.runtimeData.username);
+	}
+
+	/**
+	 * Fill in the 'Email' text field of the profile section on the change lager registration page
+	 */
+	@Step("Fill in the 'Email' text field - Profile Section")
+	public void fillOutEmail(){
+
+		// Click the "Email" textbox, and send it input
+		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Email.toString(), this.runtimeData.userEmail);
+
+	}
+
+	/**
+	 * Fill in the 'Password' text field of the profile section on the change lager registration page
+	 */
+	@Step("Fill in the 'Password' text field - Profile Section")
+	public void fillOutPassword(){
+
+		// Click the "Password" textbox, and send it input
+		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Password.toString(), this.runtimeData.password);
+
+	}
+
+	/**
+	 * Fill in the 'Confirm Password' text field of the profile section on the change lager registration page
+	 */
+	@Step("Fill in the 'Confirm Password' text field - Profile Section")
+	public void fillOutConfirmPassword(){
+
+		// Click the "Confirm Password" textbox, and send it input
+		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString(), this.runtimeData.password);
+
+	}
 
 	/**
 	 * Fill out the 'Profile' section of the Registration Form
@@ -126,59 +168,104 @@ public class RegistrationPagePO extends TestBase {
 	public void fillOutProfileSection() {
 
 		// Click the "Name" textbox, and send it input
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Name.toString(), this.runtimeData.username);
+		fillOutName();
 
 		// Click the "Email" textbox, and send it input
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Email.toString(), this.runtimeData.userEmail);
+		fillOutEmail();
 
 		// Click the "Password" textbox, and send it input
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Password.toString(), this.runtimeData.password);
+		fillOutPassword();
 
 		// Click the "Confirm Password" textbox, and send it input
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString(), this.runtimeData.password);
-
+		fillOutConfirmPassword();
 	}
 
+    /**
+     * Fill in the "Carholder's Name" textbox on the form
+     */
+    @Step("Fill in 'Cardholder's Name' textbox")
+    public void fillInCardholderName(){
 
-	/**
+        // Click the "Cardholder's Name" textbox, and send it input
+        this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardholdersName.toString(), "Stinky Stankerton");
+
+    }
+
+    /**
+     * Fill in the "Credit or debit card number" textbox on the form
+     */
+    @Step("Fill in 'Credit or debit card number' textbox")
+    public void fillInCreditOrDebit(){
+
+        // Click the "Credit or debit card number" textbox, and send it input
+        this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardNumber.toString(),	this.runtimeData.creditCardNumber);
+
+    }
+
+    /**
+     * Fill in the "Credit or debit expiration date" textbox on the form
+     */
+    @Step("Fill in the 'Credit or debit expiration date' textbox")
+    public void fillInCreditOrDebitExpDate(){
+
+        // Click the "Credit or debit card expiration date" textbox, and send it input
+        this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardExpire.toString(), this.runtimeData.creditCardExpiration);
+
+    }
+
+    /**
+     * Fill in the "Credit or debit CVC/CVV" textbox on the form
+     */
+    @Step("Fill in the 'Credit or debit CVC/CVV' textbox")
+    public void fillInCreditOrDebitCVC_CVV(){
+
+        // Click the "Credit or debit card CVC/CVV" textbox, and send it input
+        this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardCVC.toString(), this.runtimeData.creditCardCVC);
+
+    }
+
+    /**
+     * Fill in the "ZIP / Postal Code" textbox on the form
+     */
+    @Step("Fill in the 'ZIP / Postal Code' textbox")
+    public void fillInZIP(){
+
+        // Click the "ZIP / Postal Code" textbox, and send it input
+        this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ZIPPostalCode.toString(), "11111");
+
+    }
+
+
+    /**
 	 * Fill out the 'Credit Card' section of the Registration Form
 	 */
 	@Step("Fill out the 'Credit Card' section of the form")
 	public void fillOutCreditCardSection() {
 
-		// Click the "Cardholder's Name" textbox, and send it input
-		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_CardholdersName.toString());
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardholdersName.toString(), "Stinky Stankerton");
+        //Fill in Cardholder's Name
+        fillInCardholderName();
 
 		// Switch to the iFrame containing the textboxes for credit card information
 		this.iFrame.switchToIframe(ChangeLager_RegistrationPage.Locator_iFrame_CreditCardInformation.toString());
 
-		// Click the "Credit or debit card number" textbox, and send it input
-		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_CardNumber.toString());
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardNumber.toString(),	this.runtimeData.creditCardNumber);
+        //Fill in Credit Or Debit
+        fillInCreditOrDebit();
 
-		// Click the "Credit or debit card expiration date" textbox, and send it input
-		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_CardExpire.toString());
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardExpire.toString(), this.runtimeData.creditCardExpiration);
+        //Fill in Credit or Debit Expiration Date
+        fillInCreditOrDebitExpDate();
 
-		// Click the "Credit or debit card CVC/CVV" textbox, and send it input
-		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_CardCVC.toString());
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardCVC.toString(), this.runtimeData.creditCardCVC);
+        //Fill in Credit or Debit CVC
+        fillInCreditOrDebitCVC_CVV();
 
-		// Step out of the iframe, and back into the default context of the webpage
+        // Step out of the iframe, and back into the default context of the webpage
 		this.iFrame.switchToDefault();
 
-		// Click the "ZIP / Postal Code" textbox, and send it input
-		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_textField_ZIPPostalCode.toString());
-		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ZIPPostalCode.toString(), "11111");
+		//Fill in Zip Code
+        fillInZIP();
 
 		// Click the "Terms and Service" checkbox
 		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_checkBox_TermsAndService.toString());
 	}
-
-	/**
-	 * Navigate
-	 */
 
 
 	/**

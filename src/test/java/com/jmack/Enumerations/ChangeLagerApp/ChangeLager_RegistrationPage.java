@@ -23,7 +23,8 @@ public enum ChangeLager_RegistrationPage {
     Locator_textField_CardCVC("ChangeLagerRegistration.Locator.textField.CardCVC"),
     Locator_textField_ZIPPostalCode("ChangeLagerRegistration.Locator.textField.ZIPPostalCode"),
     Locator_checkBox_TermsAndService("ChangeLagerRegistration.Locator.checkBox.TermsAndService"),
-    Locator_Button_Register("ChangeLagerRegistration.Locator.Button.Registration");
+    Locator_Button_Register("ChangeLagerRegistration.Locator.Button.Register"),
+    Locator_text_ErrorMessage("ChangeLagerRegistration.Locator.text.ErrorMessage");
 
     // MOBILE
 
