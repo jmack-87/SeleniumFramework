@@ -63,13 +63,13 @@
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-testng</artifactId>
-			<version>2.9.0</version>
+			<version>2.10.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.25</version>
+			<version>1.7.26</version>
 		</dependency>
 		<dependency>
 			<groupId>io.appium</groupId>
@@ -156,7 +156,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-assembly-plugin</artifactId>
-					<version>3.1.0</version>
+					<version>3.1.1</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-dependency-plugin</artifactId>
@@ -222,7 +222,7 @@
 
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.1.0</version>
+					<version>3.1.1</version>
 					<executions>
 						<execution>
 							<id>default-jar</id>
@@ -264,11 +264,11 @@
 					<version>2.22.1</version>
 					<configuration>
 
-						<systemPropertyVariables>
-							<buildDirectory>${project.build.directory}</buildDirectory>
-							<allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
-							<allure.report.directory>${project.build.directory}/allure-report</allure.report.directory>
-						</systemPropertyVariables>
+<!-- 						<systemPropertyVariables> -->
+<!-- 							<buildDirectory>${project.build.directory}</buildDirectory> -->
+<!-- 							<allure.results.directory>${project.build.directory}/allure-results</allure.results.directory> -->
+<!-- 							<allure.report.directory>${project.build.directory}/allure-report</allure.report.directory> -->
+<!-- 						</systemPropertyVariables> -->
 
 						<testFailureIgnore>true</testFailureIgnore>
 						<suiteXmlFiles>
@@ -363,7 +363,7 @@
 				<plugin>
 					<groupId>io.qameta.allure</groupId>
 					<artifactId>allure-maven</artifactId>
-					<version>2.10</version>
+					<version>2.10.0</version>
 					<configuration>
 						<reportVersion>2.10.0</reportVersion>
 						<allureDownloadUrl>https://dl.bintray.com/qameta/maven/io/qameta/allure/allure-commandline/2.10.0/allure-commandline-2.10.0.zip</allureDownloadUrl>
@@ -379,7 +379,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>2.9</version>
+				<version>3.0.0</version>
 			</plugin>
 		</plugins>
 	</reporting>
