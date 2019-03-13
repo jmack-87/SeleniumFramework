@@ -8,45 +8,45 @@
 				"browserName": "desktop{Chrome|Ie|Edge|Firefox}|{android|ios}{Chrome|Native|Safari}",
 				"browserVersion": "integer|latest|beta",
 				"location": "REQUIRED(Mac): perfecto location",
-				"searchString": "IBM Perfecto",
-				"searchConfirmationString": "IBM"
+				"searchString": "Ahold Delhaize",
+				"searchConfirmationString": "Ahold"
 			},
 			"ChromeTest": {
 				"gridType": "local",
-				"browserName": "desktopFirefox",
+				"browserName": "desktopChrome",
 				"platformName": "Windows",
 				"platform": "windows 10",
 				"platformVersion": "10",
 				"browserVersion": "latest",
 				"resolution": "1024x768",
 				"location": "NA-US-BOS",
-				"searchString": "IBM Perfecto",
-				"searchConfirmationString": "IBM",
-				"headless": "false"
+				"searchString": "Ahold Delhaize",
+				"searchConfirmationString": "Ahold",
+				"headless": false
 			},
 			"SafariTest": {
 				"gridType": "local",
 				"browserName": "desktopSafari",
-				"searchString": "Santander Bank",
-				"searchConfirmationString": "Santander Bank"
+				"searchString": "Ahold Delhaize",
+				"searchConfirmationString": "Ahold"
 			},
 			"FirefoxTest": {
 				"gridType": "local",
 				"browserName": "desktopFirefox",
-				"searchString": "Santander Bank",
-				"searchConfirmationString": "Santander Bank"
+				"searchString": "Ahold Delhaize",
+				"searchConfirmationString": "Ahold"
 			},
 			"EdgeTest": {
 				"gridType": "local",
 				"browserName": "desktopEdge",
-				"searchString": "IBM Perfecto",
-				"searchConfirmationString": "IBM"
+				"searchString": "Ahold Delhaize",
+				"searchConfirmationString": "Ahold"
 			},
 			"IeTest": {
 				"gridType": "local",
 				"browserName": "desktopIe",
-				"searchString": "IBM Perfecto",
-				"searchConfirmationString": "IBM"
+				"searchString": "Ahold Delhaize",
+				"searchConfirmationString": "Ahold"
 			},
 			"AndroidChromeTest": {
 				"gridType": "local",

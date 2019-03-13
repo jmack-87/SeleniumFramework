@@ -18,7 +18,7 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 
 @Epic("Parallelism")
-@Feature("Android Chrome")
+@Feature("iOS Safari")
 public class IosSafariFeature extends TestBase {
 
 	/**

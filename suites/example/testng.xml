@@ -1,16 +1,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Parallel Suite 1">
+<suite name="Desktop_Suite">
 
-	<parameter name="browserNameOverride" value="" />
-	<parameter name="browserOverride" value="" />
-	<parameter name="browserVersionOverride" value="" />
-	<parameter name="gridTypeOverride" value="" />
-	<parameter name="locationOverride" value="" />
-	<parameter name="platformNameOverride" value="" />
-	<parameter name="platformVersionOverride" value="" />
-	<parameter name="resolutionOverride" value="" />
+	<parameter name="browserName" value="" />
+	<parameter name="browser" value="" />
+	<parameter name="browserVersion" value="" />
+	<parameter name="gridType" value="" />
+	<parameter name="location" value="" />
+	<parameter name="platformName" value="" />
+	<parameter name="platformVersion" value="" />
+	<parameter name="resolution" value="" />
 
-	<test name="parallel browsers 1">
+	<test name="Desktop_Clients">
 
 		<!-- Required -->
     	<parameter name="applicationUnderTest" value="Example" />
@@ -27,11 +27,11 @@
 		<parameter name="testParam" value="testValue1" />
 
 		<classes>
- 			<class name="com.jmack.Tests.Desktop.ChromeFeature" />
- 			<!--<class name="com.jmack.Tests.Desktop.SafariFeature" />-->
-			<!--<class name="com.jmack.Tests.Desktop.FirefoxFeature" />-->
-			<!--<class name="com.jmack.Tests.Desktop.EdgeFeature" />-->
- 			<!--<class name="com.jmack.Tests.Desktop.IeFeature" />-->
+ 			<class name="com.jmack.Tests.Example.Desktop.ChromeFeature" />
+			<class name="com.jmack.Tests.Example.Desktop.SafariFeature" />
+			<class name="com.jmack.Tests.Example.Desktop.FirefoxFeature" />
+			<class name="com.jmack.Tests.Example.Desktop.EdgeFeature" />
+ 			<class name="com.jmack.Tests.Example.Desktop.IeFeature" />
 		</classes>
 
 	</test>

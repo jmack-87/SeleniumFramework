@@ -1,18 +1,18 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Mobile Suite">
+<suite name="Mobile_Suite">
 
-	<parameter name="appActivityOverride" value="" />
-	<parameter name="appPackageOverride" value="" />
-	<parameter name="browserNameOverride" value="" />
-	<parameter name="browserVersionOverride" value="" />
-	<parameter name="bundleIdOverride" value="" />
-	<parameter name="gridTypeOverride" value="" />
-	<parameter name="locationOverride" value="" />
-	<parameter name="platformNameOverride" value="" />
-	<parameter name="platformVersionOverride" value="" />
-	<parameter name="resolutionOverride" value="" />
+	<parameter name="appActivity" value="" />
+	<parameter name="appPackage" value="" />
+	<parameter name="browserName" value="" />
+	<parameter name="browserVersion" value="" />
+	<parameter name="bundleId" value="" />
+	<parameter name="gridType" value="" />
+	<parameter name="location" value="" />
+	<parameter name="platformName" value="" />
+	<parameter name="platformVersion" value="" />
+	<parameter name="resolution" value="" />
 
-	<test name="Local Android Chrome and Perfecto iOS Native App">
+	<test name="Mobile_Clients">
 
 		<!-- Required -->
     	<parameter name="applicationUnderTest" value="Example" />
