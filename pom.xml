@@ -16,11 +16,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<parallelStyle>instances</parallelStyle>
-		<t.count>3</t.count> <!-- parallel test(instance) max count per suite -->
-		<suitePool>1</suitePool> <!-- parallel suite max count -->
+		<tcount /> <!-- parallel test(instance) max count per suite -->
+		<suitePool /> <!-- parallel suite max count -->
 
-		<suiteXMLPath></suiteXMLPath>
-		<suiteXML></suiteXML>
+		<suiteXMLPath />
+		<suiteXML />
 		<suiteXMLFile>suites\${suiteXMLPath}\${suiteXML}</suiteXMLFile>
 	</properties>
 
@@ -192,10 +192,10 @@
 								<goal>copy-resources</goal>
 							</goals>
 							<configuration>
-								<outputDirectory>target/allure-results</outputDirectory>
+								<outputDirectory>${project.build.directory}\target\allure-results</outputDirectory>
 								<resources>
 									<resource>
-										<directory>src/test/resources/allure</directory>
+										<directory>src\test\resources\allure</directory>
 										<includes>
 											<include>environment.properties</include>
 										</includes>
@@ -267,7 +267,7 @@
 						<suiteXmlFiles>
 							<suiteXMLFile>${suiteXMLFile}</suiteXMLFile>
 						</suiteXmlFiles>
-						<threadCount>${t.count}</threadCount>
+						<threadCount>${tcount}</threadCount>
 						<parallel>${parallelStyle}</parallel>
 						<properties>
 							<property>
@@ -356,10 +356,10 @@
 				<plugin>
 					<groupId>io.qameta.allure</groupId>
 					<artifactId>allure-maven</artifactId>
-					<version>2.9</version>
+					<version>2.10</version>
 					<configuration>
-						<reportVersion>2.9.0</reportVersion>
-						<allureDownloadUrl>https://dl.bintray.com/qameta/maven/io/qameta/allure/allure-commandline/2.9.0/allure-commandline-2.9.0.zip</allureDownloadUrl>
+						<reportVersion>2.10.0</reportVersion>
+						<allureDownloadUrl>https://dl.bintray.com/qameta/maven/io/qameta/allure/allure-commandline/2.10.0/allure-commandline-2.10.0.zip</allureDownloadUrl>
 					</configuration>
 				</plugin>
 			</plugins>

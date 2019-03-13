@@ -48,10 +48,12 @@ public class ChromeFeature extends TestBase {
 
 		generic.waitForPageLoaded(30);
 
-		generic.confirmElementExistence(SearchResults.Locator_Text_ibmSearchConfirmation.toString());
+		generic.confirmElementExistence(SearchResults.Mobile_Locator_Text_aholdSearchConfirmation.toString());
 
-		homePage.stuff("something passed");
-		
+//		homePage.stuff("something passed");
+		generic.takeScreenShot("Final confirmation.");
+
 	}
-	
+
+
 }

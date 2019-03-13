@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Super Suite" parallel="true" thread-count="2">
+<suite name="Aggregate">
 
-	<parameter name="param" value="val" />
-	
+<!-- 	<parameter name="param" value="val" /> -->
+
 	<suite-files>
-		<suite-file path="cfg/testng.xml" />
-		<suite-file path="cfg/testng2.xml" />
+		<suite-file path="testng.xml" />
+		<suite-file path="appium.xml" />
 	</suite-files>
-	
+
 </suite>
