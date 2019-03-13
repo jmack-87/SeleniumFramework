@@ -21,7 +21,7 @@
 
 		<suiteXMLPath />
 		<suiteXML />
-		<suiteXMLFile>suites\${suiteXMLPath}\${suiteXML}.xml</suiteXMLFile>
+		<suiteXMLFile>suites\${suiteXMLPath}\${suiteXML}</suiteXMLFile>
 	</properties>
 
 	<dependencies>
