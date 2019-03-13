@@ -149,6 +149,8 @@ public class HomePagePO extends TestBase {
 		validateRegisterButton_CL();
 		validateSignUpButton_CL();
 		validateDownArrowButton_CL();
+		validateRegisterToday_Single_CL();
+		validateRegisterToday_MoreThanOne_CL();
 
 	}
 
@@ -160,6 +162,42 @@ public class HomePagePO extends TestBase {
 
 		//validate the button exists
 		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_AcceptAllCookies.toString());
+
+	}
+
+	/**
+	 * On the ChangeLager Home Page, validate the existence of the 'Register Today' button
+	 * for the 'Single' Plan
+	 */
+	@Step("Validate the 'Register Today' button for the 'Single' Plan exists")
+	public void validateRegisterToday_Single_CL(){
+
+		//validate the button exists
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Single.toString());
+
+	}
+
+	/**
+	 * On the ChangeLager Home Page, validate the existence of the 'Register Today' button
+	 * for the 'More Than One' Plan
+	 */
+	@Step("Validate the 'Register Today' button for the 'More Than One' Plan exists")
+	public void validateRegisterToday_MoreThanOne_CL(){
+
+		//validate the button exists
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_MoreThanOne.toString());
+
+	}
+
+	/**
+	 * On the ChangeLager Home Page, validate the existence of the 'MetaBit, LLC' hyper link
+	 */
+	@Step("Validate the 'MetaBit, LLC' hyper link exists")
+	public void validateMetaBitLink_CL(){
+
+		//validate the link exists
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Link_MetaBit.toString());
+
 	}
 
 	/**
@@ -205,6 +243,7 @@ public class HomePagePO extends TestBase {
 
 		//Click the "Accept All Cookies" button on the home page
 		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_AcceptAllCookies.toString());
+
 	}
 
 	/**
@@ -238,6 +277,18 @@ public class HomePagePO extends TestBase {
 		//Click the 'More Than One' registration button
 		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_MoreThanOne.toString());
 
+	}
+
+	/**
+	 * Click the 'MetaBit, LLC' hyper link at the bottom of the home page
+	 * and verify that the page has loaded
+	 */
+
+	@Step("Click the 'MetaBit, LLC' hyper link")
+	public void clickMetaBitLink_CL(){
+
+		//Click the 'MetaBit, LLC' hyper link
+		this.generic.clickElement(ChangeLager_HomePage.Locator_Link_MetaBit.toString());
 	}
 
 	/**
