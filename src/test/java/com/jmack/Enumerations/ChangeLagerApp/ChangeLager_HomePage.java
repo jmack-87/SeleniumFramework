@@ -3,9 +3,11 @@ package com.jmack.Enumerations.ChangeLagerApp;
 public enum ChangeLager_HomePage {
 
        // DESKTOP
-    Text_changeLagerHomeURL("ChangeLagerHome.text.changeLagerHomeURL"),
-    Text_pageTitle("ChangeLagerHome.text.pageTitle"),
-    Locator_Tag_head("ChangeLagerHome.Locator.Tag.head"),
+    Text_changeLagerHome_URL("ChangeLagerHome.text.changeLagerHomeURL"),
+    Text_changeLagerHome_pageTitle("ChangeLagerHome.text.pageTitle"),
+    Text_MetaBitLLCHome_pageTitle("MetaBitLLCHome.text.pageTitle"),
+    Locator_Tag_head_MetaBitLLCHome("MetaBitLLCHome.Locator.Tag.head"),
+    Locator_Tag_head_changeLagerHome("ChangeLagerHome.Locator.Tag.head"),
     Locator_Button_SignUp("ChangeLagerHome.Locator.Button.SignUp"),
     Locator_Button_Login("ChangeLagerHome.Locator.Button.Login"),
     Locator_Button_Register("ChangeLagerHome.Locator.Button.Register"),
