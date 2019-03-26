@@ -7,6 +7,7 @@ import com.jmack.Base.TestBase;
 import com.jmack.Enumerations.ChangeLagerApp.ChangeLager_HomePage;
 
 import io.qameta.allure.Step;
+import javafx.scene.control.TextFormatter;
 
 
 /**
@@ -60,7 +61,7 @@ public class HomePagePO extends TestBase {
 	public void navigateTo_CL() {
 
 		// Open a new browser instance and navigate to the ChangeLager URL
-		this.generic.getUrl(ChangeLager_HomePage.Text_changeLagerHomeURL.toString());
+		this.generic.getUrl(ChangeLager_HomePage.Text_changeLagerHome_URL.toString());
 
 	}
 
@@ -72,15 +73,47 @@ public class HomePagePO extends TestBase {
 	public void confirmHeadTag_CL() {
 
 		// Confirm the Head section of the HTML for the page
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Tag_head.toString());
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Tag_head_changeLagerHome.toString());
 
 	}
 
+	/**
+	 * Confirm Head Tag of MetaBit, LLC Home Page
+	 */
+	@Step("Validate MetaBit, LLC Home Page Head Tag")
+	public void confirmHeadTag_MBLLC(){
+
+		// Confirm the Head section of the HTML for the page
+		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Tag_head_MetaBitLLCHome.toString());
+
+	}
+
+	/**
+	 * Confirm Page Title of ChangeLager Home Page
+	 */
+	@Step("Validate ChangeLager Home Page Title")
+	public void confirmPageTitle_CL(){
+
+		// Confirm the Title of the page
+		this.generic.confirmTitle(ChangeLager_HomePage.Text_changeLagerHome_pageTitle.toString());
+
+	}
+
+	/**
+	 * Confirm Page Title of MetaBit, LLC Home Page
+	 */
+	@Step("Validate MetaBit, LLC Home Page Title")
+	public void confirmPageTitle_MBLLC(){
+
+		// Confirm the Title of the page
+		this.generic.confirmTitle(ChangeLager_HomePage.Text_MetaBitLLCHome_pageTitle.toString());
+
+	}
 
 	/**
 	 * Navigate to ChangeLager Home Page and Confirm
 	 */
-	@Step("Validate ChangeLager HomePage URL")
+	@Step("Validate ChangeLager Home Page Navigation")
 	public void navigateAndValidate_CL() {
 
 		// Open a new browser instance, and navigate to the ChangeLager URL
@@ -90,7 +123,21 @@ public class HomePagePO extends TestBase {
 		this.confirmHeadTag_CL();
 
 		// Confirm the Title of the page
-		this.generic.confirmTitle(ChangeLager_HomePage.Text_pageTitle.toString());
+		this.confirmPageTitle_CL();
+
+	}
+
+	/**
+	 * After being navigated to the MetaBit, LLC Home Page, confirm
+	 */
+	@Step("Validate MetaBit, LLC Home Page Navigation")
+	public void validateNavigation_MBLLC(){
+
+		// Confirm the Head section of the HTML for the page
+		this.confirmHeadTag_MBLLC();
+
+		//Confirm the Title of the page
+		this.confirmPageTitle_MBLLC();
 
 	}
 

@@ -59,6 +59,18 @@ public class ChangeLager_E2E extends TestBase {
         //Navigate back to the ChangeLager website, and confirm
         homePage.navigateAndValidate_CL();
 
+        //Click the down arrow
+        homePage.clickDownArrow_CL();
+
+        //Click the 'MetaBit, LLC' hyperlink at the bottom of the ChangeLager Home Page
+        homePage.clickMetaBitLink_CL();
+
+        //Validate the page transition
+        homePage.validateNavigation_MBLLC();
+
+        //Navigate back to the ChangeLager website, and confirm
+        homePage.navigateAndValidate_CL();
+
         //Click the "Register" button, and confirm page change
         homePage.clickRegisterButton_CL();
 
