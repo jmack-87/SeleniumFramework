@@ -94,10 +94,10 @@ public class RegistrationPagePO extends TestBase {
 	public void validateNavigation_CL(){
 
 		//Confirm the Head section of the HTML for the page
-		confirmHeadTag_CL();
+		this.confirmHeadTag_CL();
 
 		//Confirm the Page Title attribute for the page
-		confirmPageTitle_CL();
+		this.confirmPageTitle_CL();
 
 	}
 
@@ -109,10 +109,10 @@ public class RegistrationPagePO extends TestBase {
 	public void navigateAndValidate_CL(){
 
 		//Open a browser instance and navigate to the ChangeLager Registration URL
-		navigateToRegistration_CL();
+		this.navigateToRegistration_CL();
 
 		//Validate that you have landed on the ChangeLager Registration Page
-		validateNavigation_CL();
+		this.validateNavigation_CL();
 	}
 
 
@@ -204,16 +204,16 @@ public class RegistrationPagePO extends TestBase {
 	public void fillOutProfileSection_CL() {
 
 		// Click the "Name" textbox, and send it input
-		fillOutName_CL();
+		this.fillOutName_CL();
 
 		// Click the "Email" textbox, and send it input
-		fillOutEmail_CL();
+		this.fillOutEmail_CL();
 
 		// Click the "Password" textbox, and send it input
-		fillOutPassword_CL();
+		this.fillOutPassword_CL();
 
 		// Click the "Confirm Password" textbox, and send it input
-		fillOutConfirmPassword_CL();
+		this.fillOutConfirmPassword_CL();
 	}
 
     /**
@@ -279,25 +279,25 @@ public class RegistrationPagePO extends TestBase {
 	public void fillOutCreditCardSection_CL() {
 
         //Fill in Cardholder's Name
-        fillInCardholderName_CL();
+        this.fillInCardholderName_CL();
 
 		// Switch to the iFrame containing the textboxes for credit card information
 		this.iFrame.switchToIframe(ChangeLager_RegistrationPage.Locator_iFrame_CreditCardInformation.toString());
 
         //Fill in Credit Or Debit
-        fillInCreditOrDebit_CL();
+        this.fillInCreditOrDebit_CL();
 
         //Fill in Credit or Debit Expiration Date
-        fillInCreditOrDebitExpDate_CL();
+        this.fillInCreditOrDebitExpDate_CL();
 
         //Fill in Credit or Debit CVC
-        fillInCreditOrDebitCVC_CVV_CL();
+        this.fillInCreditOrDebitCVC_CVV_CL();
 
         // Step out of the iframe, and back into the default context of the webpage
 		this.iFrame.switchToDefault();
 
 		//Fill in Zip Code
-        fillInZIP_CL();
+        this.fillInZIP_CL();
 
 		// Click the "Terms and Service" checkbox
 		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_checkBox_TermsAndService.toString());

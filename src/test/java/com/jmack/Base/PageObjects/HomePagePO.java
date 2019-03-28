@@ -111,6 +111,20 @@ public class HomePagePO extends TestBase {
 	}
 
 	/**
+	 * Validate that you have landed on the ChangeLager Home Page
+	 */
+	@Step("Validate that you have landed on the ChangeLager Home Page")
+	public void validateNavigation_CL(){
+
+		// Confirm the Head section of the HTML for the page
+		this.confirmHeadTag_CL();
+
+		// Confirm the Title of the page
+		this.confirmPageTitle_CL();
+
+	}
+
+	/**
 	 * Navigate to ChangeLager Home Page and Confirm
 	 */
 	@Step("Validate ChangeLager Home Page Navigation")
@@ -119,12 +133,8 @@ public class HomePagePO extends TestBase {
 		// Open a new browser instance, and navigate to the ChangeLager URL
 		this.navigateTo_CL();
 
-		// Confirm the Head section of the HTML for the page
-		this.confirmHeadTag_CL();
-
-		// Confirm the Title of the page
-		this.confirmPageTitle_CL();
-
+		// Validate that you have landed on the ChangeLager Home page
+		this.validateNavigation_CL();
 	}
 
 	/**
@@ -192,12 +202,12 @@ public class HomePagePO extends TestBase {
 	@Step("Validate all Buttons on the ChangeLager Home Page exist")
 	public void validateAllButtonsExist_CL(){
 
-		validateLoginButton_CL();
-		validateRegisterButton_CL();
-		validateSignUpButton_CL();
-		validateDownArrowButton_CL();
-		validateRegisterToday_Single_CL();
-		validateRegisterToday_MoreThanOne_CL();
+		this.validateLoginButton_CL();
+		this.validateRegisterButton_CL();
+		this.validateSignUpButton_CL();
+		this.validateDownArrowButton_CL();
+		this.validateRegisterToday_Single_CL();
+		this.validateRegisterToday_MoreThanOne_CL();
 
 	}
 
