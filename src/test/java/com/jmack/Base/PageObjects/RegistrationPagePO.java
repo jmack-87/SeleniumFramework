@@ -58,9 +58,9 @@ public class RegistrationPagePO extends TestBase {
 	 * Navigate to ChangeLager Registration Page
 	 */
 	@Step("Open ChangeLager Registration Page")
-	public void navigateToCL_CL(){
+	public void navigateToRegistration_CL(){
 
-		//Open a browser instance and navigate to the ChangeLager URL
+		//Open a browser instance and navigate to the ChangeLager Registration URL
 		this.generic.getUrl(ChangeLager_RegistrationPage.Text_changeLagerRegistrationURL.toString());
 
 	}
@@ -77,14 +77,50 @@ public class RegistrationPagePO extends TestBase {
 	}
 
 	/**
-	 * Navigate to Change Lager 
+	 * Confirm Page Title of ChangeLager Registration Page
 	 */
+	@Step("Confirm Page Title of ChangeLager Registration Page")
+	public void confirmPageTitle_CL(){
+
+		//Confirm the Page Title attribute for the page
+		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Text_pageTitle.toString());
+
+	}
+
+	/**
+	 * Validate that you have landed on the ChangeLager Registration Page
+	 */
+	@Step("Validate navigation to ChangeLager Registration Page")
+	public void validateNavigation_CL(){
+
+		//Confirm the Head section of the HTML for the page
+		confirmHeadTag_CL();
+
+		//Confirm the Page Title attribute for the page
+		confirmPageTitle_CL();
+
+	}
+
+	/**
+	 * Navigate to ChangeLager Registration Page,
+	 * and confirm that you have landed on the page
+	 */
+	@Step("Navigate to ChangeLager Registration Page, and validate the navigation")
+	public void navigateAndValidate_CL(){
+
+		//Open a browser instance and navigate to the ChangeLager Registration URL
+		navigateToRegistration_CL();
+
+		//Validate that you have landed on the ChangeLager Registration Page
+		validateNavigation_CL();
+	}
+
 
 	/**
 	 * Toggle from 'Dev' to 'Free' subscription type, and validate
 	 */
 	@Step("Switch from 'Dev' to 'Free' subscription type")
-	public void toggleDevToFree() {
+	public void toggleDevToFree_CL() {
 
 		// Click the "Free Plan" button on the registration
 		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_Button_FreePlan.toString());
@@ -103,7 +139,7 @@ public class RegistrationPagePO extends TestBase {
 	 * Toggle from 'Free' to 'Dev' subscription type, and validate
 	 */
 	@Step("Switch from 'Free' to 'Dev' subscription type")
-	public void toggleFreeToDev() {
+	public void toggleFreeToDev_CL() {
 
 		// Click the "Dev Plan" button
 		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_Button_DevPlan.toString());
@@ -119,20 +155,20 @@ public class RegistrationPagePO extends TestBase {
 	}
 
 	/**
-	 * Fill in the 'Name' text field of the profile section on the change lager registration page
+	 * Fill in the 'Name' text field of the profile section on the ChangeLager registration page
 	 */
 	@Step("Fill in the 'Name' text field - Profile Section")
-	public void fillOutName(){
+	public void fillOutName_CL(){
 
 		// Click the "Name" textbox, and send it input
 		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Name.toString(), this.runtimeData.username);
 	}
 
 	/**
-	 * Fill in the 'Email' text field of the profile section on the change lager registration page
+	 * Fill in the 'Email' text field of the profile section on the ChangeLager registration page
 	 */
 	@Step("Fill in the 'Email' text field - Profile Section")
-	public void fillOutEmail(){
+	public void fillOutEmail_CL(){
 
 		// Click the "Email" textbox, and send it input
 		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Email.toString(), this.runtimeData.userEmail);
@@ -140,10 +176,10 @@ public class RegistrationPagePO extends TestBase {
 	}
 
 	/**
-	 * Fill in the 'Password' text field of the profile section on the change lager registration page
+	 * Fill in the 'Password' text field of the profile section on the ChangeLager registration page
 	 */
 	@Step("Fill in the 'Password' text field - Profile Section")
-	public void fillOutPassword(){
+	public void fillOutPassword_CL(){
 
 		// Click the "Password" textbox, and send it input
 		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_Password.toString(), this.runtimeData.password);
@@ -151,10 +187,10 @@ public class RegistrationPagePO extends TestBase {
 	}
 
 	/**
-	 * Fill in the 'Confirm Password' text field of the profile section on the change lager registration page
+	 * Fill in the 'Confirm Password' text field of the profile section on the ChangeLager registration page
 	 */
 	@Step("Fill in the 'Confirm Password' text field - Profile Section")
-	public void fillOutConfirmPassword(){
+	public void fillOutConfirmPassword_CL(){
 
 		// Click the "Confirm Password" textbox, and send it input
 		this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ConfirmPassword.toString(), this.runtimeData.password);
@@ -165,26 +201,26 @@ public class RegistrationPagePO extends TestBase {
 	 * Fill out the 'Profile' section of the Registration Form
 	 */
 	@Step("Fill out the 'Profile' section of the form")
-	public void fillOutProfileSection() {
+	public void fillOutProfileSection_CL() {
 
 		// Click the "Name" textbox, and send it input
-		fillOutName();
+		fillOutName_CL();
 
 		// Click the "Email" textbox, and send it input
-		fillOutEmail();
+		fillOutEmail_CL();
 
 		// Click the "Password" textbox, and send it input
-		fillOutPassword();
+		fillOutPassword_CL();
 
 		// Click the "Confirm Password" textbox, and send it input
-		fillOutConfirmPassword();
+		fillOutConfirmPassword_CL();
 	}
 
     /**
      * Fill in the "Carholder's Name" textbox on the form
      */
     @Step("Fill in 'Cardholder's Name' textbox")
-    public void fillInCardholderName(){
+    public void fillInCardholderName_CL(){
 
         // Click the "Cardholder's Name" textbox, and send it input
         this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardholdersName.toString(), "Stinky Stankerton");
@@ -195,7 +231,7 @@ public class RegistrationPagePO extends TestBase {
      * Fill in the "Credit or debit card number" textbox on the form
      */
     @Step("Fill in 'Credit or debit card number' textbox")
-    public void fillInCreditOrDebit(){
+    public void fillInCreditOrDebit_CL(){
 
         // Click the "Credit or debit card number" textbox, and send it input
         this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardNumber.toString(),	this.runtimeData.creditCardNumber);
@@ -206,7 +242,7 @@ public class RegistrationPagePO extends TestBase {
      * Fill in the "Credit or debit expiration date" textbox on the form
      */
     @Step("Fill in the 'Credit or debit expiration date' textbox")
-    public void fillInCreditOrDebitExpDate(){
+    public void fillInCreditOrDebitExpDate_CL(){
 
         // Click the "Credit or debit card expiration date" textbox, and send it input
         this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardExpire.toString(), this.runtimeData.creditCardExpiration);
@@ -217,7 +253,7 @@ public class RegistrationPagePO extends TestBase {
      * Fill in the "Credit or debit CVC/CVV" textbox on the form
      */
     @Step("Fill in the 'Credit or debit CVC/CVV' textbox")
-    public void fillInCreditOrDebitCVC_CVV(){
+    public void fillInCreditOrDebitCVC_CVV_CL(){
 
         // Click the "Credit or debit card CVC/CVV" textbox, and send it input
         this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_CardCVC.toString(), this.runtimeData.creditCardCVC);
@@ -228,7 +264,7 @@ public class RegistrationPagePO extends TestBase {
      * Fill in the "ZIP / Postal Code" textbox on the form
      */
     @Step("Fill in the 'ZIP / Postal Code' textbox")
-    public void fillInZIP(){
+    public void fillInZIP_CL(){
 
         // Click the "ZIP / Postal Code" textbox, and send it input
         this.generic.sendText(ChangeLager_RegistrationPage.Locator_textField_ZIPPostalCode.toString(), "11111");
@@ -240,33 +276,102 @@ public class RegistrationPagePO extends TestBase {
 	 * Fill out the 'Credit Card' section of the Registration Form
 	 */
 	@Step("Fill out the 'Credit Card' section of the form")
-	public void fillOutCreditCardSection() {
+	public void fillOutCreditCardSection_CL() {
 
         //Fill in Cardholder's Name
-        fillInCardholderName();
+        fillInCardholderName_CL();
 
 		// Switch to the iFrame containing the textboxes for credit card information
 		this.iFrame.switchToIframe(ChangeLager_RegistrationPage.Locator_iFrame_CreditCardInformation.toString());
 
         //Fill in Credit Or Debit
-        fillInCreditOrDebit();
+        fillInCreditOrDebit_CL();
 
         //Fill in Credit or Debit Expiration Date
-        fillInCreditOrDebitExpDate();
+        fillInCreditOrDebitExpDate_CL();
 
         //Fill in Credit or Debit CVC
-        fillInCreditOrDebitCVC_CVV();
+        fillInCreditOrDebitCVC_CVV_CL();
 
         // Step out of the iframe, and back into the default context of the webpage
 		this.iFrame.switchToDefault();
 
 		//Fill in Zip Code
-        fillInZIP();
+        fillInZIP_CL();
 
 		// Click the "Terms and Service" checkbox
 		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_checkBox_TermsAndService.toString());
 	}
 
+	/**
+	 * Click the "Register" button on the ChangeLager Registration Page
+	 */
+	@Step("Click the 'Register' button")
+	public void clickRegisterButton_CL(){
+
+		//Click the 'Register' button
+		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_Button_Register.toString());
+
+	}
+
+	/**
+	 * Validate the error message for the "Name" field is displayed
+	 */
+	@Step("Validate the error message for the 'Name' field is displayed")
+	public void validateNameErrorMessage_CL(){
+
+		//Validate the error message text for the "Name" field is displayed
+		//when the field is blank
+		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_text_BlankNameErrorMessage.toString());
+
+	}
+
+	/**
+	 * Validate the error message for the "Email" field is displayed
+	 */
+	@Step("Validate the error message for the 'Email' field is displayed")
+	public void validateEmailErrorMessage_CL(){
+
+		//Validate the error message text for the "Email" field is displayed
+		//when the field is blank
+		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_text_BlankEmailErrorMessage.toString());
+
+	}
+
+	/**
+	 * Validate the error message for the "Password" field is displayed
+	 */
+	@Step("Validate the error message for the 'Password' field is displayed")
+	public void validatePasswordErrorMessage_CL(){
+
+		//Validate the error message text for the "Password" field is displayed
+		//when the field is blank
+		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_text_BlankPasswordErrorMessage.toString());
+
+	}
+
+	/**
+	 * Validate the error message for the "I Accept The Terms Of Service" checkbox is displayed
+	 */
+	@Step("Validate the error message for the 'I Accept The Terms Of Service' checkbox is displayed")
+	public void validateTermsOfServiceErrorMessage_CL(){
+
+		//Validate the error message text for the "I Accept The Terms Of Service" checkbox
+		//when the checkbox is not checked
+		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_text_NonCheckedTermsOfServiceErrorMessage.toString());
+
+	}
+
+	/**
+	 * Click the "Terms Of Use" hyperlink
+	 */
+	@Step("Click the 'Terms Of Use' hyperlink")
+	public void clickTermsOfUseHyperlink_CL(){
+
+		//Click the "Terms Of Use" hyperlink
+		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_Link_TermsOfUse.toString());
+
+	}
 
 	/**
 	 * Do something with RegistrationPage

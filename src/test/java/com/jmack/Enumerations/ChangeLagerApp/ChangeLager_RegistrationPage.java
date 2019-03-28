@@ -24,7 +24,12 @@ public enum ChangeLager_RegistrationPage {
     Locator_textField_ZIPPostalCode("ChangeLagerRegistration.Locator.textField.ZIPPostalCode"),
     Locator_checkBox_TermsAndService("ChangeLagerRegistration.Locator.checkBox.TermsAndService"),
     Locator_Button_Register("ChangeLagerRegistration.Locator.Button.Register"),
-    Locator_text_ErrorMessage("ChangeLagerRegistration.Locator.text.ErrorMessage");
+    Locator_text_ErrorMessage("ChangeLagerRegistration.Locator.text.ErrorMessage"),
+    Locator_text_BlankNameErrorMessage("ChangeLagerRegistration.Locator.text.BlankNameFieldErrorMessage"),
+    Locator_text_BlankEmailErrorMessage("ChangeLagerRegistration.Locator.text.BlankEmailFieldErrorMessage"),
+    Locator_text_BlankPasswordErrorMessage("ChangeLagerRegistration.Locator.text.BlankPasswordFieldErrorMessage"),
+    Locator_text_NonCheckedTermsOfServiceErrorMessage("ChangeLagerRegistration.Locator.text.NonCheckedTermsOfServiceErrorMessage"),
+    Locator_Link_TermsOfUse("ChangeLagerRegistration.Locator.Link.TermsOfService");
 
     // MOBILE
 
