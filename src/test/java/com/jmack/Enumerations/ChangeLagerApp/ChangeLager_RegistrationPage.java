@@ -4,7 +4,7 @@ public enum ChangeLager_RegistrationPage {
 
     // DESKTOP
     Text_changeLagerRegistrationURL("ChangeLagerRegistration.text.changeLagerRegistrationURL"),
-    Text_pageTitle("ChangeLagerRegistration.text.pageTitle"),
+    Locator_text_pageTitle("ChangeLagerRegistration.Locator.text.pageTitle"),
     Locator_Tag_head("ChangeLagerRegistration.Locator.Tag.head"),
     Locator_Button_DevPlan("ChangeLagerRegistration.Locator.Button.DevPlan"),
     Locator_Button_DevPlanSelect("ChangeLagerRegistration.Locator.Button.DevPlanSelect"),

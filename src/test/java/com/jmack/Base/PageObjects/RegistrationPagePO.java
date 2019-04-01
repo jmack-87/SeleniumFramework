@@ -83,7 +83,7 @@ public class RegistrationPagePO extends TestBase {
 	public void confirmPageTitle_CL(){
 
 		//Confirm the Page Title attribute for the page
-		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Text_pageTitle.toString());
+		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Locator_text_pageTitle.toString());
 
 	}
 

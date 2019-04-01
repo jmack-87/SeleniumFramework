@@ -151,7 +151,6 @@ public class HomePagePO extends TestBase {
 
 	}
 
-
 	/**
 	 * Validate the 'Login' button on the ChangeLager Home Page
 	 */

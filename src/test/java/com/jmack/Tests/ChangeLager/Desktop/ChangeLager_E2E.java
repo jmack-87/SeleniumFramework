@@ -75,7 +75,7 @@ public class ChangeLager_E2E extends TestBase {
         homePage.clickRegisterButton_CL();
 
         //Validate navigation to the ChangeLager Registration Page
-
+        registrationPage.validateNavigation_CL();
 
         //Toggle from the "Developer" option to the "Free" option
         registrationPage.toggleDevToFree_CL();
