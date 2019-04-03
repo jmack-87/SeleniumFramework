@@ -74,15 +74,20 @@ public class ChangeLager_E2E extends TestBase {
         //Click the "Register" button, and confirm page change
         homePage.clickRegisterButton_CL();
 
-        //Toggle between the different plans to ensure they function appropriately
-        registrationPage.toggleDevToFree();
-        registrationPage.toggleFreeToDev();
+        //Validate navigation to the ChangeLager Registration Page
+        registrationPage.validateNavigation_CL();
+
+        //Toggle from the "Developer" option to the "Free" option
+        registrationPage.toggleDevToFree_CL();
+
+        //Toggle form the "Free" option to the "Developer" option
+        registrationPage.toggleFreeToDev_CL();
 
         //Fill out the 'Profile' section of the Registration Form
-        registrationPage.fillOutProfileSection();
+        registrationPage.fillOutProfileSection_CL();
 
         //Fill out the 'Credit Card' section of the Registration Form
-        registrationPage.fillOutCreditCardSection();
+        registrationPage.fillOutCreditCardSection_CL();
 
     }
 
