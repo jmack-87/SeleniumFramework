@@ -48,13 +48,13 @@ public class IosSafariFeature extends TestBase {
 		mGeneric.clickElement(SearchPage.Mobile_Locator_Button_searchSubmit.toString());
 
 		// confirm at least one result returns
-		mGeneric.confirmElementExistence(SearchResults.Mobile_Locator_firstResult.toString());
+		mGeneric.confirmElementExistence(SearchResults.Locator_firstResult.toString());
 
 		// confirm result is related to query
 		mGeneric.confirmElementExistence(SearchResults.Mobile_CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
 
 		// click result
-		mGeneric.clickElement(SearchResults.Mobile_Locator_Link_firstResult.toString());
+		mGeneric.clickElement(SearchResults.Locator_firstResult.toString());
 
 		// confirm navigation
 		mGeneric.confirmElementExistence(SearchResults.Mobile_Locator_Text_aholdSearchConfirmation.toString(), 90);
