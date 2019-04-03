@@ -318,7 +318,8 @@ public class TestBase {
 			case "androidchrome":
 				caps = DesiredCapabilities.android();
 				// optional
-				caps.setCapability("automationName", "Appium");
+				//caps.setCapability("automationName", "Appium");
+				caps.setCapability("automationName", "UIAutomator2");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", "ignoredButNotEmpty");
