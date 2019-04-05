@@ -26,10 +26,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-import com.jmack.Base.PageObjects.HomePagePO;
-import com.jmack.Base.PageObjects.IFramePO;
-import com.jmack.Base.PageObjects.LogInPagePO;
-import com.jmack.Base.PageObjects.RegistrationPagePO;
+import com.jmack.Base.PageObjects.HomePage;
+import com.jmack.Base.PageObjects.IFrame;
+import com.jmack.Base.PageObjects.LoginPage;
+import com.jmack.Base.PageObjects.RegistrationPage;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -89,10 +89,10 @@ public class TestBase {
 	protected ExcelDataExtractor excelDataExtractor;
 
 	// Page Objects
-	protected HomePagePO homePage;
-	protected IFramePO iFrame;
-	protected LogInPagePO logInPage;
-	protected RegistrationPagePO registrationPage;
+	protected HomePage homePage;
+	protected IFrame iFrame;
+	protected LoginPage logInPage;
+	protected RegistrationPage registrationPage;
 
 
 	/**
@@ -603,10 +603,10 @@ public class TestBase {
 	@Step("Initialize Page Objects.")
 	private void initializePageObjects() {
 
-		homePage = 			new HomePagePO				(generic, ss, id, testName);
-		iFrame = 			new IFramePO				(generic, ss, id, testName);
-		logInPage = 		new LogInPagePO				(generic, ss, id, testName);
-		registrationPage = 	new RegistrationPagePO		(generic, ss, runtimeData, id, testName, iFrame); // must be after IFramePO
+		homePage = 			new HomePage(generic, ss, id, testName);
+		iFrame = 			new IFrame(generic, ss, id, testName);
+		logInPage = 		new LoginPage(generic, ss, runtimeData, id, testName);
+		registrationPage = 	new RegistrationPage(generic, ss, runtimeData, id, testName, iFrame); // must be after IFrame
 
 		System.out.format("[LOG]: <[%s:%s] page objects loaded>%n", id, testName);
 
