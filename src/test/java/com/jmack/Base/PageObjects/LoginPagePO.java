@@ -4,11 +4,10 @@ import com.jmack.Base.Generic;
 import com.jmack.Base.RuntimeData;
 import com.jmack.Base.ScreenShot;
 import com.jmack.Base.TestBase;
+import com.jmack.Enumerations.ChangeLagerApp.LoginPageENUM;
 import io.qameta.allure.Step;
 
-import com.jmack.Enumerations.ChangeLagerApp.ChangeLager_LoginPage;
-
-public class LoginPage extends TestBase{
+public class LoginPagePO extends TestBase{
 
     private Generic generic;
     private ScreenShot ss;
@@ -20,7 +19,7 @@ public class LoginPage extends TestBase{
      * @param generic
      * @param ss
      */
-    public LoginPage(Generic generic, ScreenShot ss) {
+    public LoginPagePO(Generic generic, ScreenShot ss) {
 
         this.generic = generic;
         this.ss = ss;
@@ -34,7 +33,7 @@ public class LoginPage extends TestBase{
      * @param id
      * @param testName
      */
-    public LoginPage(Generic generic, ScreenShot ss, RuntimeData runtimeData, String id, String testName) {
+    public LoginPagePO(Generic generic, ScreenShot ss, RuntimeData runtimeData, String id, String testName) {
 
         this.generic = generic;
         this.runtimeData = runtimeData;
@@ -51,7 +50,7 @@ public class LoginPage extends TestBase{
     public void navigateToLogin_CL(){
 
         //Navigate to the ChangeLager Login Page
-        logInPage.generic.getUrl(ChangeLager_LoginPage.text_URL.toString());
+        logInPage.generic.getUrl(LoginPageENUM.Text_URL.toString());
     }
 
     /**

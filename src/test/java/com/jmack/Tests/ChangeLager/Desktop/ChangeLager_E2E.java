@@ -31,63 +31,63 @@ public class ChangeLager_E2E extends TestBase {
     public void ChangeLager_E2ETest() {
 
         //Navigate to the ChangeLager website, and confirm
-        homePage.navigateAndValidate_CL();
+        homePagePO.navigateAndValidate_CL();
 
         //Validate all buttons exist
-        homePage.validateAllButtonsExist_CL();
+        homePagePO.validateAllButtonsExist_CL();
 
         //DEPRECATED AS OF 02/04/2019; functionality removed from site
         //Validate the "Accept All Cookies" button exists
-        //homePage.validateAcceptAllCookies_CL();
+        //homePagePO.validateAcceptAllCookies_CL();
 
         //DEPRECATED AS OF 02/04/2019; functionality removed from site
         //Click the "Accept All Cookies" button
-        //homePage.clickAcceptAllCookies_CL();
+        //homePagePO.clickAcceptAllCookies_CL();
 
         //Click the down arrow
-        homePage.clickDownArrow_CL();
+        homePagePO.clickDownArrow_CL();
 
         //Click the 'Single' registration button
-        homePage.clickSingleRegistration_CL();
+        homePagePO.clickSingleRegistration_CL();
 
         //Navigate back to the ChangeLager website, and confirm
-        homePage.navigateAndValidate_CL();
+        homePagePO.navigateAndValidate_CL();
 
         //Click the 'More Than One' registration button
-        homePage.clickMoreThanOneRegistration_CL();
+        homePagePO.clickMoreThanOneRegistration_CL();
 
         //Navigate back to the ChangeLager website, and confirm
-        homePage.navigateAndValidate_CL();
+        homePagePO.navigateAndValidate_CL();
 
         //Click the down arrow
-        homePage.clickDownArrow_CL();
+        homePagePO.clickDownArrow_CL();
 
         //Click the 'MetaBit, LLC' hyperlink at the bottom of the ChangeLager Home Page
-        homePage.clickMetaBitLink_CL();
+        homePagePO.clickMetaBitLink_CL();
 
         //Validate the page transition
-        homePage.validateNavigation_MBLLC();
+        homePagePO.validateNavigation_MBLLC();
 
         //Navigate back to the ChangeLager website, and confirm
-        homePage.navigateAndValidate_CL();
+        homePagePO.navigateAndValidate_CL();
 
         //Click the "Register" button, and confirm page change
-        homePage.clickRegisterButton_CL();
+        homePagePO.clickRegisterButton_CL();
 
         //Validate navigation to the ChangeLager Registration Page
-        registrationPage.validateNavigation_CL();
+        registrationPagePO.validateNavigation_CL();
 
         //Toggle from the "Developer" option to the "Free" option
-        registrationPage.toggleDevToFree_CL();
+        registrationPagePO.toggleDevToFree_CL();
 
         //Toggle form the "Free" option to the "Developer" option
-        registrationPage.toggleFreeToDev_CL();
+        registrationPagePO.toggleFreeToDev_CL();
 
         //Fill out the 'Profile' section of the Registration Form
-        registrationPage.fillOutProfileSection_CL();
+        registrationPagePO.fillOutProfileSection_CL();
 
         //Fill out the 'Credit Card' section of the Registration Form
-        registrationPage.fillOutCreditCardSection_CL();
+        registrationPagePO.fillOutCreditCardSection_CL();
 
     }
 

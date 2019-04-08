@@ -6,19 +6,19 @@ import com.jmack.Base.Generic;
 import com.jmack.Base.ScreenShot;
 import com.jmack.Base.TestBase;
 
-import com.jmack.Enumerations.ChangeLagerApp.ChangeLager_RegistrationPage;
+import com.jmack.Enumerations.ChangeLagerApp.RegistrationPageENUM;
 
 import io.qameta.allure.Step;
 
 
-public class RegistrationPage extends TestBase {
+public class RegistrationPagePO extends TestBase {
 
 	private Generic generic;
 	private ScreenShot ss;
 	private RuntimeData runtimeData;
 	private String id = "unknown";
 	private String testName = "unknown";
-	private IFrame iFrame;
+	private IFramePO iFrame;
 
 
 	/**
@@ -27,7 +27,7 @@ public class RegistrationPage extends TestBase {
 	 * @param generic
 	 * @param ss
 	 */
-	public RegistrationPage(Generic generic, ScreenShot ss) {
+	public RegistrationPagePO(Generic generic, ScreenShot ss) {
 
 		this.generic = generic;
 		this.ss = ss;
@@ -43,7 +43,7 @@ public class RegistrationPage extends TestBase {
 	 * @param id
 	 * @param testName
 	 */
-	public RegistrationPage(Generic generic, ScreenShot ss, RuntimeData runtimeData, String id, String testName, IFrame iFrame) {
+	public RegistrationPagePO(Generic generic, ScreenShot ss, RuntimeData runtimeData, String id, String testName, IFramePO iFrame) {
 
 		this.generic = generic;
 		this.ss = ss;
@@ -61,7 +61,7 @@ public class RegistrationPage extends TestBase {
 	public void navigateToRegistration_CL(){
 
 		//Open a browser instance and navigate to the ChangeLager Registration URL
-		this.generic.getUrl(ChangeLager_RegistrationPage.text_URL.toString());
+		this.generic.getUrl(RegistrationPageENUM.Text_URL.toString());
 
 	}
 
@@ -72,7 +72,7 @@ public class RegistrationPage extends TestBase {
 	public void confirmHeadTag_CL(){
 
 		//Confirm the Head section of the HTML for the page
-		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.Tag_head.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Tag_Head.toString());
 
 	}
 
@@ -83,7 +83,7 @@ public class RegistrationPage extends TestBase {
 	public void confirmPageTitle_CL(){
 
 		//Confirm the Page Title attribute for the page
-		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.text_pageTitle.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_PageTitle.toString());
 
 	}
 
@@ -123,11 +123,11 @@ public class RegistrationPage extends TestBase {
 	public void toggleDevToFree_CL() {
 
 		// Click the "Free Plan" button on the registration
-		this.generic.clickElement(ChangeLager_RegistrationPage.button_FreePlan.toString());
+		this.generic.clickElement(RegistrationPageENUM.Locator_Button_FreePlan.toString());
 
 		// Confirm the existence of both of plan options
-		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.button_DevPlanSelect.toString());
-		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.button_FreePlanSelected.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_DevPlanSelect.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_FreePlanSelected.toString());
 
 		// Take screenshot to verify successful transition from Dev to Free Plan
 		this.generic.takeScreenShot("of 'Free Plan' being selected");
@@ -142,12 +142,12 @@ public class RegistrationPage extends TestBase {
 	public void toggleFreeToDev_CL() {
 
 		// Click the "Dev Plan" button
-		this.generic.clickElement(ChangeLager_RegistrationPage.button_DevPlan.toString());
+		this.generic.clickElement(RegistrationPageENUM.Locator_Button_DevPlan.toString());
 
 		// Confirm the "Dev Plan" option is selected; confirm the "Free Plan" option is
 		// not selected
-		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.button_DevPlanSelected.toString());
-		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.button_FreePlanSelect.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_DevPlanSelected.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_FreePlanSelect.toString());
 
 		// Take screenshot to verify successful transition from Free to Dev Plan
 		this.generic.takeScreenShot("of 'Dev Plan' being selected");
@@ -161,7 +161,7 @@ public class RegistrationPage extends TestBase {
 	public void fillOutName_CL(){
 
 		// Click the "Name" textbox, and send it input
-		this.generic.sendText(ChangeLager_RegistrationPage.textField_Name.toString(), this.runtimeData.username);
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_Name.toString(), this.runtimeData.username);
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class RegistrationPage extends TestBase {
 	public void fillOutEmail_CL(){
 
 		// Click the "Email" textbox, and send it input
-		this.generic.sendText(ChangeLager_RegistrationPage.textField_Email.toString(), this.runtimeData.userEmail);
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_Email.toString(), this.runtimeData.userEmail);
 
 	}
 
@@ -182,7 +182,7 @@ public class RegistrationPage extends TestBase {
 	public void fillOutPassword_CL(){
 
 		// Click the "Password" textbox, and send it input
-		this.generic.sendText(ChangeLager_RegistrationPage.textField_Password.toString(), this.runtimeData.password);
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_Password.toString(), this.runtimeData.password);
 
 	}
 
@@ -193,7 +193,7 @@ public class RegistrationPage extends TestBase {
 	public void fillOutConfirmPassword_CL(){
 
 		// Click the "Confirm Password" textbox, and send it input
-		this.generic.sendText(ChangeLager_RegistrationPage.textField_ConfirmPassword.toString(), this.runtimeData.password);
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_ConfirmPassword.toString(), this.runtimeData.password);
 
 	}
 
@@ -223,7 +223,7 @@ public class RegistrationPage extends TestBase {
     public void fillInCardholderName_CL(){
 
         // Click the "Cardholder's Name" textbox, and send it input
-        this.generic.sendText(ChangeLager_RegistrationPage.textField_CardholdersName.toString(), "Stinky Stankerton");
+        this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardholdersName.toString(), "Stinky Stankerton");
 
     }
 
@@ -234,7 +234,7 @@ public class RegistrationPage extends TestBase {
     public void fillInCreditOrDebit_CL(){
 
         // Click the "Credit or debit card number" textbox, and send it input
-        this.generic.sendText(ChangeLager_RegistrationPage.textField_CardNumber.toString(),	this.runtimeData.creditCardNumber);
+        this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardNumber.toString(),	this.runtimeData.creditCardNumber);
 
     }
 
@@ -245,7 +245,7 @@ public class RegistrationPage extends TestBase {
     public void fillInCreditOrDebitExpDate_CL(){
 
         // Click the "Credit or debit card expiration date" textbox, and send it input
-        this.generic.sendText(ChangeLager_RegistrationPage.textField_CardExpire.toString(), this.runtimeData.creditCardExpiration);
+        this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardExpire.toString(), this.runtimeData.creditCardExpiration);
 
     }
 
@@ -256,7 +256,7 @@ public class RegistrationPage extends TestBase {
     public void fillInCreditOrDebitCVC_CVV_CL(){
 
         // Click the "Credit or debit card CVC/CVV" textbox, and send it input
-        this.generic.sendText(ChangeLager_RegistrationPage.textField_CardCVC.toString(), this.runtimeData.creditCardCVC);
+        this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardCVC.toString(), this.runtimeData.creditCardCVC);
 
     }
 
@@ -267,7 +267,7 @@ public class RegistrationPage extends TestBase {
     public void fillInZIP_CL(){
 
         // Click the "ZIP / Postal Code" textbox, and send it input
-        this.generic.sendText(ChangeLager_RegistrationPage.textField_ZIPPostalCode.toString(), "11111");
+        this.generic.sendText(RegistrationPageENUM.Locator_TextField_ZIPPostalCode.toString(), "11111");
 
     }
 
@@ -282,7 +282,7 @@ public class RegistrationPage extends TestBase {
         this.fillInCardholderName_CL();
 
 		// Switch to the iFrame containing the textboxes for credit card information
-		this.iFrame.switchToIframe(ChangeLager_RegistrationPage.iFrame_CreditCardInformation.toString());
+		this.iFrame.switchToIframe(RegistrationPageENUM.Locator_iFrame_CreditCardInformation.toString());
 
         //Fill in Credit Or Debit
         this.fillInCreditOrDebit_CL();
@@ -300,7 +300,7 @@ public class RegistrationPage extends TestBase {
         this.fillInZIP_CL();
 
 		// Click the "Terms and Service" checkbox
-		this.generic.clickElement(ChangeLager_RegistrationPage.Locator_checkBox_TermsAndService.toString());
+		this.generic.clickElement(RegistrationPageENUM.Locator_CheckBox_TermsAndService.toString());
 	}
 
 	/**
@@ -310,7 +310,7 @@ public class RegistrationPage extends TestBase {
 	public void clickRegisterButton_CL(){
 
 		//Click the 'Register' button
-		this.generic.clickElement(ChangeLager_RegistrationPage.button_Register.toString());
+		this.generic.clickElement(RegistrationPageENUM.Locator_Button_Register.toString());
 
 	}
 
@@ -322,7 +322,7 @@ public class RegistrationPage extends TestBase {
 
 		//Validate the error message text for the "Name" field is displayed
 		//when the field is blank
-		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.text_BlankNameErrorMessage.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankNameErrorMessage.toString());
 
 	}
 
@@ -334,7 +334,7 @@ public class RegistrationPage extends TestBase {
 
 		//Validate the error message text for the "Email" field is displayed
 		//when the field is blank
-		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.text_BlankEmailErrorMessage.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankEmailErrorMessage.toString());
 
 	}
 
@@ -346,7 +346,7 @@ public class RegistrationPage extends TestBase {
 
 		//Validate the error message text for the "Password" field is displayed
 		//when the field is blank
-		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.text_BlankPasswordErrorMessage.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankPasswordErrorMessage.toString());
 
 	}
 
@@ -358,7 +358,7 @@ public class RegistrationPage extends TestBase {
 
 		//Validate the error message text for the "I Accept The Terms Of Service" checkbox
 		//when the checkbox is not checked
-		this.generic.confirmElementExistence(ChangeLager_RegistrationPage.text_NonCheckedTermsOfServiceErrorMessage.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_NonCheckedTermsOfServiceErrorMessage.toString());
 
 	}
 
@@ -366,20 +366,31 @@ public class RegistrationPage extends TestBase {
 	 * Click the "Terms Of Use" hyperlink
 	 */
 	@Step("Click the 'Terms Of Use' hyperlink")
-	public void clickTermsOfUseHyperlink_CL(){
+	public void clickTermsOfUseHyperLocator_Link_CL(){
 
 		//Click the "Terms Of Use" hyperlink
-		this.generic.clickElement(ChangeLager_RegistrationPage.link_TermsOfUse.toString());
+		this.generic.clickElement(RegistrationPageENUM.Locator_Link_TermsOfUse.toString());
 
 	}
 
 	/**
-	 * Do something with RegistrationPage
+	 * Click the "Have an Account? Login!" hyperlink
+	 */
+	@Step("Click the 'Have an Account? Login!' hyperlink")
+	public void clickHaveAnAccountLogin(){
+
+		//Click the "Have an Account? Login!" hyperlink
+		this.generic.clickElement(RegistrationPageENUM.Locator_Link_HaveAnAccountLogin.toString());
+
+	}
+
+	/**
+	 * Do something with RegistrationPagePO
 	 *
 	 * @param somethingToPass String (used only to change Allure pass/fail
 	 *                        iconography from circle to arrow)
 	 */
-	@Step("Doing something with RegistrationPage")
+	@Step("Doing something with RegistrationPagePO")
 	public void stuff(String somethingToPass) {
 
 		System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on LogInPage>%n", this.id, this.testName, somethingToPass);

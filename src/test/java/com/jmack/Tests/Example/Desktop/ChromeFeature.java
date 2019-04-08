@@ -50,7 +50,7 @@ public class ChromeFeature extends TestBase {
 
 		generic.confirmElementExistence(SearchResults.Mobile_Locator_Text_aholdSearchConfirmation.toString());
 
-//		homePage.stuff("something passed");
+//		homePagePO.stuff("something passed");
 		generic.takeScreenShot("Final confirmation.");
 
 	}

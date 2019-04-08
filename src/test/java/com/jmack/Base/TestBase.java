@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
+import com.jmack.Base.PageObjects.HomePagePO;
+import com.jmack.Base.PageObjects.IFramePO;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -26,10 +28,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-import com.jmack.Base.PageObjects.HomePage;
-import com.jmack.Base.PageObjects.IFrame;
-import com.jmack.Base.PageObjects.LoginPage;
-import com.jmack.Base.PageObjects.RegistrationPage;
+import com.jmack.Base.PageObjects.LoginPagePO;
+import com.jmack.Base.PageObjects.RegistrationPagePO;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -89,10 +89,10 @@ public class TestBase {
 	protected ExcelDataExtractor excelDataExtractor;
 
 	// Page Objects
-	protected HomePage homePage;
-	protected IFrame iFrame;
-	protected LoginPage logInPage;
-	protected RegistrationPage registrationPage;
+	protected HomePagePO homePagePO;
+	protected IFramePO iFrame;
+	protected LoginPagePO logInPage;
+	protected RegistrationPagePO registrationPagePO;
 
 
 	/**
@@ -603,10 +603,10 @@ public class TestBase {
 	@Step("Initialize Page Objects.")
 	private void initializePageObjects() {
 
-		homePage = 			new HomePage(generic, ss, id, testName);
-		iFrame = 			new IFrame(generic, ss, id, testName);
-		logInPage = 		new LoginPage(generic, ss, runtimeData, id, testName);
-		registrationPage = 	new RegistrationPage(generic, ss, runtimeData, id, testName, iFrame); // must be after IFrame
+		homePagePO = 			new HomePagePO(generic, ss, id, testName);
+		iFrame = 			new IFramePO(generic, ss, id, testName);
+		logInPage = 		new LoginPagePO(generic, ss, runtimeData, id, testName);
+		registrationPagePO = 	new RegistrationPagePO(generic, ss, runtimeData, id, testName, iFrame); // must be after IFramePO
 
 		System.out.format("[LOG]: <[%s:%s] page objects loaded>%n", id, testName);
 
@@ -619,7 +619,7 @@ public class TestBase {
 	@Step("Initialize Mobile Page Objects.")
 	private void initializeMobilePageObjects() {
 
-		//homePage = new HomePage(mGeneric, ss, id, testName);
+		//homePagePO = new HomePagePO(mGeneric, ss, id, testName);
 	}
 
 
