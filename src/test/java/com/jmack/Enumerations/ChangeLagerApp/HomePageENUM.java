@@ -11,7 +11,6 @@ public enum HomePageENUM {
     Locator_Button_SignUp("ChangeLagerHome.Locator.Button.SignUp"),
     Locator_Button_Login("ChangeLagerHome.Locator.Button.Login"),
     Locator_Button_Register("ChangeLagerHome.Locator.Button.Register"),
-    Locator_Button_AcceptAllCookies("ChangeLagerHome.Locator.Button.AcceptAllCookies"),
     Locator_Button_DownArrow("ChangeLagerHome.Locator.Button.DownArrow"),
     Locator_Button_Single("ChangeLagerHome.Locator.Button.SingleRegister"),
     Locator_Button_MoreThanOne("ChangeLagerHome.Locator.Button.MoreThanOneRegister"),

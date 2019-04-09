@@ -36,25 +36,23 @@ public class ChangeLager_E2E extends TestBase {
         //Validate all buttons exist
         homePagePO.validateAllButtonsExist_CL();
 
-        //DEPRECATED AS OF 02/04/2019; functionality removed from site
-        //Validate the "Accept All Cookies" button exists
-        //homePagePO.validateAcceptAllCookies_CL();
-
-        //DEPRECATED AS OF 02/04/2019; functionality removed from site
-        //Click the "Accept All Cookies" button
-        //homePagePO.clickAcceptAllCookies_CL();
-
         //Click the down arrow
         homePagePO.clickDownArrow_CL();
 
         //Click the 'Single' registration button
         homePagePO.clickSingleRegistration_CL();
 
+        //Validate navigation to the ChangeLager Registration Page
+        registrationPagePO.validateNavigation_CL();
+
         //Navigate back to the ChangeLager website, and confirm
         homePagePO.navigateAndValidate_CL();
 
         //Click the 'More Than One' registration button
         homePagePO.clickMoreThanOneRegistration_CL();
+
+        //Validate navigation to the ChangeLager Registration Page
+        registrationPagePO.validateNavigation_CL();
 
         //Navigate back to the ChangeLager website, and confirm
         homePagePO.navigateAndValidate_CL();
@@ -76,6 +74,28 @@ public class ChangeLager_E2E extends TestBase {
 
         //Validate navigation to the ChangeLager Registration Page
         registrationPagePO.validateNavigation_CL();
+
+        registrationPagePO.clickRegisterButton_CL();
+
+        registrationPagePO.validateNameErrorMessageVisible_CL();
+        registrationPagePO.validateEmailErrorMessageVisible_CL();
+        registrationPagePO.validatePasswordErrorMessageVisible_CL();
+        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
+
+        registrationPagePO.fillOutName_CL();
+
+        registrationPagePO.clickRegisterButton_CL();
+
+        registrationPagePO.validateEmailErrorMessageVisible_CL();
+        registrationPagePO.validatePasswordErrorMessageVisible_CL();
+        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
+
+        registrationPagePO.fillOutEmail_CL();
+
+        registrationPagePO.clickRegisterButton_CL();
+
+        registrationPagePO.validatePasswordErrorMessageVisible_CL();
+        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
 
         //Toggle from the "Developer" option to the "Free" option
         registrationPagePO.toggleDevToFree_CL();

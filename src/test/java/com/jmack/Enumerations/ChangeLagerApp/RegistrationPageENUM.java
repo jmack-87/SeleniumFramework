@@ -25,12 +25,20 @@ public enum RegistrationPageENUM {
     Locator_TextField_ZIPPostalCode("ChangeLagerRegistration.Locator.textField.ZIPPostalCode"),
     Locator_CheckBox_TermsAndService("ChangeLagerRegistration.Locator.checkBox.TermsAndService"),
     Locator_Button_Register("ChangeLagerRegistration.Locator.Button.Register"),
-    Locator_Text_ErrorMessage("ChangeLagerRegistration.Locator.text.ErrorMessage"),
-    Locator_Text_BlankNameErrorMessage("ChangeLagerRegistration.Locator.text.BlankNameFieldErrorMessage"),
-    Locator_Text_BlankEmailErrorMessage("ChangeLagerRegistration.Locator.text.BlankEmailFieldErrorMessage"),
-    Locator_Text_BlankPasswordErrorMessage("ChangeLagerRegistration.Locator.text.BlankPasswordFieldErrorMessage"),
-    Locator_Text_NonCheckedTermsOfServiceErrorMessage("ChangeLagerRegistration.Locator.text.NonCheckedTermsOfServiceErrorMessage"),
-    Locator_Link_TermsOfUse("ChangeLagerRegistration.Locator.Link.TermsOfService");
+    Locator_Text_ErrorMessageVisible("ChangeLagerRegistration.Locator.text.ErrorMessageVisible"),
+    Locator_Text_BlankNameErrorMessageVisible("ChangeLagerRegistration.Locator.text.BlankNameFieldErrorMessageVisible"),
+    Locator_Text_BlankEmailErrorMessageVisible("ChangeLagerRegistration.Locator.text.BlankEmailFieldErrorMessageVisible"),
+    Locator_Text_BlankPasswordErrorMessageVisible("ChangeLagerRegistration.Locator.text.BlankPasswordFieldErrorMessageVisible"),
+    Locator_Text_NonCheckedTermsOfServiceErrorMessageVisible("ChangeLagerRegistration.Locator.text.NonCheckedTermsOfServiceErrorMessageVisible"),
+    Locator_Text_PasswordsDoNotMatchErrorMessageVisible("ChangeLagerRegistration.Locator.text.PasswordsDoNotMatchErrorMessageVisible"),
+    Locator_Text_ErrorMessageHidden("ChangeLagerRegistration.Locator.text.ErrorMessageHidden"),
+    Locator_Text_BlankNameErrorMessageHidden("ChangeLagerRegistration.Locator.text.BlankNameFieldErrorMessageHidden"),
+    Locator_Text_BlankEmailErrorMessageHidden("ChangeLagerRegistration.Locator.text.BlankEmailFieldErrorMessageHidden"),
+    Locator_Text_BlankPasswordErrorMessageHidden("ChangeLagerRegistration.Locator.text.BlankPasswordFieldErrorMessageHidden"),
+    Locator_Text_NonCheckedTermsOfServiceErrorMessageHidden("ChangeLagerRegistration.Locator.text.NonCheckedTermsOfServiceErrorMessageHidden"),
+    Locator_Text_PasswordsDoNotMatchErrorMessageHidden("ChangeLagerRegistration.Locator.text.PasswordsDoNotMatchErrorMessageHidden"),
+    Locator_Link_TermsOfUse("ChangeLagerRegistration.Locator.Link.TermsOfService"),
+    TermsOfUse_Text_URL("");
 
     // MOBILE
 

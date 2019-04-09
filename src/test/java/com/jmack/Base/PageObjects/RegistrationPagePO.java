@@ -115,6 +115,34 @@ public class RegistrationPagePO extends TestBase {
 		this.validateNavigation_CL();
 	}
 
+	/**
+	 * Validate that the 'Free Plan' option on the page is selected
+	 */
+	@Step("Validate that the 'Free Plan' option on the page is selected")
+	public void validateFreePlanSelected(){
+
+		//Confirm that the 'Free Plan' option is selected
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_FreePlanSelected.toString());
+
+		//Confirm that the 'Developer Plan' option is not selected
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_DevPlanSelect.toString());
+
+	}
+
+	/**
+	 * Validate that the 'Developer Plan' option on the page is selected
+	 */
+	@Step("Validate that the 'Developer Plan' option on the page is selected")
+	public void validateDevPlanSelected(){
+
+		//Confirm that the 'Developer Plan' option is selected
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_DevPlanSelected.toString());
+
+		//Confirm that the 'Free Plan' option is not selected
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_FreePlanSelect.toString());
+
+	}
+
 
 	/**
 	 * Toggle from 'Dev' to 'Free' subscription type, and validate
@@ -125,9 +153,9 @@ public class RegistrationPagePO extends TestBase {
 		// Click the "Free Plan" button on the registration
 		this.generic.clickElement(RegistrationPageENUM.Locator_Button_FreePlan.toString());
 
-		// Confirm the existence of both of plan options
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_DevPlanSelect.toString());
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_FreePlanSelected.toString());
+		// Validate that the 'Free Plan' option is selected, and that the 'Developer Plan'
+		// option is not
+		this.validateFreePlanSelected();
 
 		// Take screenshot to verify successful transition from Dev to Free Plan
 		this.generic.takeScreenShot("of 'Free Plan' being selected");
@@ -146,8 +174,7 @@ public class RegistrationPagePO extends TestBase {
 
 		// Confirm the "Dev Plan" option is selected; confirm the "Free Plan" option is
 		// not selected
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_DevPlanSelected.toString());
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Button_FreePlanSelect.toString());
+		this.validateDevPlanSelected();
 
 		// Take screenshot to verify successful transition from Free to Dev Plan
 		this.generic.takeScreenShot("of 'Dev Plan' being selected");
@@ -318,11 +345,10 @@ public class RegistrationPagePO extends TestBase {
 	 * Validate the error message for the "Name" field is displayed
 	 */
 	@Step("Validate the error message for the 'Name' field is displayed")
-	public void validateNameErrorMessage_CL(){
+	public void validateNameErrorMessageVisible_CL(){
 
 		//Validate the error message text for the "Name" field is displayed
-		//when the field is blank
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankNameErrorMessage.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankNameErrorMessageVisible.toString());
 
 	}
 
@@ -330,11 +356,10 @@ public class RegistrationPagePO extends TestBase {
 	 * Validate the error message for the "Email" field is displayed
 	 */
 	@Step("Validate the error message for the 'Email' field is displayed")
-	public void validateEmailErrorMessage_CL(){
+	public void validateEmailErrorMessageVisible_CL(){
 
 		//Validate the error message text for the "Email" field is displayed
-		//when the field is blank
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankEmailErrorMessage.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankEmailErrorMessageVisible.toString());
 
 	}
 
@@ -342,11 +367,10 @@ public class RegistrationPagePO extends TestBase {
 	 * Validate the error message for the "Password" field is displayed
 	 */
 	@Step("Validate the error message for the 'Password' field is displayed")
-	public void validatePasswordErrorMessage_CL(){
+	public void validatePasswordErrorMessageVisible_CL(){
 
 		//Validate the error message text for the "Password" field is displayed
-		//when the field is blank
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankPasswordErrorMessage.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankPasswordErrorMessageVisible.toString());
 
 	}
 
@@ -354,11 +378,76 @@ public class RegistrationPagePO extends TestBase {
 	 * Validate the error message for the "I Accept The Terms Of Service" checkbox is displayed
 	 */
 	@Step("Validate the error message for the 'I Accept The Terms Of Service' checkbox is displayed")
-	public void validateTermsOfServiceErrorMessage_CL(){
+	public void validateTermsOfServiceErrorMessageVisible_CL(){
 
 		//Validate the error message text for the "I Accept The Terms Of Service" checkbox
-		//when the checkbox is not checked
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_NonCheckedTermsOfServiceErrorMessage.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_NonCheckedTermsOfServiceErrorMessageVisible.toString());
+
+	}
+
+	/**
+	 * Validate the error message for the two password fields not matching is displayed
+	 */
+	@Step("Validate the error message for the two password fields not matching is displayed")
+	public void validatePasswordsDoNotMatchErrorMessageVisible_CL(){
+
+		//Validate the error message is visible
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_PasswordsDoNotMatchErrorMessageVisible.toString());
+
+	}
+
+	/**
+	 * Validate the error message for the "Name" field is not displayed
+	 */
+	@Step("Validate the error message for the 'Name' field is not displayed")
+	public void validateNameErrorMessageHidden_CL(){
+
+		//Validate the error message text for the "Name" field is not displayed
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankNameErrorMessageHidden.toString());
+
+	}
+
+	/**
+	 * Validate the error message for the "Email" field is not displayed
+	 */
+	@Step("Validate the error message for the 'Email' field is not displayed")
+	public void validateEmailErrorMessageHidden_CL(){
+
+		//Validate the error message text for the "Email" field is displayed
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankEmailErrorMessageHidden.toString());
+
+	}
+
+	/**
+	 * Validate the error message for the "Password" field is not displayed
+	 */
+	@Step("Validate the error message for the 'Password' field is not displayed")
+	public void validatePasswordErrorMessageHidden_CL(){
+
+		//Validate the error message text for the "Password" field is displayed
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankPasswordErrorMessageHidden.toString());
+
+	}
+
+	/**
+	 * Validate the error message for the "I Accept The Terms Of Service" checkbox is not displayed
+	 */
+	@Step("Validate the error message for the 'I Accept The Terms Of Service' checkbox is not displayed")
+	public void validateTermsOfServiceErrorMessageHidden_CL(){
+
+		//Validate the error message text for the "I Accept The Terms Of Service" checkbox
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_NonCheckedTermsOfServiceErrorMessageHidden.toString());
+
+	}
+
+	/**
+	 * Validate the error message for the two password fields not matching is not displayed
+	 */
+	@Step("Validate the error message for the two password fields not matching is not displayed")
+	public void validatePasswordsDoNotMatchErrorMessageHidden_CL(){
+
+		//Validate the error message is hidden
+		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_PasswordsDoNotMatchErrorMessageHidden.toString());
 
 	}
 
@@ -366,7 +455,7 @@ public class RegistrationPagePO extends TestBase {
 	 * Click the "Terms Of Use" hyperlink
 	 */
 	@Step("Click the 'Terms Of Use' hyperlink")
-	public void clickTermsOfUseHyperLocator_Link_CL(){
+	public void clickTermsOfUseHyperLink_CL(){
 
 		//Click the "Terms Of Use" hyperlink
 		this.generic.clickElement(RegistrationPageENUM.Locator_Link_TermsOfUse.toString());
