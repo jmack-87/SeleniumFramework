@@ -31,12 +31,6 @@ public enum RegistrationPageENUM {
     Locator_Text_BlankPasswordErrorMessageVisible("ChangeLagerRegistration.Locator.text.BlankPasswordFieldErrorMessageVisible"),
     Locator_Text_NonCheckedTermsOfServiceErrorMessageVisible("ChangeLagerRegistration.Locator.text.NonCheckedTermsOfServiceErrorMessageVisible"),
     Locator_Text_PasswordsDoNotMatchErrorMessageVisible("ChangeLagerRegistration.Locator.text.PasswordsDoNotMatchErrorMessageVisible"),
-    Locator_Text_ErrorMessageHidden("ChangeLagerRegistration.Locator.text.ErrorMessageHidden"),
-    Locator_Text_BlankNameErrorMessageHidden("ChangeLagerRegistration.Locator.text.BlankNameFieldErrorMessageHidden"),
-    Locator_Text_BlankEmailErrorMessageHidden("ChangeLagerRegistration.Locator.text.BlankEmailFieldErrorMessageHidden"),
-    Locator_Text_BlankPasswordErrorMessageHidden("ChangeLagerRegistration.Locator.text.BlankPasswordFieldErrorMessageHidden"),
-    Locator_Text_NonCheckedTermsOfServiceErrorMessageHidden("ChangeLagerRegistration.Locator.text.NonCheckedTermsOfServiceErrorMessageHidden"),
-    Locator_Text_PasswordsDoNotMatchErrorMessageHidden("ChangeLagerRegistration.Locator.text.PasswordsDoNotMatchErrorMessageHidden"),
     Locator_Link_TermsOfUse("ChangeLagerRegistration.Locator.Link.TermsOfService"),
     TermsOfUse_Text_URL("");
 

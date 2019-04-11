@@ -189,6 +189,7 @@ public class RegistrationPagePO extends TestBase {
 
 		// Click the "Name" textbox, and send it input
 		this.generic.sendText(RegistrationPageENUM.Locator_TextField_Name.toString(), this.runtimeData.username);
+
 	}
 
 	/**
@@ -241,6 +242,7 @@ public class RegistrationPagePO extends TestBase {
 
 		// Click the "Confirm Password" textbox, and send it input
 		this.fillOutConfirmPassword_CL();
+
 	}
 
     /**
@@ -298,8 +300,18 @@ public class RegistrationPagePO extends TestBase {
 
     }
 
+	/**
+	 * Click the 'I Accept The Terms Of Service' checkbox
+	 */
+	@Step("Click the 'I Accept The Terms Of Service' checkbox")
+	public void clickTermsOfServiceCheckbox_CL(){
 
-    /**
+		//Click the checkbox
+		this.generic.clickElement(RegistrationPageENUM.Locator_CheckBox_TermsAndService.toString());
+
+	}
+
+	/**
 	 * Fill out the 'Credit Card' section of the Registration Form
 	 */
 	@Step("Fill out the 'Credit Card' section of the form")
@@ -327,7 +339,8 @@ public class RegistrationPagePO extends TestBase {
         this.fillInZIP_CL();
 
 		// Click the "Terms and Service" checkbox
-		this.generic.clickElement(RegistrationPageENUM.Locator_CheckBox_TermsAndService.toString());
+		this.clickTermsOfServiceCheckbox_CL();
+
 	}
 
 	/**
@@ -393,61 +406,6 @@ public class RegistrationPagePO extends TestBase {
 
 		//Validate the error message is visible
 		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_PasswordsDoNotMatchErrorMessageVisible.toString());
-
-	}
-
-	/**
-	 * Validate the error message for the "Name" field is not displayed
-	 */
-	@Step("Validate the error message for the 'Name' field is not displayed")
-	public void validateNameErrorMessageHidden_CL(){
-
-		//Validate the error message text for the "Name" field is not displayed
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankNameErrorMessageHidden.toString());
-
-	}
-
-	/**
-	 * Validate the error message for the "Email" field is not displayed
-	 */
-	@Step("Validate the error message for the 'Email' field is not displayed")
-	public void validateEmailErrorMessageHidden_CL(){
-
-		//Validate the error message text for the "Email" field is displayed
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankEmailErrorMessageHidden.toString());
-
-	}
-
-	/**
-	 * Validate the error message for the "Password" field is not displayed
-	 */
-	@Step("Validate the error message for the 'Password' field is not displayed")
-	public void validatePasswordErrorMessageHidden_CL(){
-
-		//Validate the error message text for the "Password" field is displayed
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_BlankPasswordErrorMessageHidden.toString());
-
-	}
-
-	/**
-	 * Validate the error message for the "I Accept The Terms Of Service" checkbox is not displayed
-	 */
-	@Step("Validate the error message for the 'I Accept The Terms Of Service' checkbox is not displayed")
-	public void validateTermsOfServiceErrorMessageHidden_CL(){
-
-		//Validate the error message text for the "I Accept The Terms Of Service" checkbox
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_NonCheckedTermsOfServiceErrorMessageHidden.toString());
-
-	}
-
-	/**
-	 * Validate the error message for the two password fields not matching is not displayed
-	 */
-	@Step("Validate the error message for the two password fields not matching is not displayed")
-	public void validatePasswordsDoNotMatchErrorMessageHidden_CL(){
-
-		//Validate the error message is hidden
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_PasswordsDoNotMatchErrorMessageHidden.toString());
 
 	}
 

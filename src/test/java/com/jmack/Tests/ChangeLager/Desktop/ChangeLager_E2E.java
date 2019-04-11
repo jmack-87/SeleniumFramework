@@ -75,30 +75,62 @@ public class ChangeLager_E2E extends TestBase {
         //Validate navigation to the ChangeLager Registration Page
         registrationPagePO.validateNavigation_CL();
 
-        registrationPagePO.clickRegisterButton_CL();
-
-        registrationPagePO.validateNameErrorMessageVisible_CL();
-        registrationPagePO.validateEmailErrorMessageVisible_CL();
-        registrationPagePO.validatePasswordErrorMessageVisible_CL();
-        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
-
-        registrationPagePO.fillOutName_CL();
-
-        registrationPagePO.clickRegisterButton_CL();
-
-        registrationPagePO.validateEmailErrorMessageVisible_CL();
-        registrationPagePO.validatePasswordErrorMessageVisible_CL();
-        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
-
-        registrationPagePO.fillOutEmail_CL();
-
-        registrationPagePO.clickRegisterButton_CL();
-
-        registrationPagePO.validatePasswordErrorMessageVisible_CL();
-        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
-
         //Toggle from the "Developer" option to the "Free" option
         registrationPagePO.toggleDevToFree_CL();
+
+        //Click the "Register" button, and confirm page change
+        registrationPagePO.clickRegisterButton_CL();
+
+        //Validate the "Name" fields error message is visible
+        registrationPagePO.validateNameErrorMessageVisible_CL();
+
+        //Validate the "Email" fields error message is visible
+        registrationPagePO.validateEmailErrorMessageVisible_CL();
+
+        //Validate the "Password" fields error message is visible
+        registrationPagePO.validatePasswordErrorMessageVisible_CL();
+
+        //Validate the "Terms Of Service" error message is visible
+        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
+
+        //Fill in the "Name" field
+        registrationPagePO.fillOutName_CL();
+
+        //Click the "Register" button
+        registrationPagePO.clickRegisterButton_CL();
+
+        //Validate the "Email" error message is still visible
+        registrationPagePO.validateEmailErrorMessageVisible_CL();
+
+        //Validate the "Password" error message is still visible
+        registrationPagePO.validatePasswordErrorMessageVisible_CL();
+
+        //Validate the "Terms Of Service" error message is still visible
+        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
+
+        //Fill in the "Email" field
+        registrationPagePO.fillOutEmail_CL();
+
+        //Click the "Register" button
+        registrationPagePO.clickRegisterButton_CL();
+
+        //Validate the "Password" error message is still visible
+        registrationPagePO.validatePasswordErrorMessageVisible_CL();
+
+        //Validate the "Terms Of Service" error message is still visible
+        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
+
+        //Fill in the "Password" field
+        registrationPagePO.fillOutPassword_CL();
+
+        //Click the "Register" button
+        registrationPagePO.clickRegisterButton_CL();
+
+        //Validate the "Terms Of Service" error message is still visible
+        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
+
+        //Click the "Terms Of Service" checkbox
+        registrationPagePO.clickTermsOfServiceCheckbox_CL();
 
         //Toggle form the "Free" option to the "Developer" option
         registrationPagePO.toggleFreeToDev_CL();
