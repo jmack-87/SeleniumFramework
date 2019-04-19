@@ -150,14 +150,14 @@ public class RegistrationPagePO extends TestBase {
 	@Step("Switch from 'Dev' to 'Free' subscription type")
 	public void toggleDevToFree_CL() {
 
-		// Click the "Free Plan" button on the registration
+		//Click the "Free Plan" button on the registration
 		this.generic.clickElement(RegistrationPageENUM.Locator_Button_FreePlan.toString());
 
-		// Validate that the 'Free Plan' option is selected, and that the 'Developer Plan'
-		// option is not
+		//Validate that the 'Free Plan' option is selected, and that the 'Developer Plan'
+		//option is not
 		this.validateFreePlanSelected();
 
-		// Take screenshot to verify successful transition from Dev to Free Plan
+		//Take screenshot to verify successful transition from Dev to Free Plan
 		this.generic.takeScreenShot("of 'Free Plan' being selected");
 
 	}
@@ -169,59 +169,103 @@ public class RegistrationPagePO extends TestBase {
 	@Step("Switch from 'Free' to 'Dev' subscription type")
 	public void toggleFreeToDev_CL() {
 
-		// Click the "Dev Plan" button
+		//Click the "Dev Plan" button
 		this.generic.clickElement(RegistrationPageENUM.Locator_Button_DevPlan.toString());
 
-		// Confirm the "Dev Plan" option is selected; confirm the "Free Plan" option is
-		// not selected
+		//Confirm the "Dev Plan" option is selected; confirm the "Free Plan" option is
+		//not selected
 		this.validateDevPlanSelected();
 
-		// Take screenshot to verify successful transition from Free to Dev Plan
+		//Take screenshot to verify successful transition from Free to Dev Plan
 		this.generic.takeScreenShot("of 'Dev Plan' being selected");
 
 	}
 
 	/**
-	 * Fill in the 'Name' text field of the profile section on the ChangeLager registration page
+	 * Fill in the 'Name' textbox of the profile section on the ChangeLager registration page
 	 */
-	@Step("Fill in the 'Name' text field - Profile Section")
+	@Step("Fill in the 'Name' textbox - Profile Section")
 	public void fillOutName_CL(){
 
-		// Click the "Name" textbox, and send it input
+		//Click the "Name" textbox, and send it input
 		this.generic.sendText(RegistrationPageENUM.Locator_TextField_Name.toString(), this.runtimeData.username);
 
 	}
 
 	/**
-	 * Fill in the 'Email' text field of the profile section on the ChangeLager registration page
+	 * Clear the input from the 'Name' textbox
 	 */
-	@Step("Fill in the 'Email' text field - Profile Section")
+	@Step("Clear input from the 'Name' textbox")
+	public void clearOutName_CL(){
+
+		//Click the "Name" textbox, clear it, and send it nothing
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_Name.toString(), "");
+
+	}
+
+	/**
+	 * Fill in the 'Email' textbox of the profile section on the ChangeLager registration page
+	 */
+	@Step("Fill in the 'Email' textbox - Profile Section")
 	public void fillOutEmail_CL(){
 
-		// Click the "Email" textbox, and send it input
+		//Click the "Email" textbox, and send it input
 		this.generic.sendText(RegistrationPageENUM.Locator_TextField_Email.toString(), this.runtimeData.userEmail);
 
 	}
 
 	/**
-	 * Fill in the 'Password' text field of the profile section on the ChangeLager registration page
+	 * Clear the input from the 'Email' textbox
 	 */
-	@Step("Fill in the 'Password' text field - Profile Section")
+	@Step("Clear input from the 'Email' textbox")
+	public void clearOutEmail_CL(){
+
+		//Click the "Email" textbox, clear it, and send it nothing
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_Email.toString(), "");
+
+	}
+
+	/**
+	 * Fill in the 'Password' textbox of the profile section on the ChangeLager registration page
+	 */
+	@Step("Fill in the 'Password' textbox - Profile Section")
 	public void fillOutPassword_CL(){
 
-		// Click the "Password" textbox, and send it input
+		//Click the "Password" textbox, and send it input
 		this.generic.sendText(RegistrationPageENUM.Locator_TextField_Password.toString(), this.runtimeData.password);
 
 	}
 
 	/**
-	 * Fill in the 'Confirm Password' text field of the profile section on the ChangeLager registration page
+	 * Clear the input from the 'Password' textbox
 	 */
-	@Step("Fill in the 'Confirm Password' text field - Profile Section")
+	@Step("Clear input from the 'Password' textbox")
+	public void clearOutPassword_CL(){
+
+		//Click the "Password" textbox, clear it, and send it nothing
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_Password.toString(), "");
+
+	}
+
+	/**
+	 * Fill in the 'Confirm Password' textbox of the profile section on the ChangeLager registration page
+	 */
+	@Step("Fill in the 'Confirm Password' textbox - Profile Section")
 	public void fillOutConfirmPassword_CL(){
 
-		// Click the "Confirm Password" textbox, and send it input
+		//Click the "Confirm Password" textbox, and send it input
 		this.generic.sendText(RegistrationPageENUM.Locator_TextField_ConfirmPassword.toString(), this.runtimeData.password);
+
+	}
+
+	/**
+	 * Clear the input from the 'Confirm Password' textbox
+	 */
+	@Step("Clear input from the 'Confirm Password' textbox")
+	public void clearOutConfirmPassword_CL(){
+
+		//Click the "Confirm Password" textbox, clear it, and send it nothing
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_ConfirmPassword.toString(), "");
 
 	}
 
@@ -231,19 +275,38 @@ public class RegistrationPagePO extends TestBase {
 	@Step("Fill out the 'Profile' section of the form")
 	public void fillOutProfileSection_CL() {
 
-		// Click the "Name" textbox, and send it input
+		//Click the "Name" textbox, and send it input
 		this.fillOutName_CL();
 
-		// Click the "Email" textbox, and send it input
+		//Click the "Email" textbox, and send it input
 		this.fillOutEmail_CL();
 
-		// Click the "Password" textbox, and send it input
+		//Click the "Password" textbox, and send it input
 		this.fillOutPassword_CL();
 
-		// Click the "Confirm Password" textbox, and send it input
+		//Click the "Confirm Password" textbox, and send it input
 		this.fillOutConfirmPassword_CL();
 
 	}
+
+	/**
+	 * Clear input from the 'Profile' section of the Registration Form
+	 */
+	@Step("Clear all input from the 'Profile' section of the Registration Form")
+	public void clearOutProfileSection_CL() {
+
+		//Click the "Name" textbox, clear it, and send it nothing
+		this.clearOutName_CL();
+
+		//Click the "Email" textbox, clear it, and send it nothing
+		this.clearOutEmail_CL();
+
+		//Click the "Password" textbox, clear it, and send it nothing
+		this.clearOutPassword_CL();
+
+		//Click the "Confirm Password" textbox, clear it, and send it nothing
+		this.clearOutConfirmPassword_CL();
+}
 
     /**
      * Fill in the "Carholder's Name" textbox on the form
@@ -251,10 +314,21 @@ public class RegistrationPagePO extends TestBase {
     @Step("Fill in 'Cardholder's Name' textbox")
     public void fillInCardholderName_CL(){
 
-        // Click the "Cardholder's Name" textbox, and send it input
+        //Click the "Cardholder's Name" textbox, and send it input
         this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardholdersName.toString(), "Stinky Stankerton");
 
     }
+
+	/**
+	 * Clear the input from the "Cardholder's Name" textbox
+	 */
+	@Step("Clear input from the 'Cardholder's Name' textbox")
+	public void clearOutCardholderName_CL(){
+
+		//Click the "Cardholder's Name" textbox, clear it, and send it nothing
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardholdersName.toString(), "");
+
+	}
 
     /**
      * Fill in the "Credit or debit card number" textbox on the form
@@ -262,21 +336,43 @@ public class RegistrationPagePO extends TestBase {
     @Step("Fill in 'Credit or debit card number' textbox")
     public void fillInCreditOrDebit_CL(){
 
-        // Click the "Credit or debit card number" textbox, and send it input
+        //Click the "Credit or debit card number" textbox, and send it input
         this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardNumber.toString(),	this.runtimeData.creditCardNumber);
 
     }
 
-    /**
+	/**
+	 * Clear the input from the "Credit or debit card number" textbox
+	 */
+	@Step("Clear input from the 'Credit or debit card number' textbox")
+	public void clearOutCreditOrDebit_CL(){
+
+		//Click the "Credit or debit card number" textbox, clear it, and send it nothing
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardNumber.toString(), "");
+
+	}
+
+	/**
      * Fill in the "Credit or debit expiration date" textbox on the form
      */
     @Step("Fill in the 'Credit or debit expiration date' textbox")
     public void fillInCreditOrDebitExpDate_CL(){
 
-        // Click the "Credit or debit card expiration date" textbox, and send it input
+        //Click the "Credit or debit card expiration date" textbox, and send it input
         this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardExpire.toString(), this.runtimeData.creditCardExpiration);
 
     }
+
+	/**
+	 * Clear the input from the "Credit or debit expiration date" textbox
+	 */
+	@Step("Clear input from the 'Credit or debit expiration date' textbox")
+	public void clearOutCreditOrDebitExpDate_CL(){
+
+		//Click the "Credit or debit expiration date" textbox, clear it, and send it nothing
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardExpire.toString(), "");
+
+	}
 
     /**
      * Fill in the "Credit or debit CVC/CVV" textbox on the form
@@ -284,21 +380,43 @@ public class RegistrationPagePO extends TestBase {
     @Step("Fill in the 'Credit or debit CVC/CVV' textbox")
     public void fillInCreditOrDebitCVC_CVV_CL(){
 
-        // Click the "Credit or debit card CVC/CVV" textbox, and send it input
+        //Click the "Credit or debit card CVC/CVV" textbox, and send it input
         this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardCVC.toString(), this.runtimeData.creditCardCVC);
 
     }
 
-    /**
+	/**
+	 * Clear the input from the "Credit or debit CVC/CVV" textbox
+	 */
+	@Step("Clear input from the 'Credit or debit CVC/CVV' textbox")
+	public void clearOutCreditOrDebitCVC_CVV_CL(){
+
+		//Click the "Credit or debit CVC/CVV" textbox, clear it, and send it nothing
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_CardCVC.toString(), "");
+
+	}
+
+	/**
      * Fill in the "ZIP / Postal Code" textbox on the form
      */
     @Step("Fill in the 'ZIP / Postal Code' textbox")
     public void fillInZIP_CL(){
 
-        // Click the "ZIP / Postal Code" textbox, and send it input
+        //Click the "ZIP / Postal Code" textbox, and send it input
         this.generic.sendText(RegistrationPageENUM.Locator_TextField_ZIPPostalCode.toString(), "11111");
 
     }
+
+	/**
+	 * Clear the input from the "ZIP / Postal Code" textbox
+	 */
+	@Step("Clear input from the 'ZIP / Postal Code' textbox")
+	public void clearOutZIP_CL(){
+
+		//Click the "ZIP / Postal Code" textbox, clear it, and send it nothing
+		this.generic.sendText(RegistrationPageENUM.Locator_TextField_ZIPPostalCode.toString(), "");
+
+	}
 
 	/**
 	 * Click the 'I Accept The Terms Of Service' checkbox
@@ -320,7 +438,7 @@ public class RegistrationPagePO extends TestBase {
         //Fill in Cardholder's Name
         this.fillInCardholderName_CL();
 
-		// Switch to the iFrame containing the textboxes for credit card information
+		//Switch to the iFrame containing the textboxes for credit card information
 		this.iFrame.switchToIframe(RegistrationPageENUM.Locator_iFrame_CreditCardInformation.toString());
 
         //Fill in Credit Or Debit
@@ -332,14 +450,71 @@ public class RegistrationPagePO extends TestBase {
         //Fill in Credit or Debit CVC
         this.fillInCreditOrDebitCVC_CVV_CL();
 
-        // Step out of the iframe, and back into the default context of the webpage
+        //Step out of the iframe, and back into the default context of the webpage
 		this.iFrame.switchToDefault();
 
 		//Fill in Zip Code
         this.fillInZIP_CL();
 
-		// Click the "Terms and Service" checkbox
+		//Click the "Terms and Service" checkbox
 		this.clickTermsOfServiceCheckbox_CL();
+
+	}
+
+	/**
+	 * Clear input from the 'Credit Card' section of the Registration Form
+	 */
+	@Step("Clear all input from the 'Credit Card' section of the Registration Form")
+	public void clearOutCreditCardSection_CL() {
+
+		//Click the "Cardholder's Name" textbox, clear it, and send it nothing
+		this.clearOutCardholderName_CL();
+
+		//Switch to the iFrame containing the textboxes for credit card information
+		this.iFrame.switchToIframe(RegistrationPageENUM.Locator_iFrame_CreditCardInformation.toString());
+
+		//Click the "Credit or debit card number" textbox, clear it, and send it nothing
+		this.clearOutCreditOrDebit_CL();
+
+		//Click the "Credit or debit expiration date" textbox, clear it, and send it nothing
+		this.clearOutCreditOrDebitExpDate_CL();
+
+		//Click the "Credit or debit CVC/CVV" textbox, clear it, and send it nothing
+		this.clearOutCreditOrDebitCVC_CVV_CL();
+
+		//Step out of the iframe, and back into the default context of the webpage
+		this.iFrame.switchToDefault();
+
+		//Click the "ZIP / Postal Code" textbox, clear it, and send it nothing
+		this.clearOutZIP_CL();
+
+	}
+
+	/**
+	 * Fill out the entire Registration Form
+	 */
+	@Step("Fill out the entire Registration Form")
+	public void fillOutEntireRegistrationForm_CL(){
+
+		//Fill out the "Profile" section of the Registration Form
+		this.fillOutProfileSection_CL();
+
+		//Fill out the "Credit Card section" of the Registration Form
+		this.fillOutCreditCardSection_CL();
+		
+	}
+
+	/**
+	 * Clear input from the entire Registration Form
+	 */
+	@Step("Clear input from the entire Registration Form")
+	public void clearOutEntireRegistrationForm_CL(){
+
+		//Clear input from the "Profile" section of the Registration Form
+		this.clearOutProfileSection_CL();
+
+		//Clear input from the "Credit Card" section of the Registration Form
+		this.clearOutCreditCardSection_CL();
 
 	}
 
@@ -442,11 +617,11 @@ public class RegistrationPagePO extends TestBase {
 
 		System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on LogInPage>%n", this.id, this.testName, somethingToPass);
 
-		this.ss.assertTrue(true, "Some message if fail."); // example of an assertion with screenshot on fail
-		// ss.takeScreenShot("Some description"); // example of taking screenshot, on
-		// demand
-		// generic.clickElement("Some.Property.Key"); // example of using generic
-		// methods
+		this.ss.assertTrue(true, "Some message if fail."); //example of an assertion with screenshot on fail
+		//ss.takeScreenShot("Some description"); //example of taking screenshot, on
+		//demand
+		//generic.clickElement("Some.Property.Key"); //example of using generic
+		//methods
 
 	}
 
