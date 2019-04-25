@@ -410,7 +410,7 @@ public class TestBase {
 			case "androidnative":
 				caps = new DesiredCapabilities();
 				// optional
-				caps.setCapability("automationName", "UIAutomator2");
+				caps.setCapability("automationName", "Appium");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", runtimeData.deviceName);
@@ -423,7 +423,7 @@ public class TestBase {
 			case "androidchrome":
 				caps = DesiredCapabilities.android();
 				// optional
-				caps.setCapability("automationName", "UIAutomator2");
+				caps.setCapability("automationName", "Appium");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", runtimeData.deviceName);
