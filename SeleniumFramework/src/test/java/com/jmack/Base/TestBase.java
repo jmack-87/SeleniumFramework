@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
+import com.jmack.Base.PageObjects.HomePagePO;
+import com.jmack.Base.PageObjects.IFramePO;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -26,9 +28,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-import com.jmack.Base.PageObjects.HomePagePO;
-import com.jmack.Base.PageObjects.IFramePO;
-import com.jmack.Base.PageObjects.LogInPagePO;
+import com.jmack.Base.PageObjects.LoginPagePO;
 import com.jmack.Base.PageObjects.RegistrationPagePO;
 
 import io.appium.java_client.AppiumDriver;
@@ -89,10 +89,10 @@ public class TestBase {
 	protected ExcelDataExtractor excelDataExtractor;
 
 	// Page Objects
-	protected HomePagePO homePage;
+	protected HomePagePO homePagePO;
 	protected IFramePO iFrame;
-	protected LogInPagePO logInPage;
-	protected RegistrationPagePO registrationPage;
+	protected LoginPagePO logInPage;
+	protected RegistrationPagePO registrationPagePO;
 
 
 	/**
@@ -318,6 +318,7 @@ public class TestBase {
 			case "androidchrome":
 				caps = DesiredCapabilities.android();
 				// optional
+				//caps.setCapability("automationName", "Appium");
 				caps.setCapability("automationName", "UIAutomator2");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
@@ -410,7 +411,7 @@ public class TestBase {
 			case "androidnative":
 				caps = new DesiredCapabilities();
 				// optional
-				caps.setCapability("automationName", "Appium");
+				caps.setCapability("automationName", "UIAutomator2");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", runtimeData.deviceName);
@@ -423,7 +424,7 @@ public class TestBase {
 			case "androidchrome":
 				caps = DesiredCapabilities.android();
 				// optional
-				caps.setCapability("automationName", "Appium");
+				caps.setCapability("automationName", "UIAutomator2");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", runtimeData.deviceName);
@@ -603,10 +604,10 @@ public class TestBase {
 	@Step("Initialize Page Objects.")
 	private void initializePageObjects() {
 
-		homePage = 			new HomePagePO				(generic, ss, id, testName);
-		iFrame = 			new IFramePO				(generic, ss, id, testName);
-		logInPage = 		new LogInPagePO				(generic, ss, id, testName);
-		registrationPage = 	new RegistrationPagePO		(generic, ss, runtimeData, id, testName, iFrame); // must be after IFramePO
+		homePagePO = 			new HomePagePO(generic, ss, id, testName);
+		iFrame = 			new IFramePO(generic, ss, id, testName);
+		logInPage = 		new LoginPagePO(generic, ss, runtimeData, id, testName);
+		registrationPagePO = 	new RegistrationPagePO(generic, ss, runtimeData, id, testName, iFrame); // must be after IFramePO
 
 		System.out.format("[LOG]: <[%s:%s] page objects loaded>%n", id, testName);
 
@@ -619,7 +620,7 @@ public class TestBase {
 	@Step("Initialize Mobile Page Objects.")
 	private void initializeMobilePageObjects() {
 
-		//homePage = new HomePage(mGeneric, ss, id, testName);
+		//homePagePO = new HomePagePO(mGeneric, ss, id, testName);
 	}
 
 
