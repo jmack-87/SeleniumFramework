@@ -366,7 +366,7 @@
 					<version>2.10.0</version>
 					<configuration>
 						<reportVersion>2.10.0</reportVersion>
-						<allureDownloadUrl>https://dl.bintray.com/qameta/maven/io/qameta/allure/allure-commandline/2.10.0/allure-commandline-2.10.0.zip</allureDownloadUrl>
+						<allureDownloadUrl>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.10.0/allure-commandline-2.10.0.zip</allureDownloadUrl>
 					</configuration>
 				</plugin>
 			</plugins>
