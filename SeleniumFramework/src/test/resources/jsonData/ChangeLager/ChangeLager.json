@@ -1,0 +1,106 @@
+{
+	"Tests": [
+		{
+			"FOR REFERENCE": {
+				"gridType": "REQUIRED: perfecto|local",
+				"platformName": "REQUIRED: Mac|Windows|Android|iOS",
+				"platformVersion": "integer number or 'macOS High Sierra'",
+				"browserName": "desktop{Chrome|Ie|Edge|Firefox}|{android|ios}{Chrome|Native|Safari}",
+				"browserVersion": "integer|latest|beta",
+				"location": "REQUIRED(Mac): perfecto location",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM"
+			},
+			"ChangeLager_E2ETest": {
+				"gridType": "local",
+				"platformName": "Windows",
+				"platformVersion": "10",
+				"browserName": "desktopFirefox",
+				"browserVersion": "latest",
+				"location": "NA-US-BOS",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM",
+				"headless": "false",
+				"username": "userName",
+				"password": "passWord",
+				"creditCardNumber": "1111111111111111",
+				"creditCardExpiration": "0122",
+				"creditCardCVC": "000",
+				"userEmail": "testemail@example.com"
+			},
+			"ChromeTest": {
+				"gridType": "local",
+				"browserName": "desktopFirefox",
+				"platformName": "Windows",
+				"platform": "windows 10",
+				"platformVersion": "10",
+				"browserVersion": "latest",
+				"resolution": "1024x768",
+				"location": "NA-US-BOS",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM",
+				"headless": "false"
+			},
+			"SafariTest": {
+				"gridType": "local",
+				"browserName": "desktopSafari",
+				"searchString": "Santander Bank",
+				"searchConfirmationString": "Santander Bank"
+			},
+			"FirefoxTest": {
+				"gridType": "local",
+				"browserName": "desktopFirefox",
+				"searchString": "Santander Bank",
+				"searchConfirmationString": "Santander Bank"
+			},
+			"EdgeTest": {
+				"gridType": "local",
+				"browserName": "desktopEdge",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM"
+			},
+			"IeTest": {
+				"gridType": "local",
+				"browserName": "desktopIe",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM"
+			},
+			"AndroidChromeTest": {
+				"gridType": "local",
+				"platformName": "Android",
+				"platformVersion": "8",
+				"browserName": "androidChrome",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM"
+			},
+			"AndroidNativeTest": {
+				"gridType": "perfecto",
+				"platformName": "Android",
+				"platformVersion": "[78].*",
+				"browserName": "androidNative",
+				"appPackage": "com.google.android.gm",
+				"appActivity": ".ui.MailActivityGmail"
+			},
+			"IosSafariTest": {
+				"gridType": "perfecto",
+				"platformName": "iOS",
+				"platformVersion": "11.*",
+				"browserName": "iosSafari",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM"
+			},
+			"IosNativeTest": {
+				"gridType": "perfecto",
+				"platformName": "iOS",
+				"platformVersion": "11.*",
+				"browserName": "iosNative",
+				"bundleId": "com.apple.Preferences"
+			}
+		}
+	],
+	"System Options": [
+		{
+			"Opt1": "system option"
+		}
+	]
+}
