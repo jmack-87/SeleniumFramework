@@ -31,63 +31,115 @@ public class ChangeLager_E2E extends TestBase {
     public void ChangeLager_E2ETest() {
 
         //Navigate to the ChangeLager website, and confirm
-        homePage.navigateAndValidate_CL();
+        homePagePO.navigateAndValidate_CL();
 
         //Validate all buttons exist
-        homePage.validateAllButtonsExist_CL();
-
-        //DEPRECATED AS OF 02/04/2019; functionality removed from site
-        //Validate the "Accept All Cookies" button exists
-        //homePage.validateAcceptAllCookies_CL();
-
-        //DEPRECATED AS OF 02/04/2019; functionality removed from site
-        //Click the "Accept All Cookies" button
-        //homePage.clickAcceptAllCookies_CL();
+        homePagePO.validateAllButtonsExist_CL();
 
         //Click the down arrow
-        homePage.clickDownArrow_CL();
+        homePagePO.clickDownArrow_CL();
 
         //Click the 'Single' registration button
-        homePage.clickSingleRegistration_CL();
-
-        //Navigate back to the ChangeLager website, and confirm
-        homePage.navigateAndValidate_CL();
-
-        //Click the 'More Than One' registration button
-        homePage.clickMoreThanOneRegistration_CL();
-
-        //Navigate back to the ChangeLager website, and confirm
-        homePage.navigateAndValidate_CL();
-
-        //Click the down arrow
-        homePage.clickDownArrow_CL();
-
-        //Click the 'MetaBit, LLC' hyperlink at the bottom of the ChangeLager Home Page
-        homePage.clickMetaBitLink_CL();
-
-        //Validate the page transition
-        homePage.validateNavigation_MBLLC();
-
-        //Navigate back to the ChangeLager website, and confirm
-        homePage.navigateAndValidate_CL();
-
-        //Click the "Register" button, and confirm page change
-        homePage.clickRegisterButton_CL();
+        homePagePO.clickSingleRegistration_CL();
 
         //Validate navigation to the ChangeLager Registration Page
-        registrationPage.validateNavigation_CL();
+        registrationPagePO.validateNavigation_CL();
+
+        //Navigate back to the ChangeLager website, and confirm
+        homePagePO.navigateAndValidate_CL();
+
+        //Click the 'More Than One' registration button
+        homePagePO.clickMoreThanOneRegistration_CL();
+
+        //Validate navigation to the ChangeLager Registration Page
+        registrationPagePO.validateNavigation_CL();
+
+        //Navigate back to the ChangeLager website, and confirm
+        homePagePO.navigateAndValidate_CL();
+
+        //Click the down arrow
+        homePagePO.clickDownArrow_CL();
+
+        //Click the 'MetaBit, LLC' hyperlink at the bottom of the ChangeLager Home Page
+        homePagePO.clickMetaBitLink_CL();
+
+        //Validate the page transition
+        homePagePO.validateNavigation_MBLLC();
+
+        //Navigate back to the ChangeLager website, and confirm
+        homePagePO.navigateAndValidate_CL();
+
+        //Click the "Register" button, and confirm page change
+        homePagePO.clickRegisterButton_CL();
+
+        //Validate navigation to the ChangeLager Registration Page
+        registrationPagePO.validateNavigation_CL();
 
         //Toggle from the "Developer" option to the "Free" option
-        registrationPage.toggleDevToFree_CL();
+        registrationPagePO.toggleDevToFree_CL();
+
+        //Click the "Register" button, and confirm page change
+        registrationPagePO.clickRegisterButton_CL();
+
+        //Validate the "Name" fields error message is visible
+        registrationPagePO.validateNameErrorMessageVisible_CL();
+
+        //Validate the "Email" fields error message is visible
+        registrationPagePO.validateEmailErrorMessageVisible_CL();
+
+        //Validate the "Password" fields error message is visible
+        registrationPagePO.validatePasswordErrorMessageVisible_CL();
+
+        //Validate the "Terms Of Service" error message is visible
+        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
+
+        //Fill in the "Name" field
+        registrationPagePO.fillOutName_CL();
+
+        //Click the "Register" button
+        registrationPagePO.clickRegisterButton_CL();
+
+        //Validate the "Email" error message is still visible
+        registrationPagePO.validateEmailErrorMessageVisible_CL();
+
+        //Validate the "Password" error message is still visible
+        registrationPagePO.validatePasswordErrorMessageVisible_CL();
+
+        //Validate the "Terms Of Service" error message is still visible
+        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
+
+        //Fill in the "Email" field
+        registrationPagePO.fillOutEmail_CL();
+
+        //Click the "Register" button
+        registrationPagePO.clickRegisterButton_CL();
+
+        //Validate the "Password" error message is still visible
+        registrationPagePO.validatePasswordErrorMessageVisible_CL();
+
+        //Validate the "Terms Of Service" error message is still visible
+        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
+
+        //Fill in the "Password" field
+        registrationPagePO.fillOutPassword_CL();
+
+        //Click the "Register" button
+        registrationPagePO.clickRegisterButton_CL();
+
+        //Validate the "Terms Of Service" error message is still visible
+        registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
+
+        //Click the "Terms Of Service" checkbox
+        registrationPagePO.clickTermsOfServiceCheckbox_CL();
 
         //Toggle form the "Free" option to the "Developer" option
-        registrationPage.toggleFreeToDev_CL();
+        registrationPagePO.toggleFreeToDev_CL();
 
         //Fill out the 'Profile' section of the Registration Form
-        registrationPage.fillOutProfileSection_CL();
+        registrationPagePO.fillOutProfileSection_CL();
 
         //Fill out the 'Credit Card' section of the Registration Form
-        registrationPage.fillOutCreditCardSection_CL();
+        registrationPagePO.fillOutCreditCardSection_CL();
 
     }
 

@@ -4,10 +4,9 @@ import com.jmack.Base.Generic;
 import com.jmack.Base.ScreenShot;
 import com.jmack.Base.TestBase;
 
-import com.jmack.Enumerations.ChangeLagerApp.ChangeLager_HomePage;
+import com.jmack.Enumerations.ChangeLagerApp.HomePageENUM;
 
 import io.qameta.allure.Step;
-import javafx.scene.control.TextFormatter;
 
 
 /**
@@ -61,7 +60,7 @@ public class HomePagePO extends TestBase {
 	public void navigateTo_CL() {
 
 		// Open a new browser instance and navigate to the ChangeLager URL
-		this.generic.getUrl(ChangeLager_HomePage.Text_changeLagerHome_URL.toString());
+		this.generic.getUrl(HomePageENUM.Text_URL.toString());
 
 	}
 
@@ -73,7 +72,7 @@ public class HomePagePO extends TestBase {
 	public void confirmHeadTag_CL() {
 
 		// Confirm the Head section of the HTML for the page
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Tag_head_changeLagerHome.toString());
+		this.generic.confirmElementExistence(HomePageENUM.Locator_Tag_Head.toString());
 
 	}
 
@@ -84,7 +83,7 @@ public class HomePagePO extends TestBase {
 	public void confirmHeadTag_MBLLC(){
 
 		// Confirm the Head section of the HTML for the page
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Tag_head_MetaBitLLCHome.toString());
+		this.generic.confirmElementExistence(HomePageENUM.MetaBitLLCHome_Locator_Tag_Head.toString());
 
 	}
 
@@ -95,7 +94,7 @@ public class HomePagePO extends TestBase {
 	public void confirmPageTitle_CL(){
 
 		// Confirm the Title of the page
-		this.generic.confirmTitle(ChangeLager_HomePage.Text_changeLagerHome_pageTitle.toString());
+		this.generic.confirmTitle(HomePageENUM.Text_PageTitle.toString());
 
 	}
 
@@ -106,7 +105,7 @@ public class HomePagePO extends TestBase {
 	public void confirmPageTitle_MBLLC(){
 
 		// Confirm the Title of the page
-		this.generic.confirmTitle(ChangeLager_HomePage.Text_MetaBitLLCHome_pageTitle.toString());
+		this.generic.confirmTitle(HomePageENUM.MetaBitLLCHome_Text_PageTitle.toString());
 
 	}
 
@@ -158,7 +157,7 @@ public class HomePagePO extends TestBase {
 	public void validateLoginButton_CL(){
 
 		//Validate the button exists
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Login.toString());
+		this.generic.confirmElementExistence(HomePageENUM.Locator_Button_Login.toString());
 	}
 
 	/**
@@ -168,7 +167,7 @@ public class HomePagePO extends TestBase {
 	public void validateRegisterButton_CL(){
 
 		//Validate the button exists
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Register.toString());
+		this.generic.confirmElementExistence(HomePageENUM.Locator_Button_Register.toString());
 
 	}
 
@@ -179,7 +178,7 @@ public class HomePagePO extends TestBase {
 	public void validateSignUpButton_CL(){
 
 		//Validate the button exists
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_SignUp.toString());
+		this.generic.confirmElementExistence(HomePageENUM.Locator_Button_SignUp.toString());
 
 	}
 
@@ -190,7 +189,7 @@ public class HomePagePO extends TestBase {
 	public void validateDownArrowButton_CL(){
 
 		//Validate the button exists
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_DownArrow.toString());
+		this.generic.confirmElementExistence(HomePageENUM.Locator_Button_DownArrow.toString());
 
 	}
 
@@ -211,17 +210,6 @@ public class HomePagePO extends TestBase {
 	}
 
 	/**
-	 * On the ChangeLager Home Page, validate the existence of the "Accept All Cookies" button
-	 */
-	@Step("Validate the 'Accept All Cookies' button on the ChangeLager Home Page exists")
-	public void validateAcceptAllCookies_CL(){
-
-		//validate the button exists
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_AcceptAllCookies.toString());
-
-	}
-
-	/**
 	 * On the ChangeLager Home Page, validate the existence of the 'Register Today' button
 	 * for the 'Single' Plan
 	 */
@@ -229,7 +217,7 @@ public class HomePagePO extends TestBase {
 	public void validateRegisterToday_Single_CL(){
 
 		//validate the button exists
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_Single.toString());
+		this.generic.confirmElementExistence(HomePageENUM.Locator_Button_Single.toString());
 
 	}
 
@@ -241,7 +229,7 @@ public class HomePagePO extends TestBase {
 	public void validateRegisterToday_MoreThanOne_CL(){
 
 		//validate the button exists
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Button_MoreThanOne.toString());
+		this.generic.confirmElementExistence(HomePageENUM.Locator_Button_MoreThanOne.toString());
 
 	}
 
@@ -252,7 +240,7 @@ public class HomePagePO extends TestBase {
 	public void validateMetaBitLink_CL(){
 
 		//validate the link exists
-		this.generic.confirmElementExistence(ChangeLager_HomePage.Locator_Link_MetaBit.toString());
+		this.generic.confirmElementExistence(HomePageENUM.Locator_Link_MetaBit.toString());
 
 	}
 
@@ -263,7 +251,7 @@ public class HomePagePO extends TestBase {
 	public void clickRegisterButton_CL() {
 
 		// Click the "Register" button on the home page
-		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_Register.toString());
+		this.generic.clickElement(HomePageENUM.Locator_Button_Register.toString());
 
 	}
 
@@ -275,7 +263,7 @@ public class HomePagePO extends TestBase {
 	public void clickSignUpButton_CL() {
 
 		// Click the "Sign up for free" button on the home page
-		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_SignUp.toString());
+		this.generic.clickElement(HomePageENUM.Locator_Button_SignUp.toString());
 
 	}
 
@@ -287,18 +275,7 @@ public class HomePagePO extends TestBase {
 	public void clickLoginButton_CL() {
 
 		// Click the "Login" button on the home page
-		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_Login.toString());
-
-	}
-
-	/**
-	 * Click the 'Accept All Cookies' button
-	 */
-	@Step("Click the 'Accept All Cookies' button")
-	public void clickAcceptAllCookies_CL(){
-
-		//Click the "Accept All Cookies" button on the home page
-		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_AcceptAllCookies.toString());
+		this.generic.clickElement(HomePageENUM.Locator_Button_Login.toString());
 
 	}
 
@@ -309,7 +286,7 @@ public class HomePagePO extends TestBase {
 	public void clickDownArrow_CL(){
 
 		//Click the down arrow button on the home page
-		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_DownArrow.toString());
+		this.generic.clickElement(HomePageENUM.Locator_Button_DownArrow.toString());
 
 	}
 
@@ -320,7 +297,7 @@ public class HomePagePO extends TestBase {
 	public void clickSingleRegistration_CL(){
 
 		//Click the 'Single' registration button
-		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_Single.toString());
+		this.generic.clickElement(HomePageENUM.Locator_Button_Single.toString());
 
 	}
 
@@ -331,7 +308,7 @@ public class HomePagePO extends TestBase {
 	public void clickMoreThanOneRegistration_CL(){
 
 		//Click the 'More Than One' registration button
-		this.generic.clickElement(ChangeLager_HomePage.Locator_Button_MoreThanOne.toString());
+		this.generic.clickElement(HomePageENUM.Locator_Button_MoreThanOne.toString());
 
 	}
 
@@ -344,18 +321,18 @@ public class HomePagePO extends TestBase {
 	public void clickMetaBitLink_CL(){
 
 		//Click the 'MetaBit, LLC' hyper link
-		this.generic.clickElement(ChangeLager_HomePage.Locator_Link_MetaBit.toString());
+		this.generic.clickElement(HomePageENUM.Locator_Link_MetaBit.toString());
 	}
 
 	/**
-	 * Do something with HomePage
+	 * Do something with HomePagePO
 	 *
 	 * @param somethingToPass String (used only to change Allure pass/fail iconography from circle to arrow)
 	 */
-	@Step("Doing something with HomePage")
+	@Step("Doing something with HomePagePO")
 	public void stuff(String somethingToPass) {
 
-		System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on HomePage>%n", this.id, this.testName, somethingToPass);
+		System.out.format("[LOG]: <[%s:%s] testing: \"%s\" on HomePagePO>%n", this.id, this.testName, somethingToPass);
 
 		this.ss.assertTrue(true, "Some message if fail.");
 

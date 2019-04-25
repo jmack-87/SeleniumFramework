@@ -18,7 +18,7 @@ public class IFramePO extends TestBase {
      * @param generic
      * @param ss
      */
-    public IFramePO (Generic generic, ScreenShot ss) {
+    public IFramePO(Generic generic, ScreenShot ss) {
 
         this.generic = generic;
         this.ss = ss;
@@ -32,7 +32,7 @@ public class IFramePO extends TestBase {
      * @param id
      * @param testName
      */
-    public IFramePO (Generic generic, ScreenShot ss, String id, String testName) {
+    public IFramePO(Generic generic, ScreenShot ss, String id, String testName) {
 
         this.generic = generic;
         this.ss = ss;
