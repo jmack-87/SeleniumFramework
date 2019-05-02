@@ -132,6 +132,12 @@ public class ChangeLager_E2E extends TestBase {
         //Click the "Terms Of Service" checkbox
         registrationPagePO.clickTermsOfServiceCheckbox_CL();
 
+        //Clear input from the "Profile" section of the form
+        registrationPagePO.clearOutProfileSection_CL();
+
+        //Click the "Terms Of Service" checkbox
+        registrationPagePO.clickTermsOfServiceCheckbox_CL();
+
         //Toggle form the "Free" option to the "Developer" option
         registrationPagePO.toggleFreeToDev_CL();
 
@@ -141,6 +147,11 @@ public class ChangeLager_E2E extends TestBase {
         //Fill out the 'Credit Card' section of the Registration Form
         registrationPagePO.fillOutCreditCardSection_CL();
 
+        //Clear input from the whole form
+        registrationPagePO.clearOutEntireRegistrationForm_CL();
+
+        //Click the "Terms Of Service" checkbox
+        registrationPagePO.clickTermsOfServiceCheckbox_CL();
     }
 
 
