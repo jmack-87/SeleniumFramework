@@ -4,7 +4,7 @@
     <parameter name="gridType" value="local" />
     <parameter name="platformName" value="" />
     <parameter name="platformVersion" value="" />
-    <parameter name="browserName" value="desktopChrome" />
+    <parameter name="browserName" value="" />
     <parameter name="browserVersion" value="" />
     <parameter name="resolution" value="" />
     <parameter name="location" value="" />
@@ -14,7 +14,7 @@
 		<!-- Required -->
     	<parameter name="applicationUnderTest" value="ChangeLager" />
     	<parameter name="jsonDataFile" value="ChangeLager.json" />
-		<parameter name="excelDataFile" value="ChangeLager.xlsx" />
+<!--		<parameter name="excelDataFile" value="ChangeLager.xlsx" />-->
 		<parameter name="propertiesFile" value="ChangeLager.properties" />
 
 		<!-- not used right now, debating parameterization of source file contents as opposed to forced naming -->
