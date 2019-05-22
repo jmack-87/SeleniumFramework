@@ -31,30 +31,6 @@
 			<version>${aspectj.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>3.141.59</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-firefox-driver</artifactId>
-			<version>3.141.59</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-api</artifactId>
-			<version>3.141.59</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-support</artifactId>
-			<version>3.141.59</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>6.14.3</version>
@@ -63,7 +39,7 @@
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-testng</artifactId>
-			<version>2.10.0</version>
+			<version>2.12.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -76,11 +52,6 @@
 			<artifactId>java-client</artifactId>
 			<version>7.0.0</version>
 		</dependency>
-<!--		<dependency>	-->
-<!--			<groupId>com.sikulix</groupId>	-->
-<!--			<artifactId>sikulixapi</artifactId>	-->
-<!--			<version>1.1.2</version>	-->
-<!--		</dependency>	-->
 		<dependency>
 			<groupId>com.codoid.products</groupId>
 			<artifactId>fillo</artifactId>
@@ -102,15 +73,7 @@
 	    	<name>Perfecto mobile</name>
 	    	<url>http://repository-perfectomobile.forge.cloudbees.com/public</url>
 		</repository>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>sonatype-ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-		</repository>
 	</repositories>
-
 
 	<pluginRepositories>
 		<pluginRepository>
@@ -127,17 +90,9 @@
 	</pluginRepositories>
 
 	<build>
-<!-- 		<sourceDirectory>${project.basedir}\src\main\java</sourceDirectory> -->
-<!-- 		<scriptSourceDirectory>${project.basedir}\src\main\scripts</scriptSourceDirectory> -->
 		<testSourceDirectory>${project.basedir}\src\test\java</testSourceDirectory>
 		<outputDirectory>${project.basedir}\target\classes</outputDirectory>
 		<testOutputDirectory>${project.basedir}\target\test-classes</testOutputDirectory>
-
-		<resources>
-			<resource>
-				<directory>${project.basedir}\src\main\resources</directory>
-			</resource>
-		</resources>
 
 		<testResources>
 			<testResource>
@@ -186,7 +141,6 @@
 					<executions>
 						<execution>
 							<id>copy-resources</id>
-							<!-- here the phase you need -->
 							<phase>validate</phase>
 							<goals>
 								<goal>copy-resources</goal>
@@ -263,13 +217,6 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.22.1</version>
 					<configuration>
-
-<!-- 						<systemPropertyVariables> -->
-<!-- 							<buildDirectory>${project.build.directory}</buildDirectory> -->
-<!-- 							<allure.results.directory>${project.build.directory}/allure-results</allure.results.directory> -->
-<!-- 							<allure.report.directory>${project.build.directory}/allure-report</allure.report.directory> -->
-<!-- 						</systemPropertyVariables> -->
-
 						<testFailureIgnore>true</testFailureIgnore>
 						<suiteXmlFiles>
 							<suiteXMLFile>${suiteXMLFile}</suiteXMLFile>
@@ -365,8 +312,8 @@
 					<artifactId>allure-maven</artifactId>
 					<version>2.10.0</version>
 					<configuration>
-						<reportVersion>2.10.0</reportVersion>
-						<allureDownloadUrl>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.10.0/allure-commandline-2.10.0.zip</allureDownloadUrl>
+						<reportVersion>2.12.0</reportVersion>
+						<allureDownloadUrl>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.12.0/allure-commandline-2.10.0.zip</allureDownloadUrl>
 					</configuration>
 				</plugin>
 			</plugins>
