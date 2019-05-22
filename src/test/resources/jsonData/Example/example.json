@@ -49,9 +49,9 @@
 				"searchConfirmationString": "Ahold"
 			},
 			"AndroidChromeTest": {
-				"gridType": "local",
+				"gridType": "Perfecto",
 				"platformName": "Android",
-				"platformVersion": "7",
+				"platformVersion": "8.1.*",
 				"browserName": "androidChrome",
 				"searchString": "Ahold Delhaize",
 				"searchConfirmationString": "Ahold"
