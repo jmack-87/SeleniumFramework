@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Mobile_Suite">
+<suite name="Mobile_Suite" parallel="instances" thread-count="4">
 
 	<parameter name="appActivity" value="" />
 	<parameter name="appPackage" value="" />
@@ -27,8 +27,9 @@
 <!-- 		<parameter name="systemDataArray" value="System Options" /> -->
 
 		<classes>
-			<class name="com.jmack.Tests.Example.Mobile.AndroidNative_AholdDelhaize" />
+<!-- 			<class name="com.jmack.Tests.Example.Mobile.AndroidNative_AholdDelhaize" /> -->
 			<class name="com.jmack.Tests.Example.Mobile.AndroidChromeFeature" />
+			<class name="com.jmack.Tests.Example.Mobile.AndroidChromeFeature2" />
 <!-- 			<class name="com.jmack.Tests.Example.Mobile.AndroidNativeFeature" /> -->
 			<class name="com.jmack.Tests.Example.Mobile.IosSafariFeature" />
 <!-- 			<class name="com.jmack.Tests.Example.Mobile.IosNativeFeature" /> -->
