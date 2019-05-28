@@ -8,8 +8,8 @@
 				"browserName": "desktop{Chrome|Ie|Edge|Firefox}|{android|ios}{Chrome|Native|Safari}",
 				"browserVersion": "integer|latest|beta",
 				"location": "REQUIRED(Mac): perfecto location",
-				"searchString": "Ahold Delhaize",
-				"searchConfirmationString": "Ahold"
+				"searchString": "CareCentrix",
+				"searchConfirmationString": "future of care"
 			},
 			"ChromeTest": {
 				"gridType": "local",
@@ -20,57 +20,65 @@
 				"browserVersion": "latest",
 				"resolution": "1024x768",
 				"location": "NA-US-BOS",
-				"searchString": "Ahold Delhaize",
-				"searchConfirmationString": "Ahold",
+				"searchString": "CareCentrix",
+				"searchConfirmationString": "future of care",
 				"headless": false
 			},
 			"SafariTest": {
 				"gridType": "local",
 				"browserName": "desktopSafari",
-				"searchString": "Ahold Delhaize",
-				"searchConfirmationString": "Ahold"
+				"searchString": "CareCentrix",
+				"searchConfirmationString": "future of care"
 			},
 			"FirefoxTest": {
 				"gridType": "local",
 				"browserName": "desktopFirefox",
-				"searchString": "Ahold Delhaize",
-				"searchConfirmationString": "Ahold"
+				"searchString": "CareCentrix",
+				"searchConfirmationString": "future of care"
 			},
 			"EdgeTest": {
 				"gridType": "local",
 				"browserName": "desktopEdge",
-				"searchString": "Ahold Delhaize",
-				"searchConfirmationString": "Ahold"
+				"searchString": "CareCentrix",
+				"searchConfirmationString": "future of care"
 			},
 			"IeTest": {
 				"gridType": "local",
 				"browserName": "desktopIe",
-				"searchString": "Ahold Delhaize",
-				"searchConfirmationString": "Ahold"
+				"searchString": "CareCentrix",
+				"searchConfirmationString": "future of care"
 			},
 			"AndroidChromeTest": {
-				"gridType": "Perfecto",
+				"gridType": "local",
 				"platformName": "Android",
-				"platformVersion": "8.1.*",
+				"platformVersion": "8.1.0",
 				"browserName": "androidChrome",
-				"searchString": "Ahold Delhaize",
-				"searchConfirmationString": "Ahold"
+				"searchString": "CareCentrix",
+				"searchConfirmationString": "future of care"
+			},
+			"AndroidChromeTest2": {
+				"gridType": "local",
+				"platformName": "Android",
+				"platformVersion": "7.1.1",
+				"browserName": "androidChrome",
+				"searchString": "CareCentrix",
+				"searchConfirmationString": "future of care"
 			},
 			"AndroidNativeTest": {
 				"gridType": "local",
 				"platformName": "Android",
 				"platformVersion": "7",
 				"browserName": "androidNative",
-				"appPackage": "com.belmondo.aholddelhaize",
+				"appPackage": "com.belmondo.Aholddelhaize",
 				"appActivity": "com.reactnativenavigation.controllers.NavigationActivity"
 			},
 			"IosSafariTest": {
 				"gridType": "perfecto",
 				"platformName": "iOS",
-				"platformVersion": "12.*",
+				"platformVersion": "11.*",
 				"browserName": "iosSafari",
-				"searchString": "Ahold Delhaize",
-				"searchConfirmationString": "Ahold"
+				"searchString": "CareCentrix",
+				"searchConfirmationString": "future of care"
 			},
 			"IosNativeTest": {
 				"gridType": "perfecto",
@@ -84,7 +92,7 @@
 				"platformName": "Android",
 				"platformVersion": "8",
 				"browserName": "androidNative",
-				"appPackage": "com.belmondo.aholddelhaize",
+				"appPackage": "com.belmondo.Aholddelhaize",
 				"appActivity": "com.belmondo.app.MainActivity",
 				"userEmail": "123@234.com",
 				"password": "password"
