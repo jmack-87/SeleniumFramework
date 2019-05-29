@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Mobile_Suite" parallel="instances" thread-count="4">
+<suite name="Mobile_Suite">
 
 	<parameter name="appActivity" value="" />
 	<parameter name="appPackage" value="" />
