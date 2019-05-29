@@ -12,7 +12,7 @@
 
 	<properties>
 		<projectName>SeleniumFramework</projectName>
-		<aspectj.version>1.9.2</aspectj.version>
+		<aspectj.version>1.9.4</aspectj.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<parallelStyle>instances</parallelStyle>
