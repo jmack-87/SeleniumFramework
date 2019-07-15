@@ -14,6 +14,7 @@ import com.jmack.Base.PageObjects.HomePagePO;
 import com.jmack.Base.PageObjects.IFramePO;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -498,8 +499,11 @@ public class TestBase {
 					System.out.format("[LOG]: <[%s:%s] initializing page objects>%n", id, testName);
 					initializePageObjects();
 
-				} catch (MalformedURLException m) {
-					m.printStackTrace();
+				} catch (MalformedURLException mfu) {
+					mfu.printStackTrace();
+				}
+				catch (WebDriverException wde ) {
+					Assert.fail("Unable to start WebDriver");
 				}
 
 			// using Perfecto grid
@@ -531,8 +535,11 @@ public class TestBase {
 					System.out.format("[LOG]: <[%s:%s] initializing page objects>%n", id, testName);
 					initializePageObjects();
 
-				} catch (MalformedURLException m) {
-					m.printStackTrace();
+				} catch (MalformedURLException mfu) {
+					mfu.printStackTrace();
+				}
+				catch (WebDriverException wde ) {
+					Assert.fail("Unable to start WebDriver");
 				}
 			} else {
 				// error, no grid identified
@@ -553,8 +560,11 @@ public class TestBase {
 					System.out.format("[LOG]: <[%s:%s] initializing mobile page objects>%n", id, testName);
 					initializeMobilePageObjects();
 
-				} catch (Exception e) {
-					e.printStackTrace();
+				} catch (MalformedURLException mfu) {
+					mfu.printStackTrace();
+				}
+				catch (WebDriverException wde ) {
+					Assert.fail("Unable to start WebDriver");
 				}
 
 			// using perfecto
@@ -581,8 +591,11 @@ public class TestBase {
 					System.out.format("[LOG]: <[%s:%s] initializing mobile page objects>%n", id, testName);
 					initializeMobilePageObjects();
 
-				} catch (MalformedURLException m) {
-					m.printStackTrace();
+				} catch (MalformedURLException mfu) {
+					mfu.printStackTrace();
+				}
+				catch (WebDriverException wde ) {
+					Assert.fail("Unable to start WebDriver");
 				}
 			} else {
 				// error, no grid identified
@@ -604,8 +617,8 @@ public class TestBase {
 	private void initializePageObjects() {
 
 		homePagePO = 			new HomePagePO(generic, ss, id, testName);
-		iFrame = 			new IFramePO(generic, ss, id, testName);
-		logInPage = 		new LoginPagePO(generic, ss, runtimeData, id, testName);
+		iFrame = 				new IFramePO(generic, ss, id, testName);
+		logInPage = 			new LoginPagePO(generic, ss, runtimeData, id, testName);
 		registrationPagePO = 	new RegistrationPagePO(generic, ss, runtimeData, id, testName, iFrame); // must be after IFramePO
 
 		System.out.format("[LOG]: <[%s:%s] page objects loaded>%n", id, testName);
