@@ -15,10 +15,7 @@
 		<aspectj.version>1.9.4</aspectj.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<parallelStyle>instances</parallelStyle>
-		<tcount /> <!-- parallel test(instance) max count per suite -->
 		<suitePool /> <!-- parallel suite max count -->
-
 		<applicationUnderTest />
 		<suiteXML />
 		<suiteXMLFile>suites\${applicationUnderTest}\${suiteXML}</suiteXMLFile>
@@ -33,7 +30,7 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>7.0.0-beta3</version>
+			<version>6.14.3</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -196,8 +193,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.0</version>
 					<configuration>
-						<source>8</source>
-						<target>8</target>
+						<source>1.8</source>
+						<target>1.8</target>
 						<!-- <compilerArgument>-Xlint:deprecation</compilerArgument> -->
 					</configuration>
 					<executions>
@@ -243,8 +240,6 @@
 							-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 						</argLine>
 						<testFailureIgnore>true</testFailureIgnore>
-						<parallel>${parallelStyle}</parallel>
-						<threadCount>${tcount}</threadCount>
 					</configuration>
 					<executions>
 						<execution>
@@ -317,8 +312,8 @@
 					<artifactId>allure-maven</artifactId>
 					<version>2.10.0</version>
 					<configuration>
-						<reportVersion>2.12.1</reportVersion>
-						<allureDownloadUrl>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.12.1/allure-commandline-2.12.1.zip</allureDownloadUrl>
+						<reportVersion>2.10.0</reportVersion>
+						<allureDownloadUrl>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.10.0/allure-commandline-2.10.0.zip</allureDownloadUrl>
 					</configuration>
 				</plugin>
 			</plugins>
