@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Desktop_Suite">
+<suite name="Desktop_Suite" parallel="instances" thread-count="4">
 
 	<parameter name="browserName" value="" />
 	<parameter name="browser" value="" />
