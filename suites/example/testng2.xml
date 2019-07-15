@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Desktop Suite 2" parallel="instances" thread-count="4">
+<suite name="Desktop_Suite2" parallel="instances" thread-count="4">
 
 	<parameter name="browserName" value="" />
 	<parameter name="browser" value="" />
@@ -10,7 +10,7 @@
 	<parameter name="platformVersion" value="" />
 	<parameter name="resolution" value="" />
 
-	<test name="Desktop Test 2">
+	<test name="Desktop_Clients2">
 
 		<!-- Required -->
     	<parameter name="applicationUnderTest" value="Example" />
