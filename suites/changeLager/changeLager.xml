@@ -12,7 +12,7 @@
     <test name="Build Acceptance">
 
 		<!-- Required -->
-    	<parameter name="applicationUnderTest" value="ChangeLager" />
+    	<parameter name="applicationUnderTest" value="ChangeLager" ></parameter>
     	<parameter name="jsonDataFile" value="ChangeLager.json" />
 <!--		<parameter name="excelDataFile" value="ChangeLager.xlsx" />-->
 		<parameter name="propertiesFile" value="ChangeLager.properties" />
