@@ -14,6 +14,7 @@ package com.jmack.Enumerations.Example;
 		Mobile_Locator_firstResult("SearchResults.Mobile.Locator.firstResult"),
 		Mobile_CompoundLocator_firstResult("SearchResults.Mobile.CompoundLocator.firstResult"),
 		Mobile_Locator_Text_aholdSearchConfirmation("SearchResults.Mobile.Locator.Text.aholdSearchConfirmation"),
+		Mobile_Locator_Link_careCentrixSearchConfirmation("SearchResults.Mobile.Locator.Link.careCentrixSearchConfirmation"),
 		Mobile_Locator_Link_firstResult("SearchResults.Mobile.Locator.Link.firstResult"),
 		;
 
