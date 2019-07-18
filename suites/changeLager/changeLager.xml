@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="ChangeLager Suite">
+<suite name="ChangeLager Suite" parallel="instances" thread-count="4">
 
     <parameter name="gridType" value="local" />
     <parameter name="platformName" value="" />
@@ -9,12 +9,12 @@
     <parameter name="resolution" value="" />
     <parameter name="location" value="" />
 
-    <test name="Build Acceptance">
+    <test name="ChangeLager - E2E">
 
 		<!-- Required -->
-    	<parameter name="applicationUnderTest" value="ChangeLager" ></parameter>
+    	<parameter name="applicationUnderTest" value="ChangeLager" />
     	<parameter name="jsonDataFile" value="ChangeLager.json" />
-<!--		<parameter name="excelDataFile" value="ChangeLager.xlsx" />-->
+		<parameter name="excelDataFile" value="ChangeLager.xlsx" />
 		<parameter name="propertiesFile" value="ChangeLager.properties" />
 
 		<!-- not used right now, debating parameterization of source file contents as opposed to forced naming -->
