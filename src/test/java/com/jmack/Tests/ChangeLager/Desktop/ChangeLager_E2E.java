@@ -16,7 +16,7 @@ import io.qameta.allure.Story;
 
 
 @Epic("Parallelism")
-@Feature("Chrome")
+@Feature("Chrome, Firefox, Internet Explorer, Edge")
 public class ChangeLager_E2E extends TestBase {
 
     /**
