@@ -31,7 +31,7 @@
 			},
 			"ChromeTest": {
 				"gridType": "local",
-				"browserName": "desktopFirefox",
+				"browserName": "desktopChrome",
 				"platformName": "Windows",
 				"platform": "windows 10",
 				"platformVersion": "10",

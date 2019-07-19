@@ -1,5 +1,6 @@
 package com.jmack.Tests.ChangeLager.Desktop;
 
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -21,14 +22,15 @@ public class ChangeLager_E2E extends TestBase {
     /**
      * Perform E2E test for all relevant ChangeLager Pages
      * @param testParam optional TestNG value from suite
+     * @throws InterruptedException
      */
     @Test(testName="ChangeLager E2E Test", description="Perform general E2E test, in parallel, across multiple threads")
     @Severity(SeverityLevel.BLOCKER)
     @Description("Test Description: Perform general E2E test, in parallel, across multiple threads")
     @Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
-    @Parameters({})
+    @Parameters({"testParam"})
     @RetryOnFailCount(0)
-    public void ChangeLager_E2ETest() {
+    public void ChangeLager_E2ETest(@Optional String testParam) throws InterruptedException {
 
         //Navigate to the ChangeLager website, and confirm
         homePagePO.navigateAndValidate_CL();
