@@ -1,0 +1,39 @@
+{
+	"Tests": [
+		{
+			"FOR REFERENCE": {
+				"gridType": "REQUIRED: perfecto|local",
+				"platformName": "REQUIRED: Mac|Windows|Android|iOS",
+				"platformVersion": "integer number or 'macOS High Sierra'",
+				"browserName": "desktop{Chrome|Ie|Edge|Firefox}|{android|ios}{Chrome|Native|Safari}",
+				"browserVersion": "integer|latest|beta",
+				"location": "REQUIRED(Mac): perfecto location",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM"
+			},
+			"ShftSpace_E2E": {
+				"gridType": "local",
+				"platformName": "Windows",
+				"platformVersion": "10",
+				"browserName": "desktopFirefox",
+				"browserVersion": "latest",
+				"location": "NA-US-BOS",
+				"searchString": "IBM Perfecto",
+				"searchConfirmationString": "IBM",
+				"headless": "false",
+				"username": "userName",
+				"password": "passWord",
+				"differentPassword": "PassWord",
+				"creditCardNumber": "1111111111111111",
+				"creditCardExpiration": "0122",
+				"creditCardCVC": "000",
+				"userEmail": "testemail@example.com"
+			}
+		}
+	],
+	"System Options": [
+		{
+			"Opt1": "system option"
+		}
+	]
+}		

@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="ShftSpace_Suite" parallel="tests" thread-count="4">
+
+    <parameter name="gridType" value="" />
+    <parameter name="platformName" value="" />
+    <parameter name="platformVersion" value="" />
+    <parameter name="browser" value="" />
+    <parameter name="browserName" value="" />
+    <parameter name="browserVersion" value="" />
+    <parameter name="resolution" value="" />
+    <parameter name="location" value="" />
+
+</suite>

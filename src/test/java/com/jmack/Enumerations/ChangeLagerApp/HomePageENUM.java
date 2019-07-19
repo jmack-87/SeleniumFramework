@@ -2,7 +2,7 @@ package com.jmack.Enumerations.ChangeLagerApp;
 
 public enum HomePageENUM {
 
-       // DESKTOP
+    // DESKTOP
     Text_URL("ChangeLagerHome.text.changeLagerHomeURL"),
     Text_PageTitle("ChangeLagerHome.text.pageTitle"),
     MetaBitLLCHome_Text_PageTitle("MetaBitLLCHome.text.pageTitle"),
