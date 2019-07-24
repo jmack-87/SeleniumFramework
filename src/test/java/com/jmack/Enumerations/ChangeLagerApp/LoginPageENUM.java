@@ -12,7 +12,7 @@ public enum LoginPageENUM {
     Locator_Link_ForgotPassword("ChangeLagerLogin.Locator.Link.ForgotPassword"),
     Locator_Button_SignIn("ChangeLagerLogin.Locator.Button.SignIn"),
     Locator_Link_Github("ChangeLagerLogin.Locator.Link.Github"),
-    Locator_Link_Bitbuck("ChangeLagerLogin.Locator.Link.Bitbucket"),
+    Locator_Link_Bitbucket("ChangeLagerLogin.Locator.Link.Bitbucket"),
     Locator_Link_Gitlab("ChangeLagerLogin.Locator.Link.Gitlab"),
     Locator_Link_NoAccountRegister("ChangeLagerLogin.Locator.Link.NoAccountRegister");
 

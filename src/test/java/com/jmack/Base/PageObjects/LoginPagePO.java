@@ -5,7 +5,6 @@ import com.jmack.Base.RuntimeData;
 import com.jmack.Base.ScreenShot;
 import com.jmack.Base.TestBase;
 import com.jmack.Enumerations.ChangeLagerApp.LoginPageENUM;
-import com.jmack.Enumerations.ChangeLagerApp.RegistrationPageENUM;
 
 import io.qameta.allure.Step;
 
@@ -146,6 +145,83 @@ public class LoginPagePO extends TestBase{
 
 		//Click the "Password" textbox, clear it, and send it nothing
 		this.generic.sendText(LoginPageENUM.Locator_TextField_Password.toString(), "");
+
+	}
+
+	/**
+	 * Click the 'Remember Me' checkbox
+	 */
+	@Step("Click the 'Remember Me' checkbox")
+	public void clickRememberMeCheckbox_CL(){
+
+		//Click the checkbox
+		this.generic.clickElement(LoginPageENUM.Locator_Checkbox_RememberMe.toString());
+
+	}
+
+	/**
+	 * Click the 'Forgot Password?' hyperlink
+	 */
+	@Step("Click the 'Forgot Password' hyperlink")
+	public void clickForgotPasswordLink_CL() {
+
+		//Click the link
+		this.generic.clickElement(LoginPageENUM.Locator_Link_ForgotPassword.toString());
+
+	}
+
+	/**
+	 * Click the 'Sign In' button
+	 */
+	@Step("Click the 'Sign In' button")
+	public void clickSignInButton_CL() {
+
+		//Click the button
+		this.generic.clickElement(LoginPageENUM.Locator_Button_SignIn.toString());
+
+	}
+
+	/**
+	 * Click the 'Github' link
+	 */
+	@Step("Click the 'Github' link")
+	public void clickGithubLink_CL() {
+
+		//Click the link
+		this.generic.clickElement(LoginPageENUM.Locator_Link_Github.toString());
+
+	}
+
+	/**
+	 * Click the 'Bitbucket' link
+	 */
+	@Step("Click the 'Bitbucket' link")
+	public void clickBitbucketLink_CL() {
+
+		//Click the link
+		this.generic.clickElement(LoginPageENUM.Locator_Link_Bitbucket.toString());
+
+	}
+
+	/**
+	 * Click the 'Gitlab' link
+	 */
+	@Step("Click the 'Gitlab' link")
+	public void clickGitlabLink_CL() {
+
+		//Click the link
+		this.generic.clickElement(LoginPageENUM.Locator_Link_Gitlab.toString());
+
+	}
+
+	/**
+	 * Click the 'No Account? Register!' link
+	 */
+	@Step("Click the 'No Account? Register!' link")
+	public void clickNoAccountRegister_CL() {
+
+		//Click the link
+		this.generic.clickElement(LoginPageENUM.Locator_Link_NoAccountRegister.toString());
 
 	}
 
