@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="ChangeLager_Suite" parallel="tests" thread-count="4">
+<suite name="ChangeLager_Suite" parallel="tests" thread-count="3">
 
     <parameter name="gridType" value="" />
     <parameter name="platformName" value="" />
@@ -16,29 +16,7 @@
     	<parameter name="applicationUnderTest" value="changeLager" />
     	<parameter name="browserName" value="desktopChrome" />
     	<parameter name="jsonDataFile" value="ChangeLager.json" />
-		<parameter name="excelDataFile" value="ChangeLager.xlsx" />
-		<parameter name="propertiesFile" value="ChangeLager.properties" />
-
-		<!-- not used right now, debating parameterization of source file contents as opposed to forced naming -->
-<!-- 		<parameter name="testDataSheet" value="test" /> -->
-<!-- 		<parameter name="systemDataSheet" value="system" /> -->
-<!-- 		<parameter name="testDataArray" value="Tests" /> -->
-<!-- 		<parameter name="systemDataArray" value="System Options" /> -->
-
-		<parameter name="testParam" value="testValue1" />
-
-        <classes>
-            <class name="com.jmack.Tests.ChangeLager.Desktop.ChangeLager_E2E" />
-        </classes>
-
-    </test>
-	<test name="ChangeLager_E2E_Ie">
-
-		<!-- Required -->
-    	<parameter name="applicationUnderTest" value="changeLager" />
-    	<parameter name="browserName" value="desktopIe" />
-    	<parameter name="jsonDataFile" value="ChangeLager.json" />
-		<parameter name="excelDataFile" value="ChangeLager.xlsx" />
+<!-- 		<parameter name="excelDataFile" value="ChangeLager.xlsx" /> -->
 		<parameter name="propertiesFile" value="ChangeLager.properties" />
 
 		<!-- not used right now, debating parameterization of source file contents as opposed to forced naming -->
@@ -60,7 +38,7 @@
     	<parameter name="applicationUnderTest" value="changeLager" />
     	<parameter name="browserName" value="desktopFirefox" />
     	<parameter name="jsonDataFile" value="ChangeLager.json" />
-		<parameter name="excelDataFile" value="ChangeLager.xlsx" />
+<!-- 		<parameter name="excelDataFile" value="ChangeLager.xlsx" /> -->
 		<parameter name="propertiesFile" value="ChangeLager.properties" />
 
 		<!-- not used right now, debating parameterization of source file contents as opposed to forced naming -->
@@ -82,7 +60,7 @@
     	<parameter name="applicationUnderTest" value="changeLager" />
     	<parameter name="browserName" value="desktopEdge" />
     	<parameter name="jsonDataFile" value="ChangeLager.json" />
-		<parameter name="excelDataFile" value="ChangeLager.xlsx" />
+<!-- 		<parameter name="excelDataFile" value="ChangeLager.xlsx" /> -->
 		<parameter name="propertiesFile" value="ChangeLager.properties" />
 
 		<!-- not used right now, debating parameterization of source file contents as opposed to forced naming -->

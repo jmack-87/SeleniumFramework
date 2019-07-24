@@ -5,6 +5,8 @@ import com.jmack.Base.RuntimeData;
 import com.jmack.Base.ScreenShot;
 import com.jmack.Base.TestBase;
 import com.jmack.Enumerations.ChangeLagerApp.LoginPageENUM;
+import com.jmack.Enumerations.ChangeLagerApp.RegistrationPageENUM;
+
 import io.qameta.allure.Step;
 
 public class LoginPagePO extends TestBase{
@@ -52,6 +54,78 @@ public class LoginPagePO extends TestBase{
         //Navigate to the ChangeLager Login Page
         logInPage.generic.getUrl(LoginPageENUM.Text_URL.toString());
     }
+
+    /**
+	 * Confirm Head Tag of ChangeLager Login Page
+	 */
+	@Step("Validate CL Login Page Head Tag")
+	public void confirmHeadTag_CL(){
+
+		//Confirm the Head section of the HTML for the page
+		this.generic.confirmElementExistence(LoginPageENUM.Locator_Tag_Head.toString());
+
+	}
+
+	/**
+	 * Confirm Page Title of ChangeLager Login Page
+	 */
+	@Step("Confirm Page Title of ChangeLager Login Page")
+	public void confirmPageTitle_CL(){
+
+		//Confirm the Page Title attribute for the page
+		this.generic.confirmElementExistence(LoginPageENUM.Text_PageTitle.toString());
+
+	}
+
+	/**
+	 * Validate that you have landed on the ChangeLager Login Page
+	 */
+	@Step("Validate navigation to ChangeLager Login Page")
+	public void validateNavigation_CL(){
+
+		//Confirm the Head section of the HTML for the page
+		this.confirmHeadTag_CL();
+
+		//Confirm the Page Title attribute for the page
+		this.confirmPageTitle_CL();
+
+	}
+
+	/**
+	 * Navigate to ChangeLager Login Page,
+	 * and confirm that you have landed on the page
+	 */
+	@Step("Navigate to ChangeLager Login Page, and validate the navigation")
+	public void navigateAndValidate_CL(){
+
+		//Open a browser instance and navigate to the ChangeLager Login URL
+		this.navigateToLogin_CL();
+
+		//Validate that you have landed on the ChangeLager Login Page
+		this.validateNavigation_CL();
+	}
+
+	/**
+	 * Fill in the 'Username' textbox of the Login section on the ChangeLager login page
+	 */
+	@Step("Fill in the 'Username' textbox - Login Section")
+	public void fillOutUsername_CL(){
+
+		//Click the "Name" textbox, and send it input
+		this.generic.sendText(LoginPageENUM.Locator_TextField_Username.toString(), this.runtimeData.username);
+
+	}
+
+	/**
+	 * Clear the input from the 'Username' textbox
+	 */
+	@Step("Clear input from the 'Username' textbox")
+	public void clearOutName_CL(){
+
+		//Click the "Name" textbox, clear it, and send it nothing
+		this.generic.sendText(LoginPageENUM.Locator_TextField_Username.toString(), "");
+
+	}
 
     /**
      *  Do something with LogInPage

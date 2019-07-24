@@ -27,7 +27,7 @@ public class ChangeLager_E2E extends TestBase {
     @Test(testName="ChangeLager E2E Test", description="Perform general E2E test, in parallel, across multiple threads")
     @Severity(SeverityLevel.BLOCKER)
     @Description("Test Description: Perform general E2E test, in parallel, across multiple threads")
-    @Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
+    @Story("Run more than one browser in parallel.")
     @Parameters({"testParam"})
     @RetryOnFailCount(0)
     public void ChangeLager_E2ETest(@Optional String testParam) throws InterruptedException {
