@@ -127,6 +127,28 @@ public class LoginPagePO extends TestBase{
 
 	}
 
+	/**
+	 * Fill in the 'Password' textbox of the Login section on the ChangeLager Login page
+	 */
+	@Step("Fill in the 'Password' textbox - Login Section")
+	public void fillOutPassword_CL(){
+
+		//Click the "Password" textbox, and send it input
+		this.generic.sendText(LoginPageENUM.Locator_TextField_Password.toString(), this.runtimeData.password);
+
+	}
+
+	/**
+	 * Clear the input from the 'Password' textbox
+	 */
+	@Step("Clear input from the 'Password' textbox")
+	public void clearOutPassword_CL(){
+
+		//Click the "Password" textbox, clear it, and send it nothing
+		this.generic.sendText(LoginPageENUM.Locator_TextField_Password.toString(), "");
+
+	}
+
     /**
      *  Do something with LogInPage
      *  @param somethingToPass String (used only to change Allure pass/fail iconography from circle to arrow)
