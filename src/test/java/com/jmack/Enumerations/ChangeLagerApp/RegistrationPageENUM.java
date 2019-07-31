@@ -4,7 +4,7 @@ public enum RegistrationPageENUM {
 
     // DESKTOP
     Text_URL("ChangeLagerRegistration.text.changeLagerRegistrationURL"),
-    Locator_Text_PageTitle("ChangeLagerRegistration.Locator.text.pageTitle"),
+    Text_PageTitle("ChangeLagerRegistration.Locator.text.pageTitle"),
     Locator_Tag_Head("ChangeLagerRegistration.Locator.Tag.head"),
     Locator_Button_DevPlan("ChangeLagerRegistration.Locator.Button.DevPlan"),
     Locator_Button_DevPlanSelect("ChangeLagerRegistration.Locator.Button.DevPlanSelect"),
@@ -24,6 +24,8 @@ public enum RegistrationPageENUM {
     Locator_TextField_CardCVC("ChangeLagerRegistration.Locator.textField.CardCVC"),
     Locator_TextField_ZIPPostalCode("ChangeLagerRegistration.Locator.textField.ZIPPostalCode"),
     Locator_CheckBox_TermsAndService("ChangeLagerRegistration.Locator.checkBox.TermsAndService"),
+    Locator_Boolean_TermsAndServiceChecked("ChangeLagerRegistration.Boolean.checkBox.TermsAndServiceChecked"),
+    Locator_Boolean_TermsAndServiceNotChecked("ChangeLagerRegistration.Boolean.checkBox.TermsAndServiceNotChecked"),
     Locator_Button_Register("ChangeLagerRegistration.Locator.Button.Register"),
     Locator_Text_ErrorMessageVisible("ChangeLagerRegistration.Locator.text.ErrorMessageVisible"),
     Locator_Text_BlankNameErrorMessageVisible("ChangeLagerRegistration.Locator.text.BlankNameFieldErrorMessageVisible"),
@@ -31,8 +33,7 @@ public enum RegistrationPageENUM {
     Locator_Text_BlankPasswordErrorMessageVisible("ChangeLagerRegistration.Locator.text.BlankPasswordFieldErrorMessageVisible"),
     Locator_Text_NonCheckedTermsOfServiceErrorMessageVisible("ChangeLagerRegistration.Locator.text.NonCheckedTermsOfServiceErrorMessageVisible"),
     Locator_Text_PasswordsDoNotMatchErrorMessageVisible("ChangeLagerRegistration.Locator.text.PasswordsDoNotMatchErrorMessageVisible"),
-    Locator_Link_TermsOfUse("ChangeLagerRegistration.Locator.Link.TermsOfService"),
-    TermsOfUse_Text_URL("");
+    Locator_Link_TermsOfUse("ChangeLagerRegistration.Locator.Link.TermsOfService");
 
     // MOBILE
 

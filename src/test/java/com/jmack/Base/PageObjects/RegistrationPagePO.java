@@ -83,7 +83,7 @@ public class RegistrationPagePO extends TestBase {
 	public void confirmPageTitle_CL(){
 
 		//Confirm the Page Title attribute for the page
-		this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Text_PageTitle.toString());
+		this.generic.confirmElementExistence(RegistrationPageENUM.Text_PageTitle.toString());
 
 	}
 
@@ -420,12 +420,65 @@ public class RegistrationPagePO extends TestBase {
 
 	/**
 	 * Click the 'I Accept The Terms Of Service' checkbox
+	 * whether it is checked or not
 	 */
-	@Step("Click the 'I Accept The Terms Of Service' checkbox")
+	@Step("Click the 'I Accept The Terms Of Service'")
 	public void clickTermsOfServiceCheckbox_CL(){
 
 		//Click the checkbox
 		this.generic.clickElement(RegistrationPageENUM.Locator_CheckBox_TermsAndService.toString());
+
+	}
+
+	/**
+	 * Click the 'I Accept The Terms Of Service' checkbox
+	 * only if it is not already checked
+	 */
+	@Step("Click the 'I Accept The Terms Of Service' checkbox if it is NOT already selected")
+	public void clickNonCheckedTermsOfServiceCheckbox_CL() {
+
+		//Check to see if the Checkbox IS already selected
+
+		if (this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Boolean_TermsAndServiceChecked.toString()) != null) {
+
+			//If it is, outprint message to console
+
+			System.out.format(" <Checkbox State: ALREADY SELECTED>");
+
+		}
+		else {
+
+			//If it is NOT, click the checkbox
+
+			this.generic.clickElement(RegistrationPageENUM.Locator_CheckBox_TermsAndService.toString());
+
+		}
+
+	}
+
+	/**
+	 * Click the 'I Accept The Terms Of Service' checkbox
+	 * only if it is already checked
+	 */
+	@Step("Click the 'I Accept The Terms Of Service' checkbox only if it IS already checked")
+	public void clickCheckedTermsOfServiceCheckbox_CL() {
+
+		//Check to see if the Checkbox is NOT already selected
+
+				if (this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Boolean_TermsAndServiceNotChecked.toString()) != null) {
+
+					//If it is NOT, outprint message to console
+
+					System.out.format(" <Checkbox State: ALREADY NOT SELECTED>");
+
+				}
+				else {
+
+					//If it IS, click the checkbox
+
+					this.generic.clickElement(RegistrationPageENUM.Locator_CheckBox_TermsAndService.toString());
+
+				}
 
 	}
 
@@ -501,7 +554,7 @@ public class RegistrationPagePO extends TestBase {
 
 		//Fill out the "Credit Card section" of the Registration Form
 		this.fillOutCreditCardSection_CL();
-		
+
 	}
 
 	/**

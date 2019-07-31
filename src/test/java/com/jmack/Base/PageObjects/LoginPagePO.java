@@ -160,6 +160,30 @@ public class LoginPagePO extends TestBase{
 	}
 
 	/**
+	 * Fill out the 'Login' section of the ChangeLager Login page
+	 */
+	@Step("Fill out the 'Login' section of the page")
+	public void fillOutLoginSection_CL() {
+
+		//Fill in 'Username' textbox
+		this.fillOutUsername_CL();
+
+		//Fill in 'Password' textbox
+		this.fillOutPassword_CL();
+
+		//Click the 'Remember Me' checkbox
+		this.clickRememberMeCheckbox_CL();
+	}
+
+	/**
+	 * Clear all input from the 'Login' section of the ChangeLager Login page
+	 */
+	@Step("Clear all input from the 'Login' section of the page")
+	public void clearOutLoginSection_CL() {
+
+	}
+
+	/**
 	 * Click the 'Forgot Password?' hyperlink
 	 */
 	@Step("Click the 'Forgot Password' hyperlink")
@@ -191,6 +215,7 @@ public class LoginPagePO extends TestBase{
 		this.generic.clickElement(LoginPageENUM.Locator_Link_Github.toString());
 
 	}
+
 
 	/**
 	 * Click the 'Bitbucket' link
