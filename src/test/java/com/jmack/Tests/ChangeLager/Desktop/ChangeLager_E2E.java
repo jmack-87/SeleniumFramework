@@ -29,7 +29,7 @@ public class ChangeLager_E2E extends TestBase {
     @Description("Test Description: Perform general E2E test, in parallel, across multiple threads")
     @Story("Run more than one browser in parallel.")
     @Parameters({"testParam"})
-    @RetryOnFailCount(0)
+    @RetryOnFailCount(2)
     public void ChangeLager_E2ETest(@Optional String testParam) throws InterruptedException {
 
         //Navigate to the ChangeLager website, and confirm
@@ -63,10 +63,10 @@ public class ChangeLager_E2E extends TestBase {
         homePagePO.clickDownArrow_CL();
 
         //Click the 'MetaBit, LLC' hyperlink at the bottom of the ChangeLager Home Page
-        homePagePO.clickMetaBitLink_CL();
+//        homePagePO.clickMetaBitLink_CL();
 
         //Validate the page transition
-        homePagePO.validateNavigation_MBLLC();
+//        homePagePO.validateNavigation_MBLLC();
 
         //Navigate back to the ChangeLager website, and confirm
         homePagePO.navigateAndValidate_CL();
@@ -132,13 +132,10 @@ public class ChangeLager_E2E extends TestBase {
         registrationPagePO.validateTermsOfServiceErrorMessageVisible_CL();
 
         //Click the "Terms Of Service" checkbox
-        registrationPagePO.clickTermsOfServiceCheckbox_CL();
+        registrationPagePO.clickNonCheckedTermsOfServiceCheckbox_CL();
 
         //Clear input from the "Profile" section of the form
         registrationPagePO.clearOutProfileSection_CL();
-
-        //Click the "Terms Of Service" checkbox
-        registrationPagePO.clickTermsOfServiceCheckbox_CL();
 
         //Toggle form the "Free" option to the "Developer" option
         registrationPagePO.toggleFreeToDev_CL();
@@ -152,8 +149,6 @@ public class ChangeLager_E2E extends TestBase {
         //Clear input from the whole form
         registrationPagePO.clearOutEntireRegistrationForm_CL();
 
-        //Click the "Terms Of Service" checkbox
-        registrationPagePO.clickTermsOfServiceCheckbox_CL();
     }
 
 

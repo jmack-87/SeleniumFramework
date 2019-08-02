@@ -422,7 +422,7 @@ public class RegistrationPagePO extends TestBase {
 	 * Click the 'I Accept The Terms Of Service' checkbox
 	 * whether it is checked or not
 	 */
-	@Step("Click the 'I Accept The Terms Of Service'")
+	@Step("Click the 'I Accept The Terms Of Service' checkbox")
 	public void clickTermsOfServiceCheckbox_CL(){
 
 		//Click the checkbox
@@ -434,23 +434,25 @@ public class RegistrationPagePO extends TestBase {
 	 * Click the 'I Accept The Terms Of Service' checkbox
 	 * only if it is not already checked
 	 */
-	@Step("Click the 'I Accept The Terms Of Service' checkbox if it is NOT already selected")
+	@Step("Click the 'I Accept The Terms Of Service' checkbox if it IS NOT already selected")
 	public void clickNonCheckedTermsOfServiceCheckbox_CL() {
 
-		//Check to see if the Checkbox IS already selected
+		//Check to see if the Checkbox IS NOT already selected
 
-		if (this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Boolean_TermsAndServiceChecked.toString()) != null) {
+		if (this.generic.confirmElementExistence(RegistrationPageENUM.Locator_CheckBox_TermsAndServiceNotChecked.toString()) != null) {
 
-			//If it is, outprint message to console
+			//If it IS NOT already selected, click the checkbox
+
+			this.generic.clickElement(RegistrationPageENUM.Locator_CheckBox_TermsAndServiceNotChecked.toString());
+
+			//And take a screenshot to verify the change
+			this.generic.takeScreenShot("CHECKBOX CLICKED - CHECKBOX SHOULD BE CHECKED");
+
+		} else {
+
+			//Else, outprint message
 
 			System.out.format(" <Checkbox State: ALREADY SELECTED>");
-
-		}
-		else {
-
-			//If it is NOT, click the checkbox
-
-			this.generic.clickElement(RegistrationPageENUM.Locator_CheckBox_TermsAndService.toString());
 
 		}
 
@@ -463,20 +465,22 @@ public class RegistrationPagePO extends TestBase {
 	@Step("Click the 'I Accept The Terms Of Service' checkbox only if it IS already checked")
 	public void clickCheckedTermsOfServiceCheckbox_CL() {
 
-		//Check to see if the Checkbox is NOT already selected
+		//Check to see if the Checkbox IS already selected
 
-				if (this.generic.confirmElementExistence(RegistrationPageENUM.Locator_Boolean_TermsAndServiceNotChecked.toString()) != null) {
+				if (this.generic.confirmElementExistence(RegistrationPageENUM.Locator_CheckBox_TermsAndServiceChecked.toString()) != null) {
 
-					//If it is NOT, outprint message to console
+					//If it IS already checked, click the checkbox
+
+					this.generic.clickElement(RegistrationPageENUM.Locator_CheckBox_TermsAndServiceChecked.toString());
+
+					//And take a screenshot to verify the change
+					this.generic.takeScreenShot("CHECKBOX CLICKED - CHECKBOX SHOULD NOT BE CHECKED");
+
+				} else {
+
+					//Else, outprint message
 
 					System.out.format(" <Checkbox State: ALREADY NOT SELECTED>");
-
-				}
-				else {
-
-					//If it IS, click the checkbox
-
-					this.generic.clickElement(RegistrationPageENUM.Locator_CheckBox_TermsAndService.toString());
 
 				}
 
@@ -509,8 +513,8 @@ public class RegistrationPagePO extends TestBase {
 		//Fill in Zip Code
         this.fillInZIP_CL();
 
-		//Click the "Terms and Service" checkbox
-		this.clickTermsOfServiceCheckbox_CL();
+		//Click the "Terms and Service" checkbox if it is not already checked
+		this.clickNonCheckedTermsOfServiceCheckbox_CL();
 
 	}
 
@@ -540,6 +544,9 @@ public class RegistrationPagePO extends TestBase {
 
 		//Click the "ZIP / Postal Code" textbox, clear it, and send it nothing
 		this.clearOutZIP_CL();
+
+		//Click the "Terms and Service" checkbox only if it is already checked
+		this.clickNonCheckedTermsOfServiceCheckbox_CL();
 
 	}
 

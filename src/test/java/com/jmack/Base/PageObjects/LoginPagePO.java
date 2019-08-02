@@ -209,7 +209,7 @@ public class LoginPagePO extends TestBase{
 	 * Click the 'Github' link
 	 */
 	@Step("Click the 'Github' link")
-	public void clickGithubLink_CL() {
+	public void clickGithubLink_GH() {
 
 		//Click the link
 		this.generic.clickElement(LoginPageENUM.Locator_Link_Github.toString());
@@ -221,7 +221,7 @@ public class LoginPagePO extends TestBase{
 	 * Click the 'Bitbucket' link
 	 */
 	@Step("Click the 'Bitbucket' link")
-	public void clickBitbucketLink_CL() {
+	public void clickBitbucketLink_BB() {
 
 		//Click the link
 		this.generic.clickElement(LoginPageENUM.Locator_Link_Bitbucket.toString());
@@ -232,7 +232,7 @@ public class LoginPagePO extends TestBase{
 	 * Click the 'Gitlab' link
 	 */
 	@Step("Click the 'Gitlab' link")
-	public void clickGitlabLink_CL() {
+	public void clickGitlabLink_GL() {
 
 		//Click the link
 		this.generic.clickElement(LoginPageENUM.Locator_Link_Gitlab.toString());

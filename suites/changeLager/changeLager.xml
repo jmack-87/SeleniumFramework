@@ -76,4 +76,26 @@
         </classes>
 
     </test>
+    <test name="ChangeLager_E2E_IE">
+
+		<!-- Required -->
+    	<parameter name="applicationUnderTest" value="changeLager" />
+    	<parameter name="browserName" value="desktopIE" />
+    	<parameter name="jsonDataFile" value="ChangeLager.json" />
+<!-- 		<parameter name="excelDataFile" value="ChangeLager.xlsx" /> -->
+		<parameter name="propertiesFile" value="ChangeLager.properties" />
+
+		<!-- not used right now, debating parameterization of source file contents as opposed to forced naming -->
+<!-- 		<parameter name="testDataSheet" value="test" /> -->
+<!-- 		<parameter name="systemDataSheet" value="system" /> -->
+<!-- 		<parameter name="testDataArray" value="Tests" /> -->
+<!-- 		<parameter name="systemDataArray" value="System Options" /> -->
+
+		<parameter name="testParam" value="testValue1" />
+
+        <classes>
+            <class name="com.jmack.Tests.ChangeLager.Desktop.ChangeLager_E2E" />
+        </classes>
+
+    </test>
 </suite>
