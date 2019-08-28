@@ -27,6 +27,7 @@ public class RegistrationPagePO extends TestBase {
 	 * @param generic
 	 * @param ss
 	 */
+	
 	public RegistrationPagePO(Generic generic, ScreenShot ss) {
 
 		this.generic = generic;
