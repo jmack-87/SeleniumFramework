@@ -1,14 +1,15 @@
 package com.ibm.ciclan.Tests.Honda.Mobile;
 
+
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.jmack.Base.TestBase;
-import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
-import com.jmack.Enumerations.Generic;
-import com.jmack.Enumerations.Example.SearchPage;
-import com.jmack.Enumerations.Example.SearchResults;
+import com.ibm.ciclan.Base.TestBase;
+import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
+import com.ibm.ciclan.Enumerations.Generic;
+import com.ibm.ciclan.Enumerations.Honda.SearchPage;
+import com.ibm.ciclan.Enumerations.Honda.SearchResults;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -17,9 +18,16 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 
+
+/**
+ *
+ * @author JerimiahMACK
+ *
+ */
 @Epic("Parallelism")
 @Feature("iOS Safari")
 public class IosSafariFeature extends TestBase {
+
 
 	/**
 	 * Perform a google search. Confirm and click first result. Confirm navigation.

@@ -1,14 +1,16 @@
 package com.ibm.ciclan.Tests.Honda.Mobile;
 
+
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.jmack.Base.TestBase;
-import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
-import com.jmack.Enumerations.Example.PhoneApp;
+import com.ibm.ciclan.Base.TestBase;
+import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
+import com.ibm.ciclan.Enumerations.Honda.PhoneApp;
 
 import io.appium.java_client.MobileElement;
+
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -16,6 +18,12 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 
+
+/**
+ *
+ * @author JerimiahMACK
+ *
+ */
 @Epic("Parallelism")
 @Feature("Android Native")
 public class AndroidNativeFeature extends TestBase {
@@ -32,7 +40,7 @@ public class AndroidNativeFeature extends TestBase {
 	@Description("Test Description: Run Android Native App.")
 	@Story("Run Android Native App.")
 	@Parameters({"testParam"})
-	@RetryOnFailCount(2)
+	@RetryOnFailCount(0)
 	public void AndroidNativeTest(@Optional("n/a") String testParam) {
 
 		// confirm dialer button on phone default screen
@@ -58,7 +66,7 @@ public class AndroidNativeFeature extends TestBase {
 		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_Star.toString());
 		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_Pound.toString());
 		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_Call.toString());
-		
+
 	}
 
 
