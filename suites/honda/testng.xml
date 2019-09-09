@@ -27,11 +27,11 @@
 		<parameter name="testParam" value="testValue1" />
 
 		<classes>
- 			<class name="com.jmack.Tests.Honda.Desktop.ChromeFeature" />
-			<class name="com.jmack.Tests.Honda.Desktop.SafariFeature" />
-			<class name="com.jmack.Tests.Honda.Desktop.FirefoxFeature" />
-			<class name="com.jmack.Tests.Honda.Desktop.EdgeFeature" />
- 			<class name="com.jmack.Tests.Honda.Desktop.IeFeature" />
+ 			<class name="com.ibm.ciclan.Tests.Honda.Desktop.ChromeFeature" />
+			<class name="com.ibm.ciclan.Tests.Honda.Desktop.SafariFeature" />
+			<class name="com.ibm.ciclan.Tests.Honda.Desktop.FirefoxFeature" />
+			<class name="com.ibm.ciclan.Tests.Honda.Desktop.EdgeFeature" />
+ 			<class name="com.ibm.ciclan.Tests.Honda.Desktop.IeFeature" />
 		</classes>
 
 	</test>
