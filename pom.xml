@@ -4,7 +4,7 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.jmack</groupId>
+	<groupId>com.ibm.ciclan</groupId>
 	<artifactId>SeleniumFramework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SeleniumFramework</name>
@@ -233,7 +233,7 @@
 							</property>
 							<property>
 								<name>listener</name>
-								<value>com.jmack.Base.CustomAnnotations.TestRetryTransform</value>
+								<value>com.ibm.ciclan.Base.CustomAnnotations.TestRetryTransform</value>
 							</property>
 						</properties>
 						<argLine>
