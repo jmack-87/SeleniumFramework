@@ -56,7 +56,7 @@ public class SafariFeature extends TestBase {
 
 		generic.waitForPageLoaded(30);
 
-		generic.confirmElementExistence(SearchResults.Mobile_Locator_Text_aholdSearchConfirmation.toString());
+		generic.confirmElementExistence(SearchResults.Mobile_Locator_Text_hondaSearchConfirmation.toString());
 
 //		homePagePO.stuff("something passed");
 		generic.takeScreenShot("Final confirmation.");
