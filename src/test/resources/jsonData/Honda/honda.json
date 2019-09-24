@@ -20,65 +20,57 @@
 				"browserVersion": "latest",
 				"resolution": "1024x768",
 				"location": "NA-US-BOS",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care",
+				"searchString": "Honda",
+				"searchConfirmationString": "innovative line of quality products",
 				"headless": false
 			},
 			"SafariTest": {
 				"gridType": "local",
 				"browserName": "desktopSafari",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Honda",
+				"searchConfirmationString": "innovative line of quality products"
 			},
 			"FirefoxTest": {
 				"gridType": "local",
 				"browserName": "desktopFirefox",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Honda",
+				"searchConfirmationString": "innovative line of quality products"
 			},
 			"EdgeTest": {
 				"gridType": "local",
 				"browserName": "desktopEdge",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Honda",
+				"searchConfirmationString": "innovative line of quality products"
 			},
 			"IeTest": {
 				"gridType": "local",
 				"browserName": "desktopIe",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Honda",
+				"searchConfirmationString": "innovative line of quality products"
 			},
 			"AndroidChromeTest": {
 				"gridType": "local",
 				"platformName": "Android",
 				"platformVersion": "8.1.0",
 				"browserName": "androidChrome",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
-			},
-			"AndroidChromeTest2": {
-				"gridType": "local",
-				"platformName": "Android",
-				"platformVersion": "7.1.1",
-				"browserName": "androidChrome",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Honda",
+				"searchConfirmationString": "innovative line of quality products"
 			},
 			"AndroidNativeTest": {
 				"gridType": "local",
 				"platformName": "Android",
 				"platformVersion": "7",
 				"browserName": "androidNative",
-				"appPackage": "com.belmondo.Aholddelhaize",
-				"appActivity": "com.reactnativenavigation.controllers.NavigationActivity"
+				"appPackage": "",
+				"appActivity": ""
 			},
 			"IosSafariTest": {
 				"gridType": "perfecto",
 				"platformName": "iOS",
-				"platformVersion": "11.*",
+				"platformVersion": "12.*",
 				"browserName": "iosSafari",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Honda",
+				"searchConfirmationString": "innovative line of quality products"
 			},
 			"IosNativeTest": {
 				"gridType": "perfecto",
@@ -86,16 +78,6 @@
 				"platformVersion": "11.*",
 				"browserName": "iosNative",
 				"bundleId": "com.apple.Preferences"
-			},
-			"AndroidNative_AholdDelhaizeTest": {
-				"gridType": "local",
-				"platformName": "Android",
-				"platformVersion": "8",
-				"browserName": "androidNative",
-				"appPackage": "com.belmondo.Aholddelhaize",
-				"appActivity": "com.belmondo.app.MainActivity",
-				"userEmail": "123@234.com",
-				"password": "password"
 			}
 		}
 	],
