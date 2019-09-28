@@ -593,6 +593,7 @@ public class TestBase {
 					mfu.printStackTrace();
 				}
 				catch (WebDriverException wde ) {
+					wde.printStackTrace();
 					Assert.fail("Unable to start WebDriver");
 				}
 			} else {
