@@ -40,7 +40,7 @@ public class AndroidChromeFeature extends TestBase {
 	@Story("Run Android Chrome.")
 	@Parameters({"testParam"})
 	@RetryOnFailCount(0)
-	public void AndroidChromeTest(@Optional String testParam) throws InterruptedException {
+	public void AndroidChromeTest(@Optional String testParam) {
 
 		// launch google.com
 		mGeneric.getUrl(Generic.Text_googleURL.toString());
@@ -61,11 +61,14 @@ public class AndroidChromeFeature extends TestBase {
 		// confirm result is related to query
 		mGeneric.confirmElementExistence(SearchResults.Mobile_CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
 
+		// scroll to element
+		mGeneric.scrollToElement(SearchResults.Mobile_CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString, 4);
+
 		// click result
-		mGeneric.clickElement(SearchResults.Mobile_Locator_Link_firstResult.toString());
+		mGeneric.clickElement(SearchResults.Mobile_CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
 
 		// confirm navigation
-		mGeneric.confirmElementExistence(SearchResults.Mobile_Locator_Link_careCentrixSearchConfirmation.toString());
+		mGeneric.confirmElementExistence(SearchResults.Mobile_Locator_Text_hondaSearchConfirmation.toString());
 
 		// take screenshot
 		mGeneric.takeScreenShot("Final confirmation.");
