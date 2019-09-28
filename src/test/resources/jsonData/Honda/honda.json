@@ -49,33 +49,33 @@
 				"searchConfirmationString": "innovative line of quality products"
 			},
 			"AndroidChromeTest": {
-				"gridType": "local",
-				"platformName": "Android",
-				"platformVersion": "8.1.0",
+				"gridType": "perfecto",
+				"platformName": "android",
+				"platformVersion": "7.*",
 				"browserName": "androidChrome",
 				"searchString": "Honda",
 				"searchConfirmationString": "innovative line of quality products"
 			},
 			"AndroidNativeTest": {
-				"gridType": "local",
-				"platformName": "Android",
-				"platformVersion": "7",
+				"gridType": "perfecto",
+				"platformName": "android",
+				"platformVersion": "9",
 				"browserName": "androidNative",
 				"appPackage": "",
 				"appActivity": ""
 			},
 			"IosSafariTest": {
 				"gridType": "perfecto",
-				"platformName": "iOS",
-				"platformVersion": "12.*",
+				"platformName": "ios",
+				"platformVersion": "11.*",
 				"browserName": "iosSafari",
 				"searchString": "Honda",
 				"searchConfirmationString": "innovative line of quality products"
 			},
 			"IosNativeTest": {
 				"gridType": "perfecto",
-				"platformName": "iOS",
-				"platformVersion": "11.*",
+				"platformName": "ios",
+				"platformVersion": "13",
 				"browserName": "iosNative",
 				"bundleId": "com.apple.Preferences"
 			}
