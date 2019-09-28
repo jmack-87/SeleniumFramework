@@ -3,13 +3,16 @@ package com.ibm.ciclan.Base;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.function.Function;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
@@ -1437,6 +1440,20 @@ public class MobileGeneric extends TestBase {
 		return me = waitForElement(propertyKey, maxWait);
 
 	}
+
+	/**
+	 * Asserts element can be found within default time constraint
+	 *
+	 * @param propertyKey (String) properties file key defining element locator
+	 * @return (WebElement)
+	 */
+	@Step("Confirm element exists.")
+	public MobileElement confirmElementExistenceOrNone(String propertyKey, String replacement, int maxWait) {
+
+		return me = waitForElement(propertyKey, replacement, maxWait);
+
+	}
+
 
 
 	/**
@@ -3149,6 +3166,61 @@ public class MobileGeneric extends TestBase {
 		confirmElementExistence(propertyKey);
 		confirmElementExistence(propertyKey, "");
 
+	}
+
+
+	public void scrollToElement(String propertyKey, String replacement, int maxSwipes) {
+
+		int i = 0;
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		params.put("start", "50%,80%");
+		params.put("end", "50%,20%");
+		params.put("duration", "2");
+
+
+		while(!elementInViewport(propertyKey, replacement) && i < maxSwipes) {
+
+			System.out.format("[LOG]: <[%s:%s] performing swipe.>%n", this.id, this.testName);
+			this.driver.executeScript("mobile:touch:swipe", params);
+			i++;
+
+		}
+
+	}
+
+
+	public boolean elementInViewport(String propertyKey, String replacement) {
+
+		Dimension windowSize = 	this.driver.manage().window().getSize();
+
+		int windowHeight = 		windowSize.getHeight();
+		int windowWidth = 		windowSize.getWidth();
+
+		int elementY = 			100000;
+		int elementX = 			100000;
+		int elementHeight = 	0;
+		int elementWidth = 		0;
+		WebElement w = 			null;
+
+		w = confirmElementExistenceOrNone(propertyKey, replacement, 6);
+
+		if (!(w instanceof WebElement)) {
+			return false;
+		}
+
+		elementY = w.getRect().y;
+		elementX = w.getRect().x;
+		elementHeight = w.getRect().height;
+		elementWidth = w.getRect().width;
+
+		System.out.format("[LOG]: <[%s:%s] windowH: %d; windowW: %d; elementY: %d; elementX: %d;>%n", this.id, this.testName, windowHeight, windowWidth, elementY, elementX);
+
+		if ((elementY <= (windowHeight - elementHeight)) && (elementX <= (windowWidth - elementWidth))) {
+			return true;
+		}
+
+		return false;
 	}
 
 
