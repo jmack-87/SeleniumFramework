@@ -68,7 +68,7 @@ public class AndroidChromeFeature extends TestBase {
 		mGeneric.clickElement(SearchResults.Mobile_CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
 
 		// confirm navigation
-		mGeneric.confirmElementExistence(SearchResults.Mobile_Locator_Text_hondaSearchConfirmation.toString());
+		mGeneric.confirmElementExistence(SearchResults.Mobile_Locator_Text_aepSearchConfirmation.toString());
 
 		// take screenshot
 		mGeneric.takeScreenShot("Final confirmation.");
