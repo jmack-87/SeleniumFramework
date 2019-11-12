@@ -51,7 +51,7 @@
 			"AndroidChromeTest": {
 				"gridType": "local",
 				"platformName": "android",
-				"platformVersion": "7",
+				"platformVersion": "7.1.1",
 				"browserName": "androidChrome",
 				"searchString": "AEP",
 				"searchConfirmationString": "bright, enthusiastic people"
@@ -59,7 +59,7 @@
 			"AndroidNativeTest": {
 				"gridType": "local",
 				"platformName": "android",
-				"platformVersion": "8",
+				"platformVersion": "8.1.0",
 				"browserName": "androidNative",
 				"appPackage": "com.aep.customerapp.apco",
 				"appActivity": "com.aep.cma.aepmobileapp.splash.SplashActivityQtn"
