@@ -55,7 +55,7 @@ public class FirefoxFeature extends TestBase {
 
 		generic.waitForPageLoaded(30);
 
-		generic.confirmElementExistence(SearchResults.Mobile_Locator_Text_hondaSearchConfirmation.toString());
+		generic.confirmElementExistence(SearchResults.Mobile_Locator_Text_aepSearchConfirmation.toString());
 
 //		homePagePO.stuff("something passed");
 		generic.takeScreenShot("Final confirmation.");
