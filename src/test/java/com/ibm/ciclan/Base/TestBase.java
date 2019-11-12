@@ -304,7 +304,7 @@ public class TestBase {
 			case "androidnative":
 				caps = new DesiredCapabilities();
 				// optional
-				caps.setCapability("automationName", "UIAutomator2");
+				caps.setCapability("automationName", "Appium");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", "ignoredButNotEmpty");
@@ -317,7 +317,7 @@ public class TestBase {
 			case "androidchrome":
 				caps = DesiredCapabilities.android();
 				// optional
-				caps.setCapability("automationName", "UIAutomator2");
+				caps.setCapability("automationName", "Appium");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", "ignoredButNotEmpty");
@@ -329,7 +329,7 @@ public class TestBase {
 			case "iosnative":
 				caps = new DesiredCapabilities();
 				// optional
-				caps.setCapability("automationName", "XCUITest");
+				caps.setCapability("automationName", "Appium");
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				//required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
@@ -339,7 +339,7 @@ public class TestBase {
 			case "iossafari":
 				caps = DesiredCapabilities.iphone();
 				// optional
-				caps.setCapability("automationName", "XCUITest");
+				caps.setCapability("automationName", "Appium");
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				// required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
@@ -434,7 +434,7 @@ public class TestBase {
 			case "iosnative":
 				caps = new DesiredCapabilities();
 				// optional
-				caps.setCapability("automationName", "XCUITest");
+				caps.setCapability("automationName", "Appium");
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				//required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
@@ -444,7 +444,7 @@ public class TestBase {
 			case "iossafari":
 				caps = DesiredCapabilities.iphone();
 				// optional
-				caps.setCapability("automationName", "XCUITest");
+				caps.setCapability("automationName", "Appium");
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				// required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
