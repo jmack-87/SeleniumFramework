@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import com.ibm.ciclan.Base.TestBase;
 import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
-import com.ibm.ciclan.Enumerations.Honda.PhoneApp;
+import com.ibm.ciclan.Enumerations.Aep.Aep;
 
 import io.appium.java_client.MobileElement;
 
@@ -43,29 +43,23 @@ public class AndroidNativeFeature extends TestBase {
 	@RetryOnFailCount(0)
 	public void AndroidNativeTest(@Optional("n/a") String testParam) {
 
-		// confirm dialer button on phone default screen
-		me = mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_KeyPad.toString());
+		// screenshot application launch
+		mGeneric.takeScreenShot("Target application launched.");
 
-		// click dialer button
-		mGeneric.clickWithConfirmation(me, PhoneApp.Mobile_Button_1.toString());
+		// set email field
+		mGeneric.sendText(Aep.Mobile_Locator_TextField_User.toString(), runtimeData.userEmail);
 
-		mGeneric.takeScreenShot("Dialer pad displayed.");
+		// set password field
+		mGeneric.sendText(Aep.Mobile_Locator_TextField_Password.toString(), runtimeData.password);
 
-		// confirm dialpad buttons
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_1.toString());
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_2.toString());
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_3.toString());
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_4.toString());
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_5.toString());
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_6.toString());
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_7.toString());
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_8.toString());
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_9.toString());
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_0.toString());
+		// click login button
+		mGeneric.clickElement(Aep.Mobile_Locator_Button_Login.toString());
 
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_Star.toString());
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_Pound.toString());
-		mGeneric.confirmElementExistence(PhoneApp.Mobile_Button_Call.toString());
+		// confirm invalid credentials banner displays
+		mGeneric.confirmElementExistence(Aep.Mobile_Locator_TextContainer_LoginError.toString());
+
+		// take screenshot
+		mGeneric.takeScreenShot("Final confirmation.");
 
 	}
 
