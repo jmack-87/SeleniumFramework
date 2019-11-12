@@ -329,7 +329,7 @@ public class TestBase {
 			case "iosnative":
 				caps = new DesiredCapabilities();
 				// optional
-				caps.setCapability("automationName", "Appium");
+				caps.setCapability("automationName", "XCUITest");
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				//required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
@@ -339,7 +339,7 @@ public class TestBase {
 			case "iossafari":
 				caps = DesiredCapabilities.iphone();
 				// optional
-				caps.setCapability("automationName", "Appium");
+				caps.setCapability("automationName", "XCUITest");
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				// required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
@@ -434,7 +434,7 @@ public class TestBase {
 			case "iosnative":
 				caps = new DesiredCapabilities();
 				// optional
-				caps.setCapability("automationName", "Appium");
+				caps.setCapability("automationName", "XCUITest");
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				//required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
@@ -444,7 +444,7 @@ public class TestBase {
 			case "iossafari":
 				caps = DesiredCapabilities.iphone();
 				// optional
-				caps.setCapability("automationName", "Appium");
+				caps.setCapability("automationName", "XCUITest");
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				// required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
