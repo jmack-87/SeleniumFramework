@@ -302,7 +302,7 @@ public class TestBase {
 				break;
 			//Mobile
 			case "androidnative":
-				caps = new DesiredCapabilities();
+				caps = DesiredCapabilities.android();
 				// optional
 				caps.setCapability("automationName", "UIAutomator2");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
@@ -327,7 +327,7 @@ public class TestBase {
 				caps.setBrowserName("Chrome");
 				break;
 			case "iosnative":
-				caps = new DesiredCapabilities();
+				caps = DesiredCapabilities.iphone();
 				// optional
 				caps.setCapability("automationName", "XCUITest");
 				caps.setCapability("deviceName", runtimeData.deviceName);
@@ -407,7 +407,7 @@ public class TestBase {
 				break;
 			//Mobile
 			case "androidnative":
-				caps = new DesiredCapabilities();
+				caps = DesiredCapabilities.android();
 				// optional
 				caps.setCapability("automationName", "Appium");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
@@ -432,7 +432,7 @@ public class TestBase {
 				caps.setBrowserName("Chrome");
 				break;
 			case "iosnative":
-				caps = new DesiredCapabilities();
+				caps = DesiredCapabilities.iphone();
 				// optional
 				caps.setCapability("automationName", "XCUITest");
 				caps.setCapability("deviceName", runtimeData.deviceName);
@@ -501,7 +501,8 @@ public class TestBase {
 					mfu.printStackTrace();
 				}
 				catch (WebDriverException wde ) {
-					Assert.fail("Unable to start WebDriver");
+					wde.printStackTrace();
+					Assert.fail("Unable to start WebDriver: "+wde.getLocalizedMessage());
 				}
 
 			// using Perfecto grid
@@ -548,6 +549,12 @@ public class TestBase {
 
 			System.out.format("[LOG]: <[%s:%s] %s client detected on %s grid>%n", id, testName, runtimeData.browserName, runtimeData.gridType);
 
+			if (runtimeData.browserName.equalsIgnoreCase("androidchrome")) {
+				options = new ChromeOptions();
+				((ChromeOptions) options).setExperimentalOption("w3c", false);
+				caps.merge(options);
+			}
+
 			// using local appium server
 			if (runtimeData.gridType.toLowerCase().equals("local")) {
 				try {
@@ -562,6 +569,7 @@ public class TestBase {
 					mfu.printStackTrace();
 				}
 				catch (WebDriverException wde ) {
+					wde.printStackTrace();
 					Assert.fail("Unable to start WebDriver");
 				}
 
