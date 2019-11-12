@@ -1258,6 +1258,7 @@ public class MobileGeneric extends TestBase {
 	public void sendText(String propertyKey, String input) {
 
 		me = confirmElementExistence(propertyKey);
+		//me.click();
 		me.clear();
 		me.sendKeys(input);
 		ss.takeScreenShot("After input");
@@ -1274,6 +1275,7 @@ public class MobileGeneric extends TestBase {
 	@Step("Input text.")
 	public void sendText(MobileElement me, String input) {
 
+		//me.click();
 		me.clear();
 		me.sendKeys(input);
 		ss.takeScreenShot("After input");
@@ -1292,6 +1294,7 @@ public class MobileGeneric extends TestBase {
 	public void sendText(String propertyKey, String input, boolean takeSS) {
 
 		me = confirmElementExistence(propertyKey);
+		//me.click();
 		me.clear();
 		me.sendKeys(input);
 
