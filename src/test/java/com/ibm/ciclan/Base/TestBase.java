@@ -302,7 +302,7 @@ public class TestBase {
 				break;
 			//Mobile
 			case "androidnative":
-				caps = DesiredCapabilities.android();
+				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "UIAutomator2");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
@@ -327,7 +327,7 @@ public class TestBase {
 				caps.setBrowserName("Chrome");
 				break;
 			case "iosnative":
-				caps = DesiredCapabilities.iphone();
+				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "XCUITest");
 				caps.setCapability("deviceName", runtimeData.deviceName);
@@ -407,7 +407,7 @@ public class TestBase {
 				break;
 			//Mobile
 			case "androidnative":
-				caps = DesiredCapabilities.android();
+				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "Appium");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
@@ -432,7 +432,7 @@ public class TestBase {
 				caps.setBrowserName("Chrome");
 				break;
 			case "iosnative":
-				caps = DesiredCapabilities.iphone();
+				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "XCUITest");
 				caps.setCapability("deviceName", runtimeData.deviceName);
