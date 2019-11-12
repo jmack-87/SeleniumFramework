@@ -49,25 +49,25 @@
 				"searchConfirmationString": "bright, enthusiastic people"
 			},
 			"AndroidChromeTest": {
-				"gridType": "perfecto",
+				"gridType": "local",
 				"platformName": "android",
-				"platformVersion": "7.*",
+				"platformVersion": "7",
 				"browserName": "androidChrome",
 				"searchString": "AEP",
 				"searchConfirmationString": "bright, enthusiastic people"
 			},
 			"AndroidNativeTest": {
-				"gridType": "perfecto",
+				"gridType": "local",
 				"platformName": "android",
-				"platformVersion": "9",
+				"platformVersion": "8",
 				"browserName": "androidNative",
-				"appPackage": "",
-				"appActivity": ""
+				"appPackage": "com.aep.customerapp.apco",
+				"appActivity": "com.aep.cma.aepmobileapp.splash.SplashActivityQtn"
 			},
 			"IosSafariTest": {
 				"gridType": "perfecto",
 				"platformName": "ios",
-				"platformVersion": "11.*",
+				"platformVersion": "1[123].*",
 				"browserName": "iosSafari",
 				"searchString": "AEP",
 				"searchConfirmationString": "bright, enthusiastic people"
