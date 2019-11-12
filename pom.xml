@@ -223,10 +223,10 @@
 							<suiteXMLFile>${suiteXMLFile}</suiteXMLFile>
 						</suiteXmlFiles>
 						<properties>
-							<property>
-								<name>suitethreadpoolsize</name>
-								<value>${suitePool}</value>
-							</property>
+<!-- 							<property> -->
+<!-- 								<name>suitethreadpoolsize</name> -->
+<!-- 								<value>${suitePool}</value> -->
+<!-- 							</property> -->
 							<property>
 								<name>usedefaultlisteners</name>
 								<value>true</value>
