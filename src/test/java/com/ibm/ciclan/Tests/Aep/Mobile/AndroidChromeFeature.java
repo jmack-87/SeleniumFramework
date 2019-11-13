@@ -55,11 +55,11 @@ public class AndroidChromeFeature extends TestBase {
 		// submit search
 		mGeneric.clickElement(SearchPage.Mobile_Locator_Button_searchSubmit.toString());
 
-		// take screenshot
-		mGeneric.takeScreenShot("Search results.");
-
 		// confirm at least one result returns
 		mGeneric.confirmElementExistence(SearchResults.Locator_firstResult.toString());
+
+		// take screenshot
+		mGeneric.takeScreenShot("Search results.");
 
 		// confirm result is related to query
 		mGeneric.confirmElementExistence(SearchResults.Mobile_CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
