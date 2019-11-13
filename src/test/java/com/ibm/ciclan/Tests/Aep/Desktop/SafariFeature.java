@@ -50,6 +50,9 @@ public class SafariFeature extends TestBase {
 		generic.sendText(SearchPage.Locator_TextField_searchInput.toString(), runtimeData.searchString);
 		generic.clickElement(SearchPage.Locator_Button_searchSubmit.toString());
 
+		// take screenshot
+		generic.takeScreenShot("Search results.");
+
 		generic.confirmElementExistence(SearchResults.Locator_firstResult.toString());
 		generic.confirmElementExistence(SearchResults.CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
 		generic.clickElement(SearchResults.Locator_firstResult.toString());
