@@ -30,7 +30,7 @@
  			<class name="com.ibm.ciclan.Tests.Aep.Desktop.ChromeFeature" />
 			<class name="com.ibm.ciclan.Tests.Aep.Desktop.SafariFeature" />
 			<class name="com.ibm.ciclan.Tests.Aep.Desktop.FirefoxFeature" />
-<!-- 			<class name="com.ibm.ciclan.Tests.Aep.Desktop.EdgeFeature" /> -->
+			<class name="com.ibm.ciclan.Tests.Aep.Desktop.EdgeFeature" />
  			<class name="com.ibm.ciclan.Tests.Aep.Desktop.IeFeature" />
 		</classes>
 
