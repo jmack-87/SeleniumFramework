@@ -1810,7 +1810,7 @@ public class Generic extends TestBase {
 	// @Step("Build dynamic locator.")
 	private String buildDynamicLocator(String locator, String replacement) {
 
-		return locator.replace(gc.compoundLocatorPlaceholder, replacement);
+		return locator.replaceAll(gc.compoundLocatorPlaceholder, replacement);
 
 	}
 
