@@ -20,7 +20,7 @@
 				"location": "NA-US-BOS",
 				"searchString": "IBM Perfecto",
 				"searchConfirmationString": "IBM",
-				"headless": "true",
+				"headless": "false",
 				"username": "userName",
 				"password": "passWord",
 				"differentPassword": "PassWord",
