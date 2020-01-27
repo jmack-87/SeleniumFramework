@@ -33,7 +33,7 @@ public class ChangeLager_E2E extends TestBase {
     public void ChangeLager_E2ETest(@Optional String testParam) throws InterruptedException {
 
         //Navigate to the ChangeLager website, and confirm
-        homePagePO.navigateAndValidate_CL();
+        homePagePO.navigateTo_CL();
 
         //Validate all buttons exist
         homePagePO.validateAllButtonsExist_CL();
@@ -48,7 +48,7 @@ public class ChangeLager_E2E extends TestBase {
         registrationPagePO.validateNavigation_CL();
 
         //Navigate back to the ChangeLager website, and confirm
-        homePagePO.navigateAndValidate_CL();
+        homePagePO.navigateTo_CL();
 
         //Click the 'More Than One' registration button
         homePagePO.clickMoreThanOneRegistration_CL();
@@ -57,19 +57,19 @@ public class ChangeLager_E2E extends TestBase {
         registrationPagePO.validateNavigation_CL();
 
         //Navigate back to the ChangeLager website, and confirm
-        homePagePO.navigateAndValidate_CL();
+        homePagePO.navigateTo_CL();
 
         //Click the down arrow
         homePagePO.clickDownArrow_CL();
 
         //Click the 'MetaBit, LLC' hyperlink at the bottom of the ChangeLager Home Page
-//        homePagePO.clickMetaBitLink_CL();
+        //homePagePO.clickMetaBitLink_CL();
 
         //Validate the page transition
-//        homePagePO.validateNavigation_MBLLC();
+        //homePagePO.validateNavigation_MBLLC();
 
         //Navigate back to the ChangeLager website, and confirm
-        homePagePO.navigateAndValidate_CL();
+        //homePagePO.navigateAndValidate_CL();
 
         //Click the "Register" button, and confirm page change
         homePagePO.clickRegisterButton_CL();
