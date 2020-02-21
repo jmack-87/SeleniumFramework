@@ -8,8 +8,8 @@
 				"browserName": "desktop{Chrome|Ie|Edge|Firefox}|{android|ios}{Chrome|Native|Safari}",
 				"browserVersion": "integer|latest|beta",
 				"location": "REQUIRED(Mac): perfecto location",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Google Photos",
+				"searchConfirmationString": "home for all your photos and video"
 			},
 			"ChromeTest": {
 				"gridType": "local",
@@ -20,65 +20,65 @@
 				"browserVersion": "latest",
 				"resolution": "1024x768",
 				"location": "NA-US-BOS",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care",
+				"searchString": "Google Photos",
+				"searchConfirmationString": "home for all your photos and video",
 				"headless": false
 			},
 			"SafariTest": {
 				"gridType": "local",
 				"browserName": "desktopSafari",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Google Photos",
+				"searchConfirmationString": "home for all your photos and video"
 			},
 			"FirefoxTest": {
 				"gridType": "local",
 				"browserName": "desktopFirefox",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Google Photos",
+				"searchConfirmationString": "home for all your photos and video"
 			},
 			"EdgeTest": {
 				"gridType": "local",
 				"browserName": "desktopEdge",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Google Photos",
+				"searchConfirmationString": "home for all your photos and video"
 			},
 			"IeTest": {
 				"gridType": "local",
 				"browserName": "desktopIe",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Google Photos",
+				"searchConfirmationString": "home for all your photos and video"
 			},
 			"AndroidChromeTest": {
 				"gridType": "local",
 				"platformName": "Android",
 				"platformVersion": "8.1.0",
 				"browserName": "androidChrome",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Google Photos",
+				"searchConfirmationString": "home for all your photos and video"
 			},
 			"AndroidChromeTest2": {
 				"gridType": "local",
 				"platformName": "Android",
 				"platformVersion": "7.1.1",
 				"browserName": "androidChrome",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Google Photos",
+				"searchConfirmationString": "home for all your photos and video"
 			},
 			"AndroidNativeTest": {
-				"gridType": "local",
+				"gridType": "perfecto",
 				"platformName": "Android",
-				"platformVersion": "7",
+				"platformVersion": "7.*",
 				"browserName": "androidNative",
-				"appPackage": "com.belmondo.Aholddelhaize",
-				"appActivity": "com.reactnativenavigation.controllers.NavigationActivity"
+				"appPackage": "com.google.android.apps.docs",
+				"appActivity": ".drive.startup.StartupActivity"
 			},
 			"IosSafariTest": {
 				"gridType": "perfecto",
 				"platformName": "iOS",
 				"platformVersion": "11.*",
 				"browserName": "iosSafari",
-				"searchString": "CareCentrix",
-				"searchConfirmationString": "future of care"
+				"searchString": "Google Photos",
+				"searchConfirmationString": "home for all your photos and video"
 			},
 			"IosNativeTest": {
 				"gridType": "perfecto",

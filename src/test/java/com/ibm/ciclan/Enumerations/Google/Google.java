@@ -32,8 +32,10 @@ public enum Google {
 	Mobile_Locator_Link_firstResult("SearchResults.Mobile.Locator.Link.firstResult"),
 
 	Mobile_Locator_TextField_User("Google.Mobile.Locator.TextField.User"),
+	Mobile_Locator_Button_UserName_Next("Google.Mobile.Locator.Button.UserName.Next"),
+	Mobile_Locator_Text_UserName("Google.Mobile.Locator.Text.Email"),
 	Mobile_Locator_TextField_Password("Google.Mobile.Locator.TextField.Password"),
-	Mobile_Locator_Button_Login("Google.Mobile.Locator.Button.Login"),
+	Mobile_Locator_Button_Password_Next("Google.Mobile.Locator.Button.Password.Next"),
 	Mobile_Locator_TextContainer_LoginError("Google.Mobile.Locator.TextContainer.LoginError"),
 	;
 

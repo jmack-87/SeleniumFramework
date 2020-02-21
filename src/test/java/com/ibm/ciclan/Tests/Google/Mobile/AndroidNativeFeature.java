@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import com.ibm.ciclan.Base.TestBase;
 import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
-import com.ibm.ciclan.Enumerations.Aep.Aep;
+import com.ibm.ciclan.Enumerations.Google.Google;
 
 import io.appium.java_client.MobileElement;
 
@@ -47,16 +47,22 @@ public class AndroidNativeFeature extends TestBase {
 		mGeneric.takeScreenShot("Target application launched.");
 
 		// set email field
-		mGeneric.sendText(Aep.Mobile_Locator_TextField_User.toString(), runtimeData.userEmail);
+		mGeneric.sendText(Google.Mobile_Locator_TextField_User.toString(), runtimeData.userEmail);
+
+		// click next button
+		mGeneric.clickElement(Google.Mobile_Locator_Button_UserName_Next.toString());
+
+		// confirm correct user profile
+		mGeneric.confirmDynamicTextValue(Google.Mobile_Locator_Text_UserName.toString(), runtimeData.userEmail);
 
 		// set password field
-		mGeneric.sendText(Aep.Mobile_Locator_TextField_Password.toString(), runtimeData.password);
+		mGeneric.sendText(Google.Mobile_Locator_TextField_Password.toString(), runtimeData.password);
 
 		// click login button
-		mGeneric.clickElement(Aep.Mobile_Locator_Button_Login.toString());
+		mGeneric.clickElement(Google.Mobile_Locator_Button_Password_Next.toString());
 
 		// confirm invalid credentials banner displays
-		mGeneric.confirmElementExistence(Aep.Mobile_Locator_TextContainer_LoginError.toString());
+		mGeneric.confirmElementExistence(Google.Mobile_Locator_TextContainer_LoginError.toString());
 
 		// take screenshot
 		mGeneric.takeScreenShot("Final confirmation.");
