@@ -3,15 +3,15 @@ package com.ibm.ciclan.Base.CustomAnnotations;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 
-import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
- 
+import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
+
 public class RetryAnalyzer implements IRetryAnalyzer {
- 
+
 	int counter = 0;
- 
+
 	@Override
 	public boolean retry(ITestResult result) {
- 
+
 		// check if the test method had RetryCountIfFailed annotation
 		RetryOnFailCount annotation = result.getMethod().getConstructorOrMethod().getMethod()
 				.getAnnotation(RetryOnFailCount.class);
