@@ -271,7 +271,6 @@ public class TestBase {
 		// make sure minimum data requirements have been met
 		Assert.assertTrue(runtimeData.minimumDataCheck(this.id, this.testName), "Minimum data requirements were not met. Check JSON/Excel/Parameter for minimum data.");
 
-
 		// Set up clients for use with a locally hosted selenium grid
 		if (runtimeData.gridType.toLowerCase().equals("local")) {
 
@@ -454,6 +453,14 @@ public class TestBase {
 			}
 		}
 
+
+		if (null != options) {
+			System.out.format("[LOG]: <[%s:%s] %s>", id, testName, options.toString());
+		}
+
+		if (null != caps) {
+			System.out.format("[LOG]: <[%s:%s] %s>", id, testName, caps.toString());
+		}
 
 		// load properties file (locators definitions)
 		try {
