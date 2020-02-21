@@ -1,5 +1,6 @@
 package com.ibm.ciclan.Tests.Honda.Desktop;
 
+
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -17,9 +18,16 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 
+
+/**
+ *
+ * @author JERIMIAHMACK
+ *
+ */
 @Epic("Parallelism")
 @Feature("Chrome")
 public class ChromeFeature extends TestBase {
+
 
 	/**
 	 * Perform a google search. Confirm and click first result. Confirm navigation.

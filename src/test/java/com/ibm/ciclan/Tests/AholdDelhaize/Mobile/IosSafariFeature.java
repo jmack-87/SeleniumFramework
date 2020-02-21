@@ -1,4 +1,4 @@
-package com.ibm.ciclan.Tests.Example.Mobile;
+package com.ibm.ciclan.Tests.AholdDelhaize.Mobile;
 
 
 import org.testng.annotations.Optional;
@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 import com.ibm.ciclan.Base.TestBase;
 import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
 import com.ibm.ciclan.Enumerations.Generic;
-import com.ibm.ciclan.Enumerations.Example.SearchPage;
-import com.ibm.ciclan.Enumerations.Example.SearchResults;
+import com.ibm.ciclan.Enumerations.AholdDelhaize.SearchPage;
+import com.ibm.ciclan.Enumerations.AholdDelhaize.SearchResults;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -20,22 +20,21 @@ import io.qameta.allure.Story;
 
 
 @Epic("Parallelism")
-@Feature("Android Chrome")
-public class AndroidChromeFeature extends TestBase {
-
+@Feature("iOS Safari")
+public class IosSafariFeature extends TestBase {
 
 	/**
 	 * Perform a google search. Confirm and click first result. Confirm navigation.
 	 * @param testParam optional TestNG value from suite
 	 * @throws InterruptedException
 	 */
-	@Test(testName="Android Chrome Test", description="Run Android Chrome browser in parallel.")
+	@Test(testName="Ios Safari Test", description="Run Ios Safari browser in parallel.")
 	@Severity(SeverityLevel.BLOCKER)
-	@Description("Test Description: Run Android Chrome browser.")
-	@Story("Run Android Chrome.")
+	@Description("Test Description: Run Ios Safari browser.")
+	@Story("Run Ios Safari.")
 	@Parameters({"testParam"})
 	@RetryOnFailCount(0)
-	public void AndroidChromeTest(@Optional String testParam) throws InterruptedException {
+	public void IosSafariTest(@Optional String testParam) throws InterruptedException {
 
 		// launch google.com
 		mGeneric.getUrl(Generic.Text_googleURL.toString());
@@ -57,10 +56,10 @@ public class AndroidChromeFeature extends TestBase {
 		mGeneric.confirmElementExistence(SearchResults.Mobile_CompoundLocator_firstResult.toString(), runtimeData.searchConfirmationString);
 
 		// click result
-		mGeneric.clickElement(SearchResults.Mobile_Locator_Link_firstResult.toString());
+		mGeneric.clickElement(SearchResults.Locator_firstResult.toString());
 
 		// confirm navigation
-		mGeneric.confirmElementExistence(SearchResults.Mobile_Locator_Link_careCentrixSearchConfirmation.toString());
+		mGeneric.confirmElementExistence(SearchResults.Mobile_Locator_Text_aholdSearchConfirmation.toString(), 90);
 
 		// take screenshot
 		mGeneric.takeScreenShot("Final confirmation.");

@@ -1,14 +1,14 @@
-package com.ibm.ciclan.Tests.Example.Mobile;
+package com.ibm.ciclan.Tests.AholdDelhaize.Mobile;
+
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.jmack.Base.TestBase;
-import com.jmack.Base.CustomAnnotations.RetryOnFailCount;
-import com.jmack.Enumerations.Example.AholdDelhaize;
+import com.ibm.ciclan.Base.TestBase;
+import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
+import com.ibm.ciclan.Enumerations.AholdDelhaize.AholdDelhaize;
 
-import io.appium.java_client.MobileElement;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -16,11 +16,11 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 
+
 @Epic("Parallelism")
 @Feature("Android Native")
-public class AndroidNative_AholdDelhaize extends TestBase {
+public class AndroidNativeFeature extends TestBase {
 
-	MobileElement me = null;
 
 	/**
 	 * Perform a google search. Confirm and click first result. Confirm navigation.
@@ -32,8 +32,8 @@ public class AndroidNative_AholdDelhaize extends TestBase {
 	@Description("Test Description: Run Android Native App.")
 	@Story("Run Android Native App.")
 	@Parameters({"testParam"})
-	@RetryOnFailCount(2)
-	public void AndroidNative_AholdDelhaizeTest(@Optional("n/a") String testParam) {
+	@RetryOnFailCount(0)
+	public void AndroidNativeTest(@Optional("n/a") String testParam) {
 
 		// screenshot application launch
 		mGeneric.takeScreenShot("Target application launched.");

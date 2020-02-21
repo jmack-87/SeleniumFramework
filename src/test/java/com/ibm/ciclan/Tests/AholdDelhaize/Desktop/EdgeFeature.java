@@ -1,4 +1,4 @@
-package com.ibm.ciclan.Tests.Example.Desktop;
+package com.ibm.ciclan.Tests.AholdDelhaize.Desktop;
 
 
 import org.testng.annotations.Optional;
@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 import com.ibm.ciclan.Base.TestBase;
 import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
 import com.ibm.ciclan.Enumerations.Generic;
-import com.ibm.ciclan.Enumerations.Example.SearchPage;
-import com.ibm.ciclan.Enumerations.Example.SearchResults;
+import com.ibm.ciclan.Enumerations.AholdDelhaize.SearchPage;
+import com.ibm.ciclan.Enumerations.AholdDelhaize.SearchResults;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -20,8 +20,8 @@ import io.qameta.allure.Story;
 
 
 @Epic("Parallelism")
-@Feature("Safari")
-public class SafariFeature extends TestBase {
+@Feature("Edge")
+public class EdgeFeature extends TestBase {
 
 
 	/**
@@ -29,13 +29,13 @@ public class SafariFeature extends TestBase {
 	 * @param testParam optional TestNG value from suite
 	 * @throws InterruptedException
 	 */
-	@Test(testName="Safari Test", description="Run Safari browser in parallel.")
-	@Severity(SeverityLevel.CRITICAL)
-	@Description("Test Description: Run Safari browser in parallel.")
-	@Story("Run Chrome, Firefox, Edge, InternetExplorer, Safari in parallel.")
+	@Test(testName="Edge Test",description="Run Edge browser in parallel.")
+	@Severity(SeverityLevel.NORMAL)
+	@Description("Test Description: Run Edge browser in parallel.")
+	@Story("Run Chrome, Firefox, Edge, InternetExplorer in parallel.")
 	@Parameters({"testParam"})
 	@RetryOnFailCount(0)
-	public void SafariTest(@Optional String testParam) throws InterruptedException {
+	public void EdgeTest(@Optional String testParam) throws InterruptedException {
 
 		generic.getUrl(Generic.Text_googleURL.toString());
 

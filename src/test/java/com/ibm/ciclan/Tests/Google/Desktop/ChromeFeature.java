@@ -1,5 +1,6 @@
 package com.ibm.ciclan.Tests.Google.Desktop;
 
+
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -7,8 +8,8 @@ import org.testng.annotations.Test;
 import com.ibm.ciclan.Base.TestBase;
 import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
 import com.ibm.ciclan.Enumerations.Generic;
-import com.ibm.ciclan.Enumerations.Honda.SearchPage;
-import com.ibm.ciclan.Enumerations.Honda.SearchResults;
+import com.ibm.ciclan.Enumerations.Google.SearchPage;
+import com.ibm.ciclan.Enumerations.Google.SearchResults;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
@@ -17,9 +18,16 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 
+
+/**
+ *
+ * @author JERIMIAHMACK
+ *
+ */
 @Epic("Parallelism")
 @Feature("Chrome")
 public class ChromeFeature extends TestBase {
+
 
 	/**
 	 * Perform a google search. Confirm and click first result. Confirm navigation.
