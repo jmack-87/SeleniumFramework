@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Desktop_Suite2" parallel="instances" thread-count="4">
+<suite name="Desktop_Suite" parallel="instances" thread-count="4">
 
 	<parameter name="browserName" value="" />
 	<parameter name="browser" value="" />
@@ -10,13 +10,13 @@
 	<parameter name="platformVersion" value="" />
 	<parameter name="resolution" value="" />
 
-	<test name="Desktop_Clients2">
+	<test name="Desktop_Clients">
 
 		<!-- Required -->
-    	<parameter name="applicationUnderTest" value="Example" />
-    	<parameter name="jsonDataFile" value="example.json" />
-		<parameter name="excelDataFile" value="example.xlsx" />
-		<parameter name="propertiesFile" value="example.properties" />
+    	<parameter name="applicationUnderTest" value="AholdDelhaize" />
+    	<parameter name="jsonDataFile" value="aholdDelhaize.json" />
+		<parameter name="excelDataFile" value="aholdDelhaize.xlsx" />
+		<parameter name="propertiesFile" value="aholdDelhaize.properties" />
 
 <!--		not used right now, debating parameterization of source file contents as opposed to forced naming -->
 <!-- 		<parameter name="testDataSheet" value="test" /> -->
@@ -24,14 +24,14 @@
 <!-- 		<parameter name="testDataArray" value="Tests" /> -->
 <!-- 		<parameter name="systemDataArray" value="System Options" /> -->
 
-		<parameter name="testParam" value="testValue2" />
+		<parameter name="testParam" value="testValue1" />
 
 		<classes>
- 			<class name="com.jmack.Tests.Example.Desktop.ChromeFeature" />
-			<class name="com.jmack.Tests.Example.Desktop.SafariFeature" />
-			<class name="com.jmack.Tests.Example.Desktop.FirefoxFeature" />
-			<class name="com.jmack.Tests.Example.Desktop.EdgeFeature" />
- 			<class name="com.jmack.Tests.Example.Desktop.IeFeature" />
+ 			<class name="com.ibm.ciclan.Tests.AholdDelhaize.Desktop.ChromeFeature" />
+			<class name="com.ibm.ciclan.Tests.AholdDelhaize.Desktop.SafariFeature" />
+			<class name="com.ibm.ciclan.Tests.AholdDelhaize.Desktop.FirefoxFeature" />
+			<class name="com.ibm.ciclan.Tests.AholdDelhaize.Desktop.EdgeFeature" />
+ 			<class name="com.ibm.ciclan.Tests.AholdDelhaize.Desktop.IeFeature" />
 		</classes>
 
 	</test>
