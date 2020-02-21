@@ -11,6 +11,12 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
+import com.ibm.ciclan.Base.PageObjects.Honda_SearchPO;
+import com.ibm.ciclan.Base.PageObjects.HomePagePO;
+import com.ibm.ciclan.Base.PageObjects.IFramePO;
+import com.ibm.ciclan.Base.PageObjects.LoginPagePO;
+import com.ibm.ciclan.Base.PageObjects.RegistrationPagePO;
+
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriverException;
@@ -29,14 +35,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 
 import io.qameta.allure.Step;
-
-import com.ibm.ciclan.Base.PageObjects.Honda_SearchPO;
-
 
 /**
  *
@@ -92,7 +94,10 @@ public class TestBase {
 
 	// Page Objects
 	protected Honda_SearchPO honda_searchPO;
-
+	protected HomePagePO homePagePO;
+	protected IFramePO iFrame;
+	protected LoginPagePO logInPage;
+	protected RegistrationPagePO registrationPagePO;
 
 	/**
 	 * Initialize RemoteWebDriver, gather test data (from JSON, excel, TestNG suite Parameters)
@@ -631,6 +636,10 @@ public class TestBase {
 	private void initializePageObjects() {
 
 		honda_searchPO = new Honda_SearchPO(generic, ss, id, testName);
+		homePagePO = new HomePagePO(generic, ss, id, testName);
+		iFrame = new IFramePO(generic, ss, id, testName);
+		logInPage = new LoginPagePO(generic, ss, runtimeData, id, testName);
+		registrationPagePO = new RegistrationPagePO(generic, ss, runtimeData, id, testName, iFrame);
 
 		System.out.format("[LOG]: <[%s:%s] page objects loaded>%n", id, testName);
 
