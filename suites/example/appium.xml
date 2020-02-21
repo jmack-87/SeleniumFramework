@@ -27,12 +27,10 @@
 <!-- 		<parameter name="systemDataArray" value="System Options" /> -->
 
 		<classes>
-<!-- 			<class name="com.jmack.Tests.Example.Mobile.AndroidNative_AholdDelhaize" /> -->
-			<class name="com.jmack.Tests.Example.Mobile.AndroidChromeFeature" />
-			<class name="com.jmack.Tests.Example.Mobile.AndroidChromeFeature2" />
-<!-- 			<class name="com.jmack.Tests.Example.Mobile.AndroidNativeFeature" /> -->
-			<class name="com.jmack.Tests.Example.Mobile.IosSafariFeature" />
-<!-- 			<class name="com.jmack.Tests.Example.Mobile.IosNativeFeature" /> -->
+			<class name="com.ibm.ciclan.Tests.Example.Mobile.AndroidChromeFeature" />
+			<class name="com.ibm.ciclan.Tests.Example.Mobile.AndroidNativeFeature" />
+			<class name="com.ibm.ciclan.Tests.Example.Mobile.IosSafariFeature" />
+			<class name="com.ibm.ciclan.Tests.Example.Mobile.IosNativeFeature" />
 		</classes>
 
 	</test>

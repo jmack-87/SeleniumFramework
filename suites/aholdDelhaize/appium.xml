@@ -15,10 +15,10 @@
 	<test name="Mobile_Clients">
 
 		<!-- Required -->
-    	<parameter name="applicationUnderTest" value="Google" />
-    	<parameter name="jsonDataFile" value="google.json" />
-		<parameter name="excelDataFile" value="google.xlsx" />
-		<parameter name="propertiesFile" value="google.properties" />
+    	<parameter name="applicationUnderTest" value="AholdDelhaize" />
+    	<parameter name="jsonDataFile" value="aholdDelhaize.json" />
+		<parameter name="excelDataFile" value="aholdDelhaize.xlsx" />
+		<parameter name="propertiesFile" value="aholdDelhaize.properties" />
 
 <!--		not used right now, debating parameterization of source file contents as opposed to forced naming -->
 <!-- 		<parameter name="testDataSheet" value="test" /> -->
@@ -27,10 +27,10 @@
 <!-- 		<parameter name="systemDataArray" value="System Options" /> -->
 
 		<classes>
-			<class name="com.ibm.ciclan.Tests.Google.Mobile.AndroidChromeFeature" />
-			<class name="com.ibm.ciclan.Tests.Google.Mobile.AndroidNativeFeature" />
-			<class name="com.ibm.ciclan.Tests.Google.Mobile.IosSafariFeature" />
-			<class name="com.ibm.ciclan.Tests.Google.Mobile.IosNativeFeature" />
+			<class name="com.ibm.ciclan.Tests.AholdDelhaize.Mobile.AndroidChromeFeature" />
+			<class name="com.ibm.ciclan.Tests.AholdDelhaize.Mobile.AndroidNativeFeature" />
+			<class name="com.ibm.ciclan.Tests.AholdDelhaize.Mobile.IosSafariFeature" />
+			<class name="com.ibm.ciclan.Tests.AholdDelhaize.Mobile.IosNativeFeature" />
 		</classes>
 
 	</test>

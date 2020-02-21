@@ -30,7 +30,7 @@
 			<class name="com.ibm.ciclan.Tests.Honda.Mobile.AndroidChromeFeature" />
 			<class name="com.ibm.ciclan.Tests.Honda.Mobile.AndroidNativeFeature" />
 			<class name="com.ibm.ciclan.Tests.Honda.Mobile.IosSafariFeature" />
-<!-- 			<class name="com.ibm.ciclan.Tests.Honda.Mobile.IosNativeFeature" /> -->
+			<class name="com.ibm.ciclan.Tests.Honda.Mobile.IosNativeFeature" />
 		</classes>
 
 	</test>

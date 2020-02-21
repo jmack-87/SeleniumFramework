@@ -30,7 +30,7 @@
 			<class name="com.ibm.ciclan.Tests.Aep.Mobile.AndroidChromeFeature" />
 			<class name="com.ibm.ciclan.Tests.Aep.Mobile.AndroidNativeFeature" />
 			<class name="com.ibm.ciclan.Tests.Aep.Mobile.IosSafariFeature" />
-<!-- 			<class name="com.ibm.ciclan.Tests.Aep.Mobile.IosNativeFeature" /> -->
+			<class name="com.ibm.ciclan.Tests.Aep.Mobile.IosNativeFeature" />
 		</classes>
 
 	</test>
