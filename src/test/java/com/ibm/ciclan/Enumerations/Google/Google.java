@@ -39,12 +39,16 @@ public enum Google {
 	Mobile_Locator_TextContainer_LoginError("Google.Mobile.Locator.TextContainer.LoginError"),
 	;
 
-
 	private String str;
-	Google(String value) {str = value;}
+
+	Google(String value) {
+		str = value;
+	}
 
 	@Override
-	public String toString() {return str;}
+	public String toString() {
+		return str;
+	}
 
 
 }

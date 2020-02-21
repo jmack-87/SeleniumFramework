@@ -8,12 +8,16 @@ public enum Aep {
 	Mobile_Locator_TextContainer_LoginError("Aep.Mobile.Locator.TextContainer.LoginError"),
 	;
 
-
 	private String str;
-	Aep(String value) {str = value;}
+
+	Aep(String value) {
+		str = value;
+	}
 
 	@Override
-	public String toString() {return str;}
+	public String toString() {
+		return str;
+	}
 
 
 }

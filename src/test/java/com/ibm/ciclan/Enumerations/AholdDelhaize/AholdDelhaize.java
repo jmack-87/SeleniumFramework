@@ -1,4 +1,4 @@
-package com.jmack.Enumerations.Example;
+package com.ibm.ciclan.Enumerations.AholdDelhaize;
 
 public enum AholdDelhaize {
 
@@ -7,7 +7,6 @@ public enum AholdDelhaize {
 	Mobile_Locator_Button_Login("AholdDelhaize.Mobile.Locator.Button.Login"),
 	Mobile_Locator_TextContainer_LoginError("AholdDelhaize.Mobile.Locator.TextContainer.LoginError"),
 	;
-
 
 	private String str;
 

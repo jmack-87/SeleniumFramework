@@ -1,4 +1,4 @@
-package com.ibm.ciclan.Enumerations.Honda;
+package com.ibm.ciclan.Enumerations.Example;
 
 public enum SearchPage {
 

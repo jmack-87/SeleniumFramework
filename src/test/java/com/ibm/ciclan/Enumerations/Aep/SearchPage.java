@@ -1,4 +1,4 @@
-package com.ibm.ciclan.Enumerations.Honda;
+package com.ibm.ciclan.Enumerations.Aep;
 
 public enum SearchPage {
 
@@ -11,7 +11,8 @@ public enum SearchPage {
 
 	// MOBILE
 	Mobile_Locator_TextField_searchInput("SearchPage.Mobile.Locator.TextField.searchInput"),
-	Mobile_Locator_Button_searchSubmit("SearchPage.Mobile.Locator.Button.searchSubmit"),;
+	Mobile_Locator_Button_searchSubmit("SearchPage.Mobile.Locator.Button.searchSubmit"),
+	;
 
 	private String str;
 
