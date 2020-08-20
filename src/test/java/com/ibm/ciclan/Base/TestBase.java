@@ -16,6 +16,7 @@ import com.ibm.ciclan.Base.PageObjects.HomePagePO;
 import com.ibm.ciclan.Base.PageObjects.IFramePO;
 import com.ibm.ciclan.Base.PageObjects.LoginPagePO;
 import com.ibm.ciclan.Base.PageObjects.RegistrationPagePO;
+import com.ibm.ciclan.Enumerations.BrowserStack.BrowserStack;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
@@ -37,6 +38,7 @@ import org.testng.annotations.Parameters;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.remote.MobileCapabilityType;
 
 import io.qameta.allure.Step;
 
@@ -78,6 +80,7 @@ public class TestBase {
 	private String appPackage;
 	private String appActivity;
 	private String bundleId;
+	private String mobileType;
 
 	private String id;
 	private String testName;
@@ -115,7 +118,7 @@ public class TestBase {
 		"browserVersion", "resolution",
 		"location", "deviceName",
 		"model", "appPackage",
-		"appActivity", "bundleId"})
+		"appActivity", "bundleId", "mobileType"})
 	protected void setUp(Method testMethod,
 			@Optional String applicationUnderTest,	@Optional String excelDataFile,
 			@Optional String jsonDataFile,			@Optional String propertiesFile,
@@ -124,7 +127,8 @@ public class TestBase {
 			@Optional String browserVersion,		@Optional String resolution,
 			@Optional String location,				@Optional String deviceName,
 			@Optional String model,					@Optional String appPackage,
-			@Optional String appActivity,			@Optional String bundleId) {
+			@Optional String appActivity,			@Optional String bundleId,
+			@Optional String mobileType) {
 
 		this.applicationUnderTest = applicationUnderTest == null ? null : applicationUnderTest;
 		this.excelDataFile = excelDataFile == null ? null : excelDataFile;
@@ -144,6 +148,8 @@ public class TestBase {
 		this.appPackage = appPackage == null ? "" : appPackage;
 		this.appActivity = appActivity == null ? "" : appActivity;
 		this.bundleId = bundleId == null ? "" : bundleId;
+
+		this.mobileType = mobileType == null ? "" : mobileType;
 
 
 		testName = testMethod.getName();
@@ -181,79 +187,86 @@ public class TestBase {
 		System.out.format("[DEBUG]: <[%s:%s] parameter data 'appPackage': '%s'%n", id, testName, appPackage);
 		System.out.format("[DEBUG]: <[%s:%s] parameter data 'appActivity': '%s'%n", id, testName, appActivity);
 		System.out.format("[DEBUG]: <[%s:%s] parameter data 'bundleId': '%s'%n", id, testName, bundleId);
+		System.out.format("[DEBUG]: <[%s:%s] parameter data 'mobileType': '%s'%n", id, testName, mobileType);
 		*/
 
 		// START TESTNG PARAMETER OVERRIDES
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established gridType,  gridType
+		// if there is a gridType passed via TestNG suite file, and the gridType differs from pre-established gridType,  gridType
 		if (!("").equals(this.gridType) && !runtimeData.gridType.toLowerCase().equals(this.gridType.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding gridType \"%s\" with \"%s\">%n", id, testName, runtimeData.gridType, this.gridType);
 			runtimeData.gridType = this.gridType;
 		}
 
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established platformName,  platformName
+		// if there is a platformName passed via TestNG suite file, and the platformName differs from pre-established platformName,  platformName
 		if (!("").equals(this.platformName) && !runtimeData.platformName.toLowerCase().equals(this.platformName.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding platformName \"%s\" with \"%s\">%n", id, testName, runtimeData.platformName, this.platformName);
 			runtimeData.platformName = this.platformName;
 		}
 
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established platformVersion,  platformVersion
+		// if there is a platformVersion passed via TestNG suite file, and the platformVersion differs from pre-established platformVersion,  platformVersion
 		if (!("").equals(this.platformVersion) && !runtimeData.platformVersion.toLowerCase().equals(this.platformVersion.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding platformVersion \"%s\" with \"%s\">%n", id, testName, runtimeData.platformVersion, platformVersion);
 			runtimeData.platformVersion = this.platformVersion;
 		}
 
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established browser,  browser
+		// if there is a browserName passed via TestNG suite file, and the browserName differs from pre-established browser,  browser
 		if (!("").equals(this.browserName) && !runtimeData.browserName.toLowerCase().equals(this.browserName.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding browserName \"%s\" with \"%s\">%n", id, testName, runtimeData.browserName, browserName);
 			runtimeData.browserName = browserName;
 		}
 
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established browserVersion,  browserVersion
+		// if there is a browserVersion passed via TestNG suite file, and the browserVersion differs from pre-established browserVersion,  browserVersion
 		if (!("").equals(this.browserVersion) && !runtimeData.browserVersion.toLowerCase().equals(this.browserVersion.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding browserVersion \"%s\" with \"%s\">%n", id, testName, runtimeData.browserVersion, browserVersion);
 			runtimeData.browserVersion = browserVersion;
 		}
 
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established resolution,  resolution
+		// if there is a resolution passed via TestNG suite file, and the resolution differs from pre-established resolution,  resolution
 		if (!("").equals(this.resolution) && !runtimeData.resolution.toLowerCase().equals(this.resolution.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding resolution \"%s\" with \"%s\">%n", id, testName, runtimeData.resolution, resolution);
 			runtimeData.resolution = resolution;
 		}
 
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established location,  location
+		// if there is a location passed via TestNG suite file, and the location differs from pre-established location,  location
 		if (!("").equals(this.location) && !runtimeData.location.toLowerCase().equals(this.location.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding location \"%s\" with \"%s\">%n", id, testName, runtimeData.location, location);
 			runtimeData.location = location;
 		}
 
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established deviceName,  deviceName
+		// if there is a deviceName passed via TestNG suite file, and the deviceName differs from pre-established deviceName,  deviceName
 		if (!("").equals(this.deviceName) && !runtimeData.deviceName.toLowerCase().equals(this.deviceName.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding deviceName \"%s\" with \"%s\">%n", id, testName, runtimeData.deviceName, deviceName);
 			runtimeData.deviceName = this.deviceName;
 		}
 
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established model,  model
+		// if there is a model passed via TestNG suite file, and the model differs from pre-established model,  model
 		if (!("").equals(this.model) && !runtimeData.model.toLowerCase().equals(this.model.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding model \"%s\" with \"%s\">%n", id, testName, runtimeData.model, model);
 			runtimeData.model = this.model;
 		}
 
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established appPackage,  appPackage
+		// if there is an appPackage passed via TestNG suite file, and the appPackage differs from pre-established appPackage,  appPackage
 		if (!("").equals(this.appPackage) && !runtimeData.appPackage.toLowerCase().equals(this.appPackage.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding appPackage \"%s\" with \"%s\">%n", id, testName, runtimeData.appPackage, appPackage);
 			runtimeData.appPackage = this.appPackage;
 		}
 
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established appActivity,  appActivity
+		// if there is an appActivity passed via TestNG suite file, and the appActivity differs from pre-established appActivity,  appActivity
 		if (!("").equals(this.appActivity) && !runtimeData.appActivity.toLowerCase().equals(this.appActivity.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding appActivity \"%s\" with \"%s\">%n", id, testName, runtimeData.appActivity, appActivity);
 			runtimeData.appActivity = this.appActivity;
 		}
 
-		// if there is an  passed via TestNG suite file, and the  differs from pre-established bundleId,  bundleId
+		// if there is a bundleId passed via TestNG suite file, and the bundleId differs from pre-established bundleId,  bundleId
 		if (!("").equals(this.bundleId) && !runtimeData.bundleId.toLowerCase().equals(this.bundleId.toLowerCase())) {
 			System.out.format("[LOG]: <[%s:%s] overriding bundleId \"%s\" with \"%s\">%n", id, testName, runtimeData.bundleId, bundleId);
 			runtimeData.bundleId = this.bundleId;
+		}
+
+		// if there is a mobileType passed via TestNG suite file, and the mobileType differs from pre-established bundleId,  bundleId
+		if (!("").equals(this.mobileType) && !runtimeData.bundleId.toLowerCase().equals(this.mobileType.toLowerCase())) {
+			System.out.format("[LOG]: <[%s:%s] overriding mobileType \"%s\" with \"%s\">%n", id, testName, runtimeData.mobileType, mobileType);
+			runtimeData.mobileType = this.mobileType;
 		}
 		// END TESTNG PARAMETER OVERRIDES
 
@@ -417,22 +430,29 @@ public class TestBase {
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", runtimeData.deviceName);
+				caps.setCapability("real_mobile", "true");
+				caps.setBrowserName("Chrome");
 				// required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
 				caps.setCapability("platformVersion", runtimeData.platformVersion);
+				caps.setCapability("os_version", runtimeData.platformVersion);
 				caps.setCapability("appPackage", runtimeData.appPackage);
 				caps.setCapability("appActivity", runtimeData.appActivity);
 				break;
 			case "androidchrome":
 				caps = DesiredCapabilities.android();
 				// optional
-				caps.setCapability("automationName", "Appium");
+				caps.setCapability("automationName", "appium");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				// required
-				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
-				caps.setCapability("platformVersion", runtimeData.platformVersion);
+				////caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
+				//caps.setCapability("platformVersion", runtimeData.platformVersion);
+				caps.setCapability("os_version", "10.0");
+				caps.setCapability("real_mobile", "true");
+				caps.setCapability("browserstack.appium_version", "1.17.0");
+				caps.setCapability("browserstack.local", "false");
 				caps.setBrowserName("Chrome");
 				break;
 			case "iosnative":
@@ -443,6 +463,7 @@ public class TestBase {
 				//required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
 				caps.setCapability("platformVersion", runtimeData.platformVersion);
+				caps.setCapability("os_version", runtimeData.platformVersion);
 				caps.setCapability("bundleId", runtimeData.bundleId);
 				break;
 			case "iossafari":
@@ -453,11 +474,156 @@ public class TestBase {
 				// required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
 				caps.setCapability("platformVersion", runtimeData.platformVersion);
+				caps.setCapability("os_version", runtimeData.platformVersion);
 				caps.setBrowserName("Safari");
 				break;
 			}
 		}
 
+		// setup clients for use with browserstack cloud
+		if (runtimeData.gridType.toLowerCase().equals("browserstack")) {
+
+			System.out.format("[LOG]: <[%s:%s] browserstack grid detected>%n", id, testName);
+
+			switch (runtimeData.browserName.toLowerCase()) {
+
+			//Desktop
+			case "desktopchrome":
+				options = new ChromeOptions();
+				((ChromeOptions) options).setCapability("os", runtimeData.platform);
+				((ChromeOptions) options).setCapability("os_version", runtimeData.platformVersion);
+				((ChromeOptions) options).setCapability(CapabilityType.BROWSER_NAME, "chrome");
+				((ChromeOptions) options).setCapability(CapabilityType.BROWSER_VERSION, BrowserStackIntegration.selectDesktop_latestBrowserVersionPerOsOsVersionBrowser(runtimeData.platform, runtimeData.platformVersion, "chrome"));
+				((ChromeOptions) options).setCapability("name", id+":"+testName);
+				((ChromeOptions) options).setCapability("browserstack.local", gc.browserStackLocal);
+				((ChromeOptions) options).setCapability("browserstack.selenium_version", gc.browserStackSeVer);
+				break;
+
+			case "desktopfirefox":
+				options = new FirefoxOptions();
+				((FirefoxOptions) options).setCapability("os", runtimeData.platform);
+				((FirefoxOptions) options).setCapability("os_version", runtimeData.platformVersion);
+				((FirefoxOptions) options).setCapability(CapabilityType.BROWSER_NAME, "firefox");
+				((FirefoxOptions) options).setCapability(CapabilityType.BROWSER_VERSION, BrowserStackIntegration.selectDesktop_latestBrowserVersionPerOsOsVersionBrowser(runtimeData.platform, runtimeData.platformVersion, "firefox"));
+				((FirefoxOptions) options).setCapability("name", id+":"+testName);
+				((FirefoxOptions) options).setCapability("browserstack.local", gc.browserStackLocal);
+				((FirefoxOptions) options).setCapability("browserstack.selenium_version", gc.browserStackSeVer);
+				break;
+
+			case "desktopedge":
+				options = new EdgeOptions();
+				((EdgeOptions) options).setCapability("os", runtimeData.platform);
+				((EdgeOptions) options).setCapability("os_version", runtimeData.platformVersion);
+				((EdgeOptions) options).setCapability(CapabilityType.BROWSER_NAME, "edge");
+				((EdgeOptions) options).setCapability(CapabilityType.BROWSER_VERSION, BrowserStackIntegration.selectDesktop_latestBrowserVersionPerOsOsVersionBrowser(runtimeData.platform, runtimeData.platformVersion, "edge"));
+				((EdgeOptions) options).setCapability("name", id+":"+testName);
+				((EdgeOptions) options).setCapability("browserstack.local", gc.browserStackLocal);
+				((EdgeOptions) options).setCapability("browserstack.selenium_version", gc.browserStackSeVer);
+
+				break;
+
+			case "desktopie":
+				options = new InternetExplorerOptions();
+				((InternetExplorerOptions) options).setCapability("os", runtimeData.platform);
+				((InternetExplorerOptions) options).setCapability("os_version", runtimeData.platformVersion);
+				((InternetExplorerOptions) options).setCapability(CapabilityType.BROWSER_NAME, "ie");
+				((InternetExplorerOptions) options).setCapability(CapabilityType.BROWSER_VERSION, BrowserStackIntegration.selectDesktop_latestBrowserVersionPerOsOsVersionBrowser(runtimeData.platform, runtimeData.platformVersion, "ie"));
+				((InternetExplorerOptions) options).setCapability("name", id+":"+testName);
+				((InternetExplorerOptions) options).setCapability("browserstack.local", gc.browserStackLocal);
+				((InternetExplorerOptions) options).setCapability("browserstack.selenium_version", gc.browserStackSeVer);
+				((InternetExplorerOptions) options).setCapability("browserstack.ie_driver", gc.browserStackIeDriverVer);
+				break;
+
+			case "desktopsafari":
+				options = new SafariOptions();
+				((SafariOptions) options).setCapability("os", runtimeData.platform);
+				((SafariOptions) options).setCapability("os_version", runtimeData.platformVersion);
+				((SafariOptions) options).setCapability(CapabilityType.BROWSER_NAME, "safari");
+				((SafariOptions) options).setCapability(CapabilityType.BROWSER_VERSION, BrowserStackIntegration.selectDesktop_latestBrowserVersionPerOsOsVersionBrowser(runtimeData.platform, runtimeData.platformVersion, "safari"));
+				((SafariOptions) options).setCapability("name", id+":"+testName);
+				((SafariOptions) options).setCapability("browserstack.local", gc.browserStackLocal);
+				((SafariOptions) options).setCapability("browserstack.selenium_version", gc.browserStackSeVer);
+				break;
+
+			//Mobile
+			case "androidnative":
+				caps = new DesiredCapabilities();
+				// optional
+				caps.setCapability("automationName", "Appium");
+				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+				caps.setCapability("skipUnlock", true);
+				// required
+				//caps.setCapability("os", runtimeData.platform);
+				caps.setCapability("os_version", BrowserStackIntegration.selectMobile_latestOs(runtimeData.platform, BrowserStack.MobileType.getMobileType(runtimeData.mobileType)));
+				caps.setCapability("device", BrowserStackIntegration.selectMobile_devicePerOsOsVersion(runtimeData.platform, BrowserStackIntegration.selectMobile_latestOs(runtimeData.platform), BrowserStack.MobileType.getMobileType(runtimeData.mobileType)));
+				//caps.setCapability("appPackage", runtimeData.appPackage);
+				caps.setCapability("app", runtimeData.appPackage);
+				//caps.setCapability("appActivity", runtimeData.appActivity);
+				// browserstack specific
+				caps.setCapability("name", id+":"+testName);
+				caps.setCapability("real_mobile", gc.browserStackRealMobile);
+				caps.setCapability("browserstack.local", gc.browserStackLocal);
+				caps.setCapability("browserstack.appium_version", gc.browserStackApVer);
+				caps.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60);
+				break;
+
+			case "androidchrome":
+				caps = DesiredCapabilities.android();
+				// optional
+				caps.setCapability("automationName", "Appium");
+				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+				caps.setCapability("skipUnlock", true);
+				// required
+				//caps.setCapability("os", runtimeData.platform);
+				caps.setCapability("os_version", BrowserStackIntegration.selectMobile_latestOs(runtimeData.platform, BrowserStack.MobileType.getMobileType(runtimeData.mobileType)));
+				caps.setCapability("device", BrowserStackIntegration.selectMobile_devicePerOsOsVersion(runtimeData.platform, BrowserStackIntegration.selectMobile_latestOs(runtimeData.platform), BrowserStack.MobileType.getMobileType(runtimeData.mobileType)));
+				caps.setBrowserName("Chrome");
+				// browserstack specific
+				caps.setCapability("name", id+":"+testName);
+				caps.setCapability("real_mobile", gc.browserStackRealMobile);
+				caps.setCapability("browserstack.local", gc.browserStackLocal);
+				caps.setCapability("browserstack.appium_version", gc.browserStackApVer);
+				caps.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60);
+				break;
+
+			case "iosnative":
+				caps = new DesiredCapabilities();
+				// optional
+				caps.setCapability("automationName", "XCUITest");
+				//required
+				//caps.setCapability("os", runtimeData.platform);
+				caps.setCapability("os_version", BrowserStackIntegration.selectMobile_latestOs(runtimeData.platform, BrowserStack.MobileType.getMobileType(runtimeData.mobileType)));
+				caps.setCapability("device", BrowserStackIntegration.selectMobile_devicePerOsOsVersion(runtimeData.platform, BrowserStackIntegration.selectMobile_latestOs(runtimeData.platform), BrowserStack.MobileType.getMobileType(runtimeData.mobileType)));
+				//caps.setCapability("bundleId", runtimeData.bundleId);
+				caps.setCapability("app", runtimeData.bundleId);
+				// browserstack specific
+				caps.setCapability("name", id+":"+testName);
+				caps.setCapability("real_mobile", gc.browserStackRealMobile);
+				caps.setCapability("browserstack.local", gc.browserStackLocal);
+				caps.setCapability("browserstack.appium_version", gc.browserStackApVer);
+				caps.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60);
+				break;
+
+			case "iossafari":
+				caps = DesiredCapabilities.iphone();
+				// optional
+				caps.setCapability("automationName", "XCUITest");
+				// required
+				//caps.setCapability("os", runtimeData.platform);
+				caps.setCapability("os_version", BrowserStackIntegration.selectMobile_latestOs(runtimeData.platform, BrowserStack.MobileType.getMobileType(runtimeData.mobileType)));
+				caps.setCapability("device", BrowserStackIntegration.selectMobile_devicePerOsOsVersion(runtimeData.platform, BrowserStackIntegration.selectMobile_latestOs(runtimeData.platform), BrowserStack.MobileType.getMobileType(runtimeData.mobileType)));
+				caps.setBrowserName("Safari");
+				// browserstack specific
+				caps.setCapability("name", id+":"+testName);
+				caps.setCapability("real_mobile", gc.browserStackRealMobile);
+				caps.setCapability("browserstack.local", gc.browserStackLocal);
+				caps.setCapability("browserstack.appium_version", gc.browserStackApVer);
+				caps.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60);
+				//caps.setCapability("nativeWebTap", true);
+				break;
+
+			}
+		}
 
 		if (null != options) {
 			System.out.format("[LOG]: <[%s:%s] %s>", id, testName, options.toString());
@@ -533,8 +699,6 @@ public class TestBase {
 					System.out.println("start remote session");
 					driver.set(new RemoteWebDriver(new URL(gc.perfectoHost), options));
 
-					//SRF
-					//driver.set(new RemoteWebDriver(new URL(gc.srfHost), options));
 					System.out.println("finished remote session");
 
 					if (!(options instanceof SafariOptions)) {
@@ -552,6 +716,36 @@ public class TestBase {
 				catch (WebDriverException wde ) {
 					Assert.fail("Unable to start WebDriver");
 				}
+
+			// using browserstack grid
+			} else if (runtimeData.gridType.toLowerCase().equals("browserstack")) {
+
+				try {
+					//BrowserStack
+					System.out.println("start remote session");
+					driver.set(new RemoteWebDriver(new URL(gc.browserStackHost), options));
+
+					//SRF
+					//driver.set(new RemoteWebDriver(new URL(gc.srfHost), options));
+					System.out.println("finished remote session");
+
+					if (!(options instanceof SafariOptions)) {
+						getDriver().manage().window().maximize();
+					}
+					ss = new ScreenShot(getDriver(), id, testName);
+					generic = new Generic(getDriver(), ss, props, id, testName);
+
+					System.out.format("[LOG]: <[%s:%s] initializing page objects>%n", id, testName);
+					initializePageObjects();
+
+				} catch (MalformedURLException mfu) {
+					mfu.printStackTrace();
+				}
+				catch (WebDriverException wde ) {
+					wde.printStackTrace();
+					Assert.fail("Unable to start WebDriver");
+				}
+
 			} else {
 				// error, no grid identified
 			}
@@ -616,6 +810,29 @@ public class TestBase {
 					wde.printStackTrace();
 					Assert.fail("Unable to start WebDriver");
 				}
+
+			// using browserstack grid
+			} else if (runtimeData.gridType.toLowerCase().equals("browserstack")) {
+
+				try {
+
+					//Browserstack
+					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.browserStackHost), caps));
+
+					mss = new MobileScreenShot(getMobileDriver(), id, testName);
+					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
+
+					System.out.format("[LOG]: <[%s:%s] initializing mobile page objects>%n", id, testName);
+					initializeMobilePageObjects();
+
+				} catch (MalformedURLException mfu) {
+					mfu.printStackTrace();
+				}
+				catch (WebDriverException wde ) {
+					wde.printStackTrace();
+					Assert.fail("Unable to start WebDriver");
+				}
+
 			} else {
 				// error, no grid identified
 			}
