@@ -114,12 +114,13 @@ public class JsonDataExtractor {
 
 		this.runtimeData.headless = testData.get("headless") == null ? false : testData.get("headless").getAsBoolean();
 
-		// mobile native
+		// mobile
 		this.runtimeData.deviceName = testData.get("deviceName") == null ? "" : testData.get("deviceName").getAsString();
 		this.runtimeData.model = testData.get("model") == null ? "" : testData.get("model").getAsString();
 		this.runtimeData.appPackage = testData.get("appPackage") == null ? "" : testData.get("appPackage").getAsString();
 		this.runtimeData.appActivity = testData.get("appActivity") == null ? "" : testData.get("appActivity").getAsString();
 		this.runtimeData.bundleId = testData.get("bundleId") == null ? "" : testData.get("bundleId").getAsString();
+		this.runtimeData.mobileType = testData.get("mobileType") == null ? "" : testData.get("mobileType").getAsString();
 
 		// for sample scripts, not required: searchString
 		this.runtimeData.searchString = testData.get("searchString") == null ? "IBM Perfecto" : testData.get("searchString").getAsString();
