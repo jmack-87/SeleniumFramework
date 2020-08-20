@@ -3,6 +3,7 @@ package com.ibm.ciclan.Enumerations.ShftSpace;
 public enum HomePageENUM {
 
 	// DESKTOP
+
 	Text_URL("ShftSpaceHome.text.url"),
 	Text_PageTitle("ShftSpaceHome.text.pageTitle"),
 	Locator_Button_Register("ShftSpaceHome.Locator.Button.Register"),
