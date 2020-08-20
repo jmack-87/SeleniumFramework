@@ -129,8 +129,8 @@ hubConfig.json:
 [Information on Safari driver](https://developer.apple.com/documentation/webkit/testing_with_webdriver_in_safari)
 
 **Note on Edge:**
-It's a disappointing surprise, but Microsoft has plans to drop Edge support sometime in the future. In the meanwhile, they've also decided to make working with the MicrosoftWebDriver more difficult. Current Windows 10 users (builds > 17134) will need to run:
-```DISM.exe /Online /Add-Capability /CapabilityName:Microsoft.WebDriver~~~~0.0.1.0``` from an elevated command prompt to install a version appropriate binary.
+Microsoft has plans to deprecate original Edge support sometime in the future, in favor of chromium-based Edge. To automate with original Edge, current Windows 10 users (builds > 17134) will need to run:
+```DISM.exe /Online /Add-Capability /CapabilityName:Microsoft.WebDriver~~~~0.0.1.0``` from an elevated command prompt to install a build-version-appropriate binary.
 The binary *MicrosoftWebDriver.exe* normally installs to the C:\Windows\System32\ directory. User of Selenium Grid may wish to copy the binary to a more manageable location like the *drivers* folder mentioned above.
 
 If the binary is not found under C:\Windows\System32, running **where** should point the way.
