@@ -18,6 +18,7 @@ public class RuntimeData {
 	protected String appPackage = "";
 	protected String appActivity = "";
 	protected String bundleId = "";
+	protected String mobileType = "";
 
 	// Data available to scripts
 	public String searchString = "";
