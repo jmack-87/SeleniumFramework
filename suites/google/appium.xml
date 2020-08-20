@@ -8,6 +8,7 @@
 	<parameter name="bundleId" value="" />
 	<parameter name="gridType" value="" />
 	<parameter name="location" value="" />
+	<parameter name="mobileType" value="" />
 	<parameter name="platformName" value="" />
 	<parameter name="platformVersion" value="" />
 	<parameter name="resolution" value="" />
