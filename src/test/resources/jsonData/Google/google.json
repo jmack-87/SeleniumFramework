@@ -9,93 +9,99 @@
 				"browserVersion": "integer|latest|beta",
 				"location": "REQUIRED(Mac): perfecto location",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "home for all your photos and video"
+				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"ChromeTest": {
-				"gridType": "local",
+				"gridType": "browserstack",
 				"browserName": "desktopChrome",
 				"platformName": "Windows",
-				"platform": "windows 10",
+				"platform": "Windows",
 				"platformVersion": "10",
 				"browserVersion": "latest",
 				"resolution": "1024x768",
 				"location": "NA-US-BOS",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "home for all your photos and video",
+				"searchConfirmationString": "unlimited photos and videos for free",
 				"headless": false
 			},
 			"SafariTest": {
-				"gridType": "local",
+				"gridType": "browserstack",
 				"browserName": "desktopSafari",
+				"platformName": "OS X",
+				"platform": "OS X",
+				"platformVersion": "Catalina",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "home for all your photos and video"
+				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"FirefoxTest": {
-				"gridType": "local",
+				"gridType": "browserstack",
 				"browserName": "desktopFirefox",
+				"platformName": "Windows",
+				"platform": "Windows",
+				"platformVersion": "8.1",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "home for all your photos and video"
+				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"EdgeTest": {
-				"gridType": "local",
+				"gridType": "browserstack",
 				"browserName": "desktopEdge",
+				"platformName": "Windows",
+				"platform": "Windows",
+				"platformVersion": "10",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "home for all your photos and video"
+				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"IeTest": {
-				"gridType": "local",
+				"gridType": "browserstack",
 				"browserName": "desktopIe",
+				"platformName": "Windows",
+				"platform": "Windows",
+				"platformVersion": "7",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "home for all your photos and video"
+				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"AndroidChromeTest": {
-				"gridType": "local",
-				"platformName": "Android",
-				"platformVersion": "8.1.0",
+				"gridType": "browserstack",
+				"mobileType": "phone",
+				"platformName": "android",
+				"platform": "android",
+				"deviceName": "Samsung Galaxy S20",
+				"platformVersion": "10.0",
 				"browserName": "androidChrome",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "home for all your photos and video"
-			},
-			"AndroidChromeTest2": {
-				"gridType": "local",
-				"platformName": "Android",
-				"platformVersion": "7.1.1",
-				"browserName": "androidChrome",
-				"searchString": "Google Photos",
-				"searchConfirmationString": "home for all your photos and video"
+				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"AndroidNativeTest": {
-				"gridType": "perfecto",
-				"platformName": "Android",
-				"platformVersion": "7.*",
+				"gridType": "browserstack",
+				"mobileType": "phone",
+				"platformName": "android",
+				"platform": "android",
+				"deviceName": "Google Pixel 3",
+				"platformVersion": "9.0",
 				"browserName": "androidNative",
-				"appPackage": "com.google.android.apps.docs",
+				"appPackage": "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c",
 				"appActivity": ".drive.startup.StartupActivity"
 			},
 			"IosSafariTest": {
-				"gridType": "perfecto",
-				"platformName": "iOS",
-				"platformVersion": "11.*",
+				"gridType": "browserstack",
+				"mobileType": "phone",
+				"platformName": "ios",
+				"platform": "ios",
+				"deviceName": "iPhone 11 Pro",
+				"platformVersion": "13",
 				"browserName": "iosSafari",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "home for all your photos and video"
+				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"IosNativeTest": {
-				"gridType": "perfecto",
-				"platformName": "iOS",
-				"platformVersion": "11.*",
+				"gridType": "browserstack",
+				"mobileType": "phone",
+				"platformName": "ios",
+				"platform": "ios",
+				"deviceName": "iPhone 11 Pro Max",
+				"platformVersion": "12",
 				"browserName": "iosNative",
-				"bundleId": "com.apple.Preferences"
-			},
-			"AndroidNative_AholdDelhaizeTest": {
-				"gridType": "local",
-				"platformName": "Android",
-				"platformVersion": "8",
-				"browserName": "androidNative",
-				"appPackage": "com.belmondo.Aholddelhaize",
-				"appActivity": "com.belmondo.app.MainActivity",
-				"userEmail": "123@234.com",
-				"password": "password"
+				"bundleId": "bs://444bd0308813ae0dc236f8cd461c02d3afa7901d"
 			}
 		}
 	],
