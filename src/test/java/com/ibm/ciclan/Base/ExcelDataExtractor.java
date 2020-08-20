@@ -105,8 +105,8 @@ public class ExcelDataExtractor {
 	 */
 	private void overrideTestData(RuntimeData runtimeData, HashMap<String, String> records) {
 
-		System.out.format("[Log]: <[%s:%s] ExcelTestData: {", this.id, this.testName);
-		records.forEach((k,v) -> System.out.format("\"%s\":\"%s\";", k, v));
+		System.out.format("[LOG]: <[%s:%s] ExcelTestData: {", this.id, this.testName);
+		records.forEach((k,v) -> System.out.format("\"%s\":\"%s\",", k, v));
 		System.out.format("}>%n");
 
 		// if there is an override passed via excel file, and the override differs from pre-established data, override
@@ -287,6 +287,15 @@ public class ExcelDataExtractor {
 			if (!("").equals(records.get(key)) && !runtimeData.username.equals(records.get(key))) {
 				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.username, records.get(key));
 				runtimeData.username = records.get(key);
+			}
+		}
+
+		// if there is an override passed via excel file, and the override differs from pre-established data, override
+		key = "mobileType";
+		if (records.containsKey(key)) {
+			if (!("").equals(records.get(key)) && !runtimeData.username.equals(records.get(key))) {
+				System.out.format("[LOG]: <[%s:%s] overriding %s \"%s\" with \"%s\">%n", id, testName, key, runtimeData.mobileType, records.get(key));
+				runtimeData.mobileType = records.get(key);
 			}
 		}
 
