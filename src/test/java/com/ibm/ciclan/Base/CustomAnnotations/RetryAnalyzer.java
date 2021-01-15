@@ -5,6 +5,7 @@ import org.testng.ITestResult;
 
 import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
 
+@SuppressWarnings("unused")
 public class RetryAnalyzer implements IRetryAnalyzer {
 
 	int counter = 0;
