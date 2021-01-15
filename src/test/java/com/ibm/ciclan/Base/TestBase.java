@@ -41,6 +41,11 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 import io.qameta.allure.Step;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  *
@@ -447,7 +452,7 @@ public class TestBase {
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				// required
-				////caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
+				//caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
 				//caps.setCapability("platformVersion", runtimeData.platformVersion);
 				caps.setCapability("os_version", "10.0");
 				caps.setCapability("real_mobile", "true");
@@ -476,6 +481,156 @@ public class TestBase {
 				caps.setCapability("platformVersion", runtimeData.platformVersion);
 				caps.setCapability("os_version", runtimeData.platformVersion);
 				caps.setBrowserName("Safari");
+				break;
+			}
+		}
+
+		// setup clients for use with headspin cloud
+		if (runtimeData.gridType.toLowerCase().equals("headspin")) {
+
+			System.out.format("[LOG]: <[%s:%s] headspin grid detected>%n", id, testName);
+
+			switch (runtimeData.browserName.toLowerCase()) {
+			//Desktop
+			case "desktopchrome":
+
+				System.out.format("[LOG]: <[%s:%s] setting chrome options>%n", id, testName);
+
+				options = new ChromeOptions();
+				((ChromeOptions) options).setCapability(CapabilityType.BROWSER_NAME, "chrome");
+				//((ChromeOptions) options).setCapability("platformName", runtimeData.platformName);
+				//((ChromeOptions) options).setCapability("platform", runtimeData.platform);
+				((ChromeOptions) options).setCapability(CapabilityType.BROWSER_VERSION, runtimeData.browserVersion);
+				((ChromeOptions) options).setCapability("version", runtimeData.browserVersion);
+				((ChromeOptions) options).setCapability("headspin:InitialScreenSize", "{\"width\": \"1920\", \"height\": \"1080\"}");
+				((ChromeOptions) options).setCapability("headspin:capture", true);
+				((ChromeOptions) options).setCapability("headspin:testName", "Chrome 80");
+				//((ChromeOptions) options).setCapability("platformVersion", runtimeData.platformVersion);
+				//((ChromeOptions) options).setCapability(CapabilityType.BROWSER_VERSION, runtimeData.browserVersion);
+				//((ChromeOptions) options).setCapability("resolution", runtimeData.resolution);
+				//((ChromeOptions) options).setCapability("location", runtimeData.location);
+				((ChromeOptions) options).setCapability("headspinHost","https://dev-us-pao-0.headspin.io:9096/v0/286d8226ec894f798c3394d33d3af4ab/wd/hub");
+				break;
+			case "desktopfirefox":
+				options = new FirefoxOptions();
+				((FirefoxOptions) options).setCapability(CapabilityType.BROWSER_NAME, "firefox");
+				//((FirefoxOptions) options).setCapability("platformName", runtimeData.platformName);
+				//((FirefoxOptions) options).setCapability("platformVersion", runtimeData.platformVersion);
+				//((FirefoxOptions) options).setCapability("resolution", runtimeData.resolution);
+				//((FirefoxOptions) options).setCapability("location", runtimeData.location);
+				((FirefoxOptions) options).setCapability("headspin:InitialScreenSize", "{\"width\": \"1920\", \"height\": \"1080\"}");
+				((FirefoxOptions) options).setCapability("headspin:capture", true);
+				((FirefoxOptions) options).setCapability("headspin:testName", "Firefox 70");
+				// palo alto
+//				((FirefoxOptions) options).setCapability("headspinHost","https://dev-us-pao-0.headspin.io:9096/v0/286d8226ec894f798c3394d33d3af4ab/wd/hub");
+//				((FirefoxOptions) options).setCapability(CapabilityType.BROWSER_VERSION, runtimeData.browserVersion);
+//				((FirefoxOptions) options).setCapability("version", runtimeData.browserVersion);
+				// gb
+				((FirefoxOptions) options).setCapability("headspinHost","https://gb-lhr.headspin.io:9092/v0/286d8226ec894f798c3394d33d3af4ab/wd/hub");
+				((FirefoxOptions) options).setCapability(CapabilityType.BROWSER_VERSION, runtimeData.browserVersion);
+				((FirefoxOptions) options).setCapability("version", runtimeData.browserVersion);
+				break;
+			case "desktopedge":
+				options = new EdgeOptions();
+				((EdgeOptions) options).setCapability(CapabilityType.BROWSER_NAME, "Edge");
+				((EdgeOptions) options).setCapability("platformName", runtimeData.platformName);
+				((EdgeOptions) options).setCapability("platformVersion", runtimeData.platformVersion);
+				((EdgeOptions) options).setCapability(CapabilityType.BROWSER_VERSION, runtimeData.browserVersion);
+				((EdgeOptions) options).setCapability("resolution", runtimeData.resolution);
+				((EdgeOptions) options).setCapability("location", runtimeData.location);
+				break;
+			case "desktopie":
+				options = new InternetExplorerOptions();
+				((InternetExplorerOptions) options).setCapability(CapabilityType.BROWSER_NAME, "Internet Explorer");
+				((InternetExplorerOptions) options).setCapability("platformName", runtimeData.platformName);
+				((InternetExplorerOptions) options).setCapability("platformVersion", runtimeData.platformVersion);
+				((InternetExplorerOptions) options).setCapability(CapabilityType.BROWSER_VERSION, runtimeData.browserVersion);
+				((InternetExplorerOptions) options).setCapability("resolution", runtimeData.resolution);
+				((InternetExplorerOptions) options).setCapability("location", runtimeData.location);
+				break;
+			case "desktopsafari":
+				options = new SafariOptions();
+				((SafariOptions) options).setCapability(CapabilityType.BROWSER_NAME, "safari");
+				//((SafariOptions) options).setCapability("platformName", runtimeData.platformName);
+				//((SafariOptions) options).setCapability("platformVersion", runtimeData.platformVersion);
+				((SafariOptions) options).setCapability(CapabilityType.BROWSER_VERSION, runtimeData.browserVersion);
+				((SafariOptions) options).setCapability("version", runtimeData.browserVersion);
+				((SafariOptions) options).setCapability("headspin:InitialScreenSize", "{\"width\": \"1920\", \"height\": \"1080\"}");
+				((SafariOptions) options).setCapability("headspin:capture", true);
+				((SafariOptions) options).setCapability("headspin:testName", "Safari 13");
+				//((SafariOptions) options).setCapability("resolution", runtimeData.resolution);
+				//((SafariOptions) options).setCapability("location", runtimeData.location);
+				//((SafariOptions) options).setCapability("openDeviceTimeout", 1);
+				((SafariOptions) options).setCapability("headspinHost","https://dev-us-pao-0.headspin.io:9095/v0/286d8226ec894f798c3394d33d3af4ab/wd/hub");
+				break;
+
+			//Mobile
+			case "androidnative":
+				caps = new DesiredCapabilities();
+				// optional
+				caps.setCapability("automationName", "Appium");
+				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+				caps.setCapability("skipUnlock", true);
+				caps.setCapability("deviceName", runtimeData.deviceName);
+				caps.setCapability("real_mobile", "true");
+				caps.setBrowserName("Chrome");
+				// required
+				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
+				caps.setCapability("platformVersion", runtimeData.platformVersion);
+				caps.setCapability("os_version", runtimeData.platformVersion);
+				caps.setCapability("appPackage", runtimeData.appPackage);
+				caps.setCapability("appActivity", runtimeData.appActivity);
+				break;
+			case "androidchrome":
+				caps = DesiredCapabilities.android();
+				// optional
+				caps.setCapability("automationName", "appium");
+				caps.setCapability("takesScreenshot", true);
+				caps.setCapability("skipUnlock", true);
+				caps.setCapability("deviceName", "Pixel 4");
+				caps.setCapability("udid", "9B051FFAZ0060X");
+				caps.setCapability("autoAcceptAlerts", true);
+				caps.setCapability("platformName", "Android");
+				caps.setBrowserName("Chrome");
+				caps.setCapability("headspin:capture", true);
+				caps.setCapability("headspin:testName", "Android 10.0 Chrome");
+				caps.setCapability("lockUrl", "https://286d8226ec894f798c3394d33d3af4ab@api-dev.headspin.io/v0/adb/9B051FFAZ0060X/lock");
+				caps.setCapability("unlockUrl","https://286d8226ec894f798c3394d33d3af4ab@api-dev.headspin.io/v0/adb/9B051FFAZ0060X/unlock");
+				caps.setCapability("headspinHost","https://dev-us-pao-0.headspin.io:7049/v0/286d8226ec894f798c3394d33d3af4ab/wd/hub");
+				break;
+			case "iosnative":
+				caps = new DesiredCapabilities();
+				// optional
+				caps.setCapability("automationName", "XCUITest");
+				caps.setCapability("deviceName", runtimeData.deviceName);
+				//required
+				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
+				caps.setCapability("platformVersion", runtimeData.platformVersion);
+				caps.setCapability("os_version", runtimeData.platformVersion);
+				caps.setCapability("bundleId", runtimeData.bundleId);
+				break;
+			case "iossafari":
+				caps = DesiredCapabilities.iphone();
+				caps.setCapability("automationName", "XCUITest");
+				caps.setCapability("platformName", "iOS");
+				caps.setBrowserName("Safari");
+				caps.setCapability("headspin:capture", true);
+				caps.setCapability("headspin:testName", "iOS 13 Safari");
+
+				// palo alto
+//				caps.setCapability("platformVersion", "13.5");
+//				caps.setCapability("udid", "2e8173b26ea8849a0b923d05b8eae5b188beb961");
+//				caps.setCapability("deviceName", "iPhone 8 Plus");
+//				caps.setCapability("lockUrl", "https://286d8226ec894f798c3394d33d3af4ab@api-dev.headspin.io/v0/idevice/2e8173b26ea8849a0b923d05b8eae5b188beb961/lock");
+//				caps.setCapability("unlockUrl","https://286d8226ec894f798c3394d33d3af4ab@api-dev.headspin.io/v0/idevice/2e8173b26ea8849a0b923d05b8eae5b188beb961/unlock");
+//				caps.setCapability("headspinHost", "https://dev-us-pao-1.headspin.io:7017/v0/286d8226ec894f798c3394d33d3af4ab/wd/hub");
+				// gb
+				caps.setCapability("platformVersion", "13.5");
+				caps.setCapability("udid", "00008020-000374DC3A45002E");
+				caps.setCapability("deviceName", "iPhone XS");
+				caps.setCapability("lockUrl", "https://286d8226ec894f798c3394d33d3af4ab@api-dev.headspin.io/v0/idevice/00008020-000374DC3A45002E/lock");
+				caps.setCapability("unlockUrl","https://286d8226ec894f798c3394d33d3af4ab@api-dev.headspin.io/v0/idevice/00008020-000374DC3A45002E/unlock");
+				caps.setCapability("headspinHost", "https://dev-gb-lhr-0.headspin.io:7029/v0/286d8226ec894f798c3394d33d3af4ab/wd/hub");
 				break;
 			}
 		}
@@ -626,11 +781,11 @@ public class TestBase {
 		}
 
 		if (null != options) {
-			System.out.format("[LOG]: <[%s:%s] %s>", id, testName, options.toString());
+			System.out.format("[LOG]: <[%s:%s] %s>%n", id, testName, options.toString());
 		}
 
 		if (null != caps) {
-			System.out.format("[LOG]: <[%s:%s] %s>", id, testName, caps.toString());
+			System.out.format("[LOG]: <[%s:%s] %s>%n", id, testName, caps.toString());
 		}
 
 		// load properties file (locators definitions)
@@ -687,19 +842,17 @@ public class TestBase {
 			} else if (runtimeData.gridType.toLowerCase().equals("perfecto")) {
 
 				//Perfecto
-				System.out.println("set remote session caps");
+				System.out.println("set perfecto-specific remote session caps");
 				((MutableCapabilities) options).setCapability("securityToken", gc.perfectoSecurityToken);
 
-				//SRF
-				((MutableCapabilities) options).setCapability("SRF_CLIENT_ID", gc.srfId);
-				((MutableCapabilities) options).setCapability("SRF_CLIENT_SECRET", gc.srfPass);
+				//SRF (Storm runner functional specific caps)
+				//((MutableCapabilities) options).setCapability("SRF_CLIENT_ID", gc.srfId);
+				//((MutableCapabilities) options).setCapability("SRF_CLIENT_SECRET", gc.srfPass);
 
 				try {
 					//Perfecto
-					System.out.println("start remote session");
+					System.out.println("start perfecto remote session");
 					driver.set(new RemoteWebDriver(new URL(gc.perfectoHost), options));
-
-					System.out.println("finished remote session");
 
 					if (!(options instanceof SafariOptions)) {
 						getDriver().manage().window().maximize();
@@ -722,12 +875,8 @@ public class TestBase {
 
 				try {
 					//BrowserStack
-					System.out.println("start remote session");
+					System.out.println("start browserstack remote session");
 					driver.set(new RemoteWebDriver(new URL(gc.browserStackHost), options));
-
-					//SRF
-					//driver.set(new RemoteWebDriver(new URL(gc.srfHost), options));
-					System.out.println("finished remote session");
 
 					if (!(options instanceof SafariOptions)) {
 						getDriver().manage().window().maximize();
@@ -742,6 +891,37 @@ public class TestBase {
 					mfu.printStackTrace();
 				}
 				catch (WebDriverException wde ) {
+					wde.printStackTrace();
+					Assert.fail("Unable to start WebDriver");
+				}
+
+			} else if (runtimeData.gridType.toLowerCase().equals("headspin")) {
+
+				try {
+					// HeadSpin
+					System.out.println("start headspin desktop session");
+
+					String host = options.getCapability("headspinHost").toString();
+					System.out.format("[LOG]: <[%s:%s] hostUrl: %s>%n", id, testName, host);
+
+					//driver.set(new RemoteWebDriver(new URL(gc.headSpinHost), options));
+					driver.set(new RemoteWebDriver(new URL(host), options));
+
+					if (!(options instanceof SafariOptions)) {
+						getDriver().manage().window().maximize();
+					}
+
+					ss = new ScreenShot(getDriver(), id, testName);
+					generic = new Generic(getDriver(), ss, props, id, testName);
+
+					System.out.format("[LOG]: <[%s:%s] %s>%n", id, testName, getDriver().getCapabilities());
+					System.out.format("[LOG]: <[%s:%s] initializing page objects>%n", id, testName);
+					initializePageObjects();
+
+				} catch (MalformedURLException mfu) {
+					mfu.printStackTrace();
+					Assert.fail("Unable to start WebDriver");
+				} catch (WebDriverException wde ) {
 					wde.printStackTrace();
 					Assert.fail("Unable to start WebDriver");
 				}
@@ -833,13 +1013,41 @@ public class TestBase {
 					Assert.fail("Unable to start WebDriver");
 				}
 
+			// using headspin grid
+			} else if (runtimeData.gridType.toLowerCase().equals("headspin")) {
+
+				try {
+
+					// HeadSpin
+					System.out.println("start headspin mobile session");
+
+					// lock session
+					//lockHeadSpinSession((String) caps.getCapability("lockUrl"), (String) caps.getCapability("udid"));
+
+					//HeadSpin
+					//mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.headSpinHost), caps));
+					String host = caps.getCapability("headspinHost").toString();
+					System.out.format("[LOG]: <[%s:%s] hostUrl: %s>%n", id, testName, host);
+					mDriver.set(new AppiumDriver<MobileElement>(new URL(host), caps));
+
+					mss = new MobileScreenShot(getMobileDriver(), id, testName);
+					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
+
+					System.out.format("[LOG]: <[%s:%s] initializing mobile page objects>%n", id, testName);
+					initializeMobilePageObjects();
+
+				} catch (MalformedURLException mfu) {
+					mfu.printStackTrace();
+				}
+				catch (WebDriverException wde ) {
+					wde.printStackTrace();
+					Assert.fail("Unable to start WebDriver");
+				}
+
 			} else {
 				// error, no grid identified
 			}
 
-		}
-		else {
-			// throw config error?
 		}
 
 		System.out.format("[LOG]: <[%s:%s] =====Start test=====>%n", id, testName);
@@ -883,14 +1091,47 @@ public class TestBase {
 	@Step("Quit browser.")
 	protected void tearDown() {
 
+
 		if (getDriver() instanceof RemoteWebDriver) {
+
+			// post PASSED to headspin perf API
+			if (runtimeData.gridType.toLowerCase().equals("headspin")) {
+
+				// get desktop session id
+				String sessionId = getDriver().getSessionId().toString();
+
+				// call perf API
+				setHeadSpinPerfStatus(sessionId, "Passed");
+
+			}
+
+			// kill driver
 			getDriver().quit();
 			driver.remove();
-		}
-		else if (getMobileDriver() instanceof AppiumDriver<?>) {
+
+		} else if (getMobileDriver() instanceof AppiumDriver<?>) {
+
+			// unlock headspin mobile session
+			if (runtimeData.gridType.toLowerCase().equals("headspin")) {
+
+				// get desktop session id
+				String sessionId = getMobileDriver().getSessionId().toString();
+
+				// call perf API
+				setHeadSpinPerfStatus(sessionId, "Passed");
+
+				// unlock mobile session
+				// unlockHeadSpinSession((String) caps.getCapability("unlockUrl"), (String) caps.getCapability("udid"));
+
+			}
+
+			// kill driver
 			getMobileDriver().quit();
 			mDriver.remove();
+
+
 		}
+
 		System.out.format("[LOG]: <[%s:%s] =====end test=====>%n", id, testName);
 	}
 
@@ -912,6 +1153,118 @@ public class TestBase {
 	private AppiumDriver<?> getMobileDriver() {
 
 		return mDriver.get();
+	}
+
+
+	// lock a device
+	private void lockHeadSpinSession(String lockUrl, String udid) {
+
+		System.out.format("Locking %s on %s...", udid, lockUrl);
+
+		OkHttpClient client = new OkHttpClient();
+
+		RequestBody body = RequestBody.create(null, new byte[0]);
+
+		Request request = new Request.Builder()
+				.url(lockUrl)
+				.method("POST", body)
+				// Bearer access token can be obtained from Headspin Settings - top right corner of UI or you can also take from Appium URL
+				.addHeader("Authorization", "Bearer 286d8226ec894f798c3394d33d3af4ab")
+				.addHeader("cache-control", "no-cache")
+				.build();
+
+		try {
+
+			Response response = client.newCall(request).execute();
+			System.out.format(" %s - %s%n", response.code(), response.message());
+			String responseBody = response.body().string();
+			System.out.format("%s%n", responseBody);
+
+		} catch (IOException e) {
+			System.out.format("Failed to locked.%n", udid);
+			e.printStackTrace();
+		}
+
+		System.out.format("Locked.%n");
+
+	}
+
+
+	// lock a device
+	private void unlockHeadSpinSession(String unlockUrl, String udid) {
+
+
+		System.out.format("Unlocking %s on %s...", udid, unlockUrl);
+
+		OkHttpClient client = new OkHttpClient();
+
+		RequestBody body = RequestBody.create(null, new byte[0]);
+
+		Request request = new Request.Builder()
+				.url(unlockUrl)
+				.method("POST", body)
+				// Bearer access token can be obtained from Headspin Settings - top right corner of UI or you can also take from Appium URL
+				.addHeader("Authorization", "Bearer 286d8226ec894f798c3394d33d3af4ab")
+				.addHeader("cache-control", "no-cache")
+				.build();
+
+		try {
+
+			Response response = client.newCall(request).execute();
+			System.out.format(" %s - %s%n", response.code(), response.message());
+			String responseBody = response.body().string();
+			System.out.format("%s%n", responseBody);
+
+		} catch (IOException e) {
+			System.out.format("Failed to unlocked.%n", udid);
+			e.printStackTrace();
+		}
+
+		System.out.format("Unlocked.%n");
+
+	}
+
+
+	// set headspin status
+	private void setHeadSpinPerfStatus(String sessionId, String status) {
+
+		System.out.format("Setting session '%s' status to: '%s'...", sessionId, status);
+
+		OkHttpClient client = new OkHttpClient();
+
+		MediaType mediaType = MediaType.parse("application/json");
+
+		RequestBody body = RequestBody.create(mediaType, ""
+				+ "{"
+				+ "\"session_id\": \"" + sessionId + "\","
+				+ "\"status\": \"" + status + "\","
+				+ " \"data\": ["
+//					+ "{\"key\": \"kpi1_ms\", \"value\": \"12412\"},"
+//					+ "{\"key\": \"kpi2_ms\", \"value\": \"13455\"}"
+				+ "]}"
+			);
+
+		Request request = new Request.Builder()
+			.url("https://286d8226ec894f798c3394d33d3af4ab@api-dev.headspin.io/v0/perftests/upload")
+			.post(body)
+			.addHeader("Content-Type", "application/json")
+			.addHeader("Authorization", "Bearer 286d8226ec894f798c3394d33d3af4ab")
+			.addHeader("cache-control", "no-cache")
+			.build();
+
+		try {
+
+			Response response = client.newCall(request).execute();
+			System.out.format(" %s - %s%n", response.code(), response.message());
+			String responseBody = response.body().string();
+			System.out.format("%s%n", responseBody);
+
+		} catch (IOException e) {
+			System.out.format("Failed to set session '%s' status to: '%s'.%n", sessionId, status);
+			e.printStackTrace();
+		}
+
+
 	}
 
 
