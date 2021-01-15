@@ -1,0 +1,125 @@
+{
+	"Tests": [
+		{
+			"FOR REFERENCE": {
+				"gridType": "REQUIRED: perfecto|local",
+				"platformName": "REQUIRED: Mac|Windows|Android|iOS",
+				"platformVersion": "integer number or 'macOS High Sierra'",
+				"browserName": "desktop{Chrome|Ie|Edge|Firefox}|{android|ios}{Chrome|Native|Safari}",
+				"browserVersion": "integer|latest|beta",
+				"location": "REQUIRED(Mac): perfecto location",
+				"searchString": "Google Photos",
+				"searchConfirmationString": "unlimited photos and videos for free"
+			},
+			"ChromeTest": {
+				"gridType": "headspin",
+				"browserName": "desktopChrome",
+				"platformName": "Windows",
+				"platform": "Windows",
+				"platformVersion": "10",
+				"browserVersion": "80.0.3987.149",
+				"resolution": "1920x1080",
+				"location": "NA-US-BOS",
+				"username": "standard_user",
+				"password": "secret_sauce",
+				"searchString": "Google Photos",
+				"searchConfirmationString": "unlimited photos and videos for free",
+				"headless": false
+			},
+			"SafariTest": {
+				"gridType": "headspin",
+				"browserName": "desktopSafari",
+				"platformName": "OS X",
+				"platform": "OS X",
+				"platformVersion": "Catalina",
+				"browserVersion": "13",
+				"username": "standard_user",
+				"password": "secret_sauce",
+				"searchString": "Google Photos",
+				"searchConfirmationString": "unlimited photos and videos for free"
+			},
+			"FirefoxTest": {
+				"gridType": "headspin",
+				"browserName": "desktopFirefox",
+				"platformName": "Windows",
+				"platform": "Windows",
+				"platformVersion": "8.1",
+				"browserVersion": "70.0.1",
+				"username": "standard_user",
+				"password": "secret_sauce",
+				"searchString": "Google Photos",
+				"searchConfirmationString": "unlimited photos and videos for free"
+			},
+			"EdgeTest": {
+				"gridType": "headspin",
+				"browserName": "desktopEdge",
+				"platformName": "Windows",
+				"platform": "Windows",
+				"platformVersion": "10",
+				"searchString": "Google Photos",
+				"searchConfirmationString": "unlimited photos and videos for free"
+			},
+			"IeTest": {
+				"gridType": "headspin",
+				"browserName": "desktopIe",
+				"platformName": "Windows",
+				"platform": "Windows",
+				"platformVersion": "7",
+				"searchString": "Google Photos",
+				"searchConfirmationString": "unlimited photos and videos for free"
+			},
+			"AndroidChromeTest": {
+				"gridType": "headspin",
+				"mobileType": "phone",
+				"platformName": "android",
+				"platform": "android",
+				"deviceName": "Pixel 4",
+				"platformVersion": "10.0",
+				"browserName": "androidChrome",
+				"username": "standard_user",
+				"password": "secret_sauce",
+				"searchString": "Google Photos",
+				"searchConfirmationString": "unlimited photos and videos for free"
+			},
+			"AndroidNativeTest": {
+				"gridType": "headspin",
+				"mobileType": "phone",
+				"platformName": "android",
+				"platform": "android",
+				"deviceName": "Google Pixel 3",
+				"platformVersion": "9.0",
+				"browserName": "androidNative",
+				"appPackage": "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c",
+				"appActivity": ".drive.startup.StartupActivity"
+			},
+			"IosSafariTest": {
+				"gridType": "headspin",
+				"mobileType": "phone",
+				"platformName": "ios",
+				"platform": "ios",
+				"deviceName": "iPhone 11 Pro",
+				"platformVersion": "13",
+				"browserName": "iosSafari",
+				"username": "standard_user",
+				"password": "secret_sauce",
+				"searchString": "Google Photos",
+				"searchConfirmationString": "unlimited photos and videos for free"
+			},
+			"IosNativeTest": {
+				"gridType": "headspin",
+				"mobileType": "phone",
+				"platformName": "ios",
+				"platform": "ios",
+				"deviceName": "iPhone 11 Pro Max",
+				"platformVersion": "12",
+				"browserName": "iosNative",
+				"bundleId": "bs://444bd0308813ae0dc236f8cd461c02d3afa7901d"
+			}
+		}
+	],
+	"System Options": [
+		{
+			"Opt1": "system option"
+		}
+	]
+}
