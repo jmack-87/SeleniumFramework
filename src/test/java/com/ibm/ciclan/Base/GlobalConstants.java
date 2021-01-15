@@ -23,6 +23,12 @@ public class GlobalConstants {
 	protected final boolean browserStackLocal = false;
 	protected final boolean browserStackRealMobile = true;
 
+	//protected final String headSpinHost = "https://dev-us-pao-0.headspin.io:9096/v0/286d8226ec894f798c3394d33d3af4ab/wd/hub"; // US-chrome
+	//protected final String headSpinHost = "https://gb-lhr.headspin.io:9092/v0/286d8226ec894f798c3394d33d3af4ab/wd/hub"; // GB-firefox
+	protected final String headSpinHost = "https://dev-us-pao-0.headspin.io:9095/v0/286d8226ec894f798c3394d33d3af4ab/wd/hub"; // US-safari
+
+	protected final boolean headSpinCapture = true;
+
 	protected final String appiumHost = "http://localhost:4723/wd/hub";
 	protected final String gridHost = "http://localhost:4444/wd/hub";
 
