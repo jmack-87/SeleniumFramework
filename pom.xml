@@ -18,19 +18,26 @@
 		<applicationUnderTest /> <!-- name pattern for target application folders. get from args -->
 		<suiteXML /> <!-- testng suite to run. get from args -->
 		<suiteXMLFile>suites\${applicationUnderTest}\${suiteXML}</suiteXMLFile>
+		<aspectj.version>1.9.6</aspectj.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.9.6</version>
+			<version>${aspectj.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>29.0-jre</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>7.3.0</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
@@ -223,6 +230,9 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>3.0.0-M5</version>
 					<configuration>
+<!-- 						<systemPropertyVariables> -->
+<!--                             <testng.dtd.http>true</testng.dtd.http> -->
+<!--                         </systemPropertyVariables> -->
 						<suiteXmlFiles>
 							<suiteXMLFile>${suiteXMLFile}</suiteXMLFile>
 						</suiteXmlFiles>
