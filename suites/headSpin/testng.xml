@@ -1,0 +1,40 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Desktop_Suite" parallel="instances" thread-count="8">
+
+	<parameter name="browserName" value="" />
+	<parameter name="browser" value="" />
+	<parameter name="browserVersion" value="" />
+	<parameter name="gridType" value="" />
+	<parameter name="location" value="" />
+	<parameter name="platformName" value="" />
+	<parameter name="platformVersion" value="" />
+	<parameter name="resolution" value="" />
+
+	<test name="Desktop_Clients">
+
+		<!-- Required -->
+    	<parameter name="applicationUnderTest" value="HeadSpin" />
+    	<parameter name="jsonDataFile" value="headspin.json" />
+		<parameter name="excelDataFile" value="headspin.xlsx" />
+		<parameter name="propertiesFile" value="headspin.properties" />
+
+<!--		not used right now, debating parameterization of source file contents as opposed to forced naming -->
+<!-- 		<parameter name="testDataSheet" value="test" /> -->
+<!-- 		<parameter name="systemDataSheet" value="system" /> -->
+<!-- 		<parameter name="testDataArray" value="Tests" /> -->
+<!-- 		<parameter name="systemDataArray" value="System Options" /> -->
+
+		<parameter name="testParam" value="testValue1" />
+
+		<classes>
+ 			<class name="com.ibm.ciclan.Tests.HeadSpin.Desktop.ChromeFeature" />
+			<class name="com.ibm.ciclan.Tests.HeadSpin.Desktop.SafariFeature" />
+			<class name="com.ibm.ciclan.Tests.HeadSpin.Desktop.FirefoxFeature" />
+
+<!-- 			<class name="com.ibm.ciclan.Tests.HeadSpin.Desktop.EdgeFeature" /> -->
+<!--  			<class name="com.ibm.ciclan.Tests.HeadSpin.Desktop.IeFeature" /> -->
+		</classes>
+
+	</test>
+
+</suite>
