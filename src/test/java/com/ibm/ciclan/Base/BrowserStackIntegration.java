@@ -283,7 +283,7 @@ public class BrowserStackIntegration {
 
 		JsonArray jsonResponse;
 		String json = null;
-		JsonParser jsonParser = new JsonParser();
+		//JsonParser jsonParser = new JsonParser();
 
 		HttpHost host = new HttpHost("api.browserstack.com", 443, "https");
 		CredentialsProvider credsProvider = new BasicCredentialsProvider();
@@ -319,7 +319,7 @@ public class BrowserStackIntegration {
 				e.printStackTrace();
 			}
 
-			jsonResponse = jsonParser.parse(json).getAsJsonArray();
+			jsonResponse = JsonParser.parseString(json).getAsJsonArray();
 
 			try {
 				response.close();

@@ -8,7 +8,8 @@ import java.lang.reflect.Method;
 
 public class TestRetryTransform implements IAnnotationTransformer {
 
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
         annotation.setRetryAnalyzer(RetryAnalyzer.class);
     }

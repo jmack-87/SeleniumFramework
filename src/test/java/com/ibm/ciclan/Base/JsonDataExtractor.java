@@ -164,8 +164,8 @@ public class JsonDataExtractor {
 	private Object[] getTestData(String jsonDataFilePath) throws FileNotFoundException {
 
 		FileReader jsonDataFileReader = new FileReader(jsonDataFilePath);
-		JsonParser jsonParser = new JsonParser();
-		JsonObject jsonData = jsonParser.parse(jsonDataFileReader).getAsJsonObject();
+		//JsonParser jsonParser = new JsonParser();
+		JsonObject jsonData = JsonParser.parseReader(jsonDataFileReader).getAsJsonObject();
 
 		//force the fail for now
 		JsonArray testsArray = jsonData.getAsJsonArray(this.gc.jsonTestsDataArray);
