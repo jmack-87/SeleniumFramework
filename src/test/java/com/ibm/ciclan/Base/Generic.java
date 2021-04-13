@@ -1855,10 +1855,6 @@ public class Generic extends TestBase {
 	@Step("Wait for page to load.")
 	public void waitForPageLoaded(int timeOut) {
 
-
-
-
-
 		double start = System.currentTimeMillis();
 		System.out.format("[LOG]: <[%s:%s] waiting up to %d seconds for page to load.>", this.id, this.testName, timeOut);
 
@@ -1918,10 +1914,6 @@ public class Generic extends TestBase {
 	 */
 	@Step("Wait for page to completely load.")
 	public void waitForPageCompletelyLoaded(int timeOut) {
-
-
-
-
 
 		double start = System.currentTimeMillis();
 		System.out.format("[LOG]: <[%s:%s] waiting up to %d seconds for page to completely load.>", this.id, this.testName, timeOut);
