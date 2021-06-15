@@ -12,7 +12,7 @@
 				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"ChromeTest": {
-				"gridType": "browserstack",
+				"gridType": "local",
 				"browserName": "desktopChrome",
 				"platformName": "Windows",
 				"platform": "Windows",
@@ -25,7 +25,7 @@
 				"headless": false
 			},
 			"SafariTest": {
-				"gridType": "browserstack",
+				"gridType": "local",
 				"browserName": "desktopSafari",
 				"platformName": "OS X",
 				"platform": "OS X",
@@ -34,7 +34,7 @@
 				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"FirefoxTest": {
-				"gridType": "browserstack",
+				"gridType": "local",
 				"browserName": "desktopFirefox",
 				"platformName": "Windows",
 				"platform": "Windows",
@@ -43,7 +43,7 @@
 				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"EdgeTest": {
-				"gridType": "browserstack",
+				"gridType": "local",
 				"browserName": "desktopEdge",
 				"platformName": "Windows",
 				"platform": "Windows",
@@ -52,7 +52,7 @@
 				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"IeTest": {
-				"gridType": "browserstack",
+				"gridType": "local",
 				"browserName": "desktopIe",
 				"platformName": "Windows",
 				"platform": "Windows",
@@ -61,7 +61,7 @@
 				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"AndroidChromeTest": {
-				"gridType": "browserstack",
+				"gridType": "local",
 				"mobileType": "phone",
 				"platformName": "android",
 				"platform": "android",
@@ -72,18 +72,18 @@
 				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"AndroidNativeTest": {
-				"gridType": "browserstack",
+				"gridType": "local",
 				"mobileType": "phone",
 				"platformName": "android",
 				"platform": "android",
 				"deviceName": "Google Pixel 3",
 				"platformVersion": "9.0",
 				"browserName": "androidNative",
-				"appPackage": "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c",
+				"appPackage": "com.google.android.apps.docs",
 				"appActivity": ".drive.startup.StartupActivity"
 			},
 			"IosSafariTest": {
-				"gridType": "browserstack",
+				"gridType": "perfecto",
 				"mobileType": "phone",
 				"platformName": "ios",
 				"platform": "ios",
@@ -94,7 +94,7 @@
 				"searchConfirmationString": "unlimited photos and videos for free"
 			},
 			"IosNativeTest": {
-				"gridType": "browserstack",
+				"gridType": "perfecto",
 				"mobileType": "phone",
 				"platformName": "ios",
 				"platform": "ios",
