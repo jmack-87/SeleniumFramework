@@ -29,8 +29,8 @@ public class GlobalConstants {
 
 	protected final boolean headSpinCapture = true;
 
-	protected final String appiumHost = "http://localhost:4723/wd/hub";
-	protected final String gridHost = "http://localhost:4444/wd/hub";
+	protected final String appiumHost = "http://LAPTOP-ALE01NUB:4723/wd/hub";
+	protected final String gridHost = "http://LAPTOP-ALE01NUB:4444/wd/hub";
 
 	protected final String proxy = "";
 
