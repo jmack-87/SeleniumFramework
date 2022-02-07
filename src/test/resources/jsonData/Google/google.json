@@ -9,7 +9,7 @@
 				"browserVersion": "integer|latest|beta",
 				"location": "REQUIRED(Mac): perfecto location",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "unlimited photos and videos for free"
+				"searchConfirmationString": " the home for all your photos and videos"
 			},
 			"ChromeTest": {
 				"gridType": "local",
@@ -21,7 +21,7 @@
 				"resolution": "1024x768",
 				"location": "NA-US-BOS",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "unlimited photos and videos for free",
+				"searchConfirmationString": " the home for all your photos and videos",
 				"headless": false
 			},
 			"SafariTest": {
@@ -31,7 +31,7 @@
 				"platform": "OS X",
 				"platformVersion": "Catalina",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "unlimited photos and videos for free"
+				"searchConfirmationString": " the home for all your photos and videos"
 			},
 			"FirefoxTest": {
 				"gridType": "local",
@@ -40,7 +40,7 @@
 				"platform": "Windows",
 				"platformVersion": "8.1",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "unlimited photos and videos for free"
+				"searchConfirmationString": " the home for all your photos and videos"
 			},
 			"EdgeTest": {
 				"gridType": "local",
@@ -49,7 +49,7 @@
 				"platform": "Windows",
 				"platformVersion": "10",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "unlimited photos and videos for free"
+				"searchConfirmationString": " the home for all your photos and videos"
 			},
 			"IeTest": {
 				"gridType": "local",
@@ -58,26 +58,26 @@
 				"platform": "Windows",
 				"platformVersion": "7",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "unlimited photos and videos for free"
+				"searchConfirmationString": " the home for all your photos and videos"
 			},
 			"AndroidChromeTest": {
 				"gridType": "local",
 				"mobileType": "phone",
 				"platformName": "android",
 				"platform": "android",
-				"deviceName": "Samsung Galaxy S20",
-				"platformVersion": "10.0",
+				"deviceName": "Pixel 4a",
+				"platformVersion": "11",
 				"browserName": "androidChrome",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "unlimited photos and videos for free"
+				"searchConfirmationString": " the home for all your photos and videos"
 			},
 			"AndroidNativeTest": {
 				"gridType": "local",
 				"mobileType": "phone",
 				"platformName": "android",
 				"platform": "android",
-				"deviceName": "Google Pixel 3",
-				"platformVersion": "9.0",
+				"deviceName": "Pixel 4a",
+				"platformVersion": "11",
 				"browserName": "androidNative",
 				"appPackage": "com.google.android.apps.docs",
 				"appActivity": ".drive.startup.StartupActivity"
@@ -91,7 +91,7 @@
 				"platformVersion": "13",
 				"browserName": "iosSafari",
 				"searchString": "Google Photos",
-				"searchConfirmationString": "unlimited photos and videos for free"
+				"searchConfirmationString": " the home for all your photos and videos"
 			},
 			"IosNativeTest": {
 				"gridType": "perfecto",
@@ -101,7 +101,7 @@
 				"deviceName": "iPhone 11 Pro Max",
 				"platformVersion": "12",
 				"browserName": "iosNative",
-				"bundleId": "bs://444bd0308813ae0dc236f8cd461c02d3afa7901d"
+				"bundleId": "com.apple.preferences"
 			}
 		}
 	],
