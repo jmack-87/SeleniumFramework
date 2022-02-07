@@ -29,9 +29,9 @@
 
 		<classes>
 			<class name="com.ibm.ciclan.Tests.Google.Mobile.AndroidChromeFeature" />
-			<class name="com.ibm.ciclan.Tests.Google.Mobile.AndroidNativeFeature" />
-			<class name="com.ibm.ciclan.Tests.Google.Mobile.IosSafariFeature" />
-			<class name="com.ibm.ciclan.Tests.Google.Mobile.IosNativeFeature" />
+<!-- 			<class name="com.ibm.ciclan.Tests.Google.Mobile.AndroidNativeFeature" /> -->
+<!-- 			<class name="com.ibm.ciclan.Tests.Google.Mobile.IosSafariFeature" /> -->
+<!-- 			<class name="com.ibm.ciclan.Tests.Google.Mobile.IosNativeFeature" /> -->
 		</classes>
 
 	</test>
