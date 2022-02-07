@@ -326,36 +326,36 @@ public class TestBase {
 			case "androidnative":
 				caps = new DesiredCapabilities();
 				// optional
-				caps.setCapability("automationName", "Appium");
-				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
-				caps.setCapability("skipUnlock", true);
-				caps.setCapability("deviceName", "ignoredButNotEmpty");
+				caps.setCapability("appium:automationName", "UIAutomator2");
+				//caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+				//caps.setCapability("skipUnlock", true);
+				caps.setCapability("appium:deviceName", runtimeData.deviceName);
 				// required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
-				caps.setCapability("platformVersion", runtimeData.platformVersion);
+				caps.setCapability("appium:platformVersion", runtimeData.platformVersion);
 				caps.setCapability("appPackage", runtimeData.appPackage);
 				caps.setCapability("appActivity", runtimeData.appActivity);
 				break;
 			case "androidchrome":
 				caps = DesiredCapabilities.android();
 				// optional
-				caps.setCapability("automationName", "Appium");
-				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
-				caps.setCapability("skipUnlock", true);
-				caps.setCapability("deviceName", "ignoredButNotEmpty");
+				caps.setCapability("automationName", "UIAutomator2");
+				//caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+				//caps.setCapability("skipUnlock", true);
+				caps.setCapability("deviceName", runtimeData.deviceName);
 				// required
-				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
+				caps.setCapability("platformName", runtimeData.platformName);
 				caps.setCapability("platformVersion", runtimeData.platformVersion);
 				caps.setBrowserName("Chrome");
 				break;
 			case "iosnative":
 				caps = new DesiredCapabilities();
 				// optional
-				caps.setCapability("automationName", "XCUITest");
-				caps.setCapability("deviceName", runtimeData.deviceName);
+				caps.setCapability("appium:automationName", "XCUITest");
+				caps.setCapability("appium:deviceName", runtimeData.deviceName);
 				//required
 				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
-				caps.setCapability("platformVersion", runtimeData.platformVersion);
+				caps.setCapability("appium:platformVersion", runtimeData.platformVersion);
 				caps.setCapability("bundleId", runtimeData.bundleId);
 				break;
 			case "iossafari":
