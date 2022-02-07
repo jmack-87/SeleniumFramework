@@ -28,7 +28,7 @@
 
 		<classes>
  			<class name="com.ibm.ciclan.Tests.Google.Desktop.ChromeFeature" />
-			<class name="com.ibm.ciclan.Tests.Google.Desktop.SafariFeature" />
+<!-- 			<class name="com.ibm.ciclan.Tests.Google.Desktop.SafariFeature" /> -->
 			<class name="com.ibm.ciclan.Tests.Google.Desktop.FirefoxFeature" />
 			<class name="com.ibm.ciclan.Tests.Google.Desktop.EdgeFeature" />
  			<class name="com.ibm.ciclan.Tests.Google.Desktop.IeFeature" />
