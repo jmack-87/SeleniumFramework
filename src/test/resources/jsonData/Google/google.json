@@ -66,7 +66,7 @@
 				"platformName": "android",
 				"platform": "android",
 				"deviceName": "Pixel 4a",
-				"platformVersion": "11",
+				"platformVersion": "12",
 				"browserName": "androidChrome",
 				"searchString": "Google Photos",
 				"searchConfirmationString": " the home for all your photos and videos"
@@ -77,7 +77,7 @@
 				"platformName": "android",
 				"platform": "android",
 				"deviceName": "Pixel 4a",
-				"platformVersion": "11",
+				"platformVersion": "12",
 				"browserName": "androidNative",
 				"appPackage": "com.google.android.apps.docs",
 				"appActivity": ".drive.startup.StartupActivity"
