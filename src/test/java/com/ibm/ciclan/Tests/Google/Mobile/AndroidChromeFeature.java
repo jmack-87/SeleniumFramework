@@ -53,7 +53,8 @@ public class AndroidChromeFeature extends TestBase {
 		mGeneric.sendText(SearchPage.Mobile_Locator_TextField_searchInput.toString(), runtimeData.searchString);
 
 		// submit search
-		mGeneric.clickElement(SearchPage.Mobile_Locator_Button_searchSubmit.toString());
+		//mGeneric.clickElement(SearchPage.Mobile_Locator_Button_searchSubmit.toString());
+		mGeneric.androidPressKey();
 
 		// confirm at least one result returns
 		mGeneric.confirmElementExistence(SearchResults.Locator_firstResult.toString());
