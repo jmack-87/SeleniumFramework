@@ -20,6 +20,7 @@ import com.ibm.ciclan.Enumerations.BrowserStack.BrowserStack;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -38,6 +39,8 @@ import org.testng.annotations.Parameters;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 import io.qameta.allure.Step;
@@ -326,27 +329,27 @@ public class TestBase {
 			case "androidnative":
 				caps = new DesiredCapabilities();
 				// optional
-				caps.setCapability("appium:automationName", "UIAutomator2");
+				caps.setCapability("appium:automationName", "uiautomator2");
 				//caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				//caps.setCapability("skipUnlock", true);
 				caps.setCapability("appium:deviceName", runtimeData.deviceName);
 				// required
-				caps.setCapability(CapabilityType.PLATFORM_NAME, runtimeData.platformName);
+				caps.setCapability("platformName", runtimeData.platformName);
 				caps.setCapability("appium:platformVersion", runtimeData.platformVersion);
-				caps.setCapability("appPackage", runtimeData.appPackage);
-				caps.setCapability("appActivity", runtimeData.appActivity);
+				caps.setCapability("appium:appPackage", runtimeData.appPackage);
+				caps.setCapability("appium:appActivity", runtimeData.appActivity);
 				break;
 			case "androidchrome":
-				caps = DesiredCapabilities.android();
+				caps = new DesiredCapabilities();
 				// optional
-				caps.setCapability("automationName", "UIAutomator2");
+				caps.setCapability("appium:automationName", "uiautomator2");
 				//caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				//caps.setCapability("skipUnlock", true);
-				caps.setCapability("deviceName", runtimeData.deviceName);
+				caps.setCapability("appium:deviceName", runtimeData.deviceName);
 				// required
-				caps.setCapability("platformName", runtimeData.platformName);
-				caps.setCapability("platformVersion", runtimeData.platformVersion);
-				caps.setBrowserName("Chrome");
+				caps.setCapability("appium:platformName", runtimeData.platformName);
+				caps.setCapability("appium:platformVersion", runtimeData.platformVersion);
+				caps.setBrowserName("chrome");
 				break;
 			case "iosnative":
 				caps = new DesiredCapabilities();
@@ -359,7 +362,8 @@ public class TestBase {
 				caps.setCapability("bundleId", runtimeData.bundleId);
 				break;
 			case "iossafari":
-				caps = DesiredCapabilities.iphone();
+				//caps = DesiredCapabilities.iphone();
+				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "XCUITest");
 				caps.setCapability("deviceName", runtimeData.deviceName);
@@ -445,7 +449,8 @@ public class TestBase {
 				caps.setCapability("appActivity", runtimeData.appActivity);
 				break;
 			case "androidchrome":
-				caps = DesiredCapabilities.android();
+				//caps = DesiredCapabilities.android();
+				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "appium");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
@@ -472,7 +477,8 @@ public class TestBase {
 				caps.setCapability("bundleId", runtimeData.bundleId);
 				break;
 			case "iossafari":
-				caps = DesiredCapabilities.iphone();
+				//caps = DesiredCapabilities.iphone();
+				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "XCUITest");
 				caps.setCapability("deviceName", runtimeData.deviceName);
@@ -582,7 +588,8 @@ public class TestBase {
 				caps.setCapability("appActivity", runtimeData.appActivity);
 				break;
 			case "androidchrome":
-				caps = DesiredCapabilities.android();
+				//caps = DesiredCapabilities.android();
+				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "appium");
 				caps.setCapability("takesScreenshot", true);
@@ -610,7 +617,8 @@ public class TestBase {
 				caps.setCapability("bundleId", runtimeData.bundleId);
 				break;
 			case "iossafari":
-				caps = DesiredCapabilities.iphone();
+				//caps = DesiredCapabilities.iphone();
+				caps = new DesiredCapabilities();
 				caps.setCapability("automationName", "XCUITest");
 				caps.setCapability("platformName", "iOS");
 				caps.setBrowserName("Safari");
@@ -723,7 +731,8 @@ public class TestBase {
 				break;
 
 			case "androidchrome":
-				caps = DesiredCapabilities.android();
+				//caps = DesiredCapabilities.android();
+				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "Appium");
 				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
@@ -760,7 +769,8 @@ public class TestBase {
 				break;
 
 			case "iossafari":
-				caps = DesiredCapabilities.iphone();
+				//caps = DesiredCapabilities.iphone();
+				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "XCUITest");
 				// required
@@ -943,21 +953,41 @@ public class TestBase {
 
 			// using local appium server
 			if (runtimeData.gridType.toLowerCase().equals("local")) {
-				try {
-					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.appiumHost), caps));
-					mss = new MobileScreenShot(getMobileDriver(), id, testName);
-					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
 
-					System.out.format("[LOG]: <[%s:%s] initializing mobile page objects>%n", id, testName);
-					initializeMobilePageObjects();
+				if (runtimeData.platformName.toLowerCase().equals("android")) {
+					try {
+						mDriver.set(new AndroidDriver<MobileElement>(new URL(gc.appiumHost), caps));
+						mss = new MobileScreenShot(getMobileDriver(AndroidDriver.class), id, testName);
+						mGeneric = new MobileGeneric(getMobileDriver(AndroidDriver.class), mss, props, id, testName);
 
-				} catch (MalformedURLException mfu) {
-					mfu.printStackTrace();
+						System.out.format("[LOG]: <[%s:%s] initializing Andoird mobile page objects>%n", id, testName);
+						initializeMobilePageObjects();
+
+					} catch (MalformedURLException mfu) {
+						mfu.printStackTrace();
+					}
+					catch (WebDriverException wde ) {
+						wde.printStackTrace();
+						Assert.fail("Unable to start WebDriver");
+					}
+				} else {
+					try {
+						mDriver.set(new IOSDriver<MobileElement>(new URL(gc.appiumHost), caps));
+						mss = new MobileScreenShot(getMobileDriver(IOSDriver.class), id, testName);
+						mGeneric = new MobileGeneric(getMobileDriver(IOSDriver.class), mss, props, id, testName);
+
+						System.out.format("[LOG]: <[%s:%s] initializing iOS mobile page objects>%n", id, testName);
+						initializeMobilePageObjects();
+
+					} catch (MalformedURLException mfu) {
+						mfu.printStackTrace();
+					}
+					catch (WebDriverException wde ) {
+						wde.printStackTrace();
+						Assert.fail("Unable to start WebDriver");
+					}
 				}
-				catch (WebDriverException wde ) {
-					wde.printStackTrace();
-					Assert.fail("Unable to start WebDriver");
-				}
+
 
 			// using perfecto
 			} else if (runtimeData.gridType.toLowerCase().equals("perfecto")) {
@@ -977,8 +1007,8 @@ public class TestBase {
 					/* StormRunnerFunctional
 					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.srfHost), caps));*/
 
-					mss = new MobileScreenShot(getMobileDriver(), id, testName);
-					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
+					mss = new MobileScreenShot(getMobileDriver(AppiumDriver.class), id, testName);
+					mGeneric = new MobileGeneric(getMobileDriver(AppiumDriver.class), mss, props, id, testName);
 
 					System.out.format("[LOG]: <[%s:%s] initializing mobile page objects>%n", id, testName);
 					initializeMobilePageObjects();
@@ -999,8 +1029,8 @@ public class TestBase {
 					//Browserstack
 					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.browserStackHost), caps));
 
-					mss = new MobileScreenShot(getMobileDriver(), id, testName);
-					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
+					mss = new MobileScreenShot(getMobileDriver(AppiumDriver.class), id, testName);
+					mGeneric = new MobileGeneric(getMobileDriver(AppiumDriver.class), mss, props, id, testName);
 
 					System.out.format("[LOG]: <[%s:%s] initializing mobile page objects>%n", id, testName);
 					initializeMobilePageObjects();
@@ -1030,8 +1060,8 @@ public class TestBase {
 					System.out.format("[LOG]: <[%s:%s] hostUrl: %s>%n", id, testName, host);
 					mDriver.set(new AppiumDriver<MobileElement>(new URL(host), caps));
 
-					mss = new MobileScreenShot(getMobileDriver(), id, testName);
-					mGeneric = new MobileGeneric(getMobileDriver(), mss, props, id, testName);
+					mss = new MobileScreenShot(getMobileDriver(AppiumDriver.class), id, testName);
+					mGeneric = new MobileGeneric(getMobileDriver(AppiumDriver.class), mss, props, id, testName);
 
 					System.out.format("[LOG]: <[%s:%s] initializing mobile page objects>%n", id, testName);
 					initializeMobilePageObjects();
@@ -1109,13 +1139,13 @@ public class TestBase {
 			getDriver().quit();
 			driver.remove();
 
-		} else if (getMobileDriver() instanceof AppiumDriver<?>) {
+		} else if (getMobileDriver(AppiumDriver.class) instanceof AppiumDriver<?>) {
 
 			// unlock headspin mobile session
 			if (runtimeData.gridType.toLowerCase().equals("headspin")) {
 
 				// get desktop session id
-				String sessionId = getMobileDriver().getSessionId().toString();
+				String sessionId = getMobileDriver(AppiumDriver.class).getSessionId().toString();
 
 				// call perf API
 				setHeadSpinPerfStatus(sessionId, "Passed");
@@ -1126,7 +1156,7 @@ public class TestBase {
 			}
 
 			// kill driver
-			getMobileDriver().quit();
+			getMobileDriver(AppiumDriver.class).quit();
 			mDriver.remove();
 
 
@@ -1150,9 +1180,8 @@ public class TestBase {
 	 * Returns a thread-safe AppiumDriver
 	 * @return thread-safe AppiumDriver
 	 */
-	private AppiumDriver<?> getMobileDriver() {
-
-		return mDriver.get();
+	protected <T extends WebDriver> T getMobileDriver(Class<T> type) {
+		return type.cast(mDriver.get());
 	}
 
 
