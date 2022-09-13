@@ -15,7 +15,7 @@ import io.qameta.allure.Attachment;
  */
 public class MobileScreenShot extends Assertion {
 
-	private AppiumDriver<?> driver;
+	private AppiumDriver driver;
 	private String id = "unknown";
 	private String testName = "unknown";
 
@@ -26,7 +26,7 @@ public class MobileScreenShot extends Assertion {
 	 * @param id test instance id (timestamp truncated to last three digits)
 	 * @param testName
 	 */
-	public MobileScreenShot(AppiumDriver<?> driver, String id, String testName) {
+	public MobileScreenShot(AppiumDriver driver, String id, String testName) {
 
 		this.id = id;
 		this.testName = testName;
@@ -38,7 +38,7 @@ public class MobileScreenShot extends Assertion {
 	 * Minimum constructor
 	 * @param driver RemoteWebDriver
 	 */
-	public MobileScreenShot(AppiumDriver<?> driver) {
+	public MobileScreenShot(AppiumDriver driver) {
 
 		this.driver = driver;
 	}
