@@ -323,7 +323,6 @@ public class MobileGeneric extends TestBase {
 			meArray = this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
 					.until(new Function<AppiumDriver, List<WebElement>>() {
-						@SuppressWarnings("unchecked")
 						public List<WebElement> apply(AppiumDriver drv) {
 							return (List<WebElement>) drv.findElements(byType);
 						}
@@ -398,7 +397,6 @@ public class MobileGeneric extends TestBase {
 			meArray = this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
 					.until(new Function<AppiumDriver, List<WebElement>>() {
-						@SuppressWarnings("unchecked")
 						public List<WebElement> apply(AppiumDriver drv) {
 							return (List<WebElement>) drv.findElements(byType);
 						}
@@ -437,7 +435,6 @@ public class MobileGeneric extends TestBase {
 			meArray = this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
 					.until(new Function<AppiumDriver, List<WebElement>>() {
-						@SuppressWarnings("unchecked")
 						public List<WebElement> apply(AppiumDriver drv) {
 							return (List<WebElement>) drv.findElements(byType);
 						}
@@ -477,7 +474,6 @@ public class MobileGeneric extends TestBase {
 			meArray = this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
 					.until(new Function<AppiumDriver, List<WebElement>>() {
-						@SuppressWarnings("unchecked")
 						public List<WebElement> apply(AppiumDriver drv) {
 							return (List<WebElement>) drv.findElements(byType);
 						}
@@ -680,7 +676,6 @@ public class MobileGeneric extends TestBase {
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
 					.until(new Function<AppiumDriver, Boolean>() {
-						@SuppressWarnings("unchecked")
 						public Boolean apply(AppiumDriver drv) {
 							return (meArray = (List<WebElement>) drv.findElements(byType)).size() == 0;
 						}
@@ -722,7 +717,6 @@ public class MobileGeneric extends TestBase {
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
 					.until(new Function<AppiumDriver, Boolean>() {
-						@SuppressWarnings("unchecked")
 						public Boolean apply(AppiumDriver drv) {
 							return (meArray = (List<WebElement>) drv.findElements(byType)).size() == 0;
 						}
@@ -764,7 +758,6 @@ public class MobileGeneric extends TestBase {
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
 					.until(new Function<AppiumDriver, Boolean>() {
-						@SuppressWarnings("unchecked")
 						public Boolean apply(AppiumDriver drv) {
 							return (meArray = (List<WebElement>) drv.findElements(byType)).size() == 0;
 						}
@@ -807,7 +800,6 @@ public class MobileGeneric extends TestBase {
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
 					.until(new Function<AppiumDriver, Boolean>() {
-						@SuppressWarnings("unchecked")
 						public Boolean apply(AppiumDriver drv) {
 							meArray = (List<WebElement>) drv.findElements(byType);
 							return meArray.size() == 0;
