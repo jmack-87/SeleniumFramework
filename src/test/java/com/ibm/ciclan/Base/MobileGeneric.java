@@ -22,8 +22,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
@@ -36,15 +35,15 @@ import io.qameta.allure.Step;
  */
 public class MobileGeneric extends TestBase {
 
-	private AppiumDriver<?> driver;
-	private FluentWait<AppiumDriver<?>> wait;
+	private AppiumDriver driver;
+	private FluentWait<AppiumDriver> wait;
 	private Properties props;
 	private By byType = null;
 	private String[] command;
 	private String errorCondition = "";
 	private String value;
-	private MobileElement me = null;
-	private List<MobileElement> meArray = new ArrayList<MobileElement>();
+	private WebElement me = null;
+	private List<WebElement> meArray = new ArrayList<WebElement>();
 
 
 	protected String id = "unknown";
@@ -61,12 +60,12 @@ public class MobileGeneric extends TestBase {
 	 * @param ss MobileScreenShot instance
 	 * @param props properties file instance
 	 */
-	public MobileGeneric(AppiumDriver<?> driver, MobileScreenShot ss, Properties props) {
+	public MobileGeneric(AppiumDriver driver, MobileScreenShot ss, Properties props) {
 
 		this.ss = ss;
 		this.driver = driver;
 		this.props = props;
-		this.wait = new FluentWait<AppiumDriver<?>>(this.driver)
+		this.wait = new FluentWait<AppiumDriver>(this.driver)
 				.ignoring(NoSuchElementException.class)
 				.withTimeout(Duration.ofSeconds(gc.defaultTimeOut))
 				.pollingEvery(Duration.ofMillis(gc.defaultPollingRate));
@@ -82,14 +81,14 @@ public class MobileGeneric extends TestBase {
 	 * @param ss MobileScreenShot instance
 	 * @param props properties file instance
 	 */
-	public MobileGeneric(AppiumDriver<?> driver, MobileScreenShot ss, Properties props, String id, String testName) {
+	public MobileGeneric(AppiumDriver driver, MobileScreenShot ss, Properties props, String id, String testName) {
 
 		this.ss = ss;
 		this.id = id;
 		this.testName = testName;
 		this.driver = driver;
 		this.props = props;
-		this.wait = new FluentWait<AppiumDriver<?>>(this.driver)
+		this.wait = new FluentWait<AppiumDriver>(this.driver)
 				.ignoring(NoSuchElementException.class)
 				.withTimeout(Duration.ofSeconds(gc.defaultTimeOut))
 				.pollingEvery(Duration.ofMillis(gc.defaultPollingRate));
@@ -103,7 +102,7 @@ public class MobileGeneric extends TestBase {
 	 * @param propertyKey (String) properties file key defining element locator
 	 * @return (WebElement|null)
 	 */
-	private MobileElement waitForElement(String propertyKey) {
+	private WebElement waitForElement(String propertyKey) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, "");
@@ -112,9 +111,9 @@ public class MobileGeneric extends TestBase {
 		try {
 			me = this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, MobileElement>() {
-						public MobileElement apply(AppiumDriver<?> drv) {
-							return (MobileElement) drv.findElement(byType);
+					.until(new Function<AppiumDriver, WebElement>() {
+						public WebElement apply(AppiumDriver drv) {
+							return (WebElement) drv.findElement(byType);
 						}
 					});
 		} catch (TimeoutException to) {
@@ -138,7 +137,7 @@ public class MobileGeneric extends TestBase {
 	 * @param maxWait (int) maximum time in seconds to wait for element
 	 * @return (WebElement|null)
 	 */
-	private MobileElement waitForElement(String propertyKey, int maxWait) {
+	private WebElement waitForElement(String propertyKey, int maxWait) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, maxWait, "");
@@ -147,9 +146,9 @@ public class MobileGeneric extends TestBase {
 		try {
 			me = this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
-					.until(new Function<AppiumDriver<?>, MobileElement>() {
-						public MobileElement apply(AppiumDriver<?> drv) {
-							return (MobileElement) drv.findElement(byType);
+					.until(new Function<AppiumDriver, WebElement>() {
+						public WebElement apply(AppiumDriver drv) {
+							return (WebElement) drv.findElement(byType);
 						}
 					});
 		} catch (TimeoutException to) {
@@ -173,7 +172,7 @@ public class MobileGeneric extends TestBase {
 	 * @param maxWait (int) maximum time in seconds to wait for element
 	 * @return (WebElement|null)
 	 */
-	private MobileElement waitForElement(String propertyKey, int maxWait, int polling) {
+	private WebElement waitForElement(String propertyKey, int maxWait, int polling) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, maxWait, "");
@@ -183,9 +182,9 @@ public class MobileGeneric extends TestBase {
 			me = this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
 					.pollingEvery(Duration.ofMillis(polling))
-					.until(new Function<AppiumDriver<?>, MobileElement>() {
-						public MobileElement apply(AppiumDriver<?> drv) {
-							return (MobileElement) drv.findElement(byType);
+					.until(new Function<AppiumDriver, WebElement>() {
+						public WebElement apply(AppiumDriver drv) {
+							return (WebElement) drv.findElement(byType);
 						}
 					});
 		} catch (TimeoutException to) {
@@ -209,7 +208,7 @@ public class MobileGeneric extends TestBase {
 	 * @param replacement (String) value to replace placeholder
 	 * @return (WebElement|null)
 	 */
-	private MobileElement waitForElement(String propertyKey, String replacement) {
+	private WebElement waitForElement(String propertyKey, String replacement) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, "");
@@ -218,9 +217,9 @@ public class MobileGeneric extends TestBase {
 		try {
 			me = this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, MobileElement>() {
-						public MobileElement apply(AppiumDriver<?> drv) {
-							return (MobileElement) drv.findElement(byType);
+					.until(new Function<AppiumDriver, WebElement>() {
+						public WebElement apply(AppiumDriver drv) {
+							return (WebElement) drv.findElement(byType);
 						}
 					});
 		} catch (TimeoutException to) {
@@ -245,7 +244,7 @@ public class MobileGeneric extends TestBase {
 	 * @param maxWait (int) maximum time in seconds to wait for element
 	 * @return (WebElement|null)
 	 */
-	private MobileElement waitForElement(String propertyKey, String replacement, int maxWait) {
+	private WebElement waitForElement(String propertyKey, String replacement, int maxWait) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, maxWait, "");
@@ -254,9 +253,9 @@ public class MobileGeneric extends TestBase {
 		try {
 			me = this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
-					.until(new Function<AppiumDriver<?>, MobileElement>() {
-						public MobileElement apply(AppiumDriver<?> drv) {
-							return (MobileElement) drv.findElement(byType);
+					.until(new Function<AppiumDriver, WebElement>() {
+						public WebElement apply(AppiumDriver drv) {
+							return (WebElement) drv.findElement(byType);
 						}
 					});
 		} catch (TimeoutException to) {
@@ -279,7 +278,7 @@ public class MobileGeneric extends TestBase {
 	 * @param propertyKey target element (properties file)
 	 * @return (WebElement|null)
 	 */
-	private MobileElement waitForElement(MobileElement m, String propertyKey) {
+	private WebElement waitForElement(WebElement m, String propertyKey) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, "");
@@ -288,8 +287,8 @@ public class MobileGeneric extends TestBase {
 		try {
 			me = this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, MobileElement>() {
-						public MobileElement apply(AppiumDriver<?> drv) {
+					.until(new Function<AppiumDriver, WebElement>() {
+						public WebElement apply(AppiumDriver drv) {
 							return m.findElement(byType);
 						}
 					});
@@ -311,9 +310,9 @@ public class MobileGeneric extends TestBase {
 	 * Attempt to locate one or more element(s) within default time constraint
 	 *
 	 * @param propertyKey (String) properties file key defining element locator
-	 * @return (List<MobileElement>|null)
+	 * @return (List<WebElement>|null)
 	 */
-	private List<MobileElement> waitForElements(String propertyKey) {
+	private List<WebElement> waitForElements(String propertyKey) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, "");
@@ -323,10 +322,10 @@ public class MobileGeneric extends TestBase {
 
 			meArray = this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, List<MobileElement>>() {
+					.until(new Function<AppiumDriver, List<WebElement>>() {
 						@SuppressWarnings("unchecked")
-						public List<MobileElement> apply(AppiumDriver<?> drv) {
-							return (List<MobileElement>) drv.findElements(byType);
+						public List<WebElement> apply(AppiumDriver drv) {
+							return (List<WebElement>) drv.findElements(byType);
 						}
 					});
 
@@ -349,9 +348,9 @@ public class MobileGeneric extends TestBase {
 	 *
 	 * @param w (WebElement) reference element
 	 * @param propertyKey (String) properties file key defining element locator
-	 * @return (List<MobileElement>|null)
+	 * @return (List<WebElement>|null)
 	 */
-	private List<MobileElement> waitForElements(MobileElement m, String propertyKey) {
+	private List<WebElement> waitForElements(WebElement m, String propertyKey) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, "");
@@ -361,8 +360,8 @@ public class MobileGeneric extends TestBase {
 
 			meArray = this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, List<MobileElement>>() {
-						public List<MobileElement> apply(AppiumDriver<?> drv) {
+					.until(new Function<AppiumDriver, List<WebElement>>() {
+						public List<WebElement> apply(AppiumDriver drv) {
 							return m.findElements(byType);
 						}
 					});
@@ -386,9 +385,9 @@ public class MobileGeneric extends TestBase {
 	 *
 	 * @param propertyKey (String) properties file key defining element locator
 	 * @param maxWait (int) maximum time in seconds to wait for element
-	 * @return (List<MobileElement>|null)
+	 * @return (List<WebElement>|null)
 	 */
-	private List<MobileElement> waitForElements(String propertyKey, int maxWait) {
+	private List<WebElement> waitForElements(String propertyKey, int maxWait) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, maxWait, "");
@@ -398,10 +397,10 @@ public class MobileGeneric extends TestBase {
 
 			meArray = this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
-					.until(new Function<AppiumDriver<?>, List<MobileElement>>() {
+					.until(new Function<AppiumDriver, List<WebElement>>() {
 						@SuppressWarnings("unchecked")
-						public List<MobileElement> apply(AppiumDriver<?> drv) {
-							return (List<MobileElement>) drv.findElements(byType);
+						public List<WebElement> apply(AppiumDriver drv) {
+							return (List<WebElement>) drv.findElements(byType);
 						}
 					});
 
@@ -424,10 +423,10 @@ public class MobileGeneric extends TestBase {
 	 *
 	 * @param propertyKey (String) properties file key defining element locator
 	 * @param replacement (String) value to replace placeholder
-	 * @return (List<MobileElement>|null)
+	 * @return (List<WebElement>|null)
 	 */
 	// @Step("Wait for element.")
-	private List<MobileElement> waitForElements(String propertyKey, String replacement) {
+	private List<WebElement> waitForElements(String propertyKey, String replacement) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, "");
@@ -437,10 +436,10 @@ public class MobileGeneric extends TestBase {
 
 			meArray = this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, List<MobileElement>>() {
+					.until(new Function<AppiumDriver, List<WebElement>>() {
 						@SuppressWarnings("unchecked")
-						public List<MobileElement> apply(AppiumDriver<?> drv) {
-							return (List<MobileElement>) drv.findElements(byType);
+						public List<WebElement> apply(AppiumDriver drv) {
+							return (List<WebElement>) drv.findElements(byType);
 						}
 					});
 
@@ -464,10 +463,10 @@ public class MobileGeneric extends TestBase {
 	 * @param propertyKey (String) properties file key defining element locator
 	 * @param replacement (String) value to replace placeholder
 	 * @param maxWait (int) maximum time in seconds to wait for element
-	 * @return (List<MobileElement>|null)
+	 * @return (List<WebElement>|null)
 	 */
 	// @Step("Wait for element.")
-	private List<MobileElement> waitForElements(String propertyKey, String replacement, int maxWait) {
+	private List<WebElement> waitForElements(String propertyKey, String replacement, int maxWait) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, maxWait, "");
@@ -477,10 +476,10 @@ public class MobileGeneric extends TestBase {
 
 			meArray = this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
-					.until(new Function<AppiumDriver<?>, List<MobileElement>>() {
+					.until(new Function<AppiumDriver, List<WebElement>>() {
 						@SuppressWarnings("unchecked")
-						public List<MobileElement> apply(AppiumDriver<?> drv) {
-							return (List<MobileElement>) drv.findElements(byType);
+						public List<WebElement> apply(AppiumDriver drv) {
+							return (List<WebElement>) drv.findElements(byType);
 						}
 					});
 
@@ -504,7 +503,7 @@ public class MobileGeneric extends TestBase {
 	 * @param propertyKey (String) properties file key defining element locator
 	 * @return (null|WebElement)
 	 */
-	private MobileElement waitForElementNotFound(String propertyKey) {
+	private WebElement waitForElementNotFound(String propertyKey) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, "absence of ");
@@ -514,9 +513,9 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
-						public Boolean apply(AppiumDriver<?> drv) {
-							return !((me = (MobileElement) drv.findElement(byType)) instanceof MobileElement);
+					.until(new Function<AppiumDriver, Boolean>() {
+						public Boolean apply(AppiumDriver drv) {
+							return !((me = (WebElement) drv.findElement(byType)) instanceof WebElement);
 						}
 					});
 
@@ -545,7 +544,7 @@ public class MobileGeneric extends TestBase {
 	 * @param maxWait (int) maximum time in seconds to wait for element
 	 * @return (null|WebElement)
 	 */
-	private MobileElement waitForElementNotFound(String propertyKey, int maxWait) {
+	private WebElement waitForElementNotFound(String propertyKey, int maxWait) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, maxWait, "absence of ");
@@ -555,10 +554,10 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
-						public Boolean apply(AppiumDriver<?> drv) {
+					.until(new Function<AppiumDriver, Boolean>() {
+						public Boolean apply(AppiumDriver drv) {
 							me = null;
-							return !((me = (MobileElement) drv.findElement(byType)) instanceof MobileElement);
+							return !((me = (WebElement) drv.findElement(byType)) instanceof WebElement);
 						}
 					});
 
@@ -588,7 +587,7 @@ public class MobileGeneric extends TestBase {
 	 * @param replacement (String) value to replace placeholder
 	 * @return (null|WebElement)
 	 */
-	private MobileElement waitForElementNotFound(String propertyKey, String replacement) {
+	private WebElement waitForElementNotFound(String propertyKey, String replacement) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, "absence of ");
@@ -598,9 +597,9 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
-						public Boolean apply(AppiumDriver<?> drv) {
-							return !((me = (MobileElement) drv.findElement(byType)) instanceof MobileElement);
+					.until(new Function<AppiumDriver, Boolean>() {
+						public Boolean apply(AppiumDriver drv) {
+							return !((me = (WebElement) drv.findElement(byType)) instanceof WebElement);
 						}
 					});
 
@@ -630,7 +629,7 @@ public class MobileGeneric extends TestBase {
 	 * @param maxWait (int) maximum time in seconds to wait for element
 	 * @return (null|WebElement)
 	 */
-	private MobileElement waitForElementNotFound(String propertyKey, String replacement, int maxWait) {
+	private WebElement waitForElementNotFound(String propertyKey, String replacement, int maxWait) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, maxWait, "absence of ");
@@ -640,9 +639,9 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
-						public Boolean apply(AppiumDriver<?> drv) {
-							return !((me = (MobileElement) drv.findElement(byType)) instanceof MobileElement);
+					.until(new Function<AppiumDriver, Boolean>() {
+						public Boolean apply(AppiumDriver drv) {
+							return !((me = (WebElement) drv.findElement(byType)) instanceof WebElement);
 						}
 					});
 
@@ -670,7 +669,7 @@ public class MobileGeneric extends TestBase {
 	 * @param propertyKey (String) properties file key defining element locator
 	 * @return (null|WebElement)
 	 */
-	private List<MobileElement> waitForElementsNotFound(String propertyKey) {
+	private List<WebElement> waitForElementsNotFound(String propertyKey) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, "absence of ");
@@ -680,10 +679,10 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
+					.until(new Function<AppiumDriver, Boolean>() {
 						@SuppressWarnings("unchecked")
-						public Boolean apply(AppiumDriver<?> drv) {
-							return (meArray = (List<MobileElement>) drv.findElements(byType)).size() == 0;
+						public Boolean apply(AppiumDriver drv) {
+							return (meArray = (List<WebElement>) drv.findElements(byType)).size() == 0;
 						}
 					});
 
@@ -712,7 +711,7 @@ public class MobileGeneric extends TestBase {
 	 * @param maxWait (int) maximum time in seconds to wait for element
 	 * @return (null|WebElement)
 	 */
-	private List<MobileElement> waitForElementsNotFound(String propertyKey, int maxWait) {
+	private List<WebElement> waitForElementsNotFound(String propertyKey, int maxWait) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, maxWait, "absence of ");
@@ -722,10 +721,10 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
+					.until(new Function<AppiumDriver, Boolean>() {
 						@SuppressWarnings("unchecked")
-						public Boolean apply(AppiumDriver<?> drv) {
-							return (meArray = (List<MobileElement>) drv.findElements(byType)).size() == 0;
+						public Boolean apply(AppiumDriver drv) {
+							return (meArray = (List<WebElement>) drv.findElements(byType)).size() == 0;
 						}
 					});
 
@@ -754,7 +753,7 @@ public class MobileGeneric extends TestBase {
 	 * @param replacement (String) value to replace placeholder
 	 * @return (null|WebElement)
 	 */
-	private List<MobileElement> waitForElementsNotFound(String propertyKey, String replacement) {
+	private List<WebElement> waitForElementsNotFound(String propertyKey, String replacement) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, "absence of ");
@@ -764,10 +763,10 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
+					.until(new Function<AppiumDriver, Boolean>() {
 						@SuppressWarnings("unchecked")
-						public Boolean apply(AppiumDriver<?> drv) {
-							return (meArray = (List<MobileElement>) drv.findElements(byType)).size() == 0;
+						public Boolean apply(AppiumDriver drv) {
+							return (meArray = (List<WebElement>) drv.findElements(byType)).size() == 0;
 						}
 					});
 
@@ -797,7 +796,7 @@ public class MobileGeneric extends TestBase {
 	 * @param maxWait (int) maximum time in seconds to wait for element
 	 * @return (null|WebElement)
 	 */
-	private List<MobileElement> waitForElementsNotFound(String propertyKey, String replacement, int maxWait) {
+	private List<WebElement> waitForElementsNotFound(String propertyKey, String replacement, int maxWait) {
 
 		double start = System.currentTimeMillis();
 		byType = processLocator(propertyKey, replacement, maxWait, "absence of ");
@@ -807,10 +806,10 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) maxWait))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
+					.until(new Function<AppiumDriver, Boolean>() {
 						@SuppressWarnings("unchecked")
-						public Boolean apply(AppiumDriver<?> drv) {
-							meArray = (List<MobileElement>) drv.findElements(byType);
+						public Boolean apply(AppiumDriver drv) {
+							meArray = (List<WebElement>) drv.findElements(byType);
 							return meArray.size() == 0;
 						}
 					});
@@ -859,25 +858,25 @@ public class MobileGeneric extends TestBase {
 		byType = null;
 		switch (type.toLowerCase()) {
 			case "xpath":
-				byType = MobileBy.xpath(locator);
+				byType = AppiumBy.xpath(locator);
 				break;
 			case "css":
-				byType = MobileBy.cssSelector(locator);
+				byType = AppiumBy.cssSelector(locator);
 				break;
 			case "id":
-				byType = MobileBy.id(locator);
+				byType = AppiumBy.id(locator);
 				break;
 			case "accessibilityid":
-				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				byType = (AppiumBy) AppiumBy.accessibilityId(locator);
 				break;
 			case "androidselector":
-				byType =  (MobileBy) MobileBy.AndroidUIAutomator(locator);
+				byType =  (AppiumBy) AppiumBy.androidUIAutomator(locator);
 				break;
 			case "tag":
-				byType =  MobileBy.tagName(locator);
+				byType =  AppiumBy.tagName(locator);
 				break;
 			default:
-				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				byType = (AppiumBy) AppiumBy.accessibilityId(locator);
 				break;
 		}
 
@@ -913,25 +912,25 @@ public class MobileGeneric extends TestBase {
 		byType = null;
 		switch (type.toLowerCase()) {
 			case "xpath":
-				byType = MobileBy.xpath(locator);
+				byType = AppiumBy.xpath(locator);
 				break;
 			case "css":
-				byType = MobileBy.cssSelector(locator);
+				byType = AppiumBy.cssSelector(locator);
 				break;
 			case "id":
-				byType = MobileBy.id(locator);
+				byType = AppiumBy.id(locator);
 				break;
 			case "accessibilityid":
-				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				byType = (AppiumBy) AppiumBy.accessibilityId(locator);
 				break;
 			case "androidselector":
-				byType =  (MobileBy) MobileBy.AndroidUIAutomator(locator);
+				byType =  (AppiumBy) AppiumBy.androidUIAutomator(locator);
 				break;
 			case "tag":
-				byType =  MobileBy.tagName(locator);
+				byType =  AppiumBy.tagName(locator);
 				break;
 			default:
-				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				byType = (AppiumBy) AppiumBy.accessibilityId(locator);
 				break;
 		}
 
@@ -967,25 +966,25 @@ public class MobileGeneric extends TestBase {
 		byType = null;
 		switch (type.toLowerCase()) {
 			case "xpath":
-				byType = MobileBy.xpath(locator);
+				byType = AppiumBy.xpath(locator);
 				break;
 			case "css":
-				byType = MobileBy.cssSelector(locator);
+				byType = AppiumBy.cssSelector(locator);
 				break;
 			case "id":
-				byType = MobileBy.id(locator);
+				byType = AppiumBy.id(locator);
 				break;
 			case "accessibilityid":
-				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				byType = (AppiumBy) AppiumBy.accessibilityId(locator);
 				break;
 			case "androidselector":
-				byType =  (MobileBy) MobileBy.AndroidUIAutomator(locator);
+				byType =  (AppiumBy) AppiumBy.androidUIAutomator(locator);
 				break;
 			case "tag":
-				byType =  MobileBy.tagName(locator);
+				byType =  AppiumBy.tagName(locator);
 				break;
 			default:
-				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				byType = (AppiumBy) AppiumBy.accessibilityId(locator);
 				break;
 		}
 
@@ -1024,25 +1023,25 @@ public class MobileGeneric extends TestBase {
 		byType = null;
 		switch (type.toLowerCase()) {
 			case "xpath":
-				byType = MobileBy.xpath(locator);
+				byType = AppiumBy.xpath(locator);
 				break;
 			case "css":
-				byType = MobileBy.cssSelector(locator);
+				byType = AppiumBy.cssSelector(locator);
 				break;
 			case "id":
-				byType = MobileBy.id(locator);
+				byType = AppiumBy.id(locator);
 				break;
 			case "accessibilityid":
-				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				byType = (AppiumBy) AppiumBy.accessibilityId(locator);
 				break;
 			case "androidselector":
-				byType =  (MobileBy) MobileBy.AndroidUIAutomator(locator);
+				byType =  (AppiumBy) AppiumBy.androidUIAutomator(locator);
 				break;
 			case "tag":
-				byType =  MobileBy.tagName(locator);
+				byType =  AppiumBy.tagName(locator);
 				break;
 			default:
-				byType = (MobileBy) MobileBy.AccessibilityId(locator);
+				byType = (AppiumBy) AppiumBy.accessibilityId(locator);
 				break;
 		}
 
@@ -1082,7 +1081,7 @@ public class MobileGeneric extends TestBase {
 	 *
 	 * @param propertyKey (String) properties file key defining string
 	 */
-	public MobileElement smartScroll(String propertyKey) {
+	public WebElement smartScroll(String propertyKey) {
 
 		this.me = confirmElementExistence(propertyKey);
 		int currentY = 0;
@@ -1115,7 +1114,7 @@ public class MobileGeneric extends TestBase {
 	 *
 	 * @param w (WebElement)
 	 */
-	public MobileElement smartScroll(MobileElement m) {
+	public WebElement smartScroll(WebElement m) {
 
 		int currentY = 0;
 		int currentX = 0;
@@ -1284,7 +1283,7 @@ public class MobileGeneric extends TestBase {
 	 * @param input (String) text to enter into target element
 	 */
 	@Step("Input text.")
-	public void sendText(MobileElement me, String input) {
+	public void sendText(WebElement me, String input) {
 
 		//me.click();
 		me.clear();
@@ -1324,7 +1323,7 @@ public class MobileGeneric extends TestBase {
 	 * @param takeSS (boolean) trigger to take a screenshot
 	 */
 	@Step("Input text.")
-	public void sendText(MobileElement me, String input, boolean takeSS) {
+	public void sendText(WebElement me, String input, boolean takeSS) {
 
 		me.clear();
 		me.sendKeys(input);
@@ -1370,7 +1369,7 @@ public class MobileGeneric extends TestBase {
 	 * @param wel (WebElement) selenium web element
 	 */
 	@Step("Click element.")
-	public void clickElement(MobileElement me) {
+	public void clickElement(WebElement me) {
 
 		System.out.format("[LOG]: <[%s:%s] clicking element>%n", this.id, this.testName);
 		me.click();
@@ -1419,7 +1418,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm element exists.")
-	public MobileElement confirmElementExistence(String[] propertyKeyCustomError) {
+	public WebElement confirmElementExistence(String[] propertyKeyCustomError) {
 
 		ss.assertTrue((me = waitForElement(propertyKeyCustomError[0])) instanceof WebElement, propertyKeyCustomError[1]);
 		return me;
@@ -1434,7 +1433,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm element exists.")
-	public MobileElement confirmElementExistence(String propertyKey) {
+	public WebElement confirmElementExistence(String propertyKey) {
 
 		ss.assertTrue((me = waitForElement(propertyKey)) instanceof WebElement, "Element could not be located.");
 		return me;
@@ -1449,7 +1448,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm element exists.")
-	public MobileElement confirmElementExistenceOrNone(String propertyKey, int maxWait) {
+	public WebElement confirmElementExistenceOrNone(String propertyKey, int maxWait) {
 
 		return me = waitForElement(propertyKey, maxWait);
 
@@ -1462,7 +1461,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm element exists.")
-	public MobileElement confirmElementExistenceOrNone(String propertyKey, String replacement, int maxWait) {
+	public WebElement confirmElementExistenceOrNone(String propertyKey, String replacement, int maxWait) {
 
 		return me = waitForElement(propertyKey, replacement, maxWait);
 
@@ -1478,7 +1477,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm element exists within {maxWait} seconds.")
-	public MobileElement confirmElementExistence(String propertyKey, int maxWait) {
+	public WebElement confirmElementExistence(String propertyKey, int maxWait) {
 
 		ss.assertTrue((me = waitForElement(propertyKey, maxWait)) instanceof WebElement, "Element could not be located.");
 		return me;
@@ -1494,7 +1493,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm element exists within {maxWait} seconds.")
-	public MobileElement confirmElementExistence(String propertyKey, int maxWait, int polling) {
+	public WebElement confirmElementExistence(String propertyKey, int maxWait, int polling) {
 
 		ss.assertTrue((me = waitForElement(propertyKey, maxWait, polling)) instanceof WebElement, "Element could not be located.");
 		return me;
@@ -1510,7 +1509,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm dynamic element exists.")
-	public MobileElement confirmElementExistence(String propertyKey, String replacement) {
+	public WebElement confirmElementExistence(String propertyKey, String replacement) {
 
 		ss.assertTrue((me = waitForElement(propertyKey, replacement)) instanceof WebElement, "Element could not be located.");
 		return me;
@@ -1527,7 +1526,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm dynamic element exists within {maxWait} seconds.")
-	public MobileElement confirmElementExistence(String propertyKey, String replacement, int maxWait) {
+	public WebElement confirmElementExistence(String propertyKey, String replacement, int maxWait) {
 
 		ss.assertTrue((me = waitForElement(propertyKey, replacement, maxWait)) instanceof WebElement, "Element could not be located.");
 		return me;
@@ -1543,7 +1542,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm dynamic element exists within 30 seconds.")
-	public MobileElement confirmElementExistence(MobileElement parentElement, String propertyKey) {
+	public WebElement confirmElementExistence(WebElement parentElement, String propertyKey) {
 
 		ss.assertTrue((me = waitForElement(parentElement, propertyKey)) instanceof WebElement, "Element could not be located.");
 		return me;
@@ -1555,10 +1554,10 @@ public class MobileGeneric extends TestBase {
 	 * Asserts one or more elements can be found within default time constraint, includes custom error message
 	 *
 	 * @param propertyKeyCustomError (String[]) properties file key defining element locator, custom error messsage
-	 * @return (List<MobileElement>)
+	 * @return (List<WebElement>)
 	 */
 	@Step("Confirm element(s) exist.")
-	public List<MobileElement> confirmElementsExistence(String[] propertyKeyCustomError) {
+	public List<WebElement> confirmElementsExistence(String[] propertyKeyCustomError) {
 
 		ss.assertTrue(null != (meArray = waitForElements(propertyKeyCustomError[0])), propertyKeyCustomError[1]);
 		int size = meArray.size();
@@ -1572,10 +1571,10 @@ public class MobileGeneric extends TestBase {
 	 * Asserts one or more element(s) can be found within default time constraint
 	 *
 	 * @param propertyKey (String) properties file key defining element locator
-	 * @return (List<MobileElement>)
+	 * @return (List<WebElement>)
 	 */
 	@Step("Confirm element(s) exist.")
-	public List<MobileElement> confirmElementsExistence(String propertyKey) {
+	public List<WebElement> confirmElementsExistence(String propertyKey) {
 
 		ss.assertTrue(null != (meArray = waitForElements(propertyKey)), "One or more Elements could not be located.");
 		int size = meArray.size();
@@ -1589,10 +1588,10 @@ public class MobileGeneric extends TestBase {
 	 * Asserts zero or more element(s) can be found within default time constraint
 	 *
 	 * @param propertyKey (String) properties file key defining element locator
-	 * @return (List<MobileElement>)
+	 * @return (List<WebElement>)
 	 */
 	@Step("Confirm element(s) exist.")
-	public List<MobileElement> confirmElementsExistenceOrNone(String propertyKey) {
+	public List<WebElement> confirmElementsExistenceOrNone(String propertyKey) {
 
 		ss.assertTrue(null != (meArray = waitForElements(propertyKey)), "One or more Elements could not be located.");
 		int size = meArray.size();
@@ -1607,10 +1606,10 @@ public class MobileGeneric extends TestBase {
 	 *
 	 * @param propertyKey (String) properties file key defining element locator
 	 * @param maxWait (int) maximum time in seconds to wait for element
-	 * @return (List<MobileElement>)
+	 * @return (List<WebElement>)
 	 */
 	@Step("Confirm element(s) exist within {maxWait} seconds.")
-	public List<MobileElement> confirmElementsExistence(String propertyKey, int maxWait) {
+	public List<WebElement> confirmElementsExistence(String propertyKey, int maxWait) {
 
 		ss.assertTrue(null != (meArray = waitForElements(propertyKey, maxWait)), "One or more Elements could not be located.");
 		int size = meArray.size();
@@ -1625,10 +1624,10 @@ public class MobileGeneric extends TestBase {
 	 *
 	 * @param propertyKey (String) properties file key defining element locator
 	 * @param w (WebElement)
-	 * @return (List<MobileElement>)
+	 * @return (List<WebElement>)
 	 */
 	@Step("Confirm element(s) exist within {maxWait} seconds.")
-	public List<MobileElement> confirmElementsExistence(MobileElement m, String propertyKey) {
+	public List<WebElement> confirmElementsExistence(WebElement m, String propertyKey) {
 
 		ss.assertTrue(null != (meArray = waitForElements(m, propertyKey)), "One or more Elements could not be located.");
 		int size = meArray.size();
@@ -1643,10 +1642,10 @@ public class MobileGeneric extends TestBase {
 	 *
 	 * @param propertyKey (String) properties file key defining element locator
 	 * @param replacement (String) value to replace placeholder
-	 * @return (List<MobileElement>)
+	 * @return (List<WebElement>)
 	 */
 	@Step("Confirm dynamic element(s) exist.")
-	public List<MobileElement> confirmElementsExistence(String propertyKey, String replacement) {
+	public List<WebElement> confirmElementsExistence(String propertyKey, String replacement) {
 
 		ss.assertTrue(null != (meArray = waitForElements(propertyKey, replacement)), "One or more Elements could not be located.");
 		int size = meArray.size();
@@ -1662,10 +1661,10 @@ public class MobileGeneric extends TestBase {
 	 * @param propertyKey (String) properties file key defining element locator
 	 * @param replacement (String) value to replace placeholder
 	 * @param maxWait (int) maximum time in seconds to wait for element
-	 * @return (List<MobileElement>)
+	 * @return (List<WebElement>)
 	 */
 	@Step("Confirm dynamic element(s) exist within {maxWait} seconds.")
-	public List<MobileElement> confirmElementsExistence(String propertyKey, String replacement, int maxWait) {
+	public List<WebElement> confirmElementsExistence(String propertyKey, String replacement, int maxWait) {
 
 		ss.assertTrue(null != (meArray = waitForElements(propertyKey, replacement, maxWait)), "One or more Elements could not be located.");
 		int size = meArray.size();
@@ -1679,10 +1678,10 @@ public class MobileGeneric extends TestBase {
 	 * Asserts zero or more element(s) can be found within default time constraint
 	 *
 	 * @param propertyKey (String) properties file key defining element locator
-	 * @return (List<MobileElement>)
+	 * @return (List<WebElement>)
 	 */
 	@Step("Confirm element(s) exist.")
-	public List<MobileElement> confirmElementsExistenceOrNone(MobileElement m, String propertyKey) {
+	public List<WebElement> confirmElementsExistenceOrNone(WebElement m, String propertyKey) {
 
 		ss.assertTrue(null != (meArray = waitForElements(m, propertyKey)), "One or more Elements could not be located.");
 		int size = meArray.size();
@@ -1862,8 +1861,8 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
-						public Boolean apply(AppiumDriver<?> drv) {
+					.until(new Function<AppiumDriver, Boolean>() {
+						public Boolean apply(AppiumDriver drv) {
 							return ( ((JavascriptExecutor) drv).executeScript("return document.readyState").equals("complete") ||
 									((JavascriptExecutor) drv).executeScript("return document.readyState").equals("interactive") );
 						}
@@ -1899,8 +1898,8 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) timeOut))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
-						public Boolean apply(AppiumDriver<?> drv) {
+					.until(new Function<AppiumDriver, Boolean>() {
+						public Boolean apply(AppiumDriver drv) {
 							return ( ((JavascriptExecutor) drv).executeScript("return document.readyState").equals("complete") ||
 									((JavascriptExecutor) drv).executeScript("return document.readyState").equals("interactive") );
 						}
@@ -1928,8 +1927,8 @@ public class MobileGeneric extends TestBase {
 		try {
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
-						public Boolean apply(AppiumDriver<?> drv) {
+					.until(new Function<AppiumDriver, Boolean>() {
+						public Boolean apply(AppiumDriver drv) {
 							return ( ((JavascriptExecutor) drv).executeScript("return document.readyState").equals("complete") );
 						}
 					});
@@ -1963,8 +1962,8 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) timeOut))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
-						public Boolean apply(AppiumDriver<?> drv) {
+					.until(new Function<AppiumDriver, Boolean>() {
+						public Boolean apply(AppiumDriver drv) {
 							return ( ((JavascriptExecutor) drv).executeScript("return document.readyState").equals("complete") );
 						}
 					});
@@ -1993,8 +1992,8 @@ public class MobileGeneric extends TestBase {
 		try {
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
-						public Boolean apply(AppiumDriver<?> drv) {
+					.until(new Function<AppiumDriver, Boolean>() {
+						public Boolean apply(AppiumDriver drv) {
 							return ( ((JavascriptExecutor) drv).executeScript("return document.readyState").equals("complete") );
 						}
 					});
@@ -2119,7 +2118,7 @@ public class MobileGeneric extends TestBase {
 	 * @param valueKey (String)
 	 */
 	@Step("Set dropdown by static index.")
-	public void setDropdownByStaticIndex(MobileElement m, String valueKey) {
+	public void setDropdownByStaticIndex(WebElement m, String valueKey) {
 
 		waitForPageLoaded();
 		Select sel = new Select(m);
@@ -2315,7 +2314,7 @@ public class MobileGeneric extends TestBase {
 	 * @param valueKey (string) value properties key
 	 */
 	@Step("Set dropdown by static partial visible text value.")
-	public void setDropdownByStaticPartialVisibleText(MobileElement m, String valueKey) {
+	public void setDropdownByStaticPartialVisibleText(WebElement m, String valueKey) {
 
 		waitForPageLoaded();
 		Select sel = new Select(m);
@@ -2380,7 +2379,7 @@ public class MobileGeneric extends TestBase {
 	 * @param runtimeValue (String)
 	 */
 	@Step("Set dropdown by dynamic partial visible text value.")
-	public void setDropdownByDynamicPartialVisibleText(MobileElement m, String runtimeValue) {
+	public void setDropdownByDynamicPartialVisibleText(WebElement m, String runtimeValue) {
 
 		waitForPageLoaded();
 		Select sel = new Select(m);
@@ -2411,7 +2410,7 @@ public class MobileGeneric extends TestBase {
 	 * matching element.
 	 *
 	 * @param match (String) text to compare against select option text
-	 * @param options (List<MobileElement>) list of select options as web elements
+	 * @param options (List<WebElement>) list of select options as web elements
 	 * @return (int) index of match, or -1
 	 */
 	private int getIndexByPartialText(String match, List<WebElement> options) {
@@ -2438,7 +2437,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmStaticTextValue(String propertyKey, String valueKey) {
+	public WebElement confirmStaticTextValue(String propertyKey, String valueKey) {
 
 		value = getPropertyValue(valueKey);
 		me = confirmElementExistence(propertyKey);
@@ -2458,7 +2457,7 @@ public class MobileGeneric extends TestBase {
 	 * @param valueKey (String) comparison value text properties key
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmStaticTextValue(String propertyKey, String replacementKey, String valueKey) {
+	public WebElement confirmStaticTextValue(String propertyKey, String replacementKey, String valueKey) {
 
 		me = confirmElementExistence(propertyKey, getPropertyValue(replacementKey));
 		ss.assertTrue(me.getText().trim().toLowerCase().contains(getPropertyValue(valueKey).trim().toLowerCase()));
@@ -2477,7 +2476,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmStaticTextValue(MobileElement m, String valueKey) {
+	public WebElement confirmStaticTextValue(WebElement m, String valueKey) {
 
 		value = getPropertyValue(valueKey);
 		System.out.format("[LOG]: <[%s:%s] comparing string contains string: \"%s:%s\">%n", this.id, this.testName, m.getText().replace("\n", ""), value);
@@ -2496,7 +2495,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (WebElement)
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmStaticTextValues(MobileElement m, List<String> valueKeys) {
+	public WebElement confirmStaticTextValues(WebElement m, List<String> valueKeys) {
 
 		List<String> values = new ArrayList<String>();
 
@@ -2541,7 +2540,7 @@ public class MobileGeneric extends TestBase {
 	 * @param value (String) comparison string
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmDynamicTextValue(String propertyKey, String value) {
+	public WebElement confirmDynamicTextValue(String propertyKey, String value) {
 
 		me = confirmElementExistence(propertyKey);
 		System.out.format("[LOG]: <[%s:%s] comparing string contains string: \"%s:%s\">%n", this.id, this.testName, me.getText().replace("\n", ""), value);
@@ -2560,7 +2559,7 @@ public class MobileGeneric extends TestBase {
 	 * @param value (String) comparison value text
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmDynamicTextValue(String propertyKey, String replacementKey, String value) {
+	public WebElement confirmDynamicTextValue(String propertyKey, String replacementKey, String value) {
 
 		me = confirmElementExistence(propertyKey, getPropertyValue(replacementKey));
 		ss.assertTrue(me.getText().trim().toLowerCase().contains(value.trim().toLowerCase()));
@@ -2577,7 +2576,7 @@ public class MobileGeneric extends TestBase {
 	 * @param values (String[]) a string array containing the replacement value at position 0 and comparison value at position 1
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmDynamicTextValue(String propertyKey, String[] values) {
+	public WebElement confirmDynamicTextValue(String propertyKey, String[] values) {
 
 		String replacementValue = values[0];
 		String value = values[1];
@@ -2598,7 +2597,7 @@ public class MobileGeneric extends TestBase {
 	 * @param value (String) comparison string
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmDynamicTextValue(MobileElement me, String value) {
+	public WebElement confirmDynamicTextValue(WebElement me, String value) {
 
 		System.out.format("[LOG]: <[%s:%s] comparing string contains string: \"%s:%s\">%n", this.id, this.testName, me.getText().replace("\n", ""), value);
 		ss.assertTrue(me.getText().toLowerCase().contains(value.toLowerCase()));
@@ -2616,7 +2615,7 @@ public class MobileGeneric extends TestBase {
 	 * @param value (String) comparison string
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmDynamicNotTextValue(String propertyKey, String value) {
+	public WebElement confirmDynamicNotTextValue(String propertyKey, String value) {
 
 		me = confirmElementExistence(propertyKey);
 		System.out.format("[LOG]: <[%s:%s] comparing string contains string: \"%s:%s\">%n", this.id, this.testName, me.getText().replace("\n", ""), value);
@@ -2635,7 +2634,7 @@ public class MobileGeneric extends TestBase {
 	 * @param runtimeValue (String) comparison string
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmExactDynamicTextValue(String propertyKey, String runtimeValue) {
+	public WebElement confirmExactDynamicTextValue(String propertyKey, String runtimeValue) {
 
 		me = confirmElementExistence(propertyKey);
 		ss.assertTrue(me.getText().equals(runtimeValue));
@@ -2653,7 +2652,7 @@ public class MobileGeneric extends TestBase {
 	 * @param runtimeValue (String) comparison string
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmExactDynamicTextValue(MobileElement me, String runtimeValue) {
+	public WebElement confirmExactDynamicTextValue(WebElement me, String runtimeValue) {
 
 		//System.out.format("[DEBUG]: <[%s:%s] comparing strings [exp]\"%s\":[act]\"%s\">%n", this.id, this.testName, runtimeValue.trim(), me.getText().trim());
 		ss.assertTrue(me.getText().trim().equals(runtimeValue.trim()));
@@ -2671,7 +2670,7 @@ public class MobileGeneric extends TestBase {
 	 * @param runtimeValue (String) comparison string
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmExactDynamicInputText(String propertyKey, String runtimeValue) {
+	public WebElement confirmExactDynamicInputText(String propertyKey, String runtimeValue) {
 
 		me = confirmElementExistence(propertyKey);
 		String value = (String) this.jse.executeScript("return arguments[0].value", me);
@@ -2692,7 +2691,7 @@ public class MobileGeneric extends TestBase {
 	 * @param runtimeValue (String) comparison string
 	 */
 	@Step("Confirm text value.")
-	public MobileElement confirmExactDynamicInputText(MobileElement me, String runtimeValue) {
+	public WebElement confirmExactDynamicInputText(WebElement me, String runtimeValue) {
 
 		String value = (String) this.jse.executeScript("return arguments[0].value", me);
 		//String value = (String) this.jse.executeScript("return $(arguments[0]).val()", loc); // has an issue with unrecognized expression that I do not understand
@@ -2793,8 +2792,8 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
-						public Boolean apply(AppiumDriver<?> drv) {
+					.until(new Function<AppiumDriver, Boolean>() {
+						public Boolean apply(AppiumDriver drv) {
 							return (boolean) ((JavascriptExecutor) drv).executeScript("return (arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0)", me);
 						}
 					});
@@ -2823,8 +2822,8 @@ public class MobileGeneric extends TestBase {
 
 			this.wait
 					.withTimeout(Duration.ofSeconds((long) gc.defaultTimeOut))
-					.until(new Function<AppiumDriver<?>, Boolean>() {
-						public Boolean apply(AppiumDriver<?> drv) {
+					.until(new Function<AppiumDriver, Boolean>() {
+						public Boolean apply(AppiumDriver drv) {
 							return (boolean) ((JavascriptExecutor) drv).executeScript("return (arguments[0].complete && typeof arguments[0].naturalWidth != \"undefined\" && arguments[0].naturalWidth > 0)", me);
 						}
 					});
@@ -2846,14 +2845,14 @@ public class MobileGeneric extends TestBase {
 
 		List<String> foundList = new ArrayList<String>();
 		List<String> expectedList = new ArrayList<String>();
-		List<MobileElement> meArray = new ArrayList<MobileElement>();
+		List<WebElement> meArray = new ArrayList<WebElement>();
 		String[] values = null;
 
 		meArray = confirmElementsExistence(propertyKey);
 		values = getPropertyValue(valueKey).split(",");
 		expectedList = Arrays.asList(values);
 
-		for (MobileElement me: meArray) {
+		for (WebElement me: meArray) {
 			foundList.add(me.getText());
 		}
 
@@ -2887,14 +2886,14 @@ public class MobileGeneric extends TestBase {
 
 		List<String> foundList = new ArrayList<String>();
 		List<String> expectedList = new ArrayList<String>();
-		List<MobileElement> meArray = new ArrayList<MobileElement>();
+		List<WebElement> meArray = new ArrayList<WebElement>();
 		String[] values = null;
 
 		meArray = confirmElementsExistence(propertyKey);
 		values = getPropertyValue(valueKey).split(",");
 		expectedList = Arrays.asList(values);
 
-		for (MobileElement me: meArray) {
+		for (WebElement me: meArray) {
 			foundList.add(me.getText());
 		}
 
@@ -2929,8 +2928,7 @@ public class MobileGeneric extends TestBase {
 	@Step("Press keyboard key.")
 	public void androidPressKey() {
 
-		@SuppressWarnings("unchecked")
-		AndroidDriver<MobileElement> tempDrv = getMobileDriver(AndroidDriver.class);
+		AndroidDriver tempDrv = getMobileDriver(AndroidDriver.class);
 		tempDrv.pressKey(new KeyEvent(AndroidKey.ENTER));
 		tempDrv = null;
 
@@ -2981,7 +2979,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (boolean) result of script execution as returned by JSE
 	 */
 	@Step("Execute JavaScript snippet, boolean return.")
-	public boolean jseExecuteBoolean(String scriptKey, MobileElement me) {
+	public boolean jseExecuteBoolean(String scriptKey, WebElement me) {
 
 		String script = getPropertyValue(scriptKey);
 		System.out.format("[LOG]: <[%s:%s] executing script: %s; against dynamic element.>%n", this.id, this.testName, scriptKey);
@@ -3034,7 +3032,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (int) result of script execution as returned by JSE
 	 */
 	@Step("Execute JavaScript snippet, integer return.")
-	public int jseExecuteInteger(String scriptKey, MobileElement me) {
+	public int jseExecuteInteger(String scriptKey, WebElement me) {
 
 		String script = getPropertyValue(scriptKey);
 		System.out.format("[LOG]: <[%s:%s] executing script: %s; against dynamic element.>%n", this.id, this.testName, scriptKey);
@@ -3087,7 +3085,7 @@ public class MobileGeneric extends TestBase {
 	 * @return (String) result of script execution as returned by JSE
 	 */
 	@Step("Execute JavaScript snippet, string return.")
-	public String jseExecuteString(String scriptKey, MobileElement me) {
+	public String jseExecuteString(String scriptKey, WebElement me) {
 
 		String script = getPropertyValue(scriptKey);
 		System.out.format("[LOG]: <[%s:%s] executing script: %s; against dynamic element.>%n", this.id, this.testName, scriptKey);
@@ -3137,7 +3135,7 @@ public class MobileGeneric extends TestBase {
 	 * @param we (WebElement) locator (properties)
 	 */
 	@Step("Execute JavaScript snippet, no return.")
-	public void jseExecuteVoid(String scriptKey, MobileElement me) {
+	public void jseExecuteVoid(String scriptKey, WebElement me) {
 
 		String script = getPropertyValue(scriptKey);
 		System.out.format("[LOG]: <[%s:%s] executing script: %s; against dynamic element.>%n", this.id, this.testName, scriptKey);
@@ -3190,7 +3188,7 @@ public class MobileGeneric extends TestBase {
 	}
 
 
-	public void clickWithConfirmation(MobileElement me2, String propertyKey) {
+	public void clickWithConfirmation(WebElement me2, String propertyKey) {
 
 		me.click();
 		confirmElementExistence(propertyKey);
