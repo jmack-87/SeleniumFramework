@@ -1,6 +1,8 @@
 package com.ibm.ciclan.Tests.Example.Mobile;
 
 
+import org.openqa.selenium.WebElement;
+
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -9,7 +11,6 @@ import com.ibm.ciclan.Base.TestBase;
 import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
 import com.ibm.ciclan.Enumerations.Example.PhoneApp;
 
-import io.appium.java_client.MobileElement;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -22,7 +23,7 @@ import io.qameta.allure.Story;
 @Feature("Android Native")
 public class AndroidNativeFeature extends TestBase {
 
-	MobileElement me = null;
+	WebElement me = null;
 
 	/**
 	 * Perform a google search. Confirm and click first result. Confirm navigation.
