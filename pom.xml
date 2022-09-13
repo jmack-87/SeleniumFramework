@@ -19,7 +19,7 @@
 		<applicationUnderTest /> <!-- name pattern for target application folders. get from args -->
 		<suiteXML /> <!-- testng suite to run. get from args -->
 		<suiteXMLFile>suites\${applicationUnderTest}\${suiteXML}</suiteXMLFile>
-		<aspectj.version>1.9.8</aspectj.version>
+		<aspectj.version>1.9.9.1</aspectj.version>
 	</properties>
 
 	<dependencies>
@@ -32,56 +32,50 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>31.0.1-jre</version>
+			<version>31.1-jre</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>7.5</version>
+			<version>7.6.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.qameta.allure</groupId>
 			<artifactId>allure-testng</artifactId>
-			<version>2.17.2</version>
+			<version>2.19.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.35</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.squareup.okhttp3</groupId>
-			<artifactId>okhttp</artifactId>
-			<version>4.9.3</version>
+			<version>2.0.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>4.1.2</version>
+			<version>4.4.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>
-			<version>4.1.2</version>
+			<version>4.4.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-support</artifactId>
-			<version>4.1.2</version>
+			<version>4.4.0</version>
 		</dependency>
 
 
 		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
-			<version>7.6.0</version>
+			<version>8.2.0</version>
 		</dependency>
 
 		<dependency>
@@ -106,6 +100,11 @@
 					<artifactId>selenium-remote-driver</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+  			<artifactId>httpclient</artifactId>
+  			<version>4.5.13</version>
 		</dependency>
 	</dependencies>
 
@@ -162,23 +161,23 @@
 			<plugins>
 				<plugin>
 					<artifactId>maven-antrun-plugin</artifactId>
-					<version>3.0.0</version>
+					<version>3.1.0</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-assembly-plugin</artifactId>
-					<version>3.3.0</version>
+					<version>3.4.2</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-dependency-plugin</artifactId>
-					<version>3.2.0</version>
+					<version>3.3.0</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-release-plugin</artifactId>
-					<version>3.0.0-M5</version>
+					<version>3.0.0-M6</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-clean-plugin</artifactId>
-					<version>3.1.0</version>
+					<version>3.2.0</version>
 					<executions>
 						<execution>
 							<id>default-clean</id>
@@ -192,7 +191,7 @@
 
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
-					<version>3.2.0</version>
+					<version>3.3.0</version>
 					<executions>
 						<execution>
 							<id>copy-resources</id>
@@ -231,7 +230,7 @@
 
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.2.2</version>
+					<version>3.3.2</version>
 					<executions>
 						<execution>
 							<id>default-jar</id>
@@ -245,7 +244,7 @@
 
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.9.0</version>
+					<version>3.10.1</version>
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
@@ -271,7 +270,7 @@
 
 				<plugin>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>3.0.0-M5</version>
+					<version>3.0.0-M7</version>
 					<configuration>
 						<suiteXmlFiles>
 							<suiteXMLFile>${suiteXMLFile}</suiteXMLFile>
@@ -308,7 +307,7 @@
 
 				<plugin>
 					<artifactId>maven-install-plugin</artifactId>
-					<version>3.0.0-M1</version>
+					<version>3.0.1</version>
 					<executions>
 						<execution>
 							<id>default-install</id>
@@ -322,7 +321,7 @@
 
 				<plugin>
 					<artifactId>maven-deploy-plugin</artifactId>
-					<version>3.0.0-M1</version>
+					<version>3.0.0</version>
 					<executions>
 						<execution>
 							<id>default-deploy</id>
@@ -336,7 +335,7 @@
 
 				<plugin>
 					<artifactId>maven-site-plugin</artifactId>
-					<version>3.10.0</version>
+					<version>4.0.0-M3</version>
 					<executions>
 
 						<execution>
@@ -372,8 +371,8 @@
 					<artifactId>allure-maven</artifactId>
 					<version>2.11.2</version>
 					<configuration>
-						<reportVersion>2.17.2</reportVersion>
-						<allureDownloadUrl>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.17.2/allure-commandline-2.17.2.zip</allureDownloadUrl>
+						<reportVersion>2.19.0</reportVersion>
+						<allureDownloadUrl>https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.19.0/allure-commandline-2.19.0.zip</allureDownloadUrl>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -386,7 +385,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<version>3.2.1</version>
+				<version>3.4.1</version>
 			</plugin>
 		</plugins>
 	</reporting>
