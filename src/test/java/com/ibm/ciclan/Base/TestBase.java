@@ -4,6 +4,7 @@ package com.ibm.ciclan.Base;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,6 +18,13 @@ import com.ibm.ciclan.Base.PageObjects.IFramePO;
 import com.ibm.ciclan.Base.PageObjects.LoginPagePO;
 import com.ibm.ciclan.Base.PageObjects.RegistrationPagePO;
 import com.ibm.ciclan.Enumerations.BrowserStack.BrowserStack;
+
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.MutableCapabilities;
@@ -38,17 +46,12 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 import io.qameta.allure.Step;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+
 
 /**
  *
@@ -58,7 +61,7 @@ import okhttp3.Response;
 public class TestBase {
 
 	private static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();
-	private static ThreadLocal<AppiumDriver<?>> mDriver = new ThreadLocal<>();
+	private static ThreadLocal<AppiumDriver> mDriver = new ThreadLocal<>();
 	private Properties props = new Properties();
 
 	private Capabilities options = null;
@@ -843,7 +846,7 @@ public class TestBase {
 				} catch (MalformedURLException mfu) {
 					mfu.printStackTrace();
 				}
-				catch (WebDriverException wde ) {
+				catch (WebDriverException wde) {
 					wde.printStackTrace();
 					Assert.fail("Unable to start WebDriver: "+wde.getLocalizedMessage());
 				}
@@ -956,7 +959,7 @@ public class TestBase {
 
 				if (runtimeData.platformName.toLowerCase().equals("android")) {
 					try {
-						mDriver.set(new AndroidDriver<MobileElement>(new URL(gc.appiumHost), caps));
+						mDriver.set(new AndroidDriver(new URL(gc.appiumHost), caps));
 						mss = new MobileScreenShot(getMobileDriver(AndroidDriver.class), id, testName);
 						mGeneric = new MobileGeneric(getMobileDriver(AndroidDriver.class), mss, props, id, testName);
 
@@ -972,7 +975,7 @@ public class TestBase {
 					}
 				} else {
 					try {
-						mDriver.set(new IOSDriver<MobileElement>(new URL(gc.appiumHost), caps));
+						mDriver.set(new IOSDriver(new URL(gc.appiumHost), caps));
 						mss = new MobileScreenShot(getMobileDriver(IOSDriver.class), id, testName);
 						mGeneric = new MobileGeneric(getMobileDriver(IOSDriver.class), mss, props, id, testName);
 
@@ -1002,7 +1005,7 @@ public class TestBase {
 				try {
 
 					//Perfecto
-					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.perfectoHost), caps));
+					mDriver.set(new AppiumDriver(new URL(gc.perfectoHost), caps));
 
 					/* StormRunnerFunctional
 					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.srfHost), caps));*/
@@ -1027,7 +1030,7 @@ public class TestBase {
 				try {
 
 					//Browserstack
-					mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.browserStackHost), caps));
+					mDriver.set(new AppiumDriver(new URL(gc.browserStackHost), caps));
 
 					mss = new MobileScreenShot(getMobileDriver(AppiumDriver.class), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(AppiumDriver.class), mss, props, id, testName);
@@ -1058,7 +1061,7 @@ public class TestBase {
 					//mDriver.set(new AppiumDriver<MobileElement>(new URL(gc.headSpinHost), caps));
 					String host = caps.getCapability("headspinHost").toString();
 					System.out.format("[LOG]: <[%s:%s] hostUrl: %s>%n", id, testName, host);
-					mDriver.set(new AppiumDriver<MobileElement>(new URL(host), caps));
+					mDriver.set(new AppiumDriver(new URL(host), caps));
 
 					mss = new MobileScreenShot(getMobileDriver(AppiumDriver.class), id, testName);
 					mGeneric = new MobileGeneric(getMobileDriver(AppiumDriver.class), mss, props, id, testName);
@@ -1139,7 +1142,7 @@ public class TestBase {
 			getDriver().quit();
 			driver.remove();
 
-		} else if (getMobileDriver(AppiumDriver.class) instanceof AppiumDriver<?>) {
+		} else if (getMobileDriver(AppiumDriver.class) instanceof AppiumDriver) {
 
 			// unlock headspin mobile session
 			if (runtimeData.gridType.toLowerCase().equals("headspin")) {
@@ -1185,8 +1188,13 @@ public class TestBase {
 	}
 
 
-	// lock a device
-	private void lockHeadSpinSession(String lockUrl, String udid) {
+	/**
+	 * Not used
+	 *
+	 * @param lockUrl
+	 * @param udid
+	 */
+	/*private void lockHeadSpinSession(String lockUrl, String udid) {
 
 		System.out.format("Locking %s on %s...", udid, lockUrl);
 
@@ -1216,11 +1224,16 @@ public class TestBase {
 
 		System.out.format("Locked.%n");
 
-	}
+	}*/
 
 
-	// lock a device
-	private void unlockHeadSpinSession(String unlockUrl, String udid) {
+	/**
+	 * Not used
+	 *
+	 * @param unlockUrl
+	 * @param udid
+	 */
+	/*private void unlockHeadSpinSession(String unlockUrl, String udid) {
 
 
 		System.out.format("Unlocking %s on %s...", udid, unlockUrl);
@@ -1251,7 +1264,7 @@ public class TestBase {
 
 		System.out.format("Unlocked.%n");
 
-	}
+	}*/
 
 
 	// set headspin status
@@ -1259,40 +1272,37 @@ public class TestBase {
 
 		System.out.format("Setting session '%s' status to: '%s'...", sessionId, status);
 
-		OkHttpClient client = new OkHttpClient();
+		String result = "";
+		HttpPost headSpin = new HttpPost("https://286d8226ec894f798c3394d33d3af4ab@api-dev.headspin.io/v0/perftests/upload");
 
-		MediaType mediaType = MediaType.parse("application/json");
-
-		RequestBody body = RequestBody.create(mediaType, ""
-				+ "{"
-				+ "\"session_id\": \"" + sessionId + "\","
-				+ "\"status\": \"" + status + "\","
-				+ " \"data\": ["
-//					+ "{\"key\": \"kpi1_ms\", \"value\": \"12412\"},"
-//					+ "{\"key\": \"kpi2_ms\", \"value\": \"13455\"}"
-				+ "]}"
-			);
-
-		Request request = new Request.Builder()
-			.url("https://286d8226ec894f798c3394d33d3af4ab@api-dev.headspin.io/v0/perftests/upload")
-			.post(body)
-			.addHeader("Content-Type", "application/json")
-			.addHeader("Authorization", "Bearer 286d8226ec894f798c3394d33d3af4ab")
-			.addHeader("cache-control", "no-cache")
-			.build();
+		StringBuilder json = new StringBuilder();
+		json.append("{");
+		json.append(String.format("\"session_id\": \"%s\",", sessionId));
+		json.append(String.format("\"status\": \"%s\",", status));
+		json.append("\"data\": [");
+				//json.append(String.format("{\"key\": \"%s\", \"value\": \"%s\"}", "metricName1", "metricValue1"));
+				//json.append(String.format("{\"key\": \"%s\", \"value\": \"%s\"}", "metricName2", "metricValue2"));
+			json.append("]");
+		json.append("}");
 
 		try {
-
-			Response response = client.newCall(request).execute();
-			System.out.format(" %s - %s%n", response.code(), response.message());
-			String responseBody = response.body().string();
-			System.out.format("%s%n", responseBody);
-
-		} catch (IOException e) {
+			headSpin.setEntity(new StringEntity(json.toString()));
+		} catch (UnsupportedEncodingException e2) {
 			System.out.format("Failed to set session '%s' status to: '%s'.%n", sessionId, status);
-			e.printStackTrace();
+			e2.printStackTrace();
 		}
 
+		try (CloseableHttpClient httpClient = HttpClients.createDefault();
+			CloseableHttpResponse response = httpClient.execute(headSpin);) {
+
+			result = EntityUtils.toString(response.getEntity());
+
+		} catch (IOException e1) {
+			System.out.format("Failed to set session '%s' status to: '%s'.%n", sessionId, status);
+			e1.printStackTrace();
+		}
+
+		System.out.format("Result: %s%n", result);
 
 	}
 
