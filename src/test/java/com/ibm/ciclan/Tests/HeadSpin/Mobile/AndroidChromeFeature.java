@@ -1,9 +1,8 @@
 package com.ibm.ciclan.Tests.HeadSpin.Mobile;
 
-
-import java.io.IOException;
 import java.util.List;
 
+import org.openqa.selenium.WebElement;
 
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -13,17 +12,12 @@ import com.ibm.ciclan.Base.TestBase;
 import com.ibm.ciclan.Base.CustomAnnotations.RetryOnFailCount;
 import com.ibm.ciclan.Enumerations.HeadSpin.HeadSpin;
 
-import io.appium.java_client.MobileElement;
-
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 
 /**
@@ -71,21 +65,21 @@ public class AndroidChromeFeature extends TestBase {
 		mGeneric.confirmElementExistence(HeadSpin.Inventory_Locator_DropDown_Sort.toString());
 
 		// get array of products
-		List<MobileElement> weArray = mGeneric.confirmElementsExistence(HeadSpin.Inventory_MultiLocator_Container_InventoryItems.toString());
+		List<WebElement> weArray = mGeneric.confirmElementsExistence(HeadSpin.Inventory_MultiLocator_Container_InventoryItems.toString());
 
 		// get first item
-		MobileElement firstItem = weArray.get(0);
+		WebElement firstItem = weArray.get(0);
 
 		// get description
-		MobileElement descriptionContainer = mGeneric.confirmElementExistence(firstItem, HeadSpin.Inventory_RelativeLocator_TextContainer_Description.toString());
+		WebElement descriptionContainer = mGeneric.confirmElementExistence(firstItem, HeadSpin.Inventory_RelativeLocator_TextContainer_Description.toString());
 		String description = descriptionContainer.getText();
 
 		// get price
-		MobileElement priceContainer = mGeneric.confirmElementExistence(firstItem, HeadSpin.Inventory_RelativeLocator_TextContainer_Price.toString());
+		WebElement priceContainer = mGeneric.confirmElementExistence(firstItem, HeadSpin.Inventory_RelativeLocator_TextContainer_Price.toString());
 		String price = (priceContainer.getText()).replace("$", "");
 
 		// get add to cart button
-		MobileElement addToCart = mGeneric.confirmElementExistence(firstItem, HeadSpin.Inventory_RelativeLocator_Button_AddToCart.toString());
+		WebElement addToCart = mGeneric.confirmElementExistence(firstItem, HeadSpin.Inventory_RelativeLocator_Button_AddToCart.toString());
 
 		// add to cart
 		mGeneric.clickElement(addToCart);
