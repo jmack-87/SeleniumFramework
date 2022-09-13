@@ -439,7 +439,7 @@ public class TestBase {
 				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "Appium");
-				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+				//caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				caps.setCapability("real_mobile", "true");
@@ -456,7 +456,7 @@ public class TestBase {
 				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "appium");
-				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+				//caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				// required
@@ -578,7 +578,7 @@ public class TestBase {
 				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "Appium");
-				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+				//caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				caps.setCapability("deviceName", runtimeData.deviceName);
 				caps.setCapability("real_mobile", "true");
@@ -716,7 +716,7 @@ public class TestBase {
 				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "Appium");
-				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+				//caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				// required
 				//caps.setCapability("os", runtimeData.platform);
@@ -738,7 +738,7 @@ public class TestBase {
 				caps = new DesiredCapabilities();
 				// optional
 				caps.setCapability("automationName", "Appium");
-				caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
+				//caps.setCapability(CapabilityType.TAKES_SCREENSHOT, true);
 				caps.setCapability("skipUnlock", true);
 				// required
 				//caps.setCapability("os", runtimeData.platform);
